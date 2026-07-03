@@ -6,3 +6,12 @@ Thumbs.db
 # Editor
 .vscode/
 *.log
+
+# Excluded from repo — Variation D flow only
+index.html
+styles.css
+design-system.html
+variation-a-calculator.html
+variation-b-editorial.html
+variation-c-airy-minimal.html
+variation-e-modern-editorial.html
