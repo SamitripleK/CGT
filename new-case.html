@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a New Case · FileCGTOnline</title>
+<meta name="description" content="Guided Capital Gains Tax case setup — choose your service, add details, pay securely, sign, answer guided questions, upload documents, verify your identity and submit for review." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<style>
+/* ============================================================
+   FileCGTOnline · Start New Case Stepper
+   Design tokens taken strictly from the platform design system
+   (navy #1b2d4f · lime #adee68 · green #83C341 · cream #f6f2ea)
+   ============================================================ */
+:root{
+  --navy:#1b2d4f; --navy-2:#253f6e; --navy-dark:#182843; --ink:#0a1120;
+  --lime:#adee68; --lime-hover:#9ce04f; --green:#83C341; --green-hover:#6fae32; --green-link:#5f7a2e;
+  --cream:#f6f2ea; --cream-2:#efe9dc; --surface:#fff;
+  --border:#ebe4d6; --border-in:#ddd5c5; --line:#f0ebe0;
+  --text:#1b2d4f; --muted:#64748b; --muted-2:#94a3b8; --muted-3:#475569;
+  --su-bg:#e8f5e9; --su-tx:#388e3c; --su-dot:#43a047; --su-soft:#f1f8e8;
+  --wa-bg:#fff4d6; --wa-tx:#b7791f; --wa-dot:#ffc107;
+  --er-bg:#fdeaee; --er-tx:#d32f2f; --er-dot:#e53935;
+  --in-bg:#e3f2fd; --in-tx:#1976d2;
+  --gr-bg:#f1f5f9; --gr-tx:#475569; --gr-dot:#94a3b8;
+  --r-card:16px; --r-lg:20px; --r-in:12px; --r-chip:14px; --r-pill:9999px;
+  --sh-card:0 1px 2px rgba(27,45,79,0.04);
+  --sh-pop:0 20px 44px -16px rgba(10,17,32,0.34);
+  --sh-float:0 30px 70px -30px rgba(27,45,79,0.45);
+  --bar-h:74px; --top-h:64px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;}
+input,button,textarea,select{font-family:inherit;color:inherit;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+input[type=number]{-moz-appearance:textfield;}
+a{color:inherit;}
+::selection{background:var(--lime);color:var(--ink);}
+:focus-visible{outline:3px solid rgba(131,195,65,0.55);outline-offset:2px;border-radius:6px;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#e0d9ca;border-radius:8px;}
+
+/* ---------- layout shell ---------- */
+.wizard{min-height:100vh;display:flex;flex-direction:column;}
+.topbar{position:sticky;top:0;z-index:50;height:var(--top-h);display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 24px;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.topbar .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+.topbar .brand img{height:24px;width:auto;display:block;}
+.topbar .brand .divider{width:1px;height:22px;background:var(--border);}
+.topbar .brand .ctx{font-size:13px;color:var(--muted);white-space:nowrap;}
+.topbar .tools{display:flex;align-items:center;gap:12px;}
+
+.autosave{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--muted);
+  background:var(--cream);border:1px solid var(--border);padding:6px 12px;border-radius:var(--r-pill);opacity:0;transition:opacity .25s,color .25s;white-space:nowrap;}
+.autosave.on{opacity:1;}
+.autosave.saving i{animation:spin 0.8s linear infinite;color:var(--muted-2);}
+.autosave.saved{color:var(--su-tx);}
+.autosave.saved i{color:var(--su-dot);}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.btn-exit{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;color:var(--muted-3);
+  background:transparent;border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-in);cursor:pointer;transition:.15s;}
+.btn-exit:hover{background:var(--cream);color:var(--navy);}
+
+/* mobile progress (tablet/mobile only) */
+.mprog{display:none;padding:14px 20px 16px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:var(--top-h);z-index:40;}
+.mprog .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;}
+.mprog .phase{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--green-link);}
+.mprog .count{font-size:12.5px;color:var(--muted);}
+.mprog h2{font-size:18px;font-weight:600;}
+.mprog .bar{height:6px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;margin-top:10px;}
+.mprog .fill{height:100%;background:var(--green);border-radius:var(--r-pill);transition:width .4s cubic-bezier(.4,0,.2,1);}
+
+/* grid */
+.grid{flex:1;display:grid;grid-template-columns:272px minmax(0,1fr) 348px;grid-template-areas:"nav main side";
+  gap:28px;max-width:1360px;width:100%;margin:0 auto;padding:28px 24px calc(var(--bar-h) + 32px);}
+
+/* ---------- step navigation (desktop) ---------- */
+.stepnav{grid-area:nav;position:sticky;top:calc(var(--top-h) + 28px);align-self:start;max-height:calc(100vh - var(--top-h) - 56px);overflow:auto;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:18px 14px;}
+.phase{margin-bottom:8px;}
+.phase:last-child{margin-bottom:0;}
+.phase-head{display:flex;align-items:center;gap:9px;padding:8px 10px 4px;}
+.phase-num{width:20px;height:20px;border-radius:6px;background:var(--cream);color:var(--muted-3);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.phase.active .phase-num{background:var(--navy);color:var(--lime);}
+.phase.done .phase-num{background:var(--su-soft);color:var(--su-tx);}
+.phase-title{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);}
+.phase.active .phase-title{color:var(--navy);}
+
+.snav{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:none;background:transparent;
+  padding:9px 10px;border-radius:var(--r-in);cursor:pointer;transition:.15s;color:var(--muted-3);font-size:14px;position:relative;}
+.snav:not(:disabled):hover{background:var(--cream);}
+.snav[disabled]{cursor:not-allowed;color:var(--muted-2);opacity:.75;}
+.snav.current{background:var(--navy);color:#fff;font-weight:500;}
+.snav .dot{width:26px;height:26px;border-radius:8px;background:var(--cream-2);color:var(--muted-3);font-size:12.5px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.15s;}
+.snav.current .dot{background:rgba(255,255,255,0.16);color:#fff;}
+.snav.done .dot{background:var(--su-soft);color:var(--su-tx);}
+.snav.current.done .dot{background:var(--lime);color:var(--ink);}
+.snav .lbl{flex:1;min-width:0;}
+.snav .mini{display:block;font-size:11.5px;color:var(--muted-2);}
+.snav.current .mini{color:rgba(255,255,255,0.6);}
+
+/* ---------- stage / step content ---------- */
+.stage{grid-area:main;min-width:0;}
+.step{display:none;animation:rise .32s cubic-bezier(.4,0,.2,1);}
+.step.show{display:block;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.step-head{margin-bottom:22px;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--green-link);background:var(--su-soft);padding:6px 13px;border-radius:var(--r-pill);margin-bottom:14px;}
+.step-head h1{font-size:28px;line-height:1.2;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px;}
+.step-head p{font-size:15.5px;color:var(--muted);max-width:60ch;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:24px;box-shadow:var(--sh-card);}
+.card + .card{margin-top:16px;}
+.card-lg{padding:28px;}
+.section-label{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);margin-bottom:14px;}
+
+/* form fields */
+.field{margin-bottom:18px;}
+.field:last-child{margin-bottom:0;}
+.field label,.flabel{display:block;font-size:14px;font-weight:500;margin-bottom:7px;}
+.field .hint{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.55;}
+.optional{font-size:12px;font-weight:500;color:var(--muted-2);background:var(--cream);border:1px solid var(--border);padding:2px 9px;border-radius:var(--r-pill);margin-left:8px;}
+.input,.select,textarea.input{width:100%;border:1px solid var(--border-in);border-radius:var(--r-in);padding:12px 14px;font-size:15px;background:var(--surface);outline:none;transition:.15s;}
+.input:focus,textarea.input:focus,.select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(131,195,65,0.14);}
+.input::placeholder{color:var(--muted-2);}
+.input.err{border-color:var(--er-dot);box-shadow:0 0 0 3px rgba(229,57,53,0.12);}
+.input-wrap{position:relative;display:flex;align-items:center;}
+.input-wrap .prefix{position:absolute;left:14px;color:var(--muted-2);font-size:15px;pointer-events:none;}
+.input-wrap .input{padding-left:30px;}
+.field-err{display:none;align-items:center;gap:6px;font-size:12.5px;color:var(--er-tx);margin-top:7px;}
+.field-err.show{display:flex;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.chk-dontknow{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted-3);cursor:pointer;margin-top:8px;}
+.chk-dontknow input{accent-color:var(--green);width:15px;height:15px;}
+
+/* choice / radio cards */
+.choices{display:flex;flex-direction:column;gap:14px;}
+.choice{position:relative;display:flex;gap:16px;padding:20px;border:1.5px solid var(--border);border-radius:var(--r-card);background:var(--surface);cursor:pointer;transition:.16s;}
+.choice:hover{border-color:#cfc7b4;background:#fefdfb;}
+.choice.sel{border-color:var(--green);background:var(--su-soft);box-shadow:0 0 0 3px rgba(131,195,65,0.12);}
+.choice .ico{width:48px;height:48px;border-radius:14px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.16s;}
+.choice.sel .ico{background:#fff;}
+.choice .ico i{font-size:24px;color:var(--green);}
+.choice .body{flex:1;min-width:0;}
+.choice .body h3{font-size:17px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.choice .body .desc{font-size:14px;color:var(--muted);margin-bottom:12px;}
+.choice .meta{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:5px 12px;border-radius:var(--r-pill);background:var(--cream);color:var(--muted-3);}
+.pill i{font-size:14px;color:var(--green);}
+.pill.price{background:var(--navy);color:#fff;}
+.pill.price i{color:var(--lime);}
+.choice .bestfor{font-size:13px;color:var(--muted-3);margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+.choice .bestfor b{font-weight:600;color:var(--navy);}
+.choice .check{position:absolute;top:18px;right:18px;width:24px;height:24px;border-radius:50%;border:2px solid var(--border-in);display:flex;align-items:center;justify-content:center;transition:.16s;}
+.choice .check i{font-size:15px;color:#fff;opacity:0;}
+.choice.sel .check{background:var(--green);border-color:var(--green);}
+.choice.sel .check i{opacity:1;}
+
+/* segmented radio (ownership) */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.seg .opt{display:flex;align-items:center;gap:12px;padding:16px;border:1.5px solid var(--border);border-radius:var(--r-in);cursor:pointer;transition:.16s;font-size:15px;font-weight:500;}
+.seg .opt:hover{border-color:#cfc7b4;}
+.seg .opt.sel{border-color:var(--green);background:var(--su-soft);}
+.seg .opt .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border-in);flex-shrink:0;position:relative;transition:.16s;}
+.seg .opt.sel .radio{border-color:var(--green);}
+.seg .opt.sel .radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--green);}
+
+/* alerts / helper boxes */
+.alert{display:flex;gap:12px;padding:14px 16px;border-radius:var(--r-in);font-size:14px;line-height:1.55;}
+.alert i{font-size:19px;flex-shrink:0;margin-top:1px;}
+.alert.info{background:var(--in-bg);color:#1257a0;}.alert.info i{color:var(--in-tx);}
+.alert.success{background:var(--su-soft);color:#41641f;}.alert.success i{color:var(--su-tx);}
+.alert.warn{background:var(--wa-bg);color:#8a5a12;}.alert.warn i{color:var(--wa-tx);}
+.alert.error{background:var(--er-bg);color:#a32020;}.alert.error i{color:var(--er-tx);}
+.alert.calm{background:var(--cream);color:var(--muted-3);border:1px solid var(--border);}.alert.calm i{color:var(--green);}
+.alert b{font-weight:600;}
+.alert-title{display:block;font-weight:600;margin-bottom:2px;}
+
+/* status badge */
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:4px 11px;border-radius:var(--r-pill);}
+.badge i{font-size:14px;}
+.badge .d{width:7px;height:7px;border-radius:50%;}
+.b-grey{background:var(--gr-bg);color:var(--gr-tx);} .b-grey .d{background:var(--gr-dot);}
+.b-blue{background:var(--in-bg);color:var(--in-tx);}
+.b-amber{background:var(--wa-bg);color:var(--wa-tx);}
+.b-green{background:var(--su-bg);color:var(--su-tx);}
+.b-red{background:var(--er-bg);color:var(--er-tx);}
+
+/* ---------- price step ---------- */
+.price-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-size:15px;border-bottom:1px solid var(--line);}
+.price-row:last-of-type{border-bottom:none;}
+.price-row .lab{color:var(--muted-3);}
+.price-row.disc .val{color:var(--su-tx);font-weight:600;}
+.price-total{display:flex;align-items:baseline;justify-content:space-between;margin-top:8px;padding-top:16px;border-top:2px solid var(--navy);}
+.price-total .lab{font-size:16px;font-weight:600;}
+.price-total .val{font-size:34px;font-weight:700;color:var(--navy);letter-spacing:-0.01em;}
+.discount-row{display:flex;gap:10px;margin:6px 0 4px;}
+.discount-row .input{flex:1;text-transform:uppercase;}
+.incl-list{display:grid;gap:11px;}
+.incl-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted-3);list-style:none;}
+.incl-list i{color:var(--su-dot);font-size:17px;flex-shrink:0;margin-top:1px;}
+
+/* ---------- payment ---------- */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+.pay-m{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r-in);
+  font-size:14.5px;font-weight:600;cursor:pointer;transition:.16s;background:var(--surface);}
+.pay-m:hover{border-color:#cfc7b4;}
+.pay-m.sel{border-color:var(--navy);background:#fff;box-shadow:0 0 0 3px rgba(27,45,79,0.08);}
+.pay-m i{font-size:20px;}
+.pay-m.apple{background:#000;color:#fff;border-color:#000;}
+.pay-m.gpay{background:#fff;}
+.stripe-fields{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+.stripe-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted-2);margin-top:2px;}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+.trust{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted-3);}
+.trust i{color:var(--su-tx);font-size:17px;}
+.pay-processing,.pay-success,.pay-failed{display:none;text-align:center;padding:20px 10px;}
+.pay-processing.show,.pay-success.show,.pay-failed.show{display:block;}
+.spinner{width:44px;height:44px;border:4px solid var(--cream-2);border-top-color:var(--green);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;}
+.big-ico{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.big-ico i{font-size:34px;}
+.big-ico.ok{background:var(--su-soft);}.big-ico.ok i{color:var(--su-tx);}
+.big-ico.bad{background:var(--er-bg);}.big-ico.bad i{color:var(--er-tx);}
+
+/* ---------- agreement ---------- */
+.doc-scroll{height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r-in);padding:20px 22px;background:#fdfcf9;font-size:13.5px;line-height:1.7;color:var(--muted-3);}
+.doc-scroll h4{font-size:15px;color:var(--navy);margin:16px 0 6px;}
+.doc-scroll h4:first-child{margin-top:0;}
+.sign-pad{border:1.5px dashed var(--border-in);border-radius:var(--r-in);padding:16px;background:var(--cream);}
+.sign-input{width:100%;border:none;background:transparent;outline:none;font-size:30px;font-family:'Segoe Script','Bradley Hand',cursive;color:var(--navy);padding:8px 4px;border-bottom:2px solid var(--border-in);}
+.sign-input::placeholder{font-family:'Jost',sans-serif;font-size:15px;color:var(--muted-2);}
+.chk-row{display:flex;align-items:flex-start;gap:11px;cursor:pointer;font-size:14px;line-height:1.55;color:var(--muted-3);}
+.chk-row input{width:18px;height:18px;margin-top:1px;accent-color:var(--green);flex-shrink:0;}
+
+/* ---------- questionnaire ---------- */
+.q-progress{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.q-progress .bar{flex:1;height:8px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;}
+.q-progress .fill{height:100%;background:var(--green);width:18%;border-radius:var(--r-pill);transition:width .4s;}
+.q-progress .pct{font-size:14px;font-weight:600;color:var(--navy);}
+.q-sec{border:1px solid var(--border);border-radius:var(--r-card);margin-bottom:12px;overflow:hidden;background:var(--surface);}
+.q-sec summary{display:flex;align-items:center;gap:13px;padding:16px 18px;cursor:pointer;list-style:none;user-select:none;}
+.q-sec summary::-webkit-details-marker{display:none;}
+.q-sec .snum{width:30px;height:30px;border-radius:9px;background:var(--cream);color:var(--muted-3);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.q-sec[data-done="1"] .snum{background:var(--su-soft);color:var(--su-tx);}
+.q-sec .stitle{flex:1;font-size:15px;font-weight:600;}
+.q-sec .stitle span{display:block;font-size:12.5px;font-weight:400;color:var(--muted);}
+.q-sec .chev{color:var(--muted-2);transition:.25s;}
+.q-sec[open] .chev{transform:rotate(180deg);}
+.q-sec .qbody{padding:4px 18px 20px;border-top:1px solid var(--line);}
+.ai-field{border:1px solid #cfe3f6;background:#f4f9fe;border-radius:var(--r-in);padding:13px 15px;}
+.ai-tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--in-tx);background:#e3f2fd;padding:3px 10px;border-radius:var(--r-pill);margin-bottom:9px;}
+.ai-actions{display:flex;gap:8px;margin-top:10px;}
+.chip-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:var(--r-pill);border:1px solid var(--border);background:#fff;cursor:pointer;transition:.15s;}
+.chip-btn:hover{border-color:var(--green);color:var(--green-link);}
+.chip-btn.solid{background:var(--navy);color:#fff;border-color:var(--navy);}
+.chip-btn.solid:hover{background:var(--navy-dark);color:#fff;}
+
+/* ---------- documents ---------- */
+.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.doc-card{border:1px solid var(--border);border-radius:var(--r-card);padding:18px;background:var(--surface);display:flex;flex-direction:column;}
+.doc-card .dc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.doc-card h4{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.doc-card .why{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:12px;flex:1;}
+.doc-card .fmt{font-size:11.5px;color:var(--muted-2);margin-bottom:12px;}
+.drop{border:1.5px dashed var(--border-in);border-radius:var(--r-in);padding:16px;text-align:center;cursor:pointer;transition:.16s;background:var(--cream);}
+.drop:hover,.drop.drag{border-color:var(--green);background:var(--su-soft);}
+.drop i{font-size:24px;color:var(--muted-2);}
+.drop p{font-size:13px;color:var(--muted-3);margin-top:6px;}
+.drop .cam{font-size:12px;color:var(--green-link);margin-top:4px;display:none;}
+.uploaded{display:none;align-items:center;gap:11px;border:1px solid var(--border);border-radius:var(--r-in);padding:11px 13px;background:#fdfcf9;}
+.uploaded.show{display:flex;}
+.uploaded .fi{width:36px;height:36px;border-radius:9px;background:var(--er-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.uploaded .fi i{color:var(--er-tx);font-size:18px;}
+.uploaded .meta{flex:1;min-width:0;}
+.uploaded .meta .nm{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.uploaded .meta .sz{font-size:11.5px;color:var(--muted-2);}
+.uploaded .act{display:flex;gap:4px;}
+.icon-btn{width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:var(--muted-2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.icon-btn:hover{background:var(--cream);color:var(--navy);}
+.icon-btn.danger:hover{background:var(--er-bg);color:var(--er-tx);}
+.up-progress{display:none;height:5px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;margin-top:10px;}
+.up-progress.show{display:block;}
+.up-progress .fill{height:100%;width:0;background:var(--green);transition:width .2s;}
+
+/* ---------- verification ---------- */
+.verify-check{display:flex;flex-direction:column;gap:10px;}
+.vc-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--r-in);font-size:14px;}
+.vc-item .vi{width:34px;height:34px;border-radius:9px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.vc-item .vi i{color:var(--navy);font-size:18px;}
+.vc-item .vt{flex:1;}
+.vc-item .vt span{display:block;font-size:12.5px;color:var(--muted);}
+.provider{display:flex;align-items:center;gap:14px;padding:18px;border:1px dashed var(--border-in);border-radius:var(--r-in);background:var(--cream);}
+.provider .plogo{width:46px;height:46px;border-radius:12px;background:var(--navy);color:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+
+/* ---------- review ---------- */
+.review-list{display:flex;flex-direction:column;}
+.rev-item{display:flex;align-items:center;gap:14px;padding:16px 4px;border-bottom:1px solid var(--line);}
+.rev-item:last-child{border-bottom:none;}
+.rev-item .ri{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rev-item .ri.ok{background:var(--su-soft);color:var(--su-tx);}
+.rev-item .ri.prog{background:var(--wa-bg);color:var(--wa-tx);}
+.rev-item .ri.miss{background:var(--er-bg);color:var(--er-tx);}
+.rev-item .rt{flex:1;min-width:0;}
+.rev-item .rt h4{font-size:15px;font-weight:600;}
+.rev-item .rt p{font-size:13px;color:var(--muted);}
+.rev-item .edit{font-size:13px;font-weight:500;color:var(--green-link);background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:8px;transition:.15s;}
+.rev-item .edit:hover{background:var(--su-soft);}
+
+/* ---------- summary (right rail) ---------- */
+.summary{grid-area:side;position:sticky;top:calc(var(--top-h) + 28px);align-self:start;}
+.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--sh-card);}
+.sum-head{background:var(--navy);color:#fff;padding:18px 20px;}
+.sum-head .lab{font-size:11.5px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:.06em;}
+.sum-head .ref{font-size:17px;font-weight:600;margin-top:3px;}
+.sum-head .svc{font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px;}
+.sum-body{padding:18px 20px;}
+.sum-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;font-size:14px;border-bottom:1px solid var(--line);}
+.sum-row:last-child{border-bottom:none;}
+.sum-row .k{color:var(--muted);}
+.sum-row .v{font-weight:500;text-align:right;}
+.sum-progress{padding:16px 20px;background:var(--cream);border-top:1px solid var(--border);}
+.sum-progress .row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:8px;}
+.sum-progress .bar{height:7px;background:#e5ddcd;border-radius:var(--r-pill);overflow:hidden;}
+.sum-progress .fill{height:100%;background:var(--green);border-radius:var(--r-pill);transition:width .4s;}
+.sum-help{padding:16px 20px;font-size:12.5px;color:var(--muted);line-height:1.55;border-top:1px solid var(--border);display:flex;gap:9px;}
+.sum-help i{color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px;}
+
+/* ---------- action bar ---------- */
+.actionbar{position:fixed;left:0;right:0;bottom:0;z-index:45;height:var(--bar-h);display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:0 24px;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);border-top:1px solid var(--border);}
+.actionbar .left,.actionbar .right{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:600;padding:12px 22px;border-radius:var(--r-in);border:1px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;}
+.btn-primary{background:var(--navy);color:#fff;}
+.btn-primary:hover{background:var(--navy-dark);}
+.btn-primary:disabled{background:#c9cfd9;color:#fff;cursor:not-allowed;}
+.btn-lime{background:var(--lime);color:var(--ink);}
+.btn-lime:hover{background:var(--lime-hover);}
+.btn-ghost{background:transparent;color:var(--muted-3);border-color:var(--border);}
+.btn-ghost:hover{background:var(--cream);color:var(--navy);}
+.btn-text{background:transparent;color:var(--muted-3);border:none;padding:12px 14px;}
+.btn-text:hover{color:var(--navy);}
+.btn-lg{padding:14px 28px;font-size:16px;}
+
+/* ---------- success screen ---------- */
+.success-wrap{display:none;}
+.success-wrap.show{display:block;}
+.success-hero{max-width:640px;margin:0 auto;text-align:center;padding:20px;}
+.success-hero .burst{width:88px;height:88px;border-radius:50%;background:var(--su-soft);display:flex;align-items:center;justify-content:center;margin:8px auto 22px;animation:pop .5s cubic-bezier(.2,.8,.3,1.3);}
+.success-hero .burst i{font-size:46px;color:var(--su-tx);}
+@keyframes pop{0%{transform:scale(.4);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.success-hero h1{font-size:32px;font-weight:600;letter-spacing:-0.01em;margin-bottom:10px;}
+.success-hero .sub{font-size:16px;color:var(--muted);margin-bottom:26px;}
+.case-receipt{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:22px;text-align:left;max-width:520px;margin:0 auto 22px;box-shadow:var(--sh-card);}
+.receipt-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+.receipt-row:last-child{border-bottom:none;}
+.receipt-row .k{color:var(--muted);}
+.receipt-row .v{font-weight:600;}
+.success-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ---------- modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(27,45,79,0.4);z-index:80;opacity:0;pointer-events:none;transition:.25s;}
+.overlay.show{opacity:1;pointer-events:auto;}
+.modal{position:fixed;z-index:81;left:50%;top:50%;transform:translate(-50%,-46%);width:min(440px,92vw);background:#fff;border-radius:var(--r-lg);
+  box-shadow:var(--sh-float);padding:26px;opacity:0;pointer-events:none;transition:.25s;}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%);}
+.modal .m-ico{width:52px;height:52px;border-radius:14px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.modal .m-ico i{font-size:26px;color:var(--green);}
+.modal h3{font-size:20px;font-weight:600;margin-bottom:8px;}
+.modal p{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:22px;}
+.modal .m-actions{display:flex;gap:10px;justify-content:flex-end;}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;bottom:calc(var(--bar-h) + 18px);left:50%;transform:translateX(-50%) translateY(20px);z-index:90;
+  background:var(--navy);color:#fff;font-size:14px;padding:12px 20px;border-radius:var(--r-pill);box-shadow:var(--sh-pop);
+  display:flex;align-items:center;gap:10px;opacity:0;pointer-events:none;transition:.3s;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast i{color:var(--lime);font-size:18px;}
+
+.hide{display:none !important;}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "side";gap:20px;padding:20px 18px calc(var(--bar-h) + 24px);}
+  .stepnav{display:none;}
+  .mprog{display:block;}
+  .summary{position:static;}
+  .topbar .brand .ctx{display:none;}
+}
+@media (max-width:640px){
+  .topbar{padding:0 16px;}
+  .btn-exit span{display:none;}
+  .btn-exit{padding:9px;}
+  .step-head h1{font-size:23px;}
+  .two-col,.seg,.doc-grid,.pay-methods,.trust-grid{grid-template-columns:1fr;}
+  .choice{padding:16px;}
+  .choice .check{display:none;}
+  .card,.card-lg{padding:18px;}
+  .actionbar{padding:0 14px;gap:8px;}
+  .btn{padding:12px 16px;font-size:14.5px;}
+  .actionbar .btn-lg{padding:13px 18px;}
+  .btn .btn-full-lbl{display:none;}
+  .drop .cam{display:block;}
+  .success-hero h1{font-size:26px;}
+  .success-ctas{flex-direction:column;}
+  .success-ctas .btn{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="wizard">
+
+  <!-- ================= TOP BAR ================= -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="cgt-logo.svg" alt="FileCGTOnline" />
+      <span class="divider"></span>
+      <span class="ctx">Start a new case</span>
+    </div>
+    <div class="tools">
+      <span id="autosave" class="autosave"><i class="ti ti-cloud-check"></i> <span id="autosaveTxt">All changes saved</span></span>
+      <button class="btn-exit" id="btnExitTop"><i class="ti ti-device-floppy"></i> <span>Save &amp; exit</span></button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE / TABLET PROGRESS ============ -->
+  <div class="mprog">
+    <div class="row">
+      <span class="phase" id="mPhase">Phase 1 · Case setup</span>
+      <span class="count" id="mCount">Step 1 of 10</span>
+    </div>
+    <h2 id="mTitle">Choose your service</h2>
+    <div class="bar"><div class="fill" id="mFill" style="width:10%"></div></div>
+  </div>
+
+  <!-- ================= GRID ================= -->
+  <div class="grid">
+
+    <!-- ---------- STEP NAV (desktop) ---------- -->
+    <aside class="stepnav" id="stepnav"><!-- built by JS --></aside>
+
+    <!-- ---------- STAGE ---------- -->
+    <main class="stage" id="stage">
+
+      <!-- ===== STEP 1 · SERVICE ===== -->
+      <section class="step show" data-step="1">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-checklist"></i> Case setup · Step 1 of 10</span>
+          <h1>Which type of Capital Gains Tax case is this?</h1>
+          <p>Choose the option that best matches what you sold. Our team reviews every case before submission, so don’t worry about getting it perfect.</p>
+        </div>
+        <div class="choices" id="serviceChoices">
+          <label class="choice" data-service="residential" data-price="149" data-name="Residential Property CGT">
+            <span class="ico"><i class="ti ti-home"></i></span>
+            <span class="body">
+              <h3>Residential Property CGT</h3>
+              <span class="desc">You sold a home, buy-to-let, or other residential property in the UK.</span>
+              <span class="meta">
+                <span class="pill price"><i class="ti ti-tag"></i> From £149</span>
+                <span class="pill"><i class="ti ti-clock"></i> ~15 min to set up</span>
+                <span class="pill"><i class="ti ti-calendar-due"></i> 60-day HMRC rule</span>
+              </span>
+              <span class="bestfor"><b>Best for:</b> landlords, second homes, inherited property, and homes that weren’t always your main residence.</span>
+            </span>
+            <span class="check"><i class="ti ti-check"></i></span>
+          </label>
+
+          <label class="choice" data-service="commercial" data-price="199" data-name="Commercial Property CGT">
+            <span class="ico"><i class="ti ti-building-warehouse"></i></span>
+            <span class="body">
+              <h3>Commercial Property CGT</h3>
+              <span class="desc">You sold commercial premises, land, or a mixed-use property.</span>
+              <span class="meta">
+                <span class="pill price"><i class="ti ti-tag"></i> From £199</span>
+                <span class="pill"><i class="ti ti-clock"></i> ~15 min to set up</span>
+                <span class="pill"><i class="ti ti-briefcase"></i> Reliefs reviewed</span>
+              </span>
+              <span class="bestfor"><b>Best for:</b> shops, offices, warehouses, development land, and business premises.</span>
+            </span>
+            <span class="check"><i class="ti ti-check"></i></span>
+          </label>
+
+          <label class="choice" data-service="other" data-price="149" data-name="Other CGT">
+            <span class="ico"><i class="ti ti-chart-line"></i></span>
+            <span class="body">
+              <h3>Other CGT</h3>
+              <span class="desc">Shares, crypto, business assets, or other chargeable assets.</span>
+              <span class="meta">
+                <span class="pill price"><i class="ti ti-tag"></i> From £149</span>
+                <span class="pill"><i class="ti ti-clock"></i> ~10 min to set up</span>
+                <span class="pill"><i class="ti ti-coin-bitcoin"></i> Shares · crypto · more</span>
+              </span>
+              <span class="bestfor"><b>Best for:</b> selling shares, disposing of cryptocurrency, or selling part or all of a business.</span>
+            </span>
+            <span class="check"><i class="ti ti-check"></i></span>
+          </label>
+        </div>
+        <div class="alert calm" style="margin-top:16px;"><i class="ti ti-help-circle"></i><div><b>Not sure which one to choose?</b> Select the closest option. Our team will review your case before submission and move it if needed.</div></div>
+      </section>
+
+      <!-- ===== STEP 2 · CASE DETAILS ===== -->
+      <section class="step" data-step="2">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-file-description"></i> Case setup · Step 2 of 10</span>
+          <h1>A few basic details</h1>
+          <p>Just enough for us to create and identify your case. You can leave optional fields blank — our team can follow up if anything is unclear.</p>
+        </div>
+        <div class="card card-lg">
+          <!-- address (residential/commercial) -->
+          <div class="field" id="fldAddress">
+            <label>Property address</label>
+            <div class="input-wrap">
+              <i class="ti ti-map-pin prefix"></i>
+              <input class="input" id="inAddress" placeholder="Start typing a UK postcode or address…" autocomplete="off" />
+            </div>
+            <div class="hint">Start typing and choose your address from the list (UK address search).</div>
+            <div class="field-err" id="errAddress"><i class="ti ti-alert-circle"></i> Please add the property address.</div>
+          </div>
+          <!-- asset name (other) -->
+          <div class="field hide" id="fldAsset">
+            <label>Asset name or description</label>
+            <div class="input-wrap">
+              <i class="ti ti-tag prefix"></i>
+              <input class="input" id="inAsset" placeholder="e.g. Tesla shares disposal, Crypto asset disposal" />
+            </div>
+            <div class="hint">Give it a name you’ll recognise — for example “Tesla Shares Disposal” or “Crypto Asset Disposal”.</div>
+            <div class="field-err" id="errAsset"><i class="ti ti-alert-circle"></i> Please name the asset you disposed of.</div>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <label>Sale / disposal date</label>
+              <input class="input" id="inDispDate" type="date" />
+              <div class="field-err" id="errDispDate"><i class="ti ti-alert-circle"></i> Please add the disposal date.</div>
+            </div>
+            <div class="field">
+              <label>Sale / disposal amount</label>
+              <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" id="inSale" type="number" placeholder="0" /></div>
+              <div class="field-err" id="errSale"><i class="ti ti-alert-circle"></i> Please add the sale amount.</div>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <label>Purchase / acquisition date <span class="optional">optional</span></label>
+              <input class="input" id="inBuyDate" type="date" />
+              <label class="chk-dontknow"><input type="checkbox" id="dkBuyDate"> I don’t know this yet</label>
+            </div>
+            <div class="field">
+              <label>Purchase / acquisition price <span class="optional">optional</span></label>
+              <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" id="inBuy" type="number" placeholder="0" /></div>
+              <label class="chk-dontknow"><input type="checkbox" id="dkBuy"> I don’t know this yet</label>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:4px;">
+            <label>Case reference</label>
+            <div class="input-wrap"><i class="ti ti-hash prefix"></i><input class="input" id="inRef" placeholder="Auto-generated" style="background:var(--cream);" /></div>
+            <div class="hint">We generate this for you so it’s easy to find later. You can rename it.</div>
+          </div>
+        </div>
+        <div class="alert info" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>From here on, <b>your information saves automatically</b>. Missing something? The tax team can ask for details later — nothing is set in stone.</div></div>
+      </section>
+
+      <!-- ===== STEP 3 · OWNERSHIP ===== -->
+      <section class="step" data-step="3">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-users"></i> Case setup · Step 3 of 10</span>
+          <h1>Who owns this?</h1>
+          <p>This helps us calculate the right share of the gain and set up the correct returns.</p>
+        </div>
+        <div class="card card-lg">
+          <p class="flabel" style="margin-bottom:12px;">Is this property or asset solely owned by you?</p>
+          <div class="seg" id="ownSeg">
+            <div class="opt sel" data-own="sole"><span class="radio"></span> Yes, I’m the sole owner</div>
+            <div class="opt" data-own="joint"><span class="radio"></span> No, it’s jointly owned</div>
+          </div>
+
+          <div id="jointBlock" class="hide" style="margin-top:22px;">
+            <div class="two-col">
+              <div class="field">
+                <label>Your ownership percentage</label>
+                <div class="input-wrap"><input class="input" id="inPct" type="number" placeholder="50" style="padding-right:34px;" /><i class="ti ti-percentage prefix" style="left:auto;right:14px;"></i></div>
+              </div>
+              <div class="field">
+                <label>Number of co-owners</label>
+                <input class="input" id="inCoOwners" type="number" placeholder="1" />
+              </div>
+            </div>
+            <div class="section-label" style="margin-top:8px;">Co-owner details</div>
+            <div class="two-col">
+              <div class="field"><label>Co-owner name</label><input class="input" placeholder="e.g. Sarah Whitfield" /></div>
+              <div class="field"><label>Co-owner email</label><input class="input" type="email" placeholder="name@email.com" /></div>
+            </div>
+            <button class="chip-btn" id="addOwner" style="margin-bottom:16px;"><i class="ti ti-plus"></i> Add another owner</button>
+            <div class="alert success"><i class="ti ti-discount-2"></i><div><b>Joint owner discount:</b> if all owners file through FileCGTOnline, each owner may receive a discount on their case.</div></div>
+          </div>
+
+          <div class="alert calm" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>Each owner usually has their <b>own CGT return, payment and invoice</b>. You can invite co-owners now or later.</div></div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 4 · PRICE ===== -->
+      <section class="step" data-step="4">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-receipt"></i> Payment &amp; agreement · Step 4 of 10</span>
+          <h1>Review your price</h1>
+          <p>A clear, fixed fee — no surprises. This provisional estimate is confirmed once our tax team reviews your case.</p>
+        </div>
+        <div class="two-col" style="gap:16px;align-items:start;">
+          <div class="card card-lg">
+            <div class="section-label">Order summary</div>
+            <div class="price-row"><span class="lab" id="prSvc">Residential Property CGT</span><span class="val" id="prBase">£149</span></div>
+            <div class="price-row disc hide" id="prJointRow"><span class="lab"><i class="ti ti-discount-2" style="color:var(--su-tx);font-size:15px;"></i> Joint owner discount</span><span class="val" id="prJoint">–£30</span></div>
+            <div class="price-row disc hide" id="prCodeRow"><span class="lab"><i class="ti ti-ticket" style="color:var(--su-tx);font-size:15px;"></i> Discount code <b id="prCodeName"></b></span><span class="val" id="prCode">–£15</span></div>
+            <div class="field" style="margin:16px 0 4px;">
+              <label>Have a discount code?</label>
+              <div class="discount-row">
+                <input class="input" id="inCode" placeholder="ENTER CODE" />
+                <button class="btn btn-ghost" id="applyCode" style="padding:12px 18px;">Apply</button>
+              </div>
+              <div class="field-err" id="errCode"><i class="ti ti-alert-circle"></i> That code isn’t valid. Try <b>CGT10</b>.</div>
+              <div class="hint hide" id="okCode" style="color:var(--su-tx);"><i class="ti ti-check"></i> Code applied.</div>
+            </div>
+            <div class="price-total"><span class="lab">Total due today</span><span class="val" id="prTotal">£149</span></div>
+            <div class="alert calm" style="margin-top:16px;font-size:13px;"><i class="ti ti-file-invoice"></i><div>A VAT invoice is generated automatically and saved to your Documents after payment.</div></div>
+          </div>
+          <div class="card card-lg">
+            <div class="section-label">What’s included</div>
+            <ul class="incl-list">
+              <li><i class="ti ti-circle-check"></i> Guided CGT case setup</li>
+              <li><i class="ti ti-circle-check"></i> Secure document upload</li>
+              <li><i class="ti ti-circle-check"></i> Full review by our qualified tax team</li>
+              <li><i class="ti ti-circle-check"></i> Draft return prepared for you</li>
+              <li><i class="ti ti-circle-check"></i> Your approval before anything is submitted</li>
+              <li><i class="ti ti-circle-check"></i> HMRC submission &amp; confirmation</li>
+            </ul>
+            <div class="alert success" style="margin-top:18px;"><i class="ti ti-shield-lock"></i><div>Payments are encrypted and processed securely by Stripe. We never see your card details.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 5 · PAYMENT ===== -->
+      <section class="step" data-step="5">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-credit-card"></i> Payment &amp; agreement · Step 5 of 10</span>
+          <h1>Secure payment</h1>
+          <p>Your work begins as soon as payment is received and the engagement letter is signed.</p>
+        </div>
+
+        <div class="card card-lg" id="payForm">
+          <div class="pay-methods">
+            <div class="pay-m apple" data-pay="apple"><i class="ti ti-brand-apple"></i> Pay</div>
+            <div class="pay-m gpay" data-pay="google"><i class="ti ti-brand-google"></i> Pay</div>
+          </div>
+          <div class="pay-m sel" data-pay="card" style="width:100%;justify-content:flex-start;"><i class="ti ti-credit-card"></i> Credit or debit card</div>
+          <div class="stripe-fields">
+            <div class="field"><label>Card number</label><div class="input-wrap"><i class="ti ti-credit-card prefix"></i><input class="input" placeholder="1234 1234 1234 1234" inputmode="numeric"></div></div>
+            <div class="two-col">
+              <div class="field"><label>Expiry</label><input class="input" placeholder="MM / YY" inputmode="numeric"></div>
+              <div class="field"><label>CVC</label><input class="input" placeholder="123" inputmode="numeric"></div>
+            </div>
+            <span class="stripe-badge"><i class="ti ti-lock"></i> Secured by Stripe · encrypted checkout</span>
+          </div>
+          <div class="trust-grid" style="margin-top:18px;">
+            <div class="trust"><i class="ti ti-shield-check"></i> Secure, encrypted payment</div>
+            <div class="trust"><i class="ti ti-file-invoice"></i> Invoice generated automatically</div>
+            <div class="trust"><i class="ti ti-lock"></i> PCI-compliant checkout</div>
+            <div class="trust"><i class="ti ti-briefcase"></i> Work begins after signing</div>
+          </div>
+        </div>
+
+        <div class="card card-lg pay-processing" id="payProcessing">
+          <div class="spinner"></div>
+          <h3 style="font-size:19px;font-weight:600;">Processing your payment…</h3>
+          <p style="color:var(--muted);margin-top:6px;">Please don’t close this window. This only takes a moment.</p>
+        </div>
+
+        <div class="card card-lg pay-success" id="paySuccess">
+          <div class="big-ico ok"><i class="ti ti-check"></i></div>
+          <h3 style="font-size:20px;font-weight:600;">Payment received</h3>
+          <p style="color:var(--muted);margin-top:8px;max-width:44ch;margin-inline:auto;">Please sign the engagement letter so our team can begin working on your case.</p>
+        </div>
+
+        <div class="card card-lg pay-failed" id="payFailed">
+          <div class="big-ico bad"><i class="ti ti-x"></i></div>
+          <h3 style="font-size:20px;font-weight:600;">Payment didn’t go through</h3>
+          <p style="color:var(--muted);margin-top:8px;max-width:46ch;margin-inline:auto;">No money was taken. Please check your card details and try again, or use a different payment method.</p>
+          <button class="btn btn-primary" id="payRetry" style="margin-top:18px;"><i class="ti ti-refresh"></i> Retry payment</button>
+        </div>
+      </section>
+
+      <!-- ===== STEP 6 · AGREEMENT ===== -->
+      <section class="step" data-step="6">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-writing-sign"></i> Payment &amp; agreement · Step 6 of 10</span>
+          <h1>Sign your engagement letter</h1>
+          <p>This confirms we’re acting for you. Please read it, then add your signature below.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="section-label">Letter of Engagement</div>
+          <div class="doc-scroll" id="docScroll">
+            <h4>1. Our engagement</h4>
+            <p>This letter sets out the basis on which Everest &amp; Co Accountants Limited (trading as FileCGTOnline) will act for you in the preparation and submission of your Capital Gains Tax return to HM Revenue &amp; Customs.</p>
+            <h4>2. Your responsibilities</h4>
+            <p>You are responsible for providing complete and accurate information relating to your disposal, including sale and purchase details, allowable costs, and any reliefs you may be entitled to. You remain legally responsible for the contents of your return, which we will prepare for your approval before submission.</p>
+            <h4>3. Our responsibilities</h4>
+            <p>We will calculate your Capital Gains Tax liability based on the information provided, prepare a draft return for your review, and submit it to HMRC once you have approved it. We will act with reasonable care and skill and in accordance with ICAEW professional standards.</p>
+            <h4>4. Fees</h4>
+            <p>Our fee for this service is fixed and payable in advance, as shown at checkout. Additional work outside the agreed scope will be quoted separately and only undertaken with your approval.</p>
+            <h4>5. Data protection</h4>
+            <p>We process your personal data in line with UK GDPR and our Privacy Policy. Your documents are stored securely and shared only with those working on your case.</p>
+            <h4>6. Accuracy guarantee</h4>
+            <p>Where we make an error in preparing your return, we will correct it at no cost to you and support you in any related correspondence with HMRC.</p>
+            <p style="margin-top:16px;color:var(--muted-2);">— End of Letter of Engagement —</p>
+          </div>
+          <div class="alert calm" style="margin:16px 0;font-size:13px;"><i class="ti ti-file-text"></i><div>You’re also agreeing to our <a href="#" style="color:var(--green-link);font-weight:600;text-decoration:underline;">Terms &amp; Conditions</a> and <a href="#" style="color:var(--green-link);font-weight:600;text-decoration:underline;">Privacy Policy</a>.</div></div>
+
+          <label class="chk-row" style="margin-bottom:18px;"><input type="checkbox" id="agreeChk"> I have read and agree to the Letter of Engagement and Terms &amp; Conditions.</label>
+
+          <div class="field">
+            <label>Type your full name to sign</label>
+            <div class="sign-pad"><input class="sign-input" id="signName" placeholder="Type your full legal name" autocomplete="off"></div>
+          </div>
+          <div class="alert info" style="margin-top:4px;font-size:13px;"><i class="ti ti-shield-lock"></i><div>Your signature will be recorded with the <b>date, time and security details</b> for audit purposes.</div></div>
+
+          <div class="alert success hide" id="signedState" style="margin-top:16px;">
+            <i class="ti ti-circle-check"></i>
+            <div>
+              <span class="alert-title">Signed successfully</span>
+              Signed by <b id="signedBy">—</b> · <span id="signedStamp">—</span>
+              <div style="margin-top:8px;"><button class="chip-btn" id="downloadCopy"><i class="ti ti-download"></i> Download signed copy (PDF)</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 7 · QUESTIONS ===== -->
+      <section class="step" data-step="7">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-list-check"></i> Case information · Step 7 of 10</span>
+          <h1>Guided questions</h1>
+          <p>Answer what you can. Our team can follow up if anything is unclear — and your answers save as you go.</p>
+        </div>
+        <div class="card card-lg" style="padding:20px 22px;">
+          <div class="q-progress">
+            <span style="font-size:13px;color:var(--muted);white-space:nowrap;">Questionnaire</span>
+            <div class="bar"><div class="fill" id="qFill"></div></div>
+            <span class="pct" id="qPct">18%</span>
+          </div>
+
+          <details class="q-sec" data-done="1" open>
+            <summary><span class="snum"><i class="ti ti-check"></i></span><span class="stitle">Personal tax details<span>Your UTR, residency and tax band</span></span><i class="ti ti-chevron-down chev"></i></summary>
+            <div class="qbody">
+              <div class="field"><label>What is your Income Tax band this year?</label>
+                <select class="select"><option>Basic rate</option><option selected>Higher rate</option><option>Additional rate</option><option>I’m not sure</option></select>
+                <div class="hint">Not sure? Choose “I’m not sure” — we’ll confirm it from your records.</div>
+              </div>
+              <div class="field" style="margin-bottom:0;"><label>Unique Taxpayer Reference (UTR) <span class="optional">optional</span></label><input class="input" placeholder="10-digit UTR"></div>
+            </div>
+          </details>
+
+          <details class="q-sec" data-done="1">
+            <summary><span class="snum"><i class="ti ti-check"></i></span><span class="stitle">Sale / disposal details<span>What you sold and when</span></span><i class="ti ti-chevron-down chev"></i></summary>
+            <div class="qbody">
+              <div class="ai-field">
+                <span class="ai-tag"><i class="ti ti-sparkles"></i> AI-prefilled</span>
+                <label class="flabel">Sale price</label>
+                <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" value="385000" style="background:#fff;"></div>
+                <p class="hint" style="margin-top:8px;">AI found this value in your uploaded completion statement. Please confirm or edit it.</p>
+                <div class="ai-actions"><button class="chip-btn solid"><i class="ti ti-check"></i> Confirm</button><button class="chip-btn"><i class="ti ti-pencil"></i> Edit</button></div>
+              </div>
+            </div>
+          </details>
+
+          <details class="q-sec" data-done="0">
+            <summary><span class="snum">3</span><span class="stitle">Costs &amp; fees<span>Legal fees, agent fees, stamp duty</span></span><i class="ti ti-chevron-down chev"></i></summary>
+            <div class="qbody">
+              <div class="field" style="margin-bottom:0;"><label>Total allowable costs on sale &amp; purchase</label>
+                <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" placeholder="0"></div>
+                <div class="hint">Include solicitor and estate-agent fees, and stamp duty paid when you bought. Not sure of the exact figure? Add your best estimate.</div>
+              </div>
+            </div>
+          </details>
+
+          <details class="q-sec" data-done="0">
+            <summary><span class="snum">4</span><span class="stitle">Main residence &amp; letting history<span>Private Residence Relief (PPR)</span></span><i class="ti ti-chevron-down chev"></i></summary>
+            <div class="qbody">
+              <div class="field" style="margin-bottom:0;"><label>Did you ever live in this property as your main home?</label>
+                <div class="seg"><div class="opt sel"><span class="radio"></span> Yes</div><div class="opt"><span class="radio"></span> No</div></div>
+                <div class="hint">If yes, you may qualify for Private Residence Relief, which can reduce your bill.</div>
+              </div>
+            </div>
+          </details>
+
+          <details class="q-sec" data-done="0">
+            <summary><span class="snum">5</span><span class="stitle">Losses, other disposals &amp; notes<span>Anything else we should know</span></span><i class="ti ti-chevron-down chev"></i></summary>
+            <div class="qbody">
+              <div class="field" style="margin-bottom:0;"><label>Additional notes for our team <span class="optional">optional</span></label>
+                <textarea class="input" rows="3" placeholder="Anything you’d like us to know about this disposal…"></textarea>
+              </div>
+            </div>
+          </details>
+
+          <div class="alert calm" style="margin-top:8px;font-size:13px;"><i class="ti ti-device-floppy"></i><div>Your answers are saved automatically. You can stop any time and pick up where you left off.</div></div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 8 · DOCUMENTS ===== -->
+      <section class="step" data-step="8">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-upload"></i> Case information · Step 8 of 10</span>
+          <h1>Upload your documents</h1>
+          <p>Add what you have now — you can return and finish the rest later. Required items are clearly marked.</p>
+        </div>
+        <div class="doc-grid" id="docGrid">
+          <!-- doc cards built by JS -->
+        </div>
+        <div class="alert warn hide" id="docMissing" style="margin-top:16px;"><i class="ti ti-alert-triangle"></i><div><b>Still needed:</b> <span id="docMissingList"></span>. You can continue and add these later, but we’ll need them before filing.</div></div>
+        <div class="alert calm" style="margin-top:16px;font-size:13px;"><i class="ti ti-file-info"></i><div>Accepted formats: PDF, JPG, JPEG, PNG, DOCX · up to 25MB per file. On mobile you can upload straight from your camera.</div></div>
+      </section>
+
+      <!-- ===== STEP 9 · VERIFICATION ===== -->
+      <section class="step" data-step="9">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-id-badge-2"></i> Case information · Step 9 of 10</span>
+          <h1>Verify your identity</h1>
+          <p>We need to verify your identity before our tax team can complete your case. It only takes a couple of minutes.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="verify-check">
+            <div class="vc-item"><span class="vi"><i class="ti ti-id"></i></span><span class="vt">Government-issued photo ID<span>Passport or driving licence</span></span><span class="badge b-grey" data-vc="id"><span class="d"></span> Not started</span></div>
+            <div class="vc-item"><span class="vi"><i class="ti ti-home-2"></i></span><span class="vt">Proof of address<span>Utility bill or bank statement, last 3 months</span></span><span class="badge b-grey" data-vc="addr"><span class="d"></span> Not started</span></div>
+            <div class="vc-item"><span class="vi"><i class="ti ti-shield-search"></i></span><span class="vt">PEP &amp; sanctions screening<span>A standard background check</span></span><span class="badge b-grey" data-vc="pep"><span class="d"></span> Not started</span></div>
+            <div class="vc-item"><span class="vi"><i class="ti ti-lock-check"></i></span><span class="vt">Secure verification<span>Handled by our trusted provider</span></span><span class="badge b-grey" data-vc="sec"><span class="d"></span> Not started</span></div>
+          </div>
+
+          <div class="provider" style="margin-top:18px;">
+            <span class="plogo">X</span>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:600;">Verification by Xama</div>
+              <div style="font-size:13px;color:var(--muted);">You’ll complete a short, secure check. Your documents are handled by our regulated identity provider.</div>
+            </div>
+          </div>
+
+          <div class="alert info" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div id="verifyMsg">We need to verify your identity before our tax team can complete your case.</div></div>
+
+          <div class="alert success hide" id="verifyDone" style="margin-top:16px;"><i class="ti ti-circle-check"></i><div><span class="alert-title">Identity verification complete</span>You’re ready to submit your case for review.</div></div>
+          <div class="alert warn hide" id="verifyAction" style="margin-top:16px;"><i class="ti ti-alert-triangle"></i><div><span class="alert-title">One more item needed</span>We need one more item before verification can be completed.</div></div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 10 · REVIEW ===== -->
+      <section class="step" data-step="10">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-clipboard-check"></i> Final review · Step 10 of 10</span>
+          <h1>Review &amp; submit your case</h1>
+          <p>You’re almost done. Check everything below, then send your case to our tax team.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="review-list" id="reviewList"><!-- built by JS --></div>
+        </div>
+        <div class="alert info" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>After submitting, our team will review your information and contact you if anything else is needed. This estimate stays <b>provisional until reviewed</b>.</div></div>
+      </section>
+
+      <!-- ===== SUCCESS SCREEN ===== -->
+      <div class="success-wrap" id="successWrap">
+        <div class="success-hero">
+          <div class="burst"><i class="ti ti-circle-check"></i></div>
+          <h1>Your case has been submitted for review</h1>
+          <p class="sub">Our team will now check your information, review your documents, and contact you if anything else is needed.</p>
+          <div class="case-receipt">
+            <div class="receipt-row"><span class="k">Case name</span><span class="v" id="scName">—</span></div>
+            <div class="receipt-row"><span class="k">Case reference</span><span class="v" id="scRef">—</span></div>
+            <div class="receipt-row"><span class="k">Current status</span><span class="v"><span class="badge b-amber"><span class="d" style="background:var(--wa-dot);"></span> Under review</span></span></div>
+            <div class="receipt-row"><span class="k">Next step</span><span class="v">Staff review</span></div>
+            <div class="receipt-row"><span class="k">HMRC deadline</span><span class="v" id="scDeadline">47 days left</span></div>
+            <div class="receipt-row"><span class="k">Assigned team</span><span class="v" style="color:var(--muted);font-weight:500;">Being assigned…</span></div>
+          </div>
+          <div class="success-ctas">
+            <a class="btn btn-primary btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-layout-dashboard"></i> Go to case dashboard</a>
+            <a class="btn btn-ghost btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-files"></i> View documents</a>
+            <a class="btn btn-ghost btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-message"></i> Send message</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ---------- SUMMARY RAIL ---------- -->
+    <aside class="summary" id="summary">
+      <div class="sum-card">
+        <div class="sum-head">
+          <div class="lab">Your case</div>
+          <div class="ref" id="sumRef">New case</div>
+          <div class="svc" id="sumSvc">No service selected yet</div>
+        </div>
+        <div class="sum-body">
+          <div class="sum-row"><span class="k">Disposal</span><span class="v" id="sumDisposal">—</span></div>
+          <div class="sum-row"><span class="k">Ownership</span><span class="v" id="sumOwn">Sole owner</span></div>
+          <div class="sum-row"><span class="k">Price</span><span class="v" id="sumPrice">—</span></div>
+          <div class="sum-row"><span class="k">Payment</span><span class="v" id="sumPay"><span class="badge b-grey"><span class="d"></span> Pending</span></span></div>
+          <div class="sum-row"><span class="k">Agreement</span><span class="v" id="sumAgree"><span class="badge b-grey"><span class="d"></span> Unsigned</span></span></div>
+          <div class="sum-row"><span class="k">Identity</span><span class="v" id="sumId"><span class="badge b-grey"><span class="d"></span> Not started</span></span></div>
+        </div>
+        <div class="sum-progress">
+          <div class="row"><span style="color:var(--muted);">Setup progress</span><span style="font-weight:600;" id="sumPctTxt">10%</span></div>
+          <div class="bar"><div class="fill" id="sumFill" style="width:10%"></div></div>
+        </div>
+        <div class="sum-help"><i class="ti ti-lock"></i><div>Everything is saved automatically and protected with bank-grade encryption. You can leave and come back any time.</div></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ================= ACTION BAR ================= -->
+  <footer class="actionbar" id="actionbar">
+    <div class="left">
+      <button class="btn btn-ghost" id="btnBack"><i class="ti ti-arrow-left"></i> <span class="btn-full-lbl">Back</span></button>
+    </div>
+    <div class="right">
+      <button class="btn btn-text" id="btnSaveExit"><i class="ti ti-device-floppy"></i> Save &amp; exit</button>
+      <button class="btn btn-primary" id="btnNext">Continue <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= MODAL ================= -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="modal">
+  <div class="m-ico"><i class="ti ti-device-floppy"></i></div>
+  <h3 id="modalTitle">Save and finish later?</h3>
+  <p id="modalBody">Your progress is saved automatically. You can pick up exactly where you left off from your dashboard at any time.</p>
+  <div class="m-actions">
+    <button class="btn btn-ghost" id="modalCancel">Keep editing</button>
+    <a class="btn btn-primary" id="modalConfirm" href="FileCGTOnline Portal.dc.html">Save &amp; exit</a>
+  </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+<div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toastTxt">Saved</span></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  /* ---------- step model ---------- */
+  const STEPS = [
+    {n:1, phase:1, key:'Service',       title:'Choose your service'},
+    {n:2, phase:1, key:'Case Details',  title:'A few basic details'},
+    {n:3, phase:1, key:'Ownership',     title:'Who owns this?'},
+    {n:4, phase:2, key:'Price',         title:'Review your price'},
+    {n:5, phase:2, key:'Payment',       title:'Secure payment'},
+    {n:6, phase:2, key:'Agreement',     title:'Sign your engagement letter'},
+    {n:7, phase:3, key:'Questions',     title:'Guided questions'},
+    {n:8, phase:3, key:'Documents',     title:'Upload your documents'},
+    {n:9, phase:3, key:'Verification',  title:'Verify your identity'},
+    {n:10,phase:4, key:'Review',        title:'Review & submit'},
+  ];
+  const PHASES = [
+    {n:1, title:'Case setup',          steps:[1,2,3]},
+    {n:2, title:'Payment & agreement', steps:[4,5,6]},
+    {n:3, title:'Case information',    steps:[7,8,9]},
+    {n:4, title:'Final review',        steps:[10]},
+  ];
+
+  const state = {
+    step:1, maxReached:1, autosave:false,
+    service:null, serviceName:null, basePrice:0,
+    address:'', asset:'', dispDate:'', sale:'', ref:'',
+    ownership:'sole', codeApplied:null, codeDiscount:0, jointDiscount:0,
+    paid:false, signed:false, verified:false, submitted:false,
+  };
+
+  /* ================= NAV RENDER ================= */
+  function buildNav(){
+    const nav = $('#stepnav'); nav.innerHTML='';
+    PHASES.forEach(ph=>{
+      const done = ph.steps.every(s=>s < state.step);
+      const active = ph.steps.includes(state.step);
+      const pd = document.createElement('div');
+      pd.className = 'phase'+(active?' active':'')+(done?' done':'');
+      pd.innerHTML = `<div class="phase-head"><span class="phase-num">${done?'<i class="ti ti-check"></i>':ph.n}</span><span class="phase-title">Phase ${ph.n} · ${ph.title}</span></div>`;
+      ph.steps.forEach(sn=>{
+        const st = STEPS[sn-1];
+        const isDone = sn < state.step;
+        const isCur = sn === state.step;
+        const canGo = sn <= state.maxReached;
+        const b = document.createElement('button');
+        b.className = 'snav'+(isCur?' current':'')+(isDone?' done':'');
+        b.disabled = !canGo;
+        b.innerHTML = `<span class="dot">${isDone?'<i class="ti ti-check"></i>':st.n}</span><span class="lbl">${st.key}<span class="mini">Step ${st.n}</span></span>`;
+        b.addEventListener('click',()=>{ if(canGo) goTo(sn); });
+        pd.appendChild(b);
+      });
+      nav.appendChild(pd);
+    });
+  }
+
+  /* ================= RENDER ================= */
+  function show(step){
+    $$('.step').forEach(el=>el.classList.toggle('show', +el.dataset.step===step));
+    $('#successWrap').classList.remove('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+    const st = STEPS[step-1], ph = PHASES[st.phase-1];
+    // mobile progress
+    $('#mPhase').textContent = `Phase ${ph.n} · ${ph.title}`;
+    $('#mCount').textContent = `Step ${st.n} of 10`;
+    $('#mTitle').textContent = st.title;
+    const pct = Math.round((step/10)*100);
+    $('#mFill').style.width = pct+'%';
+    // action bar
+    $('#btnBack').style.visibility = step===1 ? 'hidden':'visible';
+    const next = $('#btnNext');
+    if(step===10){ next.innerHTML = 'Submit case for review <i class="ti ti-send"></i>'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
+    else if(step===5 && !state.paid){ next.innerHTML = 'Pay now <i class="ti ti-lock"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
+    else if(step===9 && !state.verified){ next.innerHTML = 'Start verification <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
+    else { next.innerHTML = 'Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
+    buildNav();
+    updateSummary();
+    if(step===4) renderPrice();
+    if(step===10) renderReview();
+    refreshNextState();
+  }
+
+  function goTo(step){ state.step = step; state.maxReached = Math.max(state.maxReached, step); show(step); }
+
+  /* ================= AUTOSAVE ================= */
+  let saveT;
+  function autosave(){
+    if(!state.autosave) return;
+    const el = $('#autosave'); const txt=$('#autosaveTxt');
+    el.classList.add('on','saving'); el.classList.remove('saved');
+    el.querySelector('i').className='ti ti-loader-2';
+    txt.textContent='Saving…';
+    clearTimeout(saveT);
+    saveT = setTimeout(()=>{ el.classList.remove('saving'); el.classList.add('saved'); el.querySelector('i').className='ti ti-cloud-check'; txt.textContent='All changes saved'; }, 700);
+  }
+  function enableAutosave(){ if(!state.autosave){ state.autosave=true; $('#autosave').classList.add('on','saved'); $('#autosaveTxt').textContent='All changes saved'; } }
+
+  function toast(msg){ const t=$('#toast'); $('#toastTxt').textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
+  /* ================= SUMMARY ================= */
+  const badge = (cls,txt,dot)=>`<span class="badge ${cls}">${dot?`<span class="d" style="background:${dot}"></span>`:''}${txt}</span>`;
+  function updateSummary(){
+    $('#sumRef').textContent = state.ref || 'New case';
+    $('#sumSvc').textContent = state.serviceName || 'No service selected yet';
+    $('#sumDisposal').textContent = state.sale ? '£'+Number(state.sale).toLocaleString('en-GB') : '—';
+    $('#sumOwn').textContent = state.ownership==='joint' ? 'Jointly owned' : 'Sole owner';
+    $('#sumPrice').textContent = state.service ? '£'+total().toLocaleString('en-GB') : '—';
+    $('#sumPay').innerHTML  = state.paid   ? badge('b-green','Paid','var(--su-dot)')       : badge('b-grey','Pending','var(--gr-dot)');
+    $('#sumAgree').innerHTML= state.signed ? badge('b-green','Signed','var(--su-dot)')     : badge('b-grey','Unsigned','var(--gr-dot)');
+    $('#sumId').innerHTML   = state.verified?badge('b-green','Verified','var(--su-dot)')    : badge('b-grey','Not started','var(--gr-dot)');
+    const pct = Math.round((state.step/10)*100);
+    $('#sumFill').style.width = pct+'%'; $('#sumPctTxt').textContent = pct+'%';
+  }
+
+  /* ================= STEP 1 · SERVICE ================= */
+  $$('#serviceChoices .choice').forEach(c=>{
+    c.addEventListener('click',()=>{
+      $$('#serviceChoices .choice').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');
+      state.service = c.dataset.service;
+      state.serviceName = c.dataset.name;
+      state.basePrice = +c.dataset.price;
+      // service-driven fields in step 2
+      const isProp = state.service==='residential'||state.service==='commercial';
+      $('#fldAddress').classList.toggle('hide', !isProp);
+      $('#fldAsset').classList.toggle('hide', isProp);
+      refreshNextState(); updateSummary();
+    });
+  });
+
+  /* ================= STEP 2 · CASE DETAILS ================= */
+  const genRef = ()=>{
+    const map={residential:'RES',commercial:'COM',other:'CGT'};
+    const p = map[state.service]||'CGT';
+    const n = 20000 + Math.floor(((Date.now()/1000)%40000));
+    return `${p}-${n}`;
+  };
+  ['inAddress','inAsset','inDispDate','inSale','inBuyDate','inBuy','inRef'].forEach(id=>{
+    const el=$('#'+id); if(!el) return;
+    el.addEventListener('input',()=>{
+      if(id==='inAddress') state.address=el.value;
+      if(id==='inAsset') state.asset=el.value;
+      if(id==='inDispDate') state.dispDate=el.value;
+      if(id==='inSale') state.sale=el.value;
+      if(id==='inRef') state.ref=el.value;
+      autosave(); refreshNextState(); updateSummary();
+    });
+  });
+  $('#dkBuyDate').addEventListener('change',e=>{ $('#inBuyDate').disabled=e.target.checked; if(e.target.checked)$('#inBuyDate').value=''; autosave(); });
+  $('#dkBuy').addEventListener('change',e=>{ $('#inBuy').disabled=e.target.checked; if(e.target.checked)$('#inBuy').value=''; autosave(); });
+
+  /* ================= STEP 3 · OWNERSHIP ================= */
+  $$('#ownSeg .opt').forEach(o=>o.addEventListener('click',()=>{
+    $$('#ownSeg .opt').forEach(x=>x.classList.remove('sel')); o.classList.add('sel');
+    state.ownership=o.dataset.own;
+    $('#jointBlock').classList.toggle('hide', state.ownership!=='joint');
+    state.jointDiscount = state.ownership==='joint' ? Math.round(state.basePrice*0.2) : 0;
+    autosave(); updateSummary();
+  }));
+  $('#addOwner').addEventListener('click',()=>toast('Another co-owner row added'));
+
+  /* ================= STEP 4 · PRICE ================= */
+  function total(){ return Math.max(0, state.basePrice - state.jointDiscount - state.codeDiscount); }
+  function renderPrice(){
+    $('#prSvc').textContent = state.serviceName||'—';
+    $('#prBase').textContent = '£'+state.basePrice;
+    $('#prJointRow').classList.toggle('hide', !state.jointDiscount);
+    $('#prJoint').textContent = '–£'+state.jointDiscount;
+    $('#prCodeRow').classList.toggle('hide', !state.codeDiscount);
+    $('#prCode').textContent = '–£'+state.codeDiscount;
+    $('#prCodeName').textContent = state.codeApplied?('· '+state.codeApplied):'';
+    $('#prTotal').textContent = '£'+total().toLocaleString('en-GB');
+  }
+  $('#applyCode').addEventListener('click',()=>{
+    const v=$('#inCode').value.trim().toUpperCase();
+    if(v==='CGT10'){ state.codeApplied='CGT10'; state.codeDiscount=15; $('#errCode').classList.remove('show'); $('#okCode').classList.remove('hide'); toast('Discount applied'); }
+    else { state.codeDiscount=0; state.codeApplied=null; $('#errCode').classList.add('show'); $('#okCode').classList.add('hide'); }
+    renderPrice(); updateSummary();
+  });
+
+  /* ================= STEP 5 · PAYMENT ================= */
+  $$('#payForm .pay-m').forEach(m=>m.addEventListener('click',()=>{ $$('#payForm .pay-m').forEach(x=>x.classList.remove('sel')); m.classList.add('sel'); }));
+  function startPayment(){
+    $('#payForm').style.display='none';
+    $('#payProcessing').classList.add('show');
+    setTimeout(()=>{
+      $('#payProcessing').classList.remove('show');
+      // demo: succeed
+      $('#paySuccess').classList.add('show');
+      state.paid=true; updateSummary(); refreshNextState();
+      $('#btnNext').innerHTML='Continue to agreement <i class="ti ti-arrow-right"></i>';
+    },1600);
+  }
+  $('#payRetry').addEventListener('click',()=>{ $('#payFailed').classList.remove('show'); $('#payForm').style.display='block'; });
+
+  /* ================= STEP 6 · AGREEMENT ================= */
+  function refreshSign(){
+    const ok = $('#agreeChk').checked && $('#signName').value.trim().length>=3;
+    if(state.signed) return;
+    $('#btnNext').disabled = !ok && state.step===6;
+  }
+  $('#agreeChk').addEventListener('change',refreshNextState);
+  $('#signName').addEventListener('input',refreshNextState);
+  function doSign(){
+    state.signed=true;
+    const now=new Date();
+    $('#signedBy').textContent=$('#signName').value.trim();
+    $('#signedStamp').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+', '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · IP recorded';
+    $('#signedState').classList.remove('hide');
+    updateSummary();
+  }
+  $('#downloadCopy').addEventListener('click',()=>toast('Signed copy downloaded'));
+
+  /* ================= STEP 8 · DOCUMENTS ================= */
+  const DOCS=[
+    {id:'sale',name:'Sale Completion Statement',req:true, why:'We use this to confirm your sale price and date.'},
+    {id:'purchase',name:'Purchase Completion Statement',req:true, why:'This shows what you originally paid for the asset.'},
+    {id:'improve',name:'Improvement Receipts',req:false, why:'Costs of improvements can reduce your gain.'},
+    {id:'id',name:'Identity Documents',req:true, why:'Required by HMRC to verify who you are.'},
+    {id:'addr',name:'Proof of Address',req:true, why:'A recent utility bill or bank statement (last 3 months).'},
+    {id:'other',name:'Other Supporting Documents',req:false, why:'Anything else you think is relevant to your case.'},
+  ];
+  function buildDocs(){
+    const g=$('#docGrid'); g.innerHTML='';
+    DOCS.forEach(d=>{
+      const card=document.createElement('div'); card.className='doc-card';
+      card.innerHTML=`
+        <div class="dc-head">
+          <h4><i class="ti ti-file-text" style="color:var(--green);"></i> ${d.name}</h4>
+          <span class="badge ${d.req?'b-amber':'b-grey'}">${d.req?'Required':'Optional'}</span>
+        </div>
+        <p class="why">${d.why}</p>
+        <p class="fmt">PDF, JPG, PNG, DOCX · max 25MB</p>
+        <div class="drop" data-doc="${d.id}">
+          <i class="ti ti-cloud-upload"></i>
+          <p>Drag &amp; drop or <b style="color:var(--green-link)">browse</b></p>
+          <p class="cam"><i class="ti ti-camera"></i> Or take a photo</p>
+          <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png,.docx">
+        </div>
+        <div class="up-progress" data-prog="${d.id}"><div class="fill"></div></div>
+        <div class="uploaded" data-file="${d.id}">
+          <span class="fi"><i class="ti ti-file-type-pdf"></i></span>
+          <span class="meta"><span class="nm">—</span><span class="sz">—</span></span>
+          <span class="badge b-green" style="margin-left:auto;"><i class="ti ti-circle-check"></i> Uploaded</span>
+          <span class="act"><button class="icon-btn" title="Replace"><i class="ti ti-refresh"></i></button><button class="icon-btn danger" title="Delete"><i class="ti ti-trash"></i></button></span>
+        </div>`;
+      g.appendChild(card);
+      const drop=card.querySelector('.drop'), input=card.querySelector('input[type=file]');
+      const prog=card.querySelector('.up-progress'), fill=prog.querySelector('.fill');
+      const up=card.querySelector('.uploaded');
+      const openPick=()=>input.click();
+      drop.addEventListener('click',openPick);
+      ['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
+      ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
+      drop.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+      input.addEventListener('change',()=>{ if(input.files[0]) handleFile(input.files[0]); });
+      function handleFile(file){
+        drop.style.display='none'; prog.classList.add('show'); let p=0;
+        const t=setInterval(()=>{ p+=Math.random()*30; fill.style.width=Math.min(p,100)+'%';
+          if(p>=100){ clearInterval(t); prog.classList.remove('show'); fill.style.width='0';
+            up.querySelector('.nm').textContent=file.name;
+            up.querySelector('.sz').textContent=(file.size/1048576).toFixed(1)+' MB · '+d.name;
+            up.classList.add('show'); d.done=true; autosave(); refreshDocMissing();
+          }
+        },150);
+      }
+      card.querySelector('.icon-btn.danger').addEventListener('click',()=>{ up.classList.remove('show'); drop.style.display='block'; input.value=''; d.done=false; refreshDocMissing(); });
+      card.querySelector('.icon-btn:not(.danger)').addEventListener('click',openPick);
+    });
+  }
+  function refreshDocMissing(){
+    const missing=DOCS.filter(d=>d.req&&!d.done).map(d=>d.name);
+    $('#docMissing').classList.toggle('hide', missing.length===0);
+    $('#docMissingList').textContent=missing.join(', ');
+  }
+
+  /* ================= STEP 9 · VERIFICATION ================= */
+  function startVerify(){
+    const items=['id','addr','pep','sec'];
+    $('#verifyMsg').textContent='Verification in progress — this usually takes under two minutes.';
+    items.forEach((k,i)=>{
+      const b=$(`[data-vc="${k}"]`);
+      setTimeout(()=>{ b.className='badge b-blue'; b.innerHTML='<i class="ti ti-loader-2"></i> In progress'; },i*250);
+      setTimeout(()=>{ b.className='badge b-green'; b.innerHTML='<i class="ti ti-circle-check"></i> Complete'; if(i===items.length-1) verifyComplete(); }, 900+i*450);
+    });
+  }
+  function verifyComplete(){
+    state.verified=true; $('#verifyDone').classList.remove('hide'); $('#verifyMsg').parentElement.classList.add('hide');
+    updateSummary(); refreshNextState();
+    $('#btnNext').innerHTML='Continue to review <i class="ti ti-arrow-right"></i>';
+  }
+
+  /* ================= STEP 10 · REVIEW ================= */
+  function renderReview(){
+    const rows=[
+      {t:'Service selected', s:state.service?'ok':'miss', d:state.serviceName||'Not chosen', go:1},
+      {t:'Basic case details', s:(state.sale&&(state.address||state.asset))?'ok':'prog', d:state.ref||'Incomplete', go:2},
+      {t:'Ownership details', s:'ok', d:state.ownership==='joint'?'Jointly owned':'Sole owner', go:3},
+      {t:'Payment', s:state.paid?'ok':'miss', d:state.paid?('Paid · £'+total().toLocaleString('en-GB')):'Not paid', go:5},
+      {t:'Agreement signed', s:state.signed?'ok':'miss', d:state.signed?'Signed':'Not signed', go:6},
+      {t:'Guided questions', s:'prog', d:'2 of 5 sections complete', go:7},
+      {t:'Documents uploaded', s:DOCS.filter(d=>d.req&&!d.done).length?'prog':'ok', d:DOCS.filter(d=>d.done).length+' uploaded', go:8},
+      {t:'Identity verification', s:state.verified?'ok':'miss', d:state.verified?'Verified':'Not started', go:9},
+    ];
+    const icon={ok:'ti ti-check',prog:'ti ti-progress',miss:'ti ti-alert-triangle'};
+    const lab={ok:'Completed',prog:'In progress',miss:'Action required'};
+    const cls={ok:'b-green',prog:'b-amber',miss:'b-red'};
+    $('#reviewList').innerHTML = rows.map(r=>`
+      <div class="rev-item">
+        <span class="ri ${r.s}"><i class="${icon[r.s]}"></i></span>
+        <div class="rt"><h4>${r.t}</h4><p>${r.d}</p></div>
+        <span class="badge ${cls[r.s]}" style="margin-right:4px;">${lab[r.s]}</span>
+        <button class="edit" data-go="${r.go}">Edit</button>
+      </div>`).join('');
+    $$('#reviewList .edit').forEach(b=>b.addEventListener('click',()=>goTo(+b.dataset.go)));
+  }
+
+  /* ================= SUBMIT / SUCCESS ================= */
+  function submitCase(){
+    state.submitted=true;
+    $$('.step').forEach(el=>el.classList.remove('show'));
+    $('#actionbar').style.display='none';
+    $('#summary').style.display='none';
+    $('.mprog').style.display='none';
+    $('#stepnav').style.display='none';
+    $('#scName').textContent = state.address || state.asset || state.serviceName;
+    $('#scRef').textContent = state.ref || genRef();
+    $('#successWrap').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* ================= VALIDATION / NEXT ================= */
+  function validate(step){
+    let ok=true; const bad=[];
+    if(step===1 && !state.service){ bad.push('service'); ok=false; }
+    if(step===2){
+      const isProp=state.service==='residential'||state.service==='commercial';
+      if(isProp && !$('#inAddress').value.trim()){ $('#errAddress').classList.add('show'); $('#inAddress').classList.add('err'); ok=false; } else {$('#errAddress').classList.remove('show');$('#inAddress').classList.remove('err');}
+      if(!isProp && !$('#inAsset').value.trim()){ $('#errAsset').classList.add('show'); $('#inAsset').classList.add('err'); ok=false; } else {$('#errAsset').classList.remove('show');$('#inAsset').classList.remove('err');}
+      if(!$('#inDispDate').value){ $('#errDispDate').classList.add('show'); ok=false; } else $('#errDispDate').classList.remove('show');
+      if(!$('#inSale').value){ $('#errSale').classList.add('show'); $('#inSale').classList.add('err'); ok=false; } else {$('#errSale').classList.remove('show');$('#inSale').classList.remove('err');}
+    }
+    return ok;
+  }
+  // Continue button enable/disable per step
+  function refreshNextState(){
+    const s=state.step, n=$('#btnNext'); n.disabled=false;
+    if(s===1 && !state.service) n.disabled=true;
+    if(s===6 && !state.signed){ n.disabled = !($('#agreeChk').checked && $('#signName').value.trim().length>=3); }
+    if(s===9 && !state.verified){ /* allow via Start Verification button below; Continue acts as start */ }
+  }
+
+  function next(){
+    const s=state.step;
+    if(!validate(s)){ toast('Please complete the highlighted fields'); return; }
+    // step-specific actions
+    if(s===2){ if(!state.ref){ state.ref=genRef(); $('#inRef').value=state.ref; } enableAutosave(); toast('Case created · '+state.ref); }
+    if(s===5 && !state.paid){ startPayment(); return; }
+    if(s===6 && !state.signed){ doSign(); toast('Engagement letter signed'); }
+    if(s===9 && !state.verified){ startVerify(); return; }
+    if(s===10){ submitCase(); return; }
+    if(s<10) goTo(s+1);
+  }
+  $('#btnNext').addEventListener('click',next);
+  $('#btnBack').addEventListener('click',()=>{ if(state.step>1) goTo(state.step-1); });
+
+  /* ---- Save & Exit modal ---- */
+  const openModal=()=>{ $('#overlay').classList.add('show'); $('#modal').classList.add('show'); };
+  const closeModal=()=>{ $('#overlay').classList.remove('show'); $('#modal').classList.remove('show'); };
+  $('#btnSaveExit').addEventListener('click',openModal);
+  $('#btnExitTop').addEventListener('click',openModal);
+  $('#modalCancel').addEventListener('click',closeModal);
+  $('#overlay').addEventListener('click',closeModal);
+
+  /* ---------- init ---------- */
+  buildDocs(); refreshDocMissing(); buildNav(); show(1);
+  // set qFill from data-done
+  const done=$$('.q-sec[data-done="1"]').length, tot=$$('.q-sec').length;
+  const qp=Math.round((done/tot)*100); $('#qFill').style.width=qp+'%'; $('#qPct').textContent=qp+'%';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CGT Online — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <style>
+    :root{
+      /* Brand */
+      --navy:#1B2D4F;
+      --navy-hover:#253F6E;
+      --gold:#C9A84C;
+      --gold-dark:#B8973E;
+      --gold-text:#8B6914;
+      --ink:#111D33;
+      /* Neutrals & text */
+      --slate-600:#4A5568;
+      --slate-500:#64748B;
+      --slate-400:#94A3B8;
+      --border:#CBD5E1;
+      /* Surfaces */
+      --white:#FFFFFF;
+      --mist:#F8F9FC;
+      --slate-wash:#F4F6FB;
+      --gold-wash:#F9F4E8;
+      /* Lines */
+      --card-border:#E2E8F0;
+      --divider:#EEF1F7;
+      --divider-soft:#F1F5F9;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Jost',sans-serif;background:var(--slate-wash);color:var(--navy);-webkit-font-smoothing:antialiased;}
+    summary::-webkit-details-marker{display:none;}
+    details[open] .faq-icon{transform:rotate(180deg);}
+
+    .wrap{max-width:1080px;margin:0 auto;padding:64px 48px 96px;}
+
+    /* Masthead */
+    .masthead{display:flex;align-items:center;gap:14px;padding-bottom:28px;border-bottom:1px solid var(--card-border);margin-bottom:8px;}
+    .mast-mark{width:44px;height:44px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--gold);font-size:19px;}
+    .mast-title{font-size:26px;font-weight:700;color:var(--navy);line-height:1.1;}
+    .mast-sub{font-size:13px;color:var(--slate-400);margin-top:2px;}
+    .intro{font-size:15px;color:var(--slate-500);line-height:1.7;max-width:620px;margin:24px 0 56px;}
+
+    section{margin-bottom:64px;}
+    section:last-child{margin-bottom:0;}
+    .kicker{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+    .h2{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:24px;}
+    .subhead{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:12px;}
+    .note{font-size:13px;color:var(--slate-400);margin-top:12px;}
+
+    .panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:32px;}
+
+    /* Colour swatches */
+    .group{margin-bottom:20px;}
+    .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+    .swatch{background:var(--white);border:1px solid var(--card-border);border-radius:12px;overflow:hidden;}
+    .swatch .chip{height:96px;}
+    .swatch.sm .chip{height:72px;border-bottom:1px solid var(--divider);}
+    .swatch .meta{padding:14px;}
+    .swatch.sm .meta{padding:12px;}
+    .sw-name{font-size:13px;font-weight:600;color:var(--navy);}
+    .sw-name.sm{font-size:12px;}
+    .sw-hex{font-size:12px;color:var(--slate-400);margin-top:2px;}
+    .sw-use{font-size:11px;color:var(--slate-400);}
+
+    /* Typography */
+    .type-card{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:32px;margin-bottom:24px;}
+    .type-family{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+    .type-family span{font-size:64px;color:var(--navy);line-height:1;}
+    .type-desc{font-size:13px;color:var(--slate-500);margin-top:16px;line-height:1.6;}
+    .scale{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:18px;}
+    .scale-row{display:flex;align-items:baseline;gap:20px;border-bottom:1px solid var(--divider-soft);padding-bottom:16px;}
+    .scale-row:last-child{border-bottom:none;padding-bottom:0;}
+    .scale-tag{font-size:11px;color:var(--slate-400);width:120px;flex-shrink:0;}
+
+    /* Buttons */
+    .btn{font-size:14px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;transition:background .2s,border-color .2s,color .2s;display:inline-block;}
+    .btn-primary{background:var(--navy);color:#fff;}
+    .btn-primary:hover{background:var(--navy-hover);}
+    .btn-gold{background:var(--gold);color:var(--navy);}
+    .btn-gold:hover{background:var(--gold-dark);}
+    .btn-secondary{background:transparent;color:var(--navy);font-weight:500;padding:14px 26px;border:1px solid var(--border);}
+    .btn-secondary:hover{background:var(--slate-wash);}
+    .btn-login{font-size:13px;font-weight:500;color:var(--navy);padding:9px 18px;border-radius:7px;border:1px solid var(--border);text-decoration:none;transition:background .2s;}
+    .btn-login:hover{background:var(--slate-wash);}
+    .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+
+    /* Pills */
+    .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:5px 12px;border-radius:20px;}
+    .pill-hero{background:#F4F0E4;border:1px solid #E8DFC4;color:var(--gold-text);padding:6px 14px;}
+    .pill-gold{background:rgba(201,168,76,.18);color:var(--gold-text);}
+    .pill-navy{background:rgba(27,45,79,.08);color:var(--navy);}
+    .pill-popular{background:var(--gold);color:var(--navy);font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.06em;}
+    .pill-chip{background:rgba(27,45,79,.07);color:var(--navy);border:1px solid rgba(27,45,79,.14);font-size:12px;font-weight:500;padding:7px 14px;border-radius:20px;text-transform:none;letter-spacing:0;}
+    .pill-status{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);color:var(--gold-text);padding:4px 10px;border-radius:12px;}
+
+    /* Cards */
+    .cards-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+    .feat-card{border-radius:16px;padding:28px;}
+    .feat-navy{background:var(--navy);}
+    .feat-gold{background:var(--gold-wash);}
+    .feat-pill-light{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:5px 12px;border-radius:20px;margin-bottom:16px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);}
+    .feat-stat{font-size:44px;font-weight:700;color:var(--gold);line-height:1;}
+    .feat-stat-label{font-size:12px;color:rgba(255,255,255,.5);margin-top:6px;}
+    .feat-title{font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;}
+    .feat-text{font-size:13px;color:var(--slate-500);line-height:1.6;margin-top:8px;}
+    .data-card{border:1px solid var(--card-border);border-radius:10px;padding:20px;background:var(--white);}
+    .data-cap{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:6px;}
+    .data-num{font-size:32px;font-weight:700;color:var(--navy);}
+    .data-foot{font-size:12px;color:var(--slate-400);margin-top:4px;}
+
+    /* Logo */
+    .logos-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .logo-box{border:1px solid var(--card-border);border-radius:12px;padding:32px;display:flex;align-items:center;gap:10px;background:var(--white);}
+    .logo-box.dark{background:var(--ink);border-color:var(--ink);}
+    .logo-mark{width:32px;height:32px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--gold);font-size:14px;}
+    .logo-word{font-weight:700;font-size:15px;color:var(--navy);letter-spacing:.01em;}
+    .logo-word.light{color:#fff;}
+    .gold{color:var(--gold);}
+
+    /* Nav demo */
+    .nav-demo{border:1px solid var(--card-border);border-radius:12px;overflow:hidden;}
+    .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;border-bottom:1px solid var(--divider);background:#fff;}
+    .nav-bar .grp{display:flex;align-items:center;gap:8px;}
+    .nav-bar .links{display:flex;gap:24px;}
+    .nav-bar .links span{font-size:14px;color:var(--slate-600);font-weight:500;}
+    .nav-bar .actions{display:flex;align-items:center;gap:12px;}
+    .nav-login{font-size:13px;font-weight:500;color:var(--navy);padding:8px 18px;border-radius:7px;border:1px solid var(--border);}
+    .nav-cta{font-size:13px;font-weight:600;color:var(--navy);background:var(--gold);padding:10px 22px;border-radius:7px;}
+
+    /* Trust bar */
+    .trustbar{background:var(--mist);border:1px solid var(--divider);border-radius:12px;padding:20px 28px;}
+    .trustbar .inner{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;}
+    .trust-item{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--navy);}
+    .trust-item i{color:var(--gold);font-size:15px;}
+    .vline{width:1px;height:20px;background:#DDE3EF;}
+
+    /* Steps */
+    .steps-panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:8px 28px;}
+    .step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid #E8EDF5;}
+    .step:last-child{border-bottom:none;}
+    .step-num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .step h4{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+    .step p{font-size:14px;color:var(--slate-500);line-height:1.6;}
+
+    /* Progress */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .prog-dark{background:var(--navy);border-radius:10px;padding:18px;}
+    .prog-light{background:var(--white);border:1px solid var(--card-border);border-radius:10px;padding:18px;}
+    .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+    .prog-top.mb10{margin-bottom:10px;}
+    .prog-cap-dark{font-size:12px;color:rgba(255,255,255,.5);}
+    .prog-val{font-size:14px;font-weight:700;color:var(--gold);}
+    .prog-cap{font-size:13px;color:var(--slate-500);}
+    .track{height:6px;background:rgba(255,255,255,.1);border-radius:3px;}
+    .track.light{height:4px;background:var(--divider);border-radius:2px;}
+    .track-fill{height:100%;background:var(--gold);border-radius:3px;}
+    .prog-foot{font-size:11px;color:rgba(255,255,255,.35);margin-top:7px;}
+    .prog-ends{display:flex;justify-content:space-between;margin-top:6px;}
+    .prog-ends span{font-size:10px;color:var(--slate-400);}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:620px;}
+    .plan{border:1px solid #E8EDF5;border-radius:16px;padding:32px 28px;background:#fff;position:relative;}
+    .plan.featured{border:2px solid var(--gold);}
+    .plan-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+    .plan-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:10px;}
+    .plan-price{font-size:50px;font-weight:700;color:var(--navy);line-height:1;}
+    .plan-price sup{font-size:22px;vertical-align:top;margin-top:10px;display:inline-block;}
+    .plan-desc{font-size:13px;color:var(--slate-500);margin:10px 0 24px;line-height:1.5;}
+    .plan ul{list-style:none;padding:0;margin:0 0 28px;}
+    .plan li{font-size:13px;color:#475569;padding:9px 0;border-bottom:1px solid var(--divider-soft);display:flex;align-items:flex-start;gap:8px;}
+    .plan li:last-child{border-bottom:none;}
+    .plan li i{color:var(--gold);font-size:15px;margin-top:1px;}
+    .plan-cta{display:block;font-size:14px;font-weight:600;padding:13px;border-radius:8px;text-align:center;}
+    .plan-cta.navy{background:var(--navy);color:#fff;}
+    .plan-cta.goldbtn{background:var(--gold);color:var(--navy);}
+
+    /* Accordion */
+    .acc{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:8px 28px;}
+    .acc details{border-bottom:1px solid var(--divider);}
+    .acc details:last-child{border-bottom:none;}
+    .acc summary{display:flex;align-items:center;justify-content:space-between;padding:20px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--navy);gap:16px;list-style:none;user-select:none;}
+    .acc p{padding:0 0 20px 0;font-size:14px;color:var(--slate-500);line-height:1.75;}
+    .faq-icon{color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .25s;}
+
+    /* Footer demo */
+    .footer-demo{background:var(--ink);border-radius:12px;padding:36px 32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+    .footer-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;}
+    .footer-copy{font-size:13px;color:rgba(255,255,255,.42);line-height:1.65;margin-top:14px;}
+    .footer-head{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;}
+    .footer-link{display:block;font-size:13px;color:rgba(255,255,255,.42);text-decoration:none;margin-bottom:11px;transition:color .2s;}
+    .footer-link:last-child{margin-bottom:0;}
+    .footer-link:hover{color:var(--gold);}
+
+    /* Icons */
+    .icon-grid{display:flex;flex-wrap:wrap;gap:28px;color:var(--gold);font-size:24px;}
+
+    @media (max-width:820px){
+      .wrap{padding:48px 20px 64px;}
+      .swatches,.cards-3{grid-template-columns:1fr 1fr;}
+      .logos-2,.grid-2,.pricing{grid-template-columns:1fr;}
+      .nav-bar .links{display:none;}
+      .footer-demo{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="mast-mark">C</div>
+    <div>
+      <div class="mast-title">CGT Online — Design System</div>
+      <div class="mast-sub">Brand foundations &amp; UI components · v1.0</div>
+    </div>
+  </header>
+  <p class="intro">A lightweight reference for the CGT Online platform. It captures the colours, typography, and recurring components that give the product its considered, professional-advisory feel — trustworthy navy paired with a refined gold accent.</p>
+
+  <!-- COLOUR -->
+  <section>
+    <p class="kicker">01 — Foundations</p>
+    <h2 class="h2">Colour</h2>
+
+    <div class="group">
+      <div class="subhead">Brand</div>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background:#1B2D4F"></div><div class="meta"><div class="sw-name">Navy</div><div class="sw-hex">#1B2D4F</div><div class="sw-use">Primary · text · surfaces</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#C9A84C"></div><div class="meta"><div class="sw-name">Gold</div><div class="sw-hex">#C9A84C</div><div class="sw-use">Accent · CTAs · highlights</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#B8973E"></div><div class="meta"><div class="sw-name">Gold Dark</div><div class="sw-hex">#B8973E</div><div class="sw-use">Hover state</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#111D33"></div><div class="meta"><div class="sw-name">Ink</div><div class="sw-hex">#111D33</div><div class="sw-use">Footer · deep surfaces</div></div></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="subhead">Neutrals &amp; text</div>
+      <div class="swatches">
+        <div class="swatch sm"><div class="chip" style="background:#4A5568"></div><div class="meta"><div class="sw-name sm">Slate 600</div><div class="sw-hex">#4A5568</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#64748B"></div><div class="meta"><div class="sw-name sm">Slate 500</div><div class="sw-hex">#64748B · body</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#94A3B8"></div><div class="meta"><div class="sw-name sm">Slate 400</div><div class="sw-hex">#94A3B8 · muted</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#CBD5E1"></div><div class="meta"><div class="sw-name sm">Border</div><div class="sw-hex">#CBD5E1</div></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="subhead">Surfaces</div>
+      <div class="swatches">
+        <div class="swatch sm"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><div class="sw-name sm">White</div><div class="sw-hex">#FFFFFF · base</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#F8F9FC"></div><div class="meta"><div class="sw-name sm">Mist</div><div class="sw-hex">#F8F9FC · sections</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#F4F6FB"></div><div class="meta"><div class="sw-name sm">Slate Wash</div><div class="sw-hex">#F4F6FB · cards</div></div></div>
+        <div class="swatch sm"><div class="chip" style="background:#F9F4E8"></div><div class="meta"><div class="sw-name sm">Gold Wash</div><div class="sw-hex">#F9F4E8 · accent card</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <p class="kicker">01 — Foundations</p>
+    <h2 class="h2">Typography</h2>
+    <div class="type-card">
+      <div class="subhead">Single type family</div>
+      <div class="type-family">
+        <span style="font-weight:400">Jost</span>
+        <span style="font-weight:500">Jost</span>
+        <span style="font-weight:600">Jost</span>
+        <span style="font-weight:700">Jost</span>
+      </div>
+      <div class="type-desc">Jost · 400 / 500 / 600 / 700 — a geometric sans used across the whole platform. Headings, prices, and stat figures lean on 600–700; body, labels, and nav sit at 400–500.</div>
+    </div>
+    <div class="scale">
+      <div class="scale-row"><span class="scale-tag">H1 · 56 / 700</span><span style="font-size:40px;font-weight:700;color:var(--navy)">Sorted properly.</span></div>
+      <div class="scale-row"><span class="scale-tag">H2 · 38 / 700</span><span style="font-size:30px;font-weight:700;color:var(--navy)">Section heading</span></div>
+      <div class="scale-row"><span class="scale-tag">H3 · 24 / 700</span><span style="font-size:22px;font-weight:700;color:var(--navy)">Card title</span></div>
+      <div class="scale-row"><span class="scale-tag">Body · 16 / 400</span><span style="font-size:16px;color:var(--slate-500);line-height:1.6">Regular paragraph copy in Jost at a comfortable reading size.</span></div>
+      <div class="scale-row"><span class="scale-tag">Small · 13 / 400</span><span style="font-size:13px;color:var(--slate-500)">Supporting and caption text.</span></div>
+      <div class="scale-row"><span class="scale-tag">Eyebrow · 11 / 600</span><span class="kicker" style="margin-bottom:0">Section label</span></div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Buttons</h2>
+    <div class="panel row">
+      <a href="#" class="btn btn-primary">Primary</a>
+      <a href="#" class="btn btn-gold">Gold / CTA</a>
+      <a href="#" class="btn btn-secondary">Secondary</a>
+      <a href="#" class="btn-login">Log in</a>
+    </div>
+    <p class="note">Radius 8px · 14px label · navy for primary actions, gold reserved for the highest-intent CTA on a view.</p>
+  </section>
+
+  <!-- PILLS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Pills, tags &amp; badges</h2>
+    <div class="panel row">
+      <span class="pill pill-hero"><i class="ti ti-shield-check"></i> Hero pill</span>
+      <span class="pill pill-gold"><i class="ti ti-clock"></i> Gold tag</span>
+      <span class="pill pill-navy"><i class="ti ti-home"></i> Navy tag</span>
+      <span class="pill pill-popular">Most popular</span>
+      <span class="pill pill-chip">Filter chip</span>
+      <span class="pill pill-status"><i class="ti ti-loader"></i> Status</span>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Cards &amp; surfaces</h2>
+    <div class="cards-3">
+      <div class="feat-card feat-navy">
+        <div class="feat-pill-light"><i class="ti ti-users"></i> Navy card</div>
+        <div class="feat-stat">150+</div>
+        <div class="feat-stat-label">Stat figure on dark surface</div>
+      </div>
+      <div class="feat-card feat-gold">
+        <div class="pill pill-gold" style="margin-bottom:16px"><i class="ti ti-clock"></i> Accent card</div>
+        <h3 class="feat-title">Gold-wash panel</h3>
+        <p class="feat-text">Used to draw attention without the weight of a full navy surface.</p>
+      </div>
+      <div class="data-card">
+        <div class="data-cap">Estimated liability</div>
+        <div class="data-num">£28,440</div>
+        <div class="data-foot">Data / metric card</div>
+      </div>
+    </div>
+    <p class="note">Radius: 16px feature cards · 10–12px data cards · 8px buttons &amp; chips. Borders #E2E8F0, dividers #EEF1F7 / #F1F5F9.</p>
+  </section>
+
+  <!-- LOGO -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Logo &amp; brand mark</h2>
+    <div class="logos-2">
+      <div class="logo-box"><div class="logo-mark">C</div><span class="logo-word">CGT<span class="gold">Online</span></span></div>
+      <div class="logo-box dark"><div class="logo-mark">C</div><span class="logo-word light">CGT<span class="gold">Online</span></span></div>
+    </div>
+    <p class="note">Square navy mark with gold "C" monogram (6px radius) · wordmark "CGT" in navy/white, "Online" always gold.</p>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Navigation bar</h2>
+    <div class="nav-demo">
+      <nav class="nav-bar">
+        <div class="grp"><div class="logo-mark">C</div><span class="logo-word">CGT<span class="gold">Online</span></span></div>
+        <div class="links"><span>What is CGT?</span><span>Who we help</span><span>How it works</span><span>Pricing</span></div>
+        <div class="actions"><span class="nav-login">Log in</span><span class="nav-cta">Get started</span></div>
+      </nav>
+    </div>
+    <p class="note">Sticky · 64px tall · 1px bottom border #EEF1F7 · links Slate 600 → Navy on hover.</p>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Trust bar &amp; check list</h2>
+    <div class="trustbar">
+      <div class="inner">
+        <div class="trust-item"><i class="ti ti-check"></i> ICAEW regulated</div>
+        <div class="vline"></div>
+        <div class="trust-item"><i class="ti ti-check"></i> 60-day rule compliant</div>
+        <div class="vline"></div>
+        <div class="trust-item"><i class="ti ti-star-filled"></i> 4.9 / 5 Trustpilot</div>
+      </div>
+    </div>
+    <p class="note">Mist surface · centred items with 1px #DDE3EF dividers · gold check / star glyphs.</p>
+  </section>
+
+  <!-- STEPS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Numbered steps</h2>
+    <div class="steps-panel">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><h4>Tell us about your disposal</h4><p>Answer a few straightforward questions. It takes about five minutes.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><h4>Upload your documents</h4><p>Completion statements or share certificates, straight from your phone.</p></div>
+      </div>
+    </div>
+    <p class="note">44px navy circle, gold numeral · title 16/600, body 14 Slate 500 · 1px #E8EDF5 row divider.</p>
+  </section>
+
+  <!-- PROGRESS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Progress &amp; data rows</h2>
+    <div class="grid-2">
+      <div class="prog-dark">
+        <div class="prog-top"><span class="prog-cap-dark">Days remaining</span><span class="prog-val">47 days</span></div>
+        <div class="track"><div class="track-fill" style="width:72%"></div></div>
+        <div class="prog-foot">Progress bar on dark surface</div>
+      </div>
+      <div class="prog-light">
+        <div class="prog-top mb10"><span class="prog-cap">Progress</span><span class="pill pill-status"><i class="ti ti-loader"></i> Under review</span></div>
+        <div class="track light"><div class="track-fill" style="width:65%"></div></div>
+        <div class="prog-ends"><span>Submitted</span><span>HMRC filed</span></div>
+      </div>
+    </div>
+    <p class="note">Track 4–6px tall, gold fill · status pill pairs the loader icon with a gold-tint background.</p>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Pricing card &amp; feature list</h2>
+    <div class="pricing">
+      <div class="plan">
+        <p class="plan-name">Essential</p>
+        <div class="plan-price"><sup>£</sup>149</div>
+        <p class="plan-desc">One straightforward disposal</p>
+        <ul>
+          <li><i class="ti ti-check"></i> Single asset disposal</li>
+          <li><i class="ti ti-check"></i> Full CGT calculation</li>
+          <li><i class="ti ti-check"></i> HMRC submission</li>
+        </ul>
+        <span class="plan-cta navy">Get started</span>
+      </div>
+      <div class="plan featured">
+        <div class="plan-tag">Most popular</div>
+        <p class="plan-name">Standard</p>
+        <div class="plan-price"><sup>£</sup>249</div>
+        <p class="plan-desc">Up to 3 disposals with reliefs</p>
+        <ul>
+          <li><i class="ti ti-check"></i> Up to 3 disposals</li>
+          <li><i class="ti ti-check"></i> Dedicated accountant</li>
+          <li><i class="ti ti-check"></i> Messaging throughout</li>
+        </ul>
+        <span class="plan-cta goldbtn">Get started</span>
+      </div>
+    </div>
+    <p class="note">16px radius · featured tier carries a 2px gold border + "Most popular" badge · checklist rows divided by #F1F5F9.</p>
+  </section>
+
+  <!-- ACCORDION -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">FAQ accordion</h2>
+    <div class="acc">
+      <details open>
+        <summary>What is the 60-day CGT reporting rule? <i class="ti ti-chevron-down faq-icon"></i></summary>
+        <p>Residential property gains must be reported and paid within 60 days of completion. We file well inside that window.</p>
+      </details>
+      <details>
+        <summary>Do I need to report if I made a loss? <i class="ti ti-chevron-down faq-icon"></i></summary>
+        <p>Not to pay CGT, but reporting a loss can offset future gains — we'll advise on your situation.</p>
+      </details>
+    </div>
+    <p class="note">Native &lt;details&gt; · 1px #EEF1F7 row borders · gold chevron rotates 180° when open.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Footer &amp; link columns</h2>
+    <div class="footer-demo">
+      <div>
+        <span class="footer-badge"><i class="ti ti-rosette"></i> ICAEW regulated</span>
+        <p class="footer-copy">Footer badge + supporting copy on ink surface.</p>
+      </div>
+      <div>
+        <h4 class="footer-head">Services</h4>
+        <a href="#" class="footer-link">Property CGT</a>
+        <a href="#" class="footer-link">Share disposals</a>
+        <a href="#" class="footer-link">Business assets</a>
+      </div>
+    </div>
+    <p class="note">Ink (#111D33) surface · column heads 11px uppercase white · links 42% white → gold on hover · ICAEW badge in gold tint.</p>
+  </section>
+
+  <!-- ICONS -->
+  <section>
+    <p class="kicker">02 — Components</p>
+    <h2 class="h2">Iconography</h2>
+    <div class="panel">
+      <div class="icon-grid">
+        <i class="ti ti-shield-check"></i>
+        <i class="ti ti-check"></i>
+        <i class="ti ti-clock"></i>
+        <i class="ti ti-home"></i>
+        <i class="ti ti-users"></i>
+        <i class="ti ti-building"></i>
+        <i class="ti ti-chart-line"></i>
+        <i class="ti ti-briefcase"></i>
+        <i class="ti ti-coin-bitcoin"></i>
+        <i class="ti ti-gift"></i>
+        <i class="ti ti-rosette"></i>
+        <i class="ti ti-star-filled"></i>
+        <i class="ti ti-loader"></i>
+        <i class="ti ti-chevron-down"></i>
+      </div>
+      <p class="note">Tabler Icons · outline weight · gold accent (#C9A84C) by default, inheriting context colour on dark surfaces.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

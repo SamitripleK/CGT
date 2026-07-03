@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGT Online — Your CGT bill, made effortless</title>
+<meta name="description" content="Estimate your capital gains tax in seconds, then a friendly, qualified UK accountant calculates it precisely and files with HMRC. Fixed fees from £149. Soft rounded variation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;background:#F6F2EA;color:#1B2D4F;overflow-x:hidden;}
+  input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  input[type=number]{-moz-appearance:textfield;}
+  summary::-webkit-details-marker{display:none;}
+  details[open] .faq-icon{transform:rotate(180deg);}
+
+  /* ===== Mobile responsive ===== */
+  @media (max-width:900px){
+    nav{padding:14px 16px!important;}
+    nav>div:nth-child(2){gap:12px!important;}
+    nav>div:nth-child(2)>a:nth-child(-n+4){display:none!important;}
+    [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+    [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important;}
+    [style*="grid-template-columns:1.05fr 0.95fr"]{grid-template-columns:1fr!important;}
+    [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important;}
+    [style*="gap:56px"],[style*="gap:48px"]{gap:32px!important;}
+    [style*="padding:56px 48px"]{padding:36px 24px!important;}
+    h1{font-size:42px!important;line-height:1.05!important;}
+    h2{font-size:30px!important;}
+    /* comparison table scrolls horizontally rather than squishing */
+    #included>div:last-child{overflow-x:auto!important;}
+    #included>div:last-child>div{min-width:680px;}
+  }
+  @media (max-width:520px){
+    h1{font-size:34px!important;}
+    h2{font-size:26px!important;}
+    nav .brand-logo{height:22px!important;}
+  }
+</style>
+<script src="dc-hover.js" defer></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1180px;margin:18px auto 0;background:#fff;border-radius:100px;box-shadow:0 8px 30px -16px rgba(27,45,79,0.18);">
+  <div style="display:flex;align-items:center;gap:9px;padding-left:14px;">
+    <img class="brand-logo" src="cgt-logo.svg" alt="CGT Online" style="height:26px;width:auto;display:block;" />
+  </div>
+  <div style="display:flex;align-items:center;gap:22px;">
+    <a href="#how" style="font-size:14px;color:#6B7689;text-decoration:none;font-weight:500;" style-hover="color:#1B2D4F;">How it works</a>
+    <a href="#pricing" style="font-size:14px;color:#6B7689;text-decoration:none;font-weight:500;" style-hover="color:#1B2D4F;">Pricing</a>
+    <a href="#partners" style="font-size:14px;color:#6B7689;text-decoration:none;font-weight:500;" style-hover="color:#1B2D4F;">Partners</a>
+    <a href="partner-onboarding.html" style="font-size:13px;font-weight:600;color:#1B2D4F;background:transparent;border:1px solid #D8D2C4;padding:10px 18px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;" style-hover="border-color:#83C341;color:#6FAE32;"><i class="ti ti-briefcase-2" style="font-size:15px;"></i> Become a partner</a>
+    <a href="FileCGTOnline Auth.dc.html#login" style="font-size:13px;font-weight:600;color:#1B2D4F;background:transparent;padding:10px 14px;text-decoration:none;" style-hover="color:#6FAE32;">Log in</a>
+    <a href="FileCGTOnline Auth.dc.html#signup" style="font-size:13px;font-weight:600;color:#1B2D4F;background:#83C341;padding:11px 22px;border-radius:100px;text-decoration:none;" style-hover="background:#6FAE32;">Sign up</a>
+  </div>
+</nav>
+
+<!-- HERO + CALCULATOR -->
+<section id="calculator" style="max-width:1180px;margin:0 auto;padding:64px 24px 48px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+  <div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#6FAE32;font-size:12px;font-weight:500;padding:8px 16px;border-radius:100px;margin-bottom:28px;box-shadow:0 6px 18px -10px rgba(27,45,79,0.2);">
+      <i class="ti ti-sparkles" style="color:#83C341;"></i> Free instant estimate
+    </div>
+    <h1 style="font-size:58px;font-weight:600;color:#1B2D4F;line-height:1.06;letter-spacing:-0.02em;margin-bottom:22px;">Your CGT bill,<br>made <span style="color:#83C341;">effortless.</span></h1>
+    <p style="font-size:18px;color:#6B7689;line-height:1.6;margin-bottom:32px;max-width:420px;">Estimate it in seconds. Then a friendly, qualified UK accountant calculates it precisely and files with HMRC for you.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <span style="background:#fff;border-radius:100px;padding:9px 16px;font-size:13px;color:#1B2D4F;font-weight:500;display:flex;align-items:center;gap:7px;box-shadow:0 6px 18px -12px rgba(27,45,79,0.2);"><i class="ti ti-rosette" style="color:#83C341;"></i> ICAEW regulated</span>
+      <span style="background:#fff;border-radius:100px;padding:9px 16px;font-size:13px;color:#1B2D4F;font-weight:500;display:flex;align-items:center;gap:7px;box-shadow:0 6px 18px -12px rgba(27,45,79,0.2);"><i class="ti ti-star-filled" style="color:#83C341;"></i> 4.9 / 5 rated</span>
+      <span style="background:#fff;border-radius:100px;padding:9px 16px;font-size:13px;color:#1B2D4F;font-weight:500;display:flex;align-items:center;gap:7px;box-shadow:0 6px 18px -12px rgba(27,45,79,0.2);"><i class="ti ti-clock" style="color:#83C341;"></i> Fixed fees from £149</span>
+    </div>
+  </div>
+
+  <div style="background:#fff;border-radius:32px;padding:34px;box-shadow:0 40px 80px -40px rgba(27,45,79,0.35);">
+    <div style="display:flex;gap:8px;margin-bottom:22px;background:#F6F2EA;padding:6px;border-radius:100px;">
+      <button id="tab-property" type="button"><i class="ti ti-home" style="font-size:15px;"></i> Property</button>
+      <button id="tab-other" type="button"><i class="ti ti-chart-line" style="font-size:15px;"></i> Shares / other</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div>
+        <label style="display:block;font-size:12px;font-weight:500;color:#8A93A3;margin-bottom:7px;">Purchase price</label>
+        <div style="display:flex;align-items:center;background:#F6F2EA;border-radius:14px;padding:0 14px;">
+          <span style="font-size:16px;color:#B3B9C4;">£</span>
+          <input id="inp-purchase" type="number" value="240000" style="border:none;outline:none;background:transparent;font-family:'Jost',sans-serif;font-size:16px;font-weight:600;color:#1B2D4F;padding:14px 6px;width:100%;" />
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:500;color:#8A93A3;margin-bottom:7px;">Sale price</label>
+        <div style="display:flex;align-items:center;background:#F6F2EA;border-radius:14px;padding:0 14px;">
+          <span style="font-size:16px;color:#B3B9C4;">£</span>
+          <input id="inp-sale" type="number" value="385000" style="border:none;outline:none;background:transparent;font-family:'Jost',sans-serif;font-size:16px;font-weight:600;color:#1B2D4F;padding:14px 6px;width:100%;" />
+        </div>
+      </div>
+    </div>
+    <label style="display:block;font-size:12px;font-weight:500;color:#8A93A3;margin-bottom:7px;">Costs (legal, improvements)</label>
+    <div style="display:flex;align-items:center;background:#F6F2EA;border-radius:14px;padding:0 14px;margin-bottom:18px;">
+      <span style="font-size:16px;color:#B3B9C4;">£</span>
+      <input id="inp-costs" type="number" value="5000" style="border:none;outline:none;background:transparent;font-family:'Jost',sans-serif;font-size:16px;font-weight:600;color:#1B2D4F;padding:14px 6px;width:100%;" />
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:22px;">
+      <span style="font-size:12px;font-weight:500;color:#8A93A3;">Income band</span>
+      <button id="pill-basic" type="button">Basic</button>
+      <button id="pill-higher" type="button">Higher</button>
+    </div>
+    <div style="background:#1B2D4F;border-radius:22px;padding:24px;display:flex;align-items:flex-end;justify-content:space-between;">
+      <div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.55);">Estimated CGT due</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:3px;">Gain <span id="out-gain">£0</span> · at <span id="out-rate">24%</span></div>
+      </div>
+      <span id="out-tax" style="font-size:40px;font-weight:700;color:#83C341;line-height:1;">£0</span>
+    </div>
+    <a href="#" style="display:block;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:16px;border-radius:100px;text-decoration:none;text-align:center;margin-top:14px;" style-hover="background:#6FAE32;">File this with an accountant</a>
+  </div>
+</section>
+
+<!-- DEADLINE PILL -->
+<section style="max-width:760px;margin:0 auto;padding:8px 24px 64px;">
+  <div style="background:#1B2D4F;border-radius:24px;padding:22px 28px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;">
+    <i class="ti ti-alarm" style="color:#83C341;font-size:24px;"></i>
+    <p style="font-size:15px;color:#fff;font-weight:500;line-height:1.5;">Sold a property? You have <strong style="color:#83C341;">60 days</strong> from completion to report to HMRC.</p>
+  </div>
+</section>
+
+<!-- WHY (bento, soft) -->
+<section id="why" style="max-width:1080px;margin:0 auto;padding:16px 24px 0;scroll-margin-top:80px;">
+  <div style="text-align:center;margin-bottom:40px;">
+    <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;margin-bottom:12px;">Everything you need, nothing you don't</h2>
+    <p style="font-size:16px;color:#6B7689;line-height:1.6;max-width:480px;margin:0 auto;">A dedicated service for capital gains tax, not a general firm juggling hundreds of problems.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div style="background:#1B2D4F;border-radius:28px;padding:40px;">
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;padding:6px 14px;border-radius:100px;margin-bottom:18px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);"><i class="ti ti-users"></i> Qualified team</div>
+      <h3 style="font-size:24px;font-weight:600;line-height:1.3;margin-bottom:10px;color:#fff;">Real accountants, not software.</h3>
+      <p style="font-size:14px;line-height:1.65;color:rgba(255,255,255,0.6);">Every case is handled by a UK-based qualified accountant. Expert eyes on your situation, every time.</p>
+      <div style="display:flex;gap:28px;margin-top:28px;">
+        <div><div style="font-size:46px;font-weight:700;color:#83C341;line-height:1;">150+</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;">Cases completed</div></div>
+        <div><div style="font-size:46px;font-weight:700;color:#83C341;line-height:1;">4.9</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;">Trustpilot rating</div></div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:28px;padding:40px;">
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;padding:6px 14px;border-radius:100px;margin-bottom:18px;background:#F6F2EA;color:#6FAE32;"><i class="ti ti-clock"></i> 60-day rule</div>
+      <h3 style="font-size:24px;font-weight:600;line-height:1.3;margin-bottom:10px;color:#1B2D4F;">Never miss the HMRC deadline.</h3>
+      <p style="font-size:14px;line-height:1.65;color:#6B7689;">Residential property disposals must be reported within 60 days of completion. We make sure yours is filed on time.</p>
+      <div style="margin-top:22px;background:#F6F2EA;border-radius:18px;padding:18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;color:#8A93A3;">Days remaining</span><span style="font-size:14px;font-weight:700;color:#6FAE32;">47 days</span></div>
+        <div style="height:6px;background:#E7E1D4;border-radius:3px;"><div style="height:100%;background:#83C341;border-radius:3px;width:72%;"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (three marketing stages) -->
+<section id="how" style="max-width:1140px;margin:0 auto;padding:64px 24px 80px;scroll-margin-top:80px;">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#6FAE32;font-size:12px;font-weight:500;padding:8px 16px;border-radius:100px;margin-bottom:18px;box-shadow:0 6px 18px -12px rgba(27,45,79,0.2);"><i class="ti ti-route" style="color:#83C341;"></i> How it works</div>
+    <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;margin-bottom:12px;">Three simple stages</h2>
+    <p style="font-size:16px;color:#6B7689;line-height:1.6;max-width:480px;margin:0 auto;">From your first answer to a filed return, we keep it clear and do the heavy lifting for you.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch;">
+
+    <!-- STAGE 1 -->
+    <div style="background:#fff;border-radius:28px;padding:36px 30px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;">
+        <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#6FAE32;">Stage 1</span>
+        <span style="width:44px;height:44px;border-radius:14px;background:#F6F2EA;display:flex;align-items:center;justify-content:center;"><i class="ti ti-pencil-plus" style="color:#83C341;font-size:22px;"></i></span>
+      </div>
+      <h3 style="font-size:21px;font-weight:600;color:#1B2D4F;line-height:1.25;margin-bottom:12px;">Tell us about your property</h3>
+      <p style="font-size:14px;color:#6B7689;line-height:1.65;margin-bottom:22px;flex:1;">Sign up and answer a few guided questions about your disposal, then upload your completion statement and supporting documents. We generate an instant estimated CGT figure.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:24px;">
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Guided questions</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Upload your documents</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Instant estimate</span>
+      </div>
+      <div style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:#F6F2EA;color:#6FAE32;font-size:12px;font-weight:600;padding:9px 16px;border-radius:100px;"><i class="ti ti-clock"></i> 5–15 minutes</div>
+    </div>
+
+    <!-- STAGE 2 (navy highlight) -->
+    <div style="background:#1B2D4F;border-radius:28px;padding:36px 30px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;">
+        <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#83C341;">Stage 2</span>
+        <span style="width:44px;height:44px;border-radius:14px;background:rgba(131,195,65,0.16);display:flex;align-items:center;justify-content:center;"><i class="ti ti-briefcase" style="color:#83C341;font-size:22px;"></i></span>
+      </div>
+      <h3 style="font-size:21px;font-weight:600;color:#fff;line-height:1.25;margin-bottom:12px;">We do the work</h3>
+      <p style="font-size:14px;color:rgba(255,255,255,0.62);line-height:1.65;margin-bottom:22px;flex:1;">Our qualified tax advisors review your documents, verify your identity, complete the CGT calculation and handle HMRC authorisation. We keep you updated and answer any queries throughout.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:24px;">
+        <span style="font-size:13px;color:rgba(255,255,255,0.78);display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Advisor review &amp; ID check</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.78);display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Full CGT calculation</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.78);display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> HMRC authorisation</span>
+      </div>
+      <div style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:rgba(131,195,65,0.16);color:#83C341;font-size:12px;font-weight:600;padding:9px 16px;border-radius:100px;"><i class="ti ti-message-2"></i> Minimal — reply to queries</div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div style="background:#fff;border-radius:28px;padding:36px 30px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;">
+        <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#6FAE32;">Stage 3</span>
+        <span style="width:44px;height:44px;border-radius:14px;background:#F6F2EA;display:flex;align-items:center;justify-content:center;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></span>
+      </div>
+      <h3 style="font-size:21px;font-weight:600;color:#1B2D4F;line-height:1.25;margin-bottom:12px;">Review, approve &amp; you're done</h3>
+      <p style="font-size:14px;color:#6B7689;line-height:1.65;margin-bottom:22px;flex:1;">Review your draft return in plain language. Approve it and we file with HMRC. You receive your submission confirmation and a copy of everything filed.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:24px;">
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Plain-language draft</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> One-tap approve &amp; file</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:9px;align-items:center;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Confirmation &amp; copies</span>
+      </div>
+      <div style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:#F6F2EA;color:#6FAE32;font-size:12px;font-weight:600;padding:9px 16px;border-radius:100px;"><i class="ti ti-clock"></i> 5 minutes</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section id="who" style="max-width:1080px;margin:0 auto;padding:0 24px 80px;scroll-margin-top:80px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+    <div>
+      <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;margin-bottom:14px;">CGT affects more people than you'd expect.</h2>
+      <p style="font-size:16px;color:#6B7689;line-height:1.65;margin-bottom:24px;">If you've sold something that's gone up in value, a property, shares, a business, even crypto, you likely have a CGT liability.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <div style="background:#fff;color:#1B2D4F;font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;"><i class="ti ti-building" style="color:#83C341;font-size:14px;"></i> Property sellers</div>
+        <div style="background:#fff;color:#1B2D4F;font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;"><i class="ti ti-chart-line" style="color:#83C341;font-size:14px;"></i> Share investors</div>
+        <div style="background:#fff;color:#1B2D4F;font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;"><i class="ti ti-briefcase" style="color:#83C341;font-size:14px;"></i> Business owners</div>
+        <div style="background:#fff;color:#1B2D4F;font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;"><i class="ti ti-coin-bitcoin" style="color:#83C341;font-size:14px;"></i> Crypto holders</div>
+        <div style="background:#fff;color:#1B2D4F;font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;"><i class="ti ti-gift" style="color:#83C341;font-size:14px;"></i> Inherited assets</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:#1B2D4F;border-radius:22px;padding:26px;text-align:center;"><div style="font-size:38px;font-weight:700;color:#83C341;margin-bottom:6px;">60</div><div style="font-size:12px;line-height:1.4;color:rgba(255,255,255,0.5);">Days to report a property disposal</div></div>
+      <div style="background:#fff;border-radius:22px;padding:26px;text-align:center;"><div style="font-size:38px;font-weight:700;color:#83C341;margin-bottom:6px;">£3k</div><div style="font-size:12px;color:#6B7689;line-height:1.4;">Annual CGT allowance 2025/26</div></div>
+      <div style="background:#fff;border-radius:22px;padding:26px;text-align:center;"><div style="font-size:38px;font-weight:700;color:#83C341;margin-bottom:6px;">24%</div><div style="font-size:12px;color:#6B7689;line-height:1.4;">Higher rate on residential property</div></div>
+      <div style="background:#1B2D4F;border-radius:22px;padding:26px;text-align:center;"><div style="font-size:38px;font-weight:700;color:#83C341;margin-bottom:6px;">100%</div><div style="font-size:12px;line-height:1.4;color:rgba(255,255,255,0.5);">Cases handled by qualified accountants</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING (full, soft) -->
+<section id="pricing" style="max-width:1080px;margin:0 auto;padding:0 24px 80px;scroll-margin-top:80px;">
+  <div style="text-align:center;margin-bottom:44px;">
+    <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;margin-bottom:10px;">Fixed fees, no surprises</h2>
+    <p style="font-size:16px;color:#6B7689;">Pay once and we start straight away.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div style="background:#fff;border-radius:28px;padding:36px 30px;">
+      <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#6FAE32;margin-bottom:10px;">Essential</p>
+      <div style="font-size:46px;font-weight:700;color:#1B2D4F;line-height:1;">£149</div>
+      <p style="font-size:13px;color:#8A93A3;margin:10px 0 22px;">One straightforward disposal</p>
+      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:26px;">
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Single asset disposal</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Full CGT calculation</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> HMRC submission</span>
+      </div>
+      <a href="#calculator" style="display:block;background:#F6F2EA;color:#1B2D4F;font-size:14px;font-weight:600;padding:13px;border-radius:100px;text-decoration:none;text-align:center;" style-hover="background:#EFE9DC;">Get started</a>
+    </div>
+    <div style="background:#1B2D4F;border-radius:28px;padding:36px 30px;position:relative;">
+      <span style="position:absolute;top:24px;right:24px;background:#83C341;color:#1B2D4F;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:0.06em;">Popular</span>
+      <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#83C341;margin-bottom:10px;">Standard</p>
+      <div style="font-size:46px;font-weight:700;color:#fff;line-height:1;">£249</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.55);margin:10px 0 22px;">Up to 3 disposals, reliefs reviewed</p>
+      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:26px;">
+        <span style="font-size:13px;color:rgba(255,255,255,0.75);display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Up to 3 disposals</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.75);display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Reliefs &amp; allowances review</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.75);display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Dedicated accountant</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.75);display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Messaging throughout</span>
+      </div>
+      <a href="#calculator" style="display:block;background:#83C341;color:#1B2D4F;font-size:14px;font-weight:600;padding:13px;border-radius:100px;text-decoration:none;text-align:center;" style-hover="background:#6FAE32;">Get started</a>
+    </div>
+    <div style="background:#fff;border-radius:28px;padding:36px 30px;">
+      <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#6FAE32;margin-bottom:10px;">Complex</p>
+      <div style="font-size:46px;font-weight:700;color:#1B2D4F;line-height:1;">£399</div>
+      <p style="font-size:13px;color:#8A93A3;margin:10px 0 22px;">Multiple disposals &amp; business assets</p>
+      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:26px;">
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Unlimited disposals</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Business Asset Relief check</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> Priority turnaround</span>
+        <span style="font-size:13px;color:#5A6678;display:flex;gap:8px;align-items:flex-start;"><i class="ti ti-check" style="color:#83C341;font-size:15px;"></i> HMRC enquiry support</span>
+      </div>
+      <a href="#calculator" style="display:block;background:#F6F2EA;color:#1B2D4F;font-size:14px;font-weight:600;padding:13px;border-radius:100px;text-decoration:none;text-align:center;" style-hover="background:#EFE9DC;">Get started</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED (comparison) -->
+<section id="included" style="max-width:1080px;margin:0 auto;padding:0 24px 80px;scroll-margin-top:80px;">
+  <div style="text-align:center;margin-bottom:36px;">
+    <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;margin-bottom:12px;">Here's everything that's included</h2>
+    <p style="font-size:16px;color:#6B7689;line-height:1.6;max-width:560px;margin:0 auto;">All of our tax return services are filed by a UK-accredited accountant and covered by our Accuracy Guarantee.</p>
+  </div>
+
+  <div style="background:#fff;border-radius:28px;padding:14px 28px 28px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;">
+
+      <!-- HEADER ROW -->
+      <div style="padding:28px 16px 22px;"></div>
+      <div style="padding:24px 16px 22px;text-align:center;">
+        <div style="font-size:14px;font-weight:600;color:#1B2D4F;line-height:1.3;margin-bottom:10px;">Prepared &amp;<br>Filed Accurately</div>
+        <div style="font-size:15px;color:#A7AEBA;"><s>£169</s> <span style="font-size:20px;font-weight:700;color:#1B2D4F;">£99</span></div>
+      </div>
+      <div style="padding:24px 16px 22px;text-align:center;background:#83C341;border-radius:20px 20px 0 0;">
+        <div style="display:inline-block;background:#1B2D4F;color:#83C341;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:100px;margin-bottom:8px;">Most popular</div>
+        <div style="font-size:14px;font-weight:700;color:#1B2D4F;line-height:1.3;margin-bottom:8px;">Filed, Optimised<br>&amp; Protected</div>
+        <div style="font-size:15px;color:rgba(27,45,79,0.5);"><s>£249</s> <span style="font-size:20px;font-weight:700;color:#1B2D4F;">£149</span></div>
+      </div>
+      <div style="padding:24px 16px 22px;text-align:center;">
+        <div style="font-size:14px;font-weight:600;color:#1B2D4F;line-height:1.3;margin-bottom:10px;">Filed + a Year-<br>Round Tax Partner</div>
+        <div style="font-size:15px;color:#A7AEBA;"><s>£499</s> <span style="font-size:20px;font-weight:700;color:#1B2D4F;">£349</span></div>
+      </div>
+
+      <!-- ROW 1 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">Accountant prepares and files your return</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 2 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">Accuracy Guarantee</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 3 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">HMRC integration</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 4 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">Tax optimisation, delivered through a consultation call with your accountant</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;color:#C5CBD4;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 5 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">HMRC audit &amp; letter support</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;color:#C5CBD4;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 6 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">UTR Registration</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;color:#C5CBD4;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 7 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">Year-round accountant access &amp; annual tax efficiency review</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;color:#C5CBD4;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;color:#83C341;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 8 -->
+      <div style="padding:18px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">HMRC agent representation</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;color:#C5CBD4;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;background:#F1F8E8;color:#83C341;font-size:18px;">–</div>
+      <div style="padding:18px 16px;text-align:center;border-top:1px solid #F0EBE0;"><i class="ti ti-circle-check" style="color:#83C341;font-size:22px;"></i></div>
+
+      <!-- ROW 9 (text) -->
+      <div style="padding:20px 16px;font-size:14px;color:#1B2D4F;font-weight:500;border-top:1px solid #F0EBE0;display:flex;align-items:center;">Accountant access</div>
+      <div style="padding:20px 16px;text-align:center;border-top:1px solid #F0EBE0;font-size:13px;color:#6B7689;line-height:1.5;">Messaging while filing your return</div>
+      <div style="padding:20px 16px;text-align:center;background:#F1F8E8;border-radius:0 0 20px 20px;font-size:13px;color:#1B2D4F;font-weight:500;line-height:1.5;">Messaging on anything related to your return + consultation call</div>
+      <div style="padding:20px 16px;text-align:center;border-top:1px solid #F0EBE0;font-size:13px;color:#6B7689;line-height:1.5;">Year-round messaging and scheduled calls, any tax topic</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (soft) -->
+<section style="max-width:720px;margin:0 auto;padding:0 24px 80px;">
+  <div style="text-align:center;margin-bottom:36px;">
+    <h2 style="font-size:38px;font-weight:600;color:#1B2D4F;letter-spacing:-0.01em;">Common questions</h2>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px;">
+    <details style="background:#fff;border-radius:20px;padding:6px 26px;" open>
+      <summary style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;cursor:pointer;font-size:16px;font-weight:600;color:#1B2D4F;gap:16px;list-style:none;user-select:none;">What is the 60-day CGT reporting rule? <i class="ti ti-chevron-down faq-icon" style="color:#83C341;font-size:18px;flex-shrink:0;transition:transform 0.25s;"></i></summary>
+      <p style="padding:0 0 18px;font-size:14px;color:#6B7689;line-height:1.75;">If you sell a UK residential property and make a gain, you must report and pay the CGT within 60 days of completion. We file well within that window.</p>
+    </details>
+    <details style="background:#fff;border-radius:20px;padding:6px 26px;">
+      <summary style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;cursor:pointer;font-size:16px;font-weight:600;color:#1B2D4F;gap:16px;list-style:none;user-select:none;">Do I need to report if I made a loss? <i class="ti ti-chevron-down faq-icon" style="color:#83C341;font-size:18px;flex-shrink:0;transition:transform 0.25s;"></i></summary>
+      <p style="padding:0 0 18px;font-size:14px;color:#6B7689;line-height:1.75;">Not to pay CGT, but reporting a loss can be beneficial, it can offset future gains. We'll advise on your situation.</p>
+    </details>
+    <details style="background:#fff;border-radius:20px;padding:6px 26px;">
+      <summary style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;cursor:pointer;font-size:16px;font-weight:600;color:#1B2D4F;gap:16px;list-style:none;user-select:none;">How long does the process take? <i class="ti ti-chevron-down faq-icon" style="color:#83C341;font-size:18px;flex-shrink:0;transition:transform 0.25s;"></i></summary>
+      <p style="padding:0 0 18px;font-size:14px;color:#6B7689;line-height:1.75;">Most straightforward cases are reviewed and filed within 2–3 working days of receiving your documents.</p>
+    </details>
+    <details style="background:#fff;border-radius:20px;padding:6px 26px;">
+      <summary style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;cursor:pointer;font-size:16px;font-weight:600;color:#1B2D4F;gap:16px;list-style:none;user-select:none;">I've already missed the deadline, can you help? <i class="ti ti-chevron-down faq-icon" style="color:#83C341;font-size:18px;flex-shrink:0;transition:transform 0.25s;"></i></summary>
+      <p style="padding:0 0 18px;font-size:14px;color:#6B7689;line-height:1.75;">Yes. A late report doesn't have to mean a large fine. We'll prepare the return and help you communicate with HMRC to minimise penalties.</p>
+    </details>
+    <details style="background:#fff;border-radius:20px;padding:6px 26px;">
+      <summary style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;cursor:pointer;font-size:16px;font-weight:600;color:#1B2D4F;gap:16px;list-style:none;user-select:none;">What documents do I need? <i class="ti ti-chevron-down faq-icon" style="color:#83C341;font-size:18px;flex-shrink:0;transition:transform 0.25s;"></i></summary>
+      <p style="padding:0 0 18px;font-size:14px;color:#6B7689;line-height:1.75;">For property, the completion statement from your solicitor. For shares, a sale confirmation from your broker.</p>
+    </details>
+  </div>
+</section>
+
+<!-- PARTNER SECTION -->
+<section id="partners" style="max-width:1080px;margin:0 auto;padding:0 24px 80px;scroll-margin-top:80px;">
+  <div style="background:#1B2D4F;border-radius:28px;padding:56px 48px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;">
+    <div>
+      <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(131,195,65,0.16);color:#83C341;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;margin-bottom:20px;"><i class="ti ti-briefcase-2"></i> Partner programme</span>
+      <h2 style="font-size:34px;font-weight:600;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin-bottom:14px;">Refer clients. Earn as they file.</h2>
+      <p style="font-size:16px;color:rgba(255,255,255,0.62);line-height:1.65;margin-bottom:28px;max-width:420px;">Solicitors, estate agents, IFAs and accountants — send your clients to a specialist CGT service and share in the fee. We handle the work; you keep the relationship.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="partner-onboarding.html" style="background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;" style-hover="background:#6FAE32;">Become a partner <i class="ti ti-arrow-right"></i></a>
+        <a href="partner-onboarding.html#login" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:15px;font-weight:500;padding:14px 26px;border-radius:100px;text-decoration:none;" style-hover="border-color:rgba(255,255,255,0.6);">Partner login</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;">
+        <i class="ti ti-percentage" style="color:#83C341;font-size:26px;"></i>
+        <div style="font-size:26px;font-weight:700;color:#fff;margin-top:12px;">Revenue share</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;">Competitive commission on every referred filing</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;">
+        <i class="ti ti-dashboard" style="color:#83C341;font-size:26px;"></i>
+        <div style="font-size:26px;font-weight:700;color:#fff;margin-top:12px;">Partner portal</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;">Track referrals and payouts in one dashboard</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;">
+        <i class="ti ti-user-shield" style="color:#83C341;font-size:26px;"></i>
+        <div style="font-size:26px;font-weight:700;color:#fff;margin-top:12px;">Clients cared for</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;">Qualified accountants, your name stays front</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;">
+        <i class="ti ti-bolt" style="color:#83C341;font-size:26px;"></i>
+        <div style="font-size:26px;font-weight:700;color:#fff;margin-top:12px;">Fast onboarding</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;line-height:1.5;">Set up in minutes and refer the same day</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#fff;border-radius:32px 32px 0 0;margin-top:8px;padding:64px 24px 40px;">
+  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;">
+    <div>
+      <h4 style="font-size:15px;font-weight:700;color:#1B2D4F;margin-bottom:18px;">CGT Online</h4>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">About us</a>
+      <a href="#how" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">How it works</a>
+      <a href="#pricing" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Pricing</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Our accountants</a>
+      <a href="#partners" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">For partners</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Refer a friend</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Contact</a>
+    </div>
+    <div>
+      <h4 style="font-size:15px;font-weight:700;color:#1B2D4F;margin-bottom:18px;">Our services</h4>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Property CGT</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Share disposals</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Business assets</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Inherited assets</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Cryptocurrency gains</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Late / missed filings</a>
+    </div>
+    <div>
+      <h4 style="font-size:15px;font-weight:700;color:#1B2D4F;margin-bottom:18px;">Who we help</h4>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Property sellers</a>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Landlords</a>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Share investors</a>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Business owners</a>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Crypto holders</a>
+      <a href="#who" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Inherited assets</a>
+    </div>
+    <div>
+      <h4 style="font-size:15px;font-weight:700;color:#1B2D4F;margin-bottom:18px;">Guidance</h4>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">What is CGT?</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">CGT rates 2025/26</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">The 60-day rule</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">Reliefs explained</a>
+      <a href="#" style="display:block;font-size:14px;color:#6B7689;text-decoration:none;margin-bottom:13px;" style-hover="color:#83C341;">FAQ</a>
+    </div>
+  </div>
+
+  <!-- SOCIAL + BADGE -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:22px;margin:48px 0 36px;">
+    <span style="display:inline-flex;align-items:center;gap:7px;background:#F6F2EA;color:#6FAE32;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;"><i class="ti ti-rosette"></i> ICAEW regulated · UK-based accountants</span>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#1B2D4F;color:#fff;text-decoration:none;padding:11px 20px;border-radius:14px;transition:background 0.2s;" style-hover="background:#253F6E;">
+        <i class="ti ti-brand-google-play" style="font-size:24px;color:#83C341;"></i>
+        <span style="text-align:left;line-height:1.1;"><span style="display:block;font-size:10px;color:rgba(255,255,255,0.6);">GET IT ON</span><span style="display:block;font-size:15px;font-weight:600;">Google Play</span></span>
+      </a>
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#1B2D4F;color:#fff;text-decoration:none;padding:11px 20px;border-radius:14px;transition:background 0.2s;" style-hover="background:#253F6E;">
+        <i class="ti ti-brand-apple" style="font-size:24px;color:#83C341;"></i>
+        <span style="text-align:left;line-height:1.1;"><span style="display:block;font-size:10px;color:rgba(255,255,255,0.6);">Download on the</span><span style="display:block;font-size:15px;font-weight:600;">App Store</span></span>
+      </a>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="#" style="width:42px;height:42px;border-radius:50%;background:#1B2D4F;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background 0.2s;" style-hover="background:#83C341;"><i class="ti ti-brand-linkedin" style="font-size:20px;"></i></a>
+      <a href="#" style="width:42px;height:42px;border-radius:50%;background:#1B2D4F;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background 0.2s;" style-hover="background:#83C341;"><i class="ti ti-brand-x" style="font-size:20px;"></i></a>
+      <a href="#" style="width:42px;height:42px;border-radius:50%;background:#1B2D4F;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background 0.2s;" style-hover="background:#83C341;"><i class="ti ti-brand-instagram" style="font-size:20px;"></i></a>
+      <a href="#" style="width:42px;height:42px;border-radius:50%;background:#1B2D4F;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background 0.2s;" style-hover="background:#83C341;"><i class="ti ti-brand-facebook" style="font-size:20px;"></i></a>
+    </div>
+    <p style="font-size:15px;color:#1B2D4F;">Get in touch on weekdays, 9am to 6pm by live <a href="#" style="color:#6FAE32;font-weight:600;text-decoration:underline;">chat</a> or <a href="#" style="color:#6FAE32;font-weight:600;text-decoration:underline;">email</a></p>
+  </div>
+
+  <!-- LEGAL ROW -->
+  <div style="border-top:1px solid #F0EBE0;padding-top:26px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px 22px;flex-wrap:wrap;">
+      <a href="#" style="font-size:13px;font-weight:500;color:#8A93A3;text-decoration:none;" style-hover="color:#1B2D4F;">Cookie policy</a>
+      <span style="color:#D9D3C6;">·</span>
+      <a href="#" style="font-size:13px;font-weight:500;color:#8A93A3;text-decoration:none;" style-hover="color:#1B2D4F;">Privacy policy</a>
+      <span style="color:#D9D3C6;">·</span>
+      <a href="#" style="font-size:13px;font-weight:500;color:#8A93A3;text-decoration:none;" style-hover="color:#1B2D4F;">Terms of Service</a>
+      <span style="color:#D9D3C6;">·</span>
+      <a href="#" style="font-size:13px;font-weight:500;color:#8A93A3;text-decoration:none;" style-hover="color:#1B2D4F;">Legal Notice</a>
+      <span style="color:#D9D3C6;">·</span>
+      <a href="#" style="font-size:13px;font-weight:500;color:#8A93A3;text-decoration:none;" style-hover="color:#1B2D4F;">Accuracy Guarantee T&amp;Cs</a>
+    </div>
+    <p style="font-size:12px;color:#A7AEBA;text-align:center;">© 2026 CGT Online · Operated by Everest &amp; Co Accountants Limited, Wolverhampton · Registered in England &amp; Wales</p>
+  </div>
+</footer>
+
+<!-- AI ASSISTANT -->
+<button id="ai-open" type="button" style="position:fixed;bottom:24px;right:24px;z-index:200;display:flex;align-items:center;gap:9px;background:#1B2D4F;color:#fff;border:none;font-family:'Jost',sans-serif;font-size:15px;font-weight:600;padding:14px 22px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(27,45,79,0.55);" style-hover="background:#253F6E;">
+  <i class="ti ti-sparkles" style="color:#83C341;font-size:20px;"></i> Ask AI
+</button>
+
+<div id="ai-overlay" style="position:fixed;inset:0;background:rgba(27,45,79,0.35);z-index:205;transition:opacity 0.3s;opacity:0;pointer-events:none;"></div>
+
+<div id="ai-panel" style="position:fixed;top:16px;right:16px;bottom:16px;width:min(400px,calc(100vw - 32px));background:#fff;z-index:210;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(27,45,79,0.55);transition:transform 0.34s cubic-bezier(0.4,0,0.2,1);transform:translateX(calc(100% + 32px));">
+  <!-- header -->
+  <div style="display:flex;align-items:center;gap:12px;padding:20px 22px;border-bottom:1px solid #EEF1F7;flex-shrink:0;">
+    <div style="width:40px;height:40px;border-radius:50%;background:#1B2D4F;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-sparkles" style="color:#83C341;font-size:20px;"></i></div>
+    <div style="flex:1;">
+      <div style="font-size:16px;font-weight:600;color:#1B2D4F;">AI Assistant</div>
+      <div style="font-size:12px;color:#94A3B8;">General guidance only</div>
+    </div>
+    <button id="ai-close" type="button" style="background:none;border:none;cursor:pointer;color:#94A3B8;font-size:22px;display:flex;padding:4px;" style-hover="color:#1B2D4F;"><i class="ti ti-x"></i></button>
+  </div>
+  <!-- scrolling body -->
+  <div id="ai-body" style="flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:14px;">
+    <div style="background:#EEF2FB;border-radius:16px;padding:16px 18px;font-size:14px;color:#1B2D4F;line-height:1.6;">Hi, I'm your CGT Online assistant. Ask me anything about your case, documents or the process.</div>
+    <div id="ai-msgs" style="display:flex;flex-direction:column;gap:14px;"></div>
+    <div id="ai-suggest" style="display:flex;flex-direction:column;gap:10px;">
+      <button type="button" data-q="What documents do I still need to upload?" style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E7EAF0;border-radius:14px;padding:15px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1B2D4F;cursor:pointer;transition:all 0.15s;" style-hover="border-color:#83C341;box-shadow:0 6px 16px -10px rgba(27,45,79,0.4);">What documents do I still need to upload?</button>
+      <button type="button" data-q="What does my current case status mean?" style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E7EAF0;border-radius:14px;padding:15px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1B2D4F;cursor:pointer;transition:all 0.15s;" style-hover="border-color:#83C341;box-shadow:0 6px 16px -10px rgba(27,45,79,0.4);">What does my current case status mean?</button>
+      <button type="button" data-q="Why do you need proof of address?" style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E7EAF0;border-radius:14px;padding:15px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1B2D4F;cursor:pointer;transition:all 0.15s;" style-hover="border-color:#83C341;box-shadow:0 6px 16px -10px rgba(27,45,79,0.4);">Why do you need proof of address?</button>
+      <button type="button" data-q="How is my provisional estimate calculated?" style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E7EAF0;border-radius:14px;padding:15px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1B2D4F;cursor:pointer;transition:all 0.15s;" style-hover="border-color:#83C341;box-shadow:0 6px 16px -10px rgba(27,45,79,0.4);">How is my provisional estimate calculated?</button>
+      <button type="button" data-q="What happens after I approve my draft?" style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E7EAF0;border-radius:14px;padding:15px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#1B2D4F;cursor:pointer;transition:all 0.15s;" style-hover="border-color:#83C341;box-shadow:0 6px 16px -10px rgba(27,45,79,0.4);">What happens after I approve my draft?</button>
+    </div>
+  </div>
+  <!-- disclaimer + input -->
+  <div style="padding:0 22px 22px;flex-shrink:0;">
+    <div style="background:#EEF6E3;border-radius:14px;padding:13px 16px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start;">
+      <i class="ti ti-shield-check" style="color:#6FAE32;font-size:17px;margin-top:1px;flex-shrink:0;"></i>
+      <div style="font-size:13px;color:#5E7A3A;line-height:1.5;">I don't give advice on your final figures. <a href="#" style="color:#5E7A3A;font-weight:600;text-decoration:underline;">Message your team ↗</a></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #E2E8F0;border-radius:100px;padding:5px 5px 5px 18px;">
+      <input id="ai-input" placeholder="Type your question..." style="flex:1;border:none;outline:none;background:transparent;font-family:'Jost',sans-serif;font-size:14px;color:#1B2D4F;padding:9px 0;" />
+      <button id="ai-send" type="button" style="width:40px;height:40px;border-radius:50%;background:#1B2D4F;border:none;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;" style-hover="background:#253F6E;"><i class="ti ti-send" style="font-size:18px;"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR + AI ASSISTANT LOGIC (vanilla port of the design's DCLogic component) -->
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  /* ===== Calculator ===== */
+  const state = { purchase: 240000, sale: 385000, costs: 5000, rate: 'higher', asset: 'property' };
+
+  const tabBase = "flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;padding:11px;border-radius:100px;cursor:pointer;transition:all 0.15s;border:none;";
+  const tabOn  = tabBase + "background:#fff;color:#1B2D4F;box-shadow:0 4px 12px -6px rgba(27,45,79,0.25);";
+  const tabOff = tabBase + "background:transparent;color:#6B7689;";
+
+  const pillBase = "font-family:'Jost',sans-serif;font-size:12px;font-weight:600;padding:7px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;";
+  const pillOn  = pillBase + "background:#83C341;color:#1B2D4F;border:1px solid #83C341;";
+  const pillOff = pillBase + "background:#F6F2EA;color:#6B7689;border:1px solid transparent;";
+
+  const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+  const fmt = n => '£' + Math.round(n).toLocaleString('en-GB');
+
+  function renderCalc() {
+    const gain = Math.max(0, num(state.sale) - num(state.purchase) - num(state.costs));
+    const taxable = Math.max(0, gain - 3000);
+    const ratePct = state.rate === 'higher' ? 0.24 : 0.18;
+    const tax = taxable * ratePct;
+
+    $('out-gain').textContent = fmt(gain);
+    $('out-tax').textContent  = fmt(tax);
+    $('out-rate').textContent = (ratePct * 100) + '%';
+
+    $('tab-property').style.cssText = state.asset === 'property' ? tabOn : tabOff;
+    $('tab-other').style.cssText    = state.asset === 'other'    ? tabOn : tabOff;
+    $('pill-basic').style.cssText   = state.rate === 'basic'  ? pillOn : pillOff;
+    $('pill-higher').style.cssText  = state.rate === 'higher' ? pillOn : pillOff;
+  }
+
+  /* ===== AI Assistant ===== */
+  const ANSWERS = {
+    'What documents do I still need to upload?': "Based on your case, we still need your completion statement and a recent proof of address. Head to the Documents tab to upload them — I'll flag anything else your accountant needs.",
+    'What does my current case status mean?': "‘Under review’ means your accountant is checking your documents and preparing your CGT calculation. You don't need to do anything right now — we'll message you if we need more.",
+    'Why do you need proof of address?': "HMRC requires us to verify your identity before we can file on your behalf. A recent utility bill or bank statement (last 3 months) is perfect.",
+    'How is my provisional estimate calculated?': "We take your sale price, subtract your purchase price and allowable costs, apply the £3,000 annual exemption, then your CGT rate (18% or 24%). It's an estimate — your accountant confirms the exact figure.",
+    'What happens after I approve my draft?': "Once you approve, we file your return with HMRC and send you a confirmation plus a copy of everything submitted. That's it — you're done."
+  };
+  const aiReply = q => ANSWERS[q] || "Thanks — I've noted that. This is general guidance only, so your assigned accountant will confirm the detail, but we'll walk you through every step and keep you updated as your return progresses.";
+
+  const uRow = 'display:flex;justify-content:flex-end;';
+  const aRow = 'display:flex;justify-content:flex-start;';
+  const uBub = 'background:#1B2D4F;color:#fff;border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14px;line-height:1.55;max-width:82%;';
+  const aBub = 'background:#EEF2FB;color:#1B2D4F;border-radius:16px 16px 16px 4px;padding:12px 16px;font-size:14px;line-height:1.55;max-width:82%;';
+
+  let hasMsgs = false;
+
+  function appendMsg(role, text) {
+    const row = document.createElement('div');
+    row.setAttribute('style', role === 'user' ? uRow : aRow);
+    const bub = document.createElement('div');
+    bub.setAttribute('style', role === 'user' ? uBub : aBub);
+    bub.textContent = text;
+    row.appendChild(bub);
+    $('ai-msgs').appendChild(row);
+    const body = $('ai-body');
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function send(text) {
+    const t = (text != null ? text : $('ai-input').value || '').trim();
+    if (!t) return;
+    if (!hasMsgs) { hasMsgs = true; $('ai-suggest').style.display = 'none'; }
+    appendMsg('user', t);
+    $('ai-input').value = '';
+    setTimeout(() => appendMsg('ai', aiReply(t)), 380);
+  }
+
+  function openAI() {
+    $('ai-panel').style.transform = 'translateX(0)';
+    $('ai-overlay').style.opacity = '1';
+    $('ai-overlay').style.pointerEvents = 'auto';
+  }
+  function closeAI() {
+    $('ai-panel').style.transform = 'translateX(calc(100% + 32px))';
+    $('ai-overlay').style.opacity = '0';
+    $('ai-overlay').style.pointerEvents = 'none';
+  }
+
+  /* ===== Wiring ===== */
+  function bind() {
+    const onInput = (id, key) => {
+      const el = $(id);
+      const h = () => { state[key] = el.value; renderCalc(); };
+      el.addEventListener('input', h);
+      el.addEventListener('change', h);
+    };
+    onInput('inp-purchase', 'purchase');
+    onInput('inp-sale', 'sale');
+    onInput('inp-costs', 'costs');
+
+    $('tab-property').addEventListener('click', () => { state.asset = 'property'; renderCalc(); });
+    $('tab-other').addEventListener('click',    () => { state.asset = 'other';    renderCalc(); });
+    $('pill-basic').addEventListener('click',   () => { state.rate = 'basic';   renderCalc(); });
+    $('pill-higher').addEventListener('click',  () => { state.rate = 'higher';  renderCalc(); });
+    renderCalc();
+
+    $('ai-open').addEventListener('click', openAI);
+    $('ai-close').addEventListener('click', closeAI);
+    $('ai-overlay').addEventListener('click', closeAI);
+    $('ai-send').addEventListener('click', () => send());
+    $('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); send(); } });
+    document.querySelectorAll('#ai-suggest button').forEach(b =>
+      b.addEventListener('click', () => send(b.getAttribute('data-q')))
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+</body>
+</html>
