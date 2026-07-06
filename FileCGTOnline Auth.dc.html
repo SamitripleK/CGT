@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('cgt-theme');document.documentElement.setAttribute('data-theme',(t==='dark'||t==='light')?t:'light');}catch(e){}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#"]');if(a){e.preventDefault();}});</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -13,8 +15,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 <style>
+  :root{
+    --page:#F6F2EA; --surface:#fff; --surface-2:#FBF9F4;
+    --border:#F0EBE0; --border-2:#DDD5C5;
+    --tx:#1B2D4F; --tx-2:#6B7689; --tx-3:#A7AEBA;
+    --navy:#1B2D4F; --navy-2:#182843;
+    --green:#83C341; --green-d:#6FAE32; --green-link:#5E7A3A; --green-tint:#F1F8E8;
+  }
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --page:#0f1526; --surface:#171f33; --surface-2:#1c2439;
+    --border:#2a3450; --border-2:#38466a;
+    --tx:#eaf0fb; --tx-2:#9fadc4; --tx-3:#7d8ba4;
+    --navy:#2c3a5f; --navy-2:#3a4c7d;
+    --green-link:#a9d97a; --green-tint:rgba(131,195,65,0.14);
+  }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Jost',sans-serif;background:#F6F2EA;color:#1B2D4F;}
+  body{font-family:'Jost',sans-serif;background:var(--page);color:var(--tx);transition:background-color .22s ease,color .22s ease;}
   html,body{max-width:100%;overflow-x:hidden;}
   input{font-family:'Jost',sans-serif;}
   @media (max-width:900px){ [data-role="brandpane"]{display:none !important;} [data-role="authgrid"]{grid-template-columns:1fr !important;} }
@@ -24,8 +41,11 @@
 
 <div data-role="authgrid" style="min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;">
 
+  <button onClick="{{ toggleTheme }}" title="Toggle light/dark theme" aria-label="Toggle theme" style="position:fixed;top:20px;right:20px;z-index:100;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9999px;border:1px solid var(--border);background:var(--surface);color:var(--tx-2);cursor:pointer;" style-hover="background:var(--surface-2);color:var(--tx);"><i class="{{ themeIcon }}" style="font-size:18px;"></i></button>
+
+
   <!-- BRAND PANE -->
-  <div data-role="brandpane" style="background:#1B2D4F;padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
+  <div data-role="brandpane" style="background:var(--navy);padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
     <div style="position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(131,195,65,0.12);"></div>
     <div style="position:absolute;bottom:-100px;left:-60px;width:260px;height:260px;border-radius:50%;background:rgba(131,195,65,0.08);"></div>
     <a href="variation-d-soft-rounded.html" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;position:relative;z-index:1;">
@@ -49,22 +69,22 @@
   <!-- FORM PANE -->
   <div style="display:flex;align-items:center;justify-content:center;padding:40px 24px;">
     <div style="width:100%;max-width:400px;">
-      <a href="variation-d-soft-rounded.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#6B7689;text-decoration:none;margin-bottom:24px;" style-hover="color:#1B2D4F;"><i class="ti ti-arrow-left" style="font-size:15px;"></i> Back to site</a>
+      <a href="variation-d-soft-rounded.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--tx-2);text-decoration:none;margin-bottom:24px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:15px;"></i> Back to site</a>
 
       <!-- ═══ LOGIN ═══ -->
       <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
         <div>
           <h2 style="font-size:28px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Log in</h2>
-          <p style="font-size:15px;color:#6B7689;margin-bottom:28px;">Access your cases, documents and messages.</p>
-          <button onClick="{{ submit }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:1px solid #E1DBCD;border-radius:12px;padding:13px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;color:#1B2D4F;cursor:pointer;" style-hover="background:#FBF9F4;">
+          <p style="font-size:15px;color:var(--tx-2);margin-bottom:28px;">Access your cases, documents and messages.</p>
+          <button onClick="{{ submit }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--surface);border:1px solid var(--border-2);border-radius:12px;padding:13px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;color:var(--tx);cursor:pointer;" style-hover="background:var(--surface-2);">
             <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
             Log in with Google
           </button>
-          <div style="display:flex;align-items:center;gap:14px;margin:22px 0;"><span style="flex:1;height:1px;background:#E1DBCD;"></span><span style="font-size:13px;color:#A7AEBA;">or</span><span style="flex:1;height:1px;background:#E1DBCD;"></span></div>
-          <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input type="email" placeholder="you@email.com" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
-          <div style="margin-bottom:16px;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><label style="font-size:14px;font-weight:500;">Password</label><a href="#" style="font-size:13px;color:#6FAE32;text-decoration:none;" style-hover="text-decoration:underline;">Forgot?</a></div><input type="password" placeholder="••••••••" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
-          <button onClick="{{ submit }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Log in <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-          <p style="text-align:center;font-size:14px;color:#6B7689;margin-top:22px;">Don't have an account? <a onClick="{{ toggleMode }}" style="color:#1B2D4F;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Sign up</a></p>
+          <div style="display:flex;align-items:center;gap:14px;margin:22px 0;"><span style="flex:1;height:1px;background:var(--border-2);"></span><span style="font-size:13px;color:var(--tx-3);">or</span><span style="flex:1;height:1px;background:var(--border-2);"></span></div>
+          <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input type="email" placeholder="you@email.com" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+          <div style="margin-bottom:16px;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><label style="font-size:14px;font-weight:500;">Password</label><a href="#" style="font-size:13px;color:#6FAE32;text-decoration:none;" style-hover="text-decoration:underline;">Forgot?</a></div><input type="password" placeholder="••••••••" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+          <button onClick="{{ submit }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Log in <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+          <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:22px;">Don't have an account? <a onClick="{{ toggleMode }}" style="color:var(--tx);font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Sign up</a></p>
         </div>
       </sc-if>
 
@@ -74,8 +94,8 @@
           <!-- progress -->
           <div style="margin-bottom:24px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:13px;font-weight:600;color:#1B2D4F;">{{ stepName }}</span>
-              <span style="font-size:13px;color:#94A3B8;">Step {{ stageNum }} of 4</span>
+              <span style="font-size:13px;font-weight:600;color:var(--tx);">{{ stepName }}</span>
+              <span style="font-size:13px;color:var(--tx-3);">Step {{ stageNum }} of 4</span>
             </div>
             <div style="display:flex;gap:6px;">
               <sc-for list="{{ progressSegs }}" as="s" hint-placeholder-count="4"><div style="{{ s.style }}"></div></sc-for>
@@ -86,34 +106,34 @@
           <sc-if value="{{ sDetails }}" hint-placeholder-val="{{ true }}">
             <div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Create your account</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">Let's start with your name and address.</p>
-              <button onClick="{{ submit }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:1px solid #E1DBCD;border-radius:12px;padding:13px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;color:#1B2D4F;cursor:pointer;" style-hover="background:#FBF9F4;">
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">Let's start with your name and address.</p>
+              <button onClick="{{ submit }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--surface);border:1px solid var(--border-2);border-radius:12px;padding:13px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;color:var(--tx);cursor:pointer;" style-hover="background:var(--surface-2);">
                 <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
                 Sign up with Google
               </button>
-              <div style="display:flex;align-items:center;gap:14px;margin:20px 0;"><span style="flex:1;height:1px;background:#E1DBCD;"></span><span style="font-size:13px;color:#A7AEBA;">or</span><span style="flex:1;height:1px;background:#E1DBCD;"></span></div>
-              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Full name</label><input value="{{ name }}" onInput="{{ onName }}" placeholder="James Whitfield" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
+              <div style="display:flex;align-items:center;gap:14px;margin:20px 0;"><span style="flex:1;height:1px;background:var(--border-2);"></span><span style="font-size:13px;color:var(--tx-3);">or</span><span style="flex:1;height:1px;background:var(--border-2);"></span></div>
+              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Full name</label><input value="{{ name }}" onInput="{{ onName }}" placeholder="James Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
               <div style="margin-bottom:12px;">
                 <label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">UK postcode</label>
                 <div style="display:flex;gap:8px;">
-                  <input value="{{ postcode }}" onInput="{{ onPostcode }}" placeholder="BS6 6RG" style="flex:1;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;text-transform:uppercase;" />
-                  <button onClick="{{ findAddress }}" style="background:#1B2D4F;color:#fff;font-size:14px;font-weight:500;padding:0 18px;border:none;border-radius:12px;cursor:pointer;white-space:nowrap;" style-hover="background:#182843;">Find address</button>
+                  <input value="{{ postcode }}" onInput="{{ onPostcode }}" placeholder="BS6 6RG" style="flex:1;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);text-transform:uppercase;" />
+                  <button onClick="{{ findAddress }}" style="background:var(--navy);color:#fff;font-size:14px;font-weight:500;padding:0 18px;border:none;border-radius:12px;cursor:pointer;white-space:nowrap;" style-hover="background:var(--navy-2);">Find address</button>
                 </div>
               </div>
               <!-- address results -->
               <div style="{{ addressListStyle }}">
-                <p style="font-size:12px;color:#94A3B8;padding:8px 12px 4px;">{{ addressCount }} addresses found · select yours</p>
-                <sc-for list="{{ addresses }}" as="a" hint-placeholder-count="0"><button onClick="{{ a.onClick }}" style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;font-family:'Jost',sans-serif;font-size:14px;color:#1B2D4F;cursor:pointer;border-radius:8px;" style-hover="background:#F1F8E8;"><i class="ti ti-map-pin" style="color:#83C341;font-size:16px;"></i> {{ a.label }}</button></sc-for>
+                <p style="font-size:12px;color:var(--tx-3);padding:8px 12px 4px;">{{ addressCount }} addresses found · select yours</p>
+                <sc-for list="{{ addresses }}" as="a" hint-placeholder-count="0"><button onClick="{{ a.onClick }}" style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;font-family:'Jost',sans-serif;font-size:14px;color:var(--tx);cursor:pointer;border-radius:8px;" style-hover="background:var(--green-tint);"><i class="ti ti-map-pin" style="color:#83C341;font-size:16px;"></i> {{ a.label }}</button></sc-for>
               </div>
               <!-- selected address -->
               <div style="{{ selectedStyle }}">
-                <div style="display:flex;align-items:flex-start;gap:10px;background:#F1F8E8;border:1px solid #d6ecb6;border-radius:12px;padding:12px 14px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;background:var(--green-tint);border:1px solid var(--border);border-radius:12px;padding:12px 14px;">
                   <i class="ti ti-circle-check-filled" style="color:#6FAE32;font-size:18px;margin-top:1px;"></i>
-                  <div style="flex:1;"><p style="font-size:14px;color:#1B2D4F;">{{ address }}</p><a onClick="{{ clearAddress }}" style="font-size:12px;color:#6FAE32;cursor:pointer;" style-hover="text-decoration:underline;">Change address</a></div>
+                  <div style="flex:1;"><p style="font-size:14px;color:var(--tx);">{{ address }}</p><a onClick="{{ clearAddress }}" style="font-size:12px;color:#6FAE32;cursor:pointer;" style-hover="text-decoration:underline;">Change address</a></div>
                 </div>
               </div>
-              <button onClick="{{ toEmail }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Continue <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-              <p style="text-align:center;font-size:14px;color:#6B7689;margin-top:20px;">Already have an account? <a onClick="{{ toggleMode }}" style="color:#1B2D4F;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Log in</a></p>
+              <button onClick="{{ toEmail }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Continue <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+              <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:20px;">Already have an account? <a onClick="{{ toggleMode }}" style="color:var(--tx);font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Log in</a></p>
             </div>
           </sc-if>
 
@@ -121,23 +141,23 @@
           <sc-if value="{{ sEmail }}" hint-placeholder-val="{{ false }}">
             <div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">What's your email?</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">We'll send a 6-digit code to confirm it's really you.</p>
-              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@email.com" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
-              <button onClick="{{ sendEmailCode }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Send code <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-              <button onClick="{{ backDetails }}" style="width:100%;background:none;border:none;color:#6B7689;font-size:14px;padding:14px;cursor:pointer;margin-top:6px;">Back</button>
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">We'll send a 6-digit code to confirm it's really you.</p>
+              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@email.com" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+              <button onClick="{{ sendEmailCode }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Send code <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+              <button onClick="{{ backDetails }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;padding:14px;cursor:pointer;margin-top:6px;">Back</button>
             </div>
           </sc-if>
 
           <!-- STEP: EMAIL OTP -->
           <sc-if value="{{ sEmailOtp }}" hint-placeholder-val="{{ false }}">
             <div>
-              <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:#F1F8E8;margin-bottom:18px;"><i class="ti ti-mail-opened" style="color:#6FAE32;font-size:26px;"></i></div>
+              <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:var(--green-tint);margin-bottom:18px;"><i class="ti ti-mail-opened" style="color:#6FAE32;font-size:26px;"></i></div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Verify your email</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">Enter the 6-digit code we sent to <span style="color:#1B2D4F;font-weight:500;">{{ emailDisplay }}</span></p>
-              <input value="{{ emailCode }}" onInput="{{ onEmailCode }}" inputmode="numeric" maxlength="6" placeholder="••••••" style="width:100%;text-align:center;letter-spacing:14px;font-size:28px;font-weight:600;border:1px solid #DDD5C5;border-radius:14px;padding:16px;color:#1B2D4F;outline:none;background:#fff;" />
-              <button onClick="{{ verifyEmail }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Verify email <i class="ti ti-check" style="font-size:16px;"></i></button>
-              <p style="text-align:center;font-size:14px;color:#6B7689;margin-top:18px;">Didn't get it? <a onClick="{{ sendEmailCode }}" style="color:#6FAE32;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Resend code</a></p>
-              <button onClick="{{ backEmail }}" style="width:100%;background:none;border:none;color:#6B7689;font-size:14px;padding:8px;cursor:pointer;margin-top:4px;">Change email address</button>
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">Enter the 6-digit code we sent to <span style="color:var(--tx);font-weight:500;">{{ emailDisplay }}</span></p>
+              <input value="{{ emailCode }}" onInput="{{ onEmailCode }}" inputmode="numeric" maxlength="6" placeholder="••••••" style="width:100%;text-align:center;letter-spacing:14px;font-size:28px;font-weight:600;border:1px solid var(--border-2);border-radius:14px;padding:16px;color:var(--tx);outline:none;background:var(--surface);" />
+              <button onClick="{{ verifyEmail }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Verify email <i class="ti ti-check" style="font-size:16px;"></i></button>
+              <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:18px;">Didn't get it? <a onClick="{{ sendEmailCode }}" style="color:#6FAE32;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Resend code</a></p>
+              <button onClick="{{ backEmail }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;padding:8px;cursor:pointer;margin-top:4px;">Change email address</button>
             </div>
           </sc-if>
 
@@ -145,49 +165,49 @@
           <sc-if value="{{ sMobile }}" hint-placeholder-val="{{ false }}">
             <div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Your mobile number</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">We'll text a 6-digit code to verify it — used for deadline alerts and security.</p>
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">We'll text a 6-digit code to verify it — used for deadline alerts and security.</p>
               <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Mobile number</label>
-                <div style="display:flex;align-items:center;border:1px solid #DDD5C5;border-radius:12px;padding:0 14px;background:#fff;">
-                  <span style="font-size:15px;color:#94A3B8;padding-right:8px;border-right:1px solid #E1DBCD;">🇬🇧 +44</span>
-                  <input type="tel" value="{{ mobile }}" onInput="{{ onMobile }}" placeholder="7700 900482" style="flex:1;border:none;outline:none;background:transparent;padding:12px 10px;font-size:15px;color:#1B2D4F;" />
+                <div style="display:flex;align-items:center;border:1px solid var(--border-2);border-radius:12px;padding:0 14px;background:var(--surface);">
+                  <span style="font-size:15px;color:var(--tx-3);padding-right:8px;border-right:1px solid var(--border-2);">🇬🇧 +44</span>
+                  <input type="tel" value="{{ mobile }}" onInput="{{ onMobile }}" placeholder="7700 900482" style="flex:1;border:none;outline:none;background:transparent;padding:12px 10px;font-size:15px;color:var(--tx);" />
                 </div>
               </div>
-              <button onClick="{{ sendMobileCode }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Send code <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-              <button onClick="{{ backEmailOtp }}" style="width:100%;background:none;border:none;color:#6B7689;font-size:14px;padding:14px;cursor:pointer;margin-top:6px;">Back</button>
+              <button onClick="{{ sendMobileCode }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Send code <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+              <button onClick="{{ backEmailOtp }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;padding:14px;cursor:pointer;margin-top:6px;">Back</button>
             </div>
           </sc-if>
 
           <!-- STEP: MOBILE OTP -->
           <sc-if value="{{ sMobileOtp }}" hint-placeholder-val="{{ false }}">
             <div>
-              <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:#F1F8E8;margin-bottom:18px;"><i class="ti ti-device-mobile-message" style="color:#6FAE32;font-size:26px;"></i></div>
+              <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:var(--green-tint);margin-bottom:18px;"><i class="ti ti-device-mobile-message" style="color:#6FAE32;font-size:26px;"></i></div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Verify your mobile</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">Enter the 6-digit code we texted to <span style="color:#1B2D4F;font-weight:500;">{{ mobileDisplay }}</span></p>
-              <input value="{{ mobileCode }}" onInput="{{ onMobileCode }}" inputmode="numeric" maxlength="6" placeholder="••••••" style="width:100%;text-align:center;letter-spacing:14px;font-size:28px;font-weight:600;border:1px solid #DDD5C5;border-radius:14px;padding:16px;color:#1B2D4F;outline:none;background:#fff;" />
-              <button onClick="{{ verifyMobile }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Verify mobile <i class="ti ti-check" style="font-size:16px;"></i></button>
-              <p style="text-align:center;font-size:14px;color:#6B7689;margin-top:18px;">Didn't get it? <a onClick="{{ sendMobileCode }}" style="color:#6FAE32;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Resend code</a></p>
-              <button onClick="{{ backMobile }}" style="width:100%;background:none;border:none;color:#6B7689;font-size:14px;padding:8px;cursor:pointer;margin-top:4px;">Change mobile number</button>
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">Enter the 6-digit code we texted to <span style="color:var(--tx);font-weight:500;">{{ mobileDisplay }}</span></p>
+              <input value="{{ mobileCode }}" onInput="{{ onMobileCode }}" inputmode="numeric" maxlength="6" placeholder="••••••" style="width:100%;text-align:center;letter-spacing:14px;font-size:28px;font-weight:600;border:1px solid var(--border-2);border-radius:14px;padding:16px;color:var(--tx);outline:none;background:var(--surface);" />
+              <button onClick="{{ verifyMobile }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Verify mobile <i class="ti ti-check" style="font-size:16px;"></i></button>
+              <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:18px;">Didn't get it? <a onClick="{{ sendMobileCode }}" style="color:#6FAE32;font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Resend code</a></p>
+              <button onClick="{{ backMobile }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;padding:8px;cursor:pointer;margin-top:4px;">Change mobile number</button>
             </div>
           </sc-if>
 
           <!-- STEP: PASSWORD -->
           <sc-if value="{{ sPassword }}" hint-placeholder-val="{{ false }}">
             <div>
-              <div style="display:flex;align-items:center;gap:8px;background:#F1F8E8;border:1px solid #d6ecb6;border-radius:12px;padding:10px 14px;margin-bottom:20px;"><i class="ti ti-shield-check" style="color:#6FAE32;font-size:18px;"></i><span style="font-size:13px;color:#5E7A3A;">Email &amp; mobile verified</span></div>
+              <div style="display:flex;align-items:center;gap:8px;background:var(--green-tint);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:20px;"><i class="ti ti-shield-check" style="color:#6FAE32;font-size:18px;"></i><span style="font-size:13px;color:var(--green-link);">Email &amp; mobile verified</span></div>
               <h2 style="font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Set a password</h2>
-              <p style="font-size:15px;color:#6B7689;margin-bottom:22px;">Last step — choose a strong password to secure your account.</p>
-              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Password</label><input type="password" placeholder="At least 8 characters" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
-              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Confirm password</label><input type="password" placeholder="Re-enter password" style="width:100%;border:1px solid #DDD5C5;border-radius:12px;padding:12px 14px;font-size:15px;color:#1B2D4F;outline:none;background:#fff;" /></div>
-              <label style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;cursor:pointer;"><input type="checkbox" style="width:16px;height:16px;margin-top:2px;accent-color:#83C341;flex-shrink:0;" /><span style="font-size:13px;color:#6B7689;line-height:1.5;">I agree to the <a href="#" style="color:#6FAE32;text-decoration:underline;">Terms of Service</a> and <a href="#" style="color:#6FAE32;text-decoration:underline;">Privacy Policy</a>.</span></label>
-              <button onClick="{{ createAccount }}" style="width:100%;background:#83C341;color:#1B2D4F;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Create account <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-              <button onClick="{{ backMobileOtp }}" style="width:100%;background:none;border:none;color:#6B7689;font-size:14px;padding:8px;cursor:pointer;margin-top:6px;">Back</button>
+              <p style="font-size:15px;color:var(--tx-2);margin-bottom:22px;">Last step — choose a strong password to secure your account.</p>
+              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Password</label><input type="password" placeholder="At least 8 characters" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+              <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Confirm password</label><input type="password" placeholder="Re-enter password" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+              <label style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;cursor:pointer;"><input type="checkbox" style="width:16px;height:16px;margin-top:2px;accent-color:#83C341;flex-shrink:0;" /><span style="font-size:13px;color:var(--tx-2);line-height:1.5;">I agree to the <a href="#" style="color:#6FAE32;text-decoration:underline;">Terms of Service</a> and <a href="#" style="color:#6FAE32;text-decoration:underline;">Privacy Policy</a>.</span></label>
+              <button onClick="{{ createAccount }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Create account <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+              <button onClick="{{ backMobileOtp }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;padding:8px;cursor:pointer;margin-top:6px;">Back</button>
             </div>
           </sc-if>
 
         </div>
       </sc-if>
 
-      <p style="text-align:center;font-size:12px;color:#A7AEBA;margin-top:28px;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="ti ti-lock" style="font-size:14px;"></i> Secured with 256-bit encryption</p>
+      <p style="text-align:center;font-size:12px;color:var(--tx-3);margin-top:28px;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="ti ti-lock" style="font-size:14px;"></i> Secured with 256-bit encryption</p>
     </div>
   </div>
 
@@ -195,9 +215,15 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { mode: 'login', step: 'details', name: '', postcode: '', addressFound: false, address: '', email: '', emailCode: '', mobile: '', mobileCode: '' };
+  state = { mode: 'login', step: 'details', name: '', postcode: '', addressFound: false, address: '', email: '', emailCode: '', mobile: '', mobileCode: '', theme: 'light' };
 
   componentDidMount() {
+    try {
+      const saved = localStorage.getItem('cgt-theme');
+      const t = (saved === 'dark' || saved === 'light') ? saved : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t !== this.state.theme) this.setState({ theme: t });
+    } catch (e) {}
     const h = (window.location.hash || '').replace('#', '').toLowerCase();
     if (h === 'signup') this.setState({ mode: 'signup', step: 'details' });
     else if (h === 'login') this.setState({ mode: 'login' });
@@ -213,7 +239,7 @@ class Component extends DCLogic {
     const stageMap = { details: 1, email: 2, 'email-otp': 2, mobile: 3, 'mobile-otp': 3, password: 4 };
     const stage = stageMap[s.step] || 1;
     const stepNames = { details: 'Your details', email: 'Email address', 'email-otp': 'Verify email', mobile: 'Mobile number', 'mobile-otp': 'Verify mobile', password: 'Create password' };
-    const progressSegs = [1, 2, 3, 4].map(i => ({ style: 'height:5px;flex:1;border-radius:9999px;background:' + (i <= stage ? '#83C341' : '#E1DBCD') + ';' }));
+    const progressSegs = [1, 2, 3, 4].map(i => ({ style: 'height:5px;flex:1;border-radius:9999px;background:' + (i <= stage ? '#83C341' : 'var(--border-2)') + ';' }));
 
     // address lookup (simulated UK address API)
     const pc = (s.postcode || 'BS6 6RG').toUpperCase().trim() || 'BS6 6RG';
@@ -222,6 +248,12 @@ class Component extends DCLogic {
 
     return {
       isLogin, isSignup,
+      themeIcon: this.state.theme === 'dark' ? 'ti ti-sun' : 'ti ti-moon',
+      toggleTheme: () => {
+        const next = this.state.theme === 'dark' ? 'light' : 'dark';
+        try { document.documentElement.setAttribute('data-theme', next); localStorage.setItem('cgt-theme', next); } catch (e) {}
+        this.setState({ theme: next });
+      },
       heroTitle: isLogin ? 'Welcome back to your CGT portal.' : 'Capital gains tax, sorted properly.',
       toggleMode: () => this.setState({ mode: isLogin ? 'signup' : 'login', step: 'details' }),
       submit: go,
@@ -235,7 +267,7 @@ class Component extends DCLogic {
       postcode: s.postcode, onPostcode: e => this.setState({ postcode: e.target.value }),
       findAddress: () => this.setState({ addressFound: true }),
       addresses, addressCount: addrList.length,
-      addressListStyle: 'display:' + (s.addressFound && !s.address ? 'block' : 'none') + ';border:1px solid #E1DBCD;border-radius:12px;padding:4px;margin-bottom:8px;background:#fff;',
+      addressListStyle: 'display:' + (s.addressFound && !s.address ? 'block' : 'none') + ';border:1px solid var(--border-2);border-radius:12px;padding:4px;margin-bottom:8px;background:var(--surface);',
       selectedStyle: 'display:' + (s.address ? 'block' : 'none') + ';margin-bottom:8px;',
       address: s.address, clearAddress: () => this.setState({ address: '', addressFound: true }),
       toEmail: set({ step: 'email' }),
