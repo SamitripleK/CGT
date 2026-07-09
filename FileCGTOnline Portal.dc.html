@@ -113,13 +113,13 @@
   <!-- SIDEBAR -->
   <aside data-role="sidebar" style="position:fixed;inset:0 auto 0 0;width:264px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--surface);padding:20px 16px;z-index:40;">
     <!-- brand -->
-    <div style="padding:0 8px;margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+    <div style="padding:0 8px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">
       <img data-role="logo-l" src="cgt-logo.svg" alt="CGT Online" style="height:26px;width:auto;display:block;" /><img data-role="logo-d" src="cgt-logo-light.svg" alt="CGT Online" style="height:26px;width:auto;display:none;" />
       <span style="font-size:11px;color:var(--tx-2);border-left:1px solid var(--border);padding-left:10px;">Client Portal</span>
     </div>
 
     <!-- flow switcher -->
-    <div style="position:relative;margin-bottom:16px;">
+    <div style="position:relative;margin-bottom:12px;">
       <button onClick="{{ toggleFlow }}" style="display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid var(--border);background:var(--surface);padding:8px 10px;text-align:left;width:100%;cursor:pointer;" style-hover="background:var(--surface-2);">
         <span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:8px;background:var(--navy);"><i class="{{ flowIcon }}" style="color:#c8ec96;font-size:16px;"></i></span>
         <span style="min-width:0;flex:1;"><span style="display:block;font-size:13px;color:var(--tx);line-height:1.2;">{{ flowLabel }}</span><span style="display:block;font-size:11px;color:var(--tx-2);line-height:1.2;">Switch flow</span></span>
@@ -152,7 +152,7 @@
   <!-- MAIN COLUMN -->
   <div data-role="main" style="margin-left:264px;">
     <!-- top bar -->
-    <header style="position:sticky;top:0;z-index:30;display:flex;height:64px;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border);background:var(--surface-blur);backdrop-filter:blur(8px);padding:0 32px;">
+    <header style="position:sticky;top:0;z-index:30;display:flex;height:64px;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border);background:var(--surface-blur);backdrop-filter:blur(8px);padding:0 32px;">
       <p data-role="hide-mobile" style="font-size:13px;color:var(--tx-2);">Secure client portal</p>
       <div data-role="mobile-flow" style="display:none;position:relative;">
         <button onClick="{{ toggleFlow }}" style="display:flex;align-items:center;gap:7px;border-radius:8px;border:1px solid var(--border);background:var(--surface);padding:6px 10px;cursor:pointer;font-family:'Jost',sans-serif;">
@@ -186,145 +186,76 @@
       </div>
     </header>
 
-    <main style="padding:24px 32px 112px;max-width:1200px;margin:0 auto;">
+    <main style="padding:16px;max-width:1200px;margin:0 auto;">
 
       <!-- ══ DASHBOARD ══ -->
       <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
-        <div>
-          <!-- ── HERO: greeting + summary + most-urgent deadline ── -->
-          <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
-            <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-              <div>
-                <h1 style="font-size:30px;line-height:36px;font-weight:700;color:var(--tx);letter-spacing:-0.01em;">Welcome back, James</h1>
-                <p style="font-size:15px;color:var(--tx-2);margin-top:6px;">Here's where your Capital Gains Tax filings stand today.</p>
-              </div>
-              <a href="new-case.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:11px 20px;border:none;border-radius:12px;cursor:pointer;text-decoration:none;box-shadow:var(--sh-md);" style-hover="background:var(--navy-hover);"><i class="ti ti-plus" style="font-size:16px;"></i> Start a new case</a>
+        <div style="max-width:920px;margin:0 auto;">
+          <!-- ── Greeting ── -->
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+            <div>
+              <h1 style="font-size:30px;line-height:36px;font-weight:700;color:var(--tx);letter-spacing:-0.01em;">Welcome back, James</h1>
+              <p style="font-size:15px;color:var(--tx-2);margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+                <span><b style="font-weight:700;color:var(--tx);">{{ sumActive }}</b> active cases</span>
+                <span style="color:var(--border-2);">·</span>
+                <span><b style="font-weight:700;color:var(--tx);">{{ sumAction }}</b> need action</span>
+                <span style="color:var(--border-2);">·</span>
+                <span><b style="font-weight:700;color:var(--tx);">{{ sumUnread }}</b> unread</span>
+              </p>
             </div>
-
-            <!-- summary chips -->
-            <div style="display:flex;flex-wrap:wrap;gap:10px;">
-              <span style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 14px;font-size:14px;color:var(--tx-2b);"><i class="ti ti-folders" style="font-size:16px;color:var(--tx);"></i> <b style="font-weight:700;color:var(--tx);">{{ sumActive }}</b> active cases</span>
-              <span style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 14px;font-size:14px;color:var(--tx-2b);"><i class="ti ti-alert-circle" style="font-size:16px;color:var(--wa-tx);"></i> <b style="font-weight:700;color:var(--tx);">{{ sumAction }}</b> need action</span>
-              <span style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 14px;font-size:14px;color:var(--tx-2b);"><i class="ti ti-message" style="font-size:16px;color:var(--tx);"></i> <b style="font-weight:700;color:var(--tx);">{{ sumUnread }}</b> unread messages</span>
-            </div>
-
-            <!-- most-urgent deadline alert -->
-            <sc-if value="{{ heroHasAlert }}" hint-placeholder-val="{{ true }}">
-              <div style="{{ heroStripStyle }}">
-                <span style="{{ heroIconWrapStyle }}"><i class="{{ heroIcon }}" style="font-size:20px;"></i></span>
-                <div style="flex:1;min-width:180px;">
-                  <p style="{{ heroKickerStyle }}">{{ heroKicker }}</p>
-                  <p style="font-size:16px;font-weight:600;color:var(--tx);margin-top:3px;">{{ heroTitle }}</p>
-                  <p style="font-size:13px;color:var(--tx-2);margin-top:2px;">{{ heroSub }}</p>
-                </div>
-                <span style="{{ heroDeadlinePillStyle }}"><i class="ti ti-clock" style="font-size:14px;"></i> {{ heroDeadlineLabel }}</span>
-                <button onClick="{{ heroOnCta }}" style="{{ heroCtaStyle }}">{{ heroCtaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
-              </div>
-            </sc-if>
+            <a href="new-case.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:15px;font-weight:600;padding:11px 20px;border-radius:12px;cursor:pointer;text-decoration:none;" style-hover="background:var(--surface-2);"><i class="ti ti-plus" style="font-size:16px;"></i> New case</a>
           </div>
 
-          <!-- ── MAIN GRID ── -->
-          <div data-role="col3" style="display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start;">
-            <!-- LEFT: active cases -->
-            <div style="display:flex;flex-direction:column;gap:16px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;">
-                <h2 style="font-size:18px;font-weight:700;color:var(--tx);">Your active cases</h2>
-                <a onClick="{{ goCases }}" style="display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:var(--link);cursor:pointer;" style-hover="text-decoration:underline;">View all <i class="ti ti-chevron-right" style="font-size:15px;"></i></a>
+          <!-- ── FOCAL: your single next step ── -->
+          <sc-if value="{{ heroHasAlert }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-left:4px solid #adee68;border-radius:16px;padding:22px 24px;box-shadow:var(--sh-md);margin-bottom:28px;">
+              <span style="display:flex;width:52px;height:52px;flex-shrink:0;align-items:center;justify-content:center;border-radius:14px;background:var(--su-bg);"><i class="{{ heroIcon }}" style="font-size:26px;color:var(--su-tx);"></i></span>
+              <div style="flex:1;min-width:200px;">
+                <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--tx-3);">{{ heroKicker }}</p>
+                <p style="font-size:19px;font-weight:700;color:var(--tx);margin-top:4px;">{{ heroTitle }}</p>
+                <p style="font-size:14px;color:var(--tx-2);margin-top:3px;">{{ heroSub }}</p>
               </div>
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <sc-for list="{{ activeCases }}" as="c" hint-placeholder-count="3">
-                  <div style="{{ c.rowStyle }}" style-hover="box-shadow:var(--sh-lg);transform:translateY(-1px);">
-                    <!-- TIER 1 · identity + urgency -->
-                    <div style="display:flex;align-items:center;gap:14px;">
-                      <div style="display:flex;width:44px;height:44px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ c.icon }}" style="color:var(--tx);font-size:20px;"></i></div>
-                      <div style="min-width:0;flex:1;">
-                        <h3 style="font-size:16px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.title }}</h3>
-                        <p style="font-size:13px;color:var(--tx-2);margin-top:2px;">{{ c.stageLabel }}</p>
-                      </div>
-                      <span data-role="hide-mobile" style="{{ c.ragStyle }}"><span style="{{ c.ragDotStyle }}"></span>{{ c.ragLabel }}</span>
-                      <span style="{{ c.deadlineStyle }}"><i class="{{ c.deadlineIcon }}" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
-                    </div>
-                    <!-- TIER 2 · next step + progress + estimate -->
-                    <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;">
-                      <div style="flex:1;min-width:220px;">
-                        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--tx-3);">Next step</p>
-                        <p style="font-size:14px;font-weight:500;color:var(--tx);margin:2px 0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.currentTitle }}</p>
-                        <div style="{{ c.progressTrackStyle }}"><div style="{{ c.progressFillStyle }}"></div></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
-                          <span style="font-size:12px;color:var(--tx-2);">{{ c.stepText }}</span>
-                          <span style="font-size:12px;font-weight:600;color:var(--tx);">{{ c.pctLabel }} complete</span>
-                        </div>
-                      </div>
-                      <div style="flex-shrink:0;text-align:right;">
-                        <p style="font-size:12px;color:var(--tx-3);">Provisional estimate</p>
-                        <p style="font-size:16px;font-weight:600;color:var(--tx);margin-top:2px;">{{ c.estimateLabel }}</p>
-                      </div>
-                    </div>
-                    <!-- TIER 3 · deadline note + actions -->
-                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border-3);">
-                      <p style="flex:1;min-width:160px;font-size:12px;color:var(--tx-3);display:flex;align-items:center;gap:6px;"><i class="ti ti-calendar-event" style="font-size:14px;"></i> {{ c.deadlineDateLabel }}</p>
-                      <button onClick="{{ c.onView }}" style="display:inline-flex;align-items:center;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:10px 16px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">View</button>
-                      <button onClick="{{ c.onCta }}" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ c.ctaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
-                    </div>
-                  </div>
-                </sc-for>
-              </div>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--tx-2);"><i class="ti ti-clock" style="font-size:15px;"></i> {{ heroDeadlineLabel }}</span>
+              <button onClick="{{ heroOnCta }}" style="display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:15px;font-weight:600;padding:13px 22px;border:none;border-radius:12px;cursor:pointer;box-shadow:var(--sh-sm);" style-hover="background:#9ce04f;">{{ heroCtaLabel }} <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
             </div>
+          </sc-if>
 
-            <!-- RIGHT: quick-access widgets -->
-            <div style="display:flex;flex-direction:column;gap:16px;">
-              <!-- Messages -->
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-                  <h3 style="font-size:15px;font-weight:700;color:var(--tx);display:flex;align-items:center;gap:8px;"><i class="ti ti-message" style="color:var(--tx);font-size:18px;"></i> Messages</h3>
-                  <sc-if value="{{ unreadShow }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;border-radius:9999px;background:var(--er-bg);color:var(--er-tx);font-size:11px;font-weight:600;padding:3px 9px;">{{ unreadCountLabel }}</span></sc-if>
-                </div>
-                <div style="display:flex;align-items:flex-start;gap:10px;">
-                  <span style="display:flex;width:32px;height:32px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--chip);color:var(--tx);font-size:12px;font-weight:600;">SH</span>
-                  <div style="min-width:0;">
-                    <p style="font-size:14px;font-weight:500;color:var(--tx);">{{ latestMsgAuthor }}</p>
-                    <p style="font-size:13px;line-height:1.5;color:var(--tx-2);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ latestMsgBody }}</p>
+          <!-- ── Your cases (compact list) ── -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <h2 style="font-size:18px;font-weight:700;color:var(--tx);">Your cases</h2>
+            <a onClick="{{ goCases }}" style="display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:var(--link);cursor:pointer;" style-hover="text-decoration:underline;">View all <i class="ti ti-chevron-right" style="font-size:15px;"></i></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ activeCases }}" as="c" hint-placeholder-count="3">
+              <div style="{{ c.cardStyle }}">
+                <!-- steps bar (top) -->
+                <div>
+                  <div style="display:flex;gap:4px;"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="10"><div style="{{ b.style }}"></div></sc-for></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                    <span style="font-size:12px;color:var(--tx-2);">{{ c.stepText }}</span>
+                    <span style="font-size:12px;font-weight:600;color:var(--tx);">{{ c.pctLabel }} complete</span>
                   </div>
                 </div>
-                <button onClick="{{ goMessages }}" style="width:100%;margin-top:16px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:10px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Open inbox <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
-              </div>
-
-              <!-- Documents -->
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-                  <h3 style="font-size:15px;font-weight:700;color:var(--tx);display:flex;align-items:center;gap:8px;"><i class="ti ti-file-text" style="color:var(--tx);font-size:18px;"></i> Documents</h3>
-                  <sc-if value="{{ docsActionShow }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:5px;border-radius:9999px;background:var(--er-bg);color:var(--er-tx);font-size:11px;font-weight:600;padding:3px 9px;"><i class="ti ti-alert-triangle" style="font-size:12px;"></i> {{ docsActionLabel }}</span></sc-if>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:12px;">
-                  <sc-for list="{{ recentDocs }}" as="d" hint-placeholder-count="3">
-                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                      <div style="min-width:0;display:flex;align-items:center;gap:10px;">
-                        <span style="display:flex;width:30px;height:30px;flex-shrink:0;align-items:center;justify-content:center;border-radius:8px;background:var(--page);"><i class="{{ d.icon }}" style="color:var(--tx);font-size:16px;"></i></span>
-                        <div style="min-width:0;">
-                          <p style="font-size:13px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ d.name }}</p>
-                          <p style="font-size:11px;color:var(--tx-3);">{{ d.dateLabel }}</p>
-                        </div>
-                      </div>
-                      <span style="{{ d.statusStyle }}"><i class="{{ d.statusIcon }}" style="font-size:13px;"></i> {{ d.status }}</span>
-                    </div>
-                  </sc-for>
-                </div>
-                <button onClick="{{ goDocuments }}" style="width:100%;margin-top:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:10px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Document library <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
-              </div>
-
-              <!-- Payments -->
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);">
-                <h3 style="font-size:15px;font-weight:700;color:var(--tx);display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i class="ti ti-credit-card" style="color:var(--tx);font-size:18px;"></i> Payments</h3>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                  <div>
-                    <p style="font-size:14px;color:var(--tx);">Compliance Guarantee</p>
-                    <p style="font-size:12px;color:var(--tx-3);margin-top:2px;">Optional add-on</p>
+                <!-- header -->
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:flex-start;gap:12px;min-width:0;">
+                    <div style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ c.icon }}" style="color:var(--tx);font-size:20px;"></i></div>
+                    <div style="min-width:0;"><h3 style="font-size:16px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.title }}</h3><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">{{ c.stageLabel }}</p></div>
                   </div>
-                  <span style="display:inline-flex;align-items:center;border-radius:9999px;background:var(--wa-bg);color:var(--wa-tx);padding:4px 10px;font-size:13px;font-weight:600;">Pending · £149</span>
+                  <span style="{{ c.deadlineStyle }}"><i class="{{ c.deadlineIcon }}" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
                 </div>
-                <button onClick="{{ goPayments }}" style="width:100%;margin-top:16px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:10px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">View invoices <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+                <!-- next step -->
+                <p style="font-size:14px;color:var(--tx);">{{ c.currentTitle }}</p>
+                <!-- footer -->
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border-3);">
+                  <span style="{{ c.ragStyle }}"><span style="{{ c.ragDotStyle }}"></span>{{ c.ragLabel }}</span>
+                  <span style="font-size:13px;color:var(--tx-3);">Est. <b style="color:var(--tx);font-weight:600;">{{ c.estimateLabel }}</b></span>
+                  <div style="flex:1;min-width:8px;"></div>
+                  <button onClick="{{ c.onView }}" style="display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">View</button>
+                  <button onClick="{{ c.onCta }}" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:9px 16px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ c.ctaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+                </div>
               </div>
-            </div>
+            </sc-for>
           </div>
         </div>
       </sc-if>
@@ -332,58 +263,71 @@
       <!-- ══ CASES ══ -->
       <sc-if value="{{ isCases }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">My Cases</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">All of your Capital Gains Tax filings in one place.</p>
           </div>
-          <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;">Active</h2>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <h2 style="font-size:20px;font-weight:600;margin-bottom:12px;">Active</h2>
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <sc-for list="{{ activeCases }}" as="c" hint-placeholder-count="3">
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px;">
+              <div style="{{ c.cardStyle }}">
+                <!-- steps bar (top) -->
+                <div>
+                  <div style="display:flex;gap:4px;"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="10"><div style="{{ b.style }}"></div></sc-for></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                    <span style="font-size:12px;color:var(--tx-2);">{{ c.stepText }}</span>
+                    <span style="font-size:12px;font-weight:600;color:var(--tx);">{{ c.pctLabel }} complete</span>
+                  </div>
+                </div>
+                <!-- header -->
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <div style="display:flex;align-items:flex-start;gap:12px;min-width:0;">
                     <div style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ c.icon }}" style="color:var(--tx);font-size:20px;"></i></div>
                     <div style="min-width:0;"><h3 style="font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.title }}</h3><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">{{ c.stageLabel }}</p></div>
                   </div>
-                  <span style="{{ c.deadlineStyle }}"><i class="ti ti-clock" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
+                  <span style="{{ c.deadlineStyle }}"><i class="{{ c.deadlineIcon }}" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
                 </div>
-                <div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><span style="font-size:13px;color:var(--tx-2);">{{ c.stepText }}</span><span style="font-size:13px;color:var(--tx-2);">{{ c.doneText }}</span></div>
-                  <div style="display:flex;gap:4px;"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="10"><div style="{{ b.style }}"></div></sc-for></div>
-                  <p style="margin-top:8px;font-size:15px;color:var(--tx);">{{ c.currentTitle }}</p>
-                </div>
-                <div style="display:flex;align-items:center;gap:16px;">
-                  <div><p style="font-size:12px;color:var(--tx-2);">Provisional estimate</p><p style="font-size:15px;color:var(--tx);">{{ c.estimateLabel }}</p></div>
+                <!-- next step -->
+                <p style="font-size:14px;color:var(--tx);">{{ c.currentTitle }}</p>
+                <!-- footer -->
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border-3);">
                   <span style="{{ c.ragStyle }}"><span style="{{ c.ragDotStyle }}"></span>{{ c.ragLabel }}</span>
+                  <span style="font-size:13px;color:var(--tx-3);">Est. <b style="color:var(--tx);font-weight:600;">{{ c.estimateLabel }}</b></span>
+                  <div style="flex:1;min-width:8px;"></div>
+                  <button onClick="{{ c.onView }}" style="display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">View</button>
+                  <button onClick="{{ c.onCta }}" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:9px 16px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ c.ctaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
                 </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <button onClick="{{ c.onCta }}" style="flex:1;background:#adee68;color:#0a1120;font-size:14px;font-weight:500;padding:10px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ c.ctaLabel }}</button>
-                  <button onClick="{{ c.onView }}" style="display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;padding:10px 14px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">View <i class="ti ti-chevron-right" style="font-size:15px;"></i></button>
-                </div>
-                <p style="font-size:12px;color:var(--tx-3);">{{ c.deadlineDateLabel }}</p>
               </div>
             </sc-for>
           </div>
           <h2 style="font-size:20px;font-weight:600;margin:40px 0 16px;">Completed</h2>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <sc-for list="{{ completedCases }}" as="c" hint-placeholder-count="1">
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px;">
+              <div style="{{ c.cardStyle }}">
+                <!-- steps bar (top) -->
+                <div>
+                  <div style="display:flex;gap:4px;"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="10"><div style="{{ b.style }}"></div></sc-for></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                    <span style="font-size:12px;color:var(--tx-2);">{{ c.stepText }}</span>
+                    <span style="font-size:12px;font-weight:600;color:var(--tx);">{{ c.pctLabel }} complete</span>
+                  </div>
+                </div>
+                <!-- header -->
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
                   <div style="display:flex;align-items:flex-start;gap:12px;min-width:0;">
                     <div style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ c.icon }}" style="color:var(--tx);font-size:20px;"></i></div>
                     <div style="min-width:0;"><h3 style="font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.title }}</h3><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">{{ c.stageLabel }}</p></div>
                   </div>
-                  <span style="{{ c.deadlineStyle }}"><i class="ti ti-clock" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
+                  <span style="{{ c.deadlineStyle }}"><i class="{{ c.deadlineIcon }}" style="font-size:13px;"></i> {{ c.deadlineLabel }}</span>
                 </div>
-                <div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><span style="font-size:13px;color:var(--tx-2);">{{ c.stepText }}</span><span style="font-size:13px;color:var(--tx-2);">{{ c.doneText }}</span></div>
-                  <div style="display:flex;gap:4px;"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="10"><div style="{{ b.style }}"></div></sc-for></div>
-                  <p style="margin-top:8px;font-size:15px;color:var(--tx);">{{ c.currentTitle }}</p>
+                <!-- next step -->
+                <p style="font-size:14px;color:var(--tx);">{{ c.currentTitle }}</p>
+                <!-- footer -->
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border-3);">
+                  <span style="{{ c.ragStyle }}"><span style="{{ c.ragDotStyle }}"></span>{{ c.ragLabel }}</span>
+                  <div style="flex:1;min-width:8px;"></div>
+                  <button onClick="{{ c.onCta }}" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:9px 16px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">{{ c.ctaLabel }} <i class="ti ti-chevron-right" style="font-size:15px;"></i></button>
                 </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <button onClick="{{ c.onCta }}" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:10px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">{{ c.ctaLabel }}</button>
-                </div>
-                <p style="font-size:12px;color:var(--tx-3);">{{ c.deadlineDateLabel }}</p>
               </div>
             </sc-for>
           </div>
@@ -392,12 +336,12 @@
 
       <!-- ══ CASE DETAIL ══ -->
       <sc-if value="{{ isCaseDetail }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:820px;">
-          <a onClick="{{ backToCases }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:18px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to dashboard</a>
+        <div>
+          <a onClick="{{ backToCases }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to dashboard</a>
 
           <!-- header -->
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
               <div style="display:flex;align-items:flex-start;gap:14px;min-width:0;">
                 <div style="display:flex;width:48px;height:48px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ detailIcon }}" style="color:var(--tx);font-size:24px;"></i></div>
                 <div style="min-width:0;">
@@ -411,7 +355,7 @@
               </div>
             </div>
             <!-- progress -->
-            <div style="margin-top:20px;">
+            <div style="margin-top:12px;">
               <div style="{{ detailProgressTrackStyle }}"><div style="{{ detailProgressFillStyle }}"></div></div>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
                 <span style="font-size:13px;color:var(--tx-2);">{{ detailStepText }}</span>
@@ -419,19 +363,49 @@
               </div>
             </div>
             <!-- meta row -->
-            <div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border-3);">
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;padding-top:20px;border-top:1px solid var(--border-3);">
               <div><p style="font-size:12px;color:var(--tx-3);">Provisional estimate</p><p style="font-size:17px;font-weight:600;color:var(--tx);margin-top:2px;">{{ detailEstimate }}</p></div>
               <div><p style="font-size:12px;color:var(--tx-3);">Current step</p><p style="font-size:15px;font-weight:500;color:var(--tx);margin-top:4px;">{{ detailCurrentTitle }}</p></div>
               <div style="display:flex;align-items:flex-end;"><p style="font-size:12px;color:var(--tx-3);display:flex;align-items:center;gap:6px;"><i class="ti ti-calendar-event" style="font-size:14px;"></i> {{ detailDeadlineDate }}</p></div>
             </div>
             <sc-if value="{{ detailCtaShow }}" hint-placeholder-val="{{ true }}">
-              <button onClick="{{ detailOnCta }}" style="margin-top:20px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ detailCtaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+              <button onClick="{{ detailOnCta }}" style="margin-top:12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ detailCtaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
             </sc-if>
           </div>
 
+          <!-- quick actions -->
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <button onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-upload" style="font-size:15px;color:var(--tx-2);"></i> Upload documents</button>
+            <button onClick="{{ goVerify }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-shield-check" style="font-size:15px;color:var(--tx-2);"></i> Verify identity</button>
+            <button onClick="{{ goHmrc }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-building-bank" style="font-size:15px;color:var(--tx-2);"></i> HMRC authorisation</button>
+            <button onClick="{{ goDraft }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-file-check" style="font-size:15px;color:var(--tx-2);"></i> Review draft</button>
+            <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-message" style="font-size:15px;color:var(--tx-2);"></i> Message team</button>
+          </div>
+
+          <!-- important dates + assigned team -->
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;align-items:start;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);">
+              <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:14px;">Important dates</h2>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border-3);"><span style="font-size:14px;color:var(--tx-2);">Completion date</span><span style="font-size:14px;font-weight:500;color:var(--tx);">{{ detailCompletionDate }}</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border-3);"><span style="font-size:14px;color:var(--tx-2);">HMRC deadline</span><span style="font-size:14px;font-weight:500;color:var(--tx);">{{ detailDeadlineOnly }}</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;"><span style="font-size:14px;color:var(--tx-2);">Submission date</span><span style="font-size:14px;font-weight:500;color:var(--tx);">{{ detailSubmissionDate }}</span></div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);">
+              <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:14px;">Your team</h2>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <sc-for list="{{ team }}" as="t" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span style="{{ t.avatarStyle }}">{{ t.initials }}</span>
+                    <div style="min-width:0;"><p style="font-size:14px;font-weight:500;color:var(--tx);">{{ t.name }}</p><span style="{{ t.roleStyle }}">{{ t.role }}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
           <!-- journey timeline -->
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-top:20px;">
-            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:20px;">Case journey</h2>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-top:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:12px;">Case journey</h2>
             <div style="display:flex;flex-direction:column;">
               <sc-for list="{{ detailSteps }}" as="s" hint-placeholder-count="10">
                 <div style="display:flex;gap:14px;">
@@ -447,17 +421,270 @@
               </sc-for>
             </div>
           </div>
+
+          <!-- activity history -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-top:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:12px;">Recent activity</h2>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <sc-for list="{{ caseActivity }}" as="a" hint-placeholder-count="5">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                  <span style="{{ a.iconWrapStyle }}"><i class="{{ a.icon }}" style="font-size:17px;"></i></span>
+                  <div style="min-width:0;flex:1;"><p style="font-size:14px;color:var(--tx);">{{ a.title }}</p><p style="font-size:12px;color:var(--tx-3);margin-top:2px;">{{ a.time }}</p></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
         </div>
       </sc-if>
+
+      <!-- ══ DOCUMENT UPLOAD CENTRE ══ -->
+      <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
+          <div style="margin-bottom:8px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Upload documents</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Add your files by category. On mobile you can snap a photo straight from your camera.</p></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--in-bg);border:1px solid var(--in-bd);border-radius:12px;padding:12px 16px;margin:16px 0 20px;">
+            <i class="ti ti-info-circle" style="color:var(--in-tx);font-size:18px;"></i>
+            <p style="font-size:13px;color:var(--in-tx);flex:1;min-width:200px;">Accepted formats: PDF, JPG, PNG, DOCX · Maximum 25MB per file. Your documents are encrypted and only seen by your tax team.</p>
+          </div>
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <sc-for list="{{ uploadCats }}" as="c" hint-placeholder-count="6">
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+                  <div style="min-width:0;"><h3 style="font-size:15px;font-weight:600;color:var(--tx);">{{ c.name }}</h3><span style="{{ c.requiredStyle }}">{{ c.requiredLabel }}</span></div>
+                  <span style="{{ c.statusStyle }}"><i class="{{ c.statusIcon }}" style="font-size:13px;"></i> {{ c.status }}</span>
+                </div>
+                <p style="font-size:13px;color:var(--tx-2);line-height:1.5;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-help-circle" style="font-size:14px;margin-top:2px;color:var(--tx-3);"></i> {{ c.why }}</p>
+                <sc-if value="{{ c.hasFiles }}" hint-placeholder-val="{{ true }}">
+                  <sc-for list="{{ c.files }}" as="f" hint-placeholder-count="1">
+                    <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;">
+                      <i class="ti ti-file" style="color:var(--tx-2);font-size:18px;"></i>
+                      <div style="min-width:0;flex:1;"><p style="font-size:13px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ f.name }}</p><p style="font-size:11px;color:var(--tx-3);">{{ f.size }}</p></div>
+                      <a style="padding:6px;cursor:pointer;color:var(--tx-2);" style-hover="color:var(--tx);" title="Download"><i class="ti ti-download" style="font-size:16px;"></i></a>
+                      <a style="padding:6px;cursor:pointer;color:var(--tx-2);" style-hover="color:var(--tx);" title="Replace"><i class="ti ti-refresh" style="font-size:16px;"></i></a>
+                      <a style="padding:6px;cursor:pointer;color:var(--er-tx);" title="Delete"><i class="ti ti-trash" style="font-size:16px;"></i></a>
+                    </div>
+                  </sc-for>
+                </sc-if>
+                <div style="{{ c.dropStyle }}" style-hover="border-color:#83C341;background:var(--surface);">
+                  <i class="ti ti-cloud-upload" style="font-size:26px;color:var(--tx-3);"></i>
+                  <p style="font-size:13px;color:var(--tx-2);margin-top:6px;">Drag &amp; drop or</p>
+                  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                    <button style="display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:13px;font-weight:500;padding:8px 14px;border:none;border-radius:9999px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-folder" style="font-size:15px;"></i> Browse files</button>
+                    <button data-role="hide-mobile" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:8px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-camera" style="font-size:15px;"></i> Use camera</button>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ══ AML / IDENTITY VERIFICATION ══ -->
+      <sc-if value="{{ isVerify }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
+          <div style="margin-bottom:12px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Identity verification</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">A quick, secure check we're legally required to complete before filing.</p></div>
+          <div style="display:flex;align-items:center;gap:12px;background:var(--wa-bg);border:1px solid var(--wa-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;">
+            <i class="ti ti-clock" style="color:var(--wa-tx);font-size:22px;"></i>
+            <div style="flex:1;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Verification in progress</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">One item still needs your attention — see the checklist below.</p></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;"><i class="ti ti-shield-lock" style="color:var(--tx);font-size:20px;"></i><h2 style="font-size:16px;font-weight:700;color:var(--tx);">Why we need this</h2></div>
+            <p style="font-size:14px;color:var(--tx-2);line-height:1.6;">UK anti-money-laundering rules require us to confirm your identity and address before we can act as your tax agent. It only takes a few minutes and is handled securely by our verification partner.</p>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:12px;">Verification checklist</h2>
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-3);"><span style="display:flex;width:26px;height:26px;align-items:center;justify-content:center;border-radius:9999px;background:#43a047;color:#fff;"><i class="ti ti-check" style="font-size:15px;"></i></span><span style="flex:1;font-size:14px;color:var(--tx);">Government-issued photo ID</span><span style="display:inline-flex;border-radius:9999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--su-bg);color:var(--su-tx);">Verified</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-3);"><span style="display:flex;width:26px;height:26px;align-items:center;justify-content:center;border-radius:9999px;background:var(--er-bg);color:var(--er-tx);"><i class="ti ti-alert-triangle" style="font-size:14px;"></i></span><span style="flex:1;font-size:14px;color:var(--tx);">Proof of address (within 3 months)</span><span style="display:inline-flex;border-radius:9999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--er-bg);color:var(--er-tx);">Action required</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 0;"><span style="display:flex;width:26px;height:26px;align-items:center;justify-content:center;border-radius:9999px;background:#43a047;color:#fff;"><i class="ti ti-check" style="font-size:15px;"></i></span><span style="flex:1;font-size:14px;color:var(--tx);">PEP &amp; sanctions screening</span><span style="display:inline-flex;border-radius:9999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--su-bg);color:var(--su-tx);">Passed</span></div>
+          </div>
+          <div style="background:var(--navy);border-radius:16px;padding:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;"><p style="font-size:15px;font-weight:600;color:#fff;">Continue with our verification partner</p><p style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px;">You'll be securely handed to Xama to finish the check.</p></div>
+            <button style="display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Continue verification <i class="ti ti-external-link" style="font-size:15px;"></i></button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ══ HMRC AGENT AUTHORISATION ══ -->
+      <sc-if value="{{ isHmrc }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
+          <div style="margin-bottom:12px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Authorise us with HMRC</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">This lets us submit your return to HMRC on your behalf. We'll guide you through every click.</p></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+            <div style="flex:1;min-width:220px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;"><i class="ti ti-photo" style="font-size:30px;color:var(--tx-3);"></i><p style="font-size:13px;color:var(--tx-2);margin-top:8px;">Step-by-step screenshots</p></div>
+            <div style="flex:1;min-width:220px;background:var(--navy);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;cursor:pointer;"><i class="ti ti-player-play" style="font-size:34px;color:#c8ec96;"></i><p style="font-size:13px;color:#fff;margin-top:8px;">Watch the 2-minute video guide</p></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:12px;">What to do</h2>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">1</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">You'll receive an email from HMRC with an authorisation request. Open it and sign in to your Government Gateway account.</p></div>
+              <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">2</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">Review the request from <b style="color:var(--tx);">FileCGTOnline (Everest &amp; Co)</b> and confirm you want us to act as your agent.</p></div>
+              <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">3</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">Once you approve, come back here — we'll confirm it's connected and take it from there.</p></div>
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <h3 style="font-size:15px;font-weight:600;color:var(--tx);margin-bottom:10px;">Common problems</h3>
+            <p style="font-size:13px;color:var(--tx-2);line-height:1.6;">Can't find the email? Check spam, or ask us to resend. Forgotten your Government Gateway login? You can recover it on the HMRC sign-in page — we can stay on the phone with you while you do.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;background:var(--su-bg);border-radius:16px;padding:20px;flex-wrap:wrap;">
+            <i class="ti ti-headset" style="color:var(--su-tx);font-size:24px;"></i>
+            <div style="flex:1;min-width:200px;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Stuck? We'll do it with you</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">Book a free 10-minute call and we'll walk you through it live.</p></div>
+            <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:11px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-calendar" style="font-size:15px;"></i> Book a help call</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ══ DRAFT CGT REVIEW & APPROVAL ══ -->
+      <sc-if value="{{ isDraft }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
+
+          <sc-if value="{{ draftApproved }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 28px;text-align:center;box-shadow:var(--sh-sm);">
+              <div style="display:inline-flex;width:64px;height:64px;align-items:center;justify-content:center;border-radius:9999px;background:var(--su-bg);color:var(--su-tx);margin-bottom:12px;"><i class="ti ti-circle-check" style="font-size:34px;"></i></div>
+              <h1 style="font-size:24px;font-weight:700;color:var(--tx);">Draft approved — thank you</h1>
+              <p style="font-size:15px;color:var(--tx-2);margin-top:8px;max-width:460px;margin-left:auto;margin-right:auto;">We've recorded your approval and our team will now submit your return to HMRC. You'll get a confirmation as soon as it's filed.</p>
+              <button onClick="{{ backToCase }}" style="margin-top:12px;display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Back to case</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ draftPending }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="display:flex;align-items:center;gap:12px;background:var(--su-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;">
+              <i class="ti ti-file-check" style="color:var(--su-tx);font-size:24px;"></i>
+              <div style="flex:1;"><p style="font-size:16px;font-weight:600;color:var(--tx);">Your draft return is ready to review</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">Please check the figures below. You can approve it or raise a query before we file.</p></div>
+            </div>
+            <!-- headline -->
+            <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);"><p style="font-size:13px;color:var(--tx-2);">Capital Gains Tax due</p><p style="font-size:28px;font-weight:700;color:var(--er-tx);margin-top:4px;">£32,702</p></div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);"><p style="font-size:13px;color:var(--tx-2);">HMRC payment deadline</p><p style="font-size:20px;font-weight:700;color:var(--tx);margin-top:8px;display:flex;align-items:center;gap:8px;"><i class="ti ti-calendar-due" style="font-size:19px;color:var(--wa-tx);"></i> 18 Jul 2026</p></div>
+            </div>
+            <!-- plain-language summary -->
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+              <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:8px;">In plain English</h2>
+              <p style="font-size:14px;color:var(--tx-2);line-height:1.6;">You sold 14 Elm Grove for more than you paid, so there's a taxable gain. After deducting what you paid, your improvement costs, selling fees and your tax-free allowance, the Capital Gains Tax owed to HMRC is <b style="color:var(--tx);">£32,702</b>. Here's exactly how we worked that out:</p>
+            </div>
+            <!-- breakdown -->
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+              <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:6px;">How your figure is calculated</h2>
+              <sc-for list="{{ draftRows }}" as="r" hint-placeholder-count="8">
+                <div style="{{ r.rowStyle }}"><span style="{{ r.labelStyle }}">{{ r.label }}</span><span style="{{ r.valueStyle }}">{{ r.value }}</span></div>
+              </sc-for>
+              <p style="font-size:12px;color:var(--tx-3);margin-top:12px;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-info-circle" style="font-size:14px;margin-top:1px;"></i> Figures are based on the information and documents you provided and have been checked by a qualified UK accountant.</p>
+            </div>
+            <!-- documents included -->
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+              <h3 style="font-size:15px;font-weight:600;color:var(--tx);margin-bottom:12px;">Documents included in this return</h3>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:10px;"><i class="ti ti-file-type-pdf" style="color:var(--er-tx);font-size:18px;"></i><span style="font-size:14px;color:var(--tx-2);flex:1;">Draft CGT computation.pdf</span><a style="font-size:13px;color:var(--link);cursor:pointer;">Download</a></div>
+                <div style="display:flex;align-items:center;gap:10px;"><i class="ti ti-file-type-pdf" style="color:var(--er-tx);font-size:18px;"></i><span style="font-size:14px;color:var(--tx-2);flex:1;">Supporting schedule.pdf</span><a style="font-size:13px;color:var(--link);cursor:pointer;">Download</a></div>
+              </div>
+            </div>
+            <!-- Compliance Guarantee upsell -->
+            <div style="border:1px solid #adee68;border-radius:16px;padding:24px;margin-bottom:12px;background:var(--su-bg);">
+              <div style="display:flex;align-items:flex-start;gap:12px;">
+                <i class="ti ti-umbrella" style="color:var(--su-tx);font-size:24px;"></i>
+                <div style="flex:1;">
+                  <h3 style="font-size:16px;font-weight:700;color:var(--tx);">Add the Compliance Guarantee</h3>
+                  <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:4px;">If HMRC ever raises a compliance query on this submission, we deal with it for you at no additional professional cost. Optional peace of mind.</p>
+                  <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
+                    <button onClick="{{ toggleCompliance }}" style="{{ complianceCtaStyle }};max-width:280px;"><i class="ti ti-shield-check" style="font-size:16px;"></i> {{ complianceCtaLabel }}</button>
+                    <a style="font-size:13px;color:var(--link);cursor:pointer;">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- actions -->
+            <div style="position:sticky;bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--sh-lg);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <p style="flex:1;min-width:160px;font-size:13px;color:var(--tx-2);">Happy with your draft? Approving lets us file it with HMRC.</p>
+              <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:11px 18px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-message-circle-question" style="font-size:15px;"></i> Raise a query</button>
+              <button onClick="{{ openApprove }}" style="display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:11px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Approve draft <i class="ti ti-check" style="font-size:15px;"></i></button>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ══ SUBMISSION CONFIRMATION ══ -->
+      <sc-if value="{{ isConfirmation }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 28px;text-align:center;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <div style="display:inline-flex;width:64px;height:64px;align-items:center;justify-content:center;border-radius:9999px;background:var(--su-bg);color:var(--su-tx);margin-bottom:12px;"><i class="ti ti-circle-check" style="font-size:36px;"></i></div>
+            <h1 style="font-size:26px;font-weight:700;color:var(--tx);">Your return has been filed with HMRC</h1>
+            <p style="font-size:15px;color:var(--tx-2);margin-top:8px;max-width:460px;margin-left:auto;margin-right:auto;">Everything's done on our side. Keep the details below for your records.</p>
+            <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;text-align:left;">
+              <div style="background:var(--surface-2);border-radius:12px;padding:14px 16px;"><p style="font-size:12px;color:var(--tx-3);">HMRC submission reference</p><p style="font-size:15px;font-weight:600;color:var(--tx);margin-top:2px;">{{ subRef }}</p></div>
+              <div style="background:var(--surface-2);border-radius:12px;padding:14px 16px;"><p style="font-size:12px;color:var(--tx-3);">Submission date</p><p style="font-size:15px;font-weight:600;color:var(--tx);margin-top:2px;">{{ subDate }}</p></div>
+            </div>
+          </div>
+          <!-- payment instructions -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:6px;">Paying HMRC</h2>
+            <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-bottom:14px;">You now need to pay your Capital Gains Tax directly to HMRC. This is separate from our fee.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:160px;background:var(--surface-2);border-radius:12px;padding:14px 16px;"><p style="font-size:12px;color:var(--tx-3);">Amount to pay HMRC</p><p style="font-size:20px;font-weight:700;color:var(--tx);margin-top:2px;">{{ subAmountDue }}</p></div>
+              <div style="flex:1;min-width:160px;background:var(--surface-2);border-radius:12px;padding:14px 16px;"><p style="font-size:12px;color:var(--tx-3);">Pay by</p><p style="font-size:20px;font-weight:700;color:var(--wa-tx);margin-top:2px;">{{ subPayBy }}</p></div>
+            </div>
+            <p style="font-size:12px;color:var(--tx-3);margin-top:12px;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-info-circle" style="font-size:14px;margin-top:1px;"></i> Pay using your Capital Gains Tax on UK property account, or the payment reference in your confirmation document.</p>
+          </div>
+          <!-- downloads -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:14px;">Your documents</h2>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:10px;"><i class="ti ti-file-type-pdf" style="color:var(--er-tx);font-size:18px;"></i><span style="font-size:14px;color:var(--tx);flex:1;">Filed CGT return.pdf</span><a style="display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--link);cursor:pointer;"><i class="ti ti-download" style="font-size:15px;"></i> Download</a></div>
+              <div style="display:flex;align-items:center;gap:10px;"><i class="ti ti-file-type-pdf" style="color:var(--er-tx);font-size:18px;"></i><span style="font-size:14px;color:var(--tx);flex:1;">HMRC submission confirmation.pdf</span><a style="display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--link);cursor:pointer;"><i class="ti ti-download" style="font-size:15px;"></i> Download</a></div>
+            </div>
+            <button style="width:100%;margin-top:12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:12px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-download" style="font-size:15px;"></i> Download all documents</button>
+          </div>
+          <!-- what next -->
+          <div style="background:var(--in-bg);border:1px solid var(--in-bd);border-radius:16px;padding:20px;display:flex;gap:12px;">
+            <i class="ti ti-sparkles" style="color:var(--in-tx);font-size:20px;flex-shrink:0;"></i>
+            <div><h3 style="font-size:15px;font-weight:600;color:var(--tx);">What happens next</h3><p style="font-size:14px;color:var(--in-tx);line-height:1.6;margin-top:4px;">Make your payment to HMRC by the deadline above. If you file a Self Assessment tax return, remember to include this disposal there too — we can help. Questions? <a onClick="{{ goMessages }}" style="text-decoration:underline;cursor:pointer;">Message your team</a>.</p></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- Approve confirmation modal -->
+      <div style="{{ approveOverlayStyle }}">
+        <div style="background:var(--surface);border-radius:16px;padding:28px;max-width:440px;width:100%;box-shadow:var(--sh-2xl);">
+          <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:var(--su-bg);color:var(--su-tx);margin-bottom:12px;"><i class="ti ti-file-check" style="font-size:26px;"></i></div>
+          <h3 style="font-size:20px;font-weight:700;color:var(--tx);">Approve your CGT return?</h3>
+          <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:8px;">By approving, you confirm the figures are correct and authorise us to submit this return to HMRC on your behalf. This is a formal, legally-recorded approval.</p>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:10px 12px;margin-top:14px;"><i class="ti ti-clock" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:12px;color:var(--tx-3);">Your approval will be timestamped and added to your case record.</span></div>
+          <div style="display:flex;gap:10px;margin-top:12px;">
+            <button onClick="{{ closeApprove }}" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Cancel</button>
+            <button onClick="{{ confirmApprove }}" style="flex:1;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Yes, approve &amp; submit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete-profile reminder modal -->
+      <div style="{{ profileReminderStyle }}">
+        <div style="background:var(--surface);border-radius:16px;padding:28px;max-width:440px;width:100%;box-shadow:var(--sh-2xl);">
+          <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:var(--wa-bg);color:var(--wa-tx);margin-bottom:12px;"><i class="ti ti-user-exclamation" style="font-size:26px;"></i></div>
+          <h3 style="font-size:20px;font-weight:700;color:var(--tx);">Complete your profile</h3>
+          <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:8px;">Your account isn't fully set up yet. To file a CGT return we need to verify your email and phone, and have your address on record. It only takes a minute.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-mail" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Verify email</span></div>
+            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-device-mobile" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Verify phone</span></div>
+            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-map-pin" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Add your address</span></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:16px;">
+            <button onClick="{{ dismissProfileReminder }}" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Later</button>
+            <button onClick="{{ goCompleteProfile }}" style="flex:1;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Complete now</button>
+          </div>
+        </div>
+      </div>
 
       <!-- ══ DOCUMENTS ══ -->
       <sc-if value="{{ isDocuments }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Document library</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Every file related to your cases, in one secure place.</p>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:20px;">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;">
             <div style="position:relative;">
               <i class="ti ti-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--tx-3);font-size:16px;"></i>
               <input value="{{ docQuery }}" onInput="{{ onDocSearch }}" placeholder="Search documents…" style="width:100%;border:1px solid var(--border-2);border-radius:12px;background:var(--surface);padding:11px 14px 11px 36px;font-size:14px;color:var(--tx);outline:none;" />
@@ -468,7 +695,7 @@
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
             <sc-for list="{{ filteredDocs }}" as="d" hint-placeholder-count="7">
-              <div style="display:flex;align-items:center;gap:16px;padding:16px;border-bottom:1px solid var(--border);" style-hover="background:var(--surface-2);">
+              <div style="display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);" style-hover="background:var(--surface-2);">
                 <div style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--chip);"><i class="{{ d.icon }}" style="color:var(--tx);font-size:20px;"></i></div>
                 <div style="min-width:0;flex:1;">
                   <p style="font-size:15px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ d.name }}</p>
@@ -485,13 +712,13 @@
       <!-- ══ MESSAGES ══ -->
       <sc-if value="{{ isMessages }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Messages</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">A secure conversation with your tax team about 14 Elm Grove, Bristol.</p>
           </div>
-          <div data-role="col3" style="display:grid;grid-template-columns:2fr 1fr;gap:24px;">
+          <div data-role="col3" style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
-              <div style="flex:1;padding:20px;display:flex;flex-direction:column;gap:20px;max-height:60vh;overflow-y:auto;">
+              <div style="flex:1;padding:20px;display:flex;flex-direction:column;gap:12px;max-height:60vh;overflow-y:auto;">
                 <sc-for list="{{ thread }}" as="m" hint-placeholder-count="4">
                   <div style="{{ m.rowStyle }}">
                     <span style="{{ m.avatarStyle }}">{{ m.initials }}</span>
@@ -511,10 +738,10 @@
                 </div>
               </div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
               <div style="background:var(--navy);border-radius:16px;padding:20px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><i class="ti ti-sparkles" style="color:#c8ec96;font-size:18px;"></i><h3 style="font-size:16px;font-weight:600;color:#fff;">AI help assistant</h3></div>
-                <p style="font-size:14px;color:#cdd4e1;margin-bottom:16px;">Need a quick answer about your documents or process? The assistant can help instantly.</p>
+                <p style="font-size:14px;color:#cdd4e1;margin-bottom:12px;">Need a quick answer about your documents or process? The assistant can help instantly.</p>
                 <p style="font-size:12px;color:#c8ec96;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-info-circle" style="font-size:14px;margin-top:1px;"></i> For advice on your specific figures, message your team here — they handle anything affecting your return.</p>
               </div>
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;">
@@ -534,16 +761,16 @@
       <!-- ══ PAYMENTS ══ -->
       <sc-if value="{{ isPayments }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Payments &amp; invoices</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Your purchase history and invoices. For joint ownership, you only see your own share.</p>
           </div>
-          <div style="border-radius:16px;border:1px solid #ffc107;background:var(--wa-bg);padding:16px;margin-bottom:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="border-radius:16px;border:1px solid #ffc107;background:var(--wa-bg);padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
             <i class="ti ti-alert-circle" style="color:var(--wa-tx);font-size:20px;"></i>
             <p style="flex:1;font-size:14px;color:var(--tx);min-width:200px;">You have 1 unpaid add-on (£149). Pay now to activate your Compliance Guarantee.</p>
             <button style="background:var(--navy);color:#fff;font-size:14px;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Pay now</button>
           </div>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px;">
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;"><p style="font-size:13px;color:var(--tx-2);">Total paid</p><p style="font-size:24px;font-weight:600;color:var(--tx);margin-top:4px;">£1,090</p></div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;"><p style="font-size:13px;color:var(--tx-2);">Outstanding</p><p style="font-size:24px;font-weight:600;color:var(--wa-tx);margin-top:4px;">£149</p></div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;"><p style="font-size:13px;color:var(--tx-2);">Payment method</p><p style="font-size:15px;color:var(--tx);margin-top:8px;display:flex;align-items:center;gap:8px;"><i class="ti ti-credit-card" style="font-size:16px;"></i> Visa •• 4242</p></div>
@@ -567,12 +794,12 @@
       <!-- ══ REFER ══ -->
       <sc-if value="{{ isRefer }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Refer &amp; Earn</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Know someone who needs to file CGT? Share FileCGTOnline and you both earn credit.</p>
           </div>
-          <div data-role="col3" style="display:grid;grid-template-columns:2fr 1fr;gap:24px;">
-            <div style="display:flex;flex-direction:column;gap:24px;">
+          <div data-role="col3" style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
                 <h3 style="font-size:16px;font-weight:600;margin-bottom:12px;">Your referral link</h3>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -597,7 +824,7 @@
                 </sc-for>
               </div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
               <div style="background:var(--navy);border-radius:16px;padding:24px;text-align:center;">
                 <i class="ti ti-wallet" style="color:#c8ec96;font-size:28px;"></i>
                 <p style="font-size:13px;color:#cdd4e1;margin-top:8px;">Your credit balance</p>
@@ -621,14 +848,14 @@
       <!-- ══ PROFILE ══ -->
       <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="margin-bottom:24px;">
+          <div style="margin-bottom:12px;">
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Profile &amp; settings</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Manage your personal details, security and how we contact you.</p>
           </div>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i class="ti ti-user" style="color:var(--tx);font-size:18px;"></i> Personal details</h3>
-              <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-user" style="color:var(--tx);font-size:18px;"></i> Personal details</h3>
+              <div style="display:flex;flex-direction:column;gap:12px;">
                 <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Full name</label><input value="James Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
                 <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input value="james.whitfield@email.com" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
                 <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Mobile number</label><input value="07700 900482" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
@@ -637,12 +864,12 @@
               </div>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i class="ti ti-lock" style="color:var(--tx);font-size:18px;"></i> Security</h3>
-              <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-lock" style="color:var(--tx);font-size:18px;"></i> Security</h3>
+              <div style="display:flex;flex-direction:column;gap:12px;">
                 <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Current password</label><input type="password" value="" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;outline:none;" /></div>
                 <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">New password</label><input type="password" value="" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;outline:none;" /></div>
                 <button style="align-self:flex-start;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;padding:10px 18px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Update password</button>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:8px;border-top:1px solid var(--border);">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px;border-top:1px solid var(--border);">
                   <div><p style="font-size:14px;color:var(--tx);">Two-factor authentication</p><p style="font-size:13px;color:var(--tx-2);">Add an extra layer of security at sign-in</p></div>
                   <span style="width:40px;height:22px;border-radius:9999px;background:#adee68;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span>
                 </div>
@@ -650,20 +877,13 @@
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
               <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:8px;"><i class="ti ti-bell" style="color:var(--tx);font-size:18px;"></i> Notification preferences</h3>
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);"><div><p style="font-size:14px;color:var(--tx);">Email updates</p><p style="font-size:13px;color:var(--tx-2);">Case progress and important reminders</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#adee68;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);"><div><p style="font-size:14px;color:var(--tx);">SMS opt-in</p><p style="font-size:13px;color:var(--tx-2);">Deadline alerts by text message</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#adee68;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;"><div><p style="font-size:14px;color:var(--tx);">Marketing emails</p><p style="font-size:13px;color:var(--tx-2);">Tips, offers and product news</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#cbd5e1;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);"><div><p style="font-size:14px;color:var(--tx);">Email updates</p><p style="font-size:13px;color:var(--tx-2);">Case progress and important reminders</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#adee68;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);"><div><p style="font-size:14px;color:var(--tx);">SMS opt-in</p><p style="font-size:13px;color:var(--tx-2);">Deadline alerts by text message</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#adee68;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;"><div><p style="font-size:14px;color:var(--tx);">Marketing emails</p><p style="font-size:13px;color:var(--tx-2);">Tips, offers and product news</p></div><span style="width:40px;height:22px;border-radius:9999px;background:#cbd5e1;position:relative;flex-shrink:0;"><span style="position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:9999px;background:var(--surface);"></span></span></div>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="ti ti-device-desktop" style="color:var(--tx);font-size:18px;"></i> Devices &amp; sessions</h3>
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:12px;padding:14px;"><i class="ti ti-device-desktop" style="color:var(--tx);font-size:20px;"></i><div style="flex:1;"><p style="font-size:14px;color:var(--tx);">Chrome · Bristol, UK</p><p style="font-size:12px;color:var(--su-tx);">Active now · this device</p></div></div>
-                <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:12px;padding:14px;"><i class="ti ti-device-mobile" style="color:var(--tx-2);font-size:20px;"></i><div style="flex:1;"><p style="font-size:14px;color:var(--tx);">iPhone · Safari</p><p style="font-size:12px;color:var(--tx-3);">Last active 2 days ago</p></div><button style="background:none;border:none;color:#e53935;font-size:14px;cursor:pointer;">Sign out</button></div>
-              </div>
-            </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="ti ti-shield-check" style="color:var(--tx);font-size:18px;"></i> Privacy &amp; your data</h3>
-              <p style="font-size:14px;color:var(--tx-2b);margin-bottom:16px;">You can request a copy of your data or ask us to delete your account at any time, in line with UK GDPR.</p>
+              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-shield-check" style="color:var(--tx);font-size:18px;"></i> Privacy &amp; your data</h3>
+              <p style="font-size:14px;color:var(--tx-2b);margin-bottom:12px;">You can request a copy of your data or ask us to delete your account at any time, in line with UK GDPR.</p>
               <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button style="background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;padding:9px 16px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Download my data</button>
                 <button style="display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:#e53935;font-size:14px;padding:9px 12px;border-radius:12px;cursor:pointer;"><i class="ti ti-trash" style="font-size:15px;"></i> Request account deletion</button>
@@ -676,11 +896,11 @@
       <!-- ══ EMPTY STATE (client modules) ══ -->
       <sc-if value="{{ clientEmpty }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 24px;min-height:56vh;">
-          <div style="display:flex;width:76px;height:76px;align-items:center;justify-content:center;border-radius:16px;background:var(--chip);margin-bottom:20px;"><i class="{{ emptyIcon }}" style="color:var(--tx);font-size:36px;"></i></div>
+          <div style="display:flex;width:76px;height:76px;align-items:center;justify-content:center;border-radius:16px;background:var(--chip);margin-bottom:12px;"><i class="{{ emptyIcon }}" style="color:var(--tx);font-size:36px;"></i></div>
           <h2 style="font-size:20px;font-weight:600;color:var(--tx);">{{ emptyTitle }}</h2>
           <p style="font-size:15px;line-height:1.6;color:var(--tx-2);margin-top:8px;max-width:440px;">{{ emptyDesc }}</p>
           <sc-if value="{{ emptyCtaShow }}" hint-placeholder-val="{{ true }}">
-            <button onClick="{{ emptyCta }}" style="margin-top:24px;display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:15px;font-weight:600;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;"><i class="ti ti-plus" style="font-size:16px;"></i> {{ emptyCtaLabel }}</button>
+            <button onClick="{{ emptyCta }}" style="margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:15px;font-weight:600;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;"><i class="ti ti-plus" style="font-size:16px;"></i> {{ emptyCtaLabel }}</button>
           </sc-if>
         </div>
       </sc-if>
@@ -759,7 +979,7 @@
     </div>
   </header>
 
-  <main style="flex:1;padding:clamp(28px,6vw,64px) clamp(16px,4vw,32px) 64px;max-width:920px;width:100%;margin:0 auto;">
+  <main style="flex:1;padding:16px;max-width:920px;width:100%;margin:0 auto;">
 
     <!-- hero -->
     <span style="display:inline-flex;align-items:center;gap:6px;background:var(--su-bg);border:1px solid #e4f5c7;color:var(--link);font-size:13px;font-weight:500;padding:6px 14px;border-radius:9999px;"><i class="ti ti-sparkles" style="font-size:15px;"></i> Welcome to FileCGTOnline</span>
@@ -910,7 +1130,7 @@
       </div>
     </header>
 
-    <main style="padding:24px 32px 112px;max-width:1200px;margin:0 auto;">
+    <main style="padding:16px;max-width:1200px;margin:0 auto;">
       <!-- PARTNER DASHBOARD -->
       <sc-if value="{{ isPDash }}" hint-placeholder-val="{{ true }}">
         <div>
@@ -1171,7 +1391,7 @@
       <sc-for list="{{ aNav }}" as="n" hint-placeholder-count="11"><button onClick="{{ n.onClick }}" style="{{ n.chipStyle }}">{{ n.label }}</button></sc-for>
     </div>
 
-    <main style="padding:24px;max-width:1400px;margin:0 auto;">
+    <main style="padding:16px;max-width:1400px;margin:0 auto;">
       <!-- ADMIN DASHBOARD -->
       <sc-if value="{{ isADash }}" hint-placeholder-val="{{ true }}">
         <div>
@@ -1448,7 +1668,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null };
+  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false };
 
   componentDidMount() {
     try {
@@ -1465,6 +1685,10 @@ class Component extends DCLogic {
     else if (h === 'partner-empty') this.setState({ portal: 'partner', route: 'p-dashboard', empty: true });
     else if (h === 'admin-empty') this.setState({ portal: 'admin', route: 'a-dashboard', empty: true });
     else if (h === 'client') this.setState({ portal: 'client', route: 'dashboard' });
+    try {
+      const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}');
+      if (su.profileSkipped && !su.profileComplete) this.setState({ profileReminder: true });
+    } catch (e) {}
   }
 
   gbp(n) { return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n); }
@@ -1486,10 +1710,10 @@ class Component extends DCLogic {
     const iconFor = { 'Residential CGT': 'ti ti-building', 'Commercial CGT': 'ti ti-building-bank', 'Other CGT': 'ti ti-trending-up' };
 
     const CASES = [
-      { id: 'case-1', title: '14 Elm Grove, Bristol BS6 6RG', service: 'Residential CGT', stage: 2, step: 6, deadline: '2026-07-19', days: 20, rag: 'amber', action: true, estimate: 12480, cta: 'Upload documents', ctaRoute: 'documents', completed: false },
-      { id: 'case-2', title: 'Unit 7, Kingsway Business Park', service: 'Commercial CGT', stage: 1, step: 2, deadline: '2026-08-30', days: 62, rag: 'green', action: true, estimate: 0, cta: 'Continue questionnaire', ctaRoute: 'cases', ctaHref: 'new-case.html#step-7', completed: false },
-      { id: 'case-3', title: 'Shares — Meridian Holdings plc', service: 'Other CGT', stage: 3, step: 9, deadline: '2026-06-30', days: 1, rag: 'red', action: true, estimate: 4220, cta: 'Review draft', ctaRoute: 'messages', completed: false },
-      { id: 'case-4', title: '29 Maple Court, Leeds LS8 2QN', service: 'Residential CGT', stage: 3, step: 10, deadline: '2026-04-12', days: 0, rag: 'grey', action: false, estimate: 8650, cta: 'View confirmation', ctaRoute: 'cases', completed: true },
+      { id: 'case-1', title: '14 Elm Grove, Bristol BS6 6RG', service: 'Residential CGT', stage: 2, step: 6, deadline: '2026-07-19', completion: '2026-05-20', days: 20, rag: 'amber', action: true, estimate: 12480, cta: 'Upload documents', ctaRoute: 'upload', completed: false },
+      { id: 'case-2', title: 'Unit 7, Kingsway Business Park', service: 'Commercial CGT', stage: 1, step: 2, deadline: '2026-08-30', completion: '2026-07-01', days: 62, rag: 'green', action: true, estimate: 0, cta: 'Continue questionnaire', ctaRoute: 'cases', ctaHref: 'new-case.html#step-7', completed: false },
+      { id: 'case-3', title: 'Shares — Meridian Holdings plc', service: 'Other CGT', stage: 3, step: 8, deadline: '2026-06-30', completion: '2026-05-02', days: 1, rag: 'red', action: true, estimate: 4220, cta: 'Review draft', ctaRoute: 'draft', completed: false },
+      { id: 'case-4', title: '29 Maple Court, Leeds LS8 2QN', service: 'Residential CGT', stage: 3, step: 10, deadline: '2026-04-12', completion: '2026-02-11', days: 0, rag: 'grey', action: false, estimate: 8650, cta: 'View confirmation', ctaRoute: 'confirmation', completed: true },
     ];
     // progress fill colour: navy conveys confident forward progress; urgency lives in pills/accent
     const mapCase = (c) => {
@@ -1521,7 +1745,7 @@ class Component extends DCLogic {
         cardStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;' + (urgent ? 'border-left:4px solid ' + accentColor + ';' : ''),
         // full-width list-row variant used on the dashboard (shallower padding, tighter gap)
         rowStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;' + (urgent ? 'border-left:4px solid ' + accentColor + ';' : ''),
-        onCta: c.ctaHref ? (() => { window.location.href = c.ctaHref; }) : nav(c.ctaRoute || 'cases'),
+        onCta: c.ctaHref ? (() => { window.location.href = c.ctaHref; }) : (() => this.setState({ route: c.ctaRoute || 'cases', selectedCase: c.id })),
         onView: () => this.setState({ route: 'case-detail', selectedCase: c.id }),
       };
     };
@@ -1545,6 +1769,63 @@ class Component extends DCLogic {
       };
     }) : [];
     const detailPct = selRaw ? (selRaw.completed ? 100 : Math.round((selRaw.step - 1) / STEPS.length * 100)) : 0;
+    const goCase = (r) => () => this.setState({ route: r, selectedCase: (this.state.selectedCase || 'case-1') });
+
+    /* ═══════════ ASSIGNED TEAM (shared: dashboard + case detail) ═══════════ */
+    const teamAccent = { 'Client Manager': 'var(--navy)', 'Tax Assistant': '#43a047', 'Admin Contact': '#1976d2' };
+    const TEAM = [
+      { name: 'Sarah Hughes', role: 'Client Manager', initials: 'SH', desc: 'Your main point of contact' },
+      { name: 'Daniel Okafor', role: 'Tax Assistant', initials: 'DO', desc: 'Prepares your calculation' },
+      { name: 'Priya Patel', role: 'Admin Contact', initials: 'PP', desc: 'Billing & scheduling' },
+    ];
+    const team = TEAM.map(t => ({ name: t.name, role: t.role, initials: t.initials, desc: t.desc, avatarStyle: 'display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--chip);color:var(--tx);font-size:14px;font-weight:600;', roleStyle: 'display:inline-flex;align-items:center;gap:5px;border-radius:9999px;padding:2px 9px;font-size:11px;font-weight:600;background:var(--chip);color:' + teamAccent[t.role] + ';' }));
+
+    /* ═══════════ CASE ACTIVITY TIMELINE ═══════════ */
+    const activityTint = { doc: '#1976d2', msg: 'var(--navy)', ok: '#43a047', wait: '#ffa000' };
+    const caseActivity = [
+      { kind: 'ok', icon: 'ti ti-circle-check', title: 'HMRC agent authorisation confirmed', time: '18 Jun 2026 · 10:24' },
+      { kind: 'msg', icon: 'ti ti-message', title: 'Sarah Hughes sent you a query about your council tax bill', time: '18 Jun 2026 · 09:14' },
+      { kind: 'doc', icon: 'ti ti-file-upload', title: 'You uploaded Sale Completion Statement.pdf', time: '2 Jun 2026 · 14:20' },
+      { kind: 'ok', icon: 'ti ti-shield-check', title: 'Identity & address verification completed', time: '28 May 2026 · 16:03' },
+      { kind: 'ok', icon: 'ti ti-signature', title: 'You signed the Letter of Engagement', time: '20 May 2026 · 11:40' },
+    ].map(a => ({ title: a.title, time: a.time, icon: a.icon, iconWrapStyle: 'display:flex;width:34px;height:34px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--chip);color:' + activityTint[a.kind] + ';' }));
+
+    /* ═══════════ DRAFT CGT REVIEW (step 8) ═══════════ */
+    const draftRows = [
+      { label: 'Disposal proceeds (what you sold it for)', value: '£412,000', kind: '' },
+      { label: 'Less: acquisition cost (what you paid)', value: '−£245,000', kind: '' },
+      { label: 'Less: improvement costs', value: '−£18,500', kind: '' },
+      { label: 'Less: selling costs (legal & agent fees)', value: '−£9,240', kind: '' },
+      { label: 'Chargeable gain', value: '£139,260', kind: 'sub' },
+      { label: 'Less: annual exempt amount (2025/26)', value: '−£3,000', kind: '' },
+      { label: 'Taxable gain', value: '£136,260', kind: 'sub' },
+      { label: 'Capital Gains Tax due (24% residential higher rate)', value: '£32,702', kind: 'total' },
+    ].map(r => ({ label: r.label, value: r.value,
+      rowStyle: 'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:' + (r.kind === 'total' ? '16px' : '11px') + ' 0;' + (r.kind ? 'border-top:1px solid var(--border-3);' : '') + (r.kind === 'total' ? 'border-top:2px solid var(--border);margin-top:4px;' : ''),
+      labelStyle: 'font-size:' + (r.kind === 'total' ? '15px' : '14px') + ';font-weight:' + (r.kind ? '600' : '400') + ';color:' + (r.kind === 'total' ? 'var(--tx)' : 'var(--tx-2b)') + ';',
+      valueStyle: 'font-size:' + (r.kind === 'total' ? '20px' : '15px') + ';font-weight:' + (r.kind ? '700' : '500') + ';color:' + (r.kind === 'total' ? 'var(--er-tx)' : 'var(--tx)') + ';white-space:nowrap;' }));
+
+    /* ═══════════ DOCUMENT UPLOAD CENTRE ═══════════ */
+    const upStatus = { 'Not uploaded': ['var(--muted)', 'var(--tx-3)', 'ti ti-circle-dashed'], 'Uploaded': ['var(--in-bg)', 'var(--in-tx)', 'ti ti-circle-check'], 'Processing': ['var(--wa-bg)', 'var(--wa-tx)', 'ti ti-clock'], 'Reviewed': ['var(--su-bg)', 'var(--su-tx)', 'ti ti-circle-check'], 'Action required': ['var(--er-bg)', 'var(--er-tx)', 'ti ti-alert-triangle'] };
+    const upBadge = (s) => 'display:inline-flex;align-items:center;gap:5px;border-radius:9999px;padding:4px 11px;font-size:12.5px;font-weight:600;background:' + upStatus[s][0] + ';color:' + upStatus[s][1] + ';';
+    const UPLOAD_CATS = [
+      { name: 'Sale Completion Statement', why: 'Confirms your final sale price and completion date.', required: true, status: 'Reviewed', files: [{ name: 'Sale Completion Statement.pdf', size: '1.2 MB' }] },
+      { name: 'Purchase Completion Statement', why: 'Shows what you originally paid — this reduces your taxable gain.', required: true, status: 'Uploaded', files: [{ name: 'Purchase Completion Statement.pdf', size: '980 KB' }] },
+      { name: 'Improvement Receipts', why: 'Money spent improving the property can lower your CGT bill.', required: false, status: 'Processing', files: [{ name: 'Kitchen renovation invoice.jpg', size: '3.1 MB' }] },
+      { name: 'Identity Documents', why: 'Required by law (anti-money-laundering) before we can file for you.', required: true, status: 'Reviewed', files: [{ name: 'Passport.jpg', size: '2.4 MB' }] },
+      { name: 'Proof of Address', why: 'A utility bill or bank statement dated within the last 3 months.', required: true, status: 'Action required', files: [] },
+      { name: 'Other Supporting Documents', why: 'Anything else you think is relevant to your disposal.', required: false, status: 'Not uploaded', files: [] },
+    ];
+    const uploadCats = UPLOAD_CATS.map((c, i) => ({
+      name: c.name, why: c.why, status: c.status, statusStyle: upBadge(c.status), statusIcon: upStatus[c.status][2],
+      requiredLabel: c.required ? 'Required' : 'Optional',
+      requiredStyle: 'font-size:11px;font-weight:600;color:' + (c.required ? 'var(--er-tx)' : 'var(--tx-3)') + ';',
+      hasFiles: c.files.length > 0, files: c.files,
+      dropStyle: 'border:2px dashed ' + (c.status === 'Action required' ? 'var(--er-tx)' : 'var(--border-2)') + ';border-radius:12px;padding:18px;text-align:center;background:var(--surface-2);cursor:pointer;transition:.15s;',
+    }));
+
+    /* ═══════════ SUBMISSION CONFIRMATION (step 9) ═══════════ */
+    const submission = { ref: 'HMRC-CGT-2026-4471829', date: '12 Apr 2026', amountDue: '£8,650', payBy: '11 Jun 2026' };
 
     /* ═══════════ DASHBOARD HERO: most urgent deadline + summary ═══════════ */
     const activeRaw = CASES.filter(c => !c.completed);
@@ -1981,6 +2262,7 @@ class Component extends DCLogic {
       detailDeadlineStyle: selRaw ? badge(selRaw.rag) : '', detailDeadlineIcon: selRaw && selRaw.rag === 'red' ? 'ti ti-alert-triangle' : 'ti ti-clock',
       detailDeadlineLabel: selRaw ? (selRaw.rag === 'grey' ? 'Completed' : selRaw.days <= 0 ? 'Due today' : selRaw.days + ' day' + (selRaw.days === 1 ? '' : 's') + ' left') : '',
       detailDeadlineDate: selRaw ? ('HMRC deadline ' + this.fdate(selRaw.deadline)) : '',
+      detailDeadlineOnly: selRaw ? this.fdate(selRaw.deadline) : '',
       detailEstimate: selRaw ? (selRaw.estimate > 0 ? this.gbp(selRaw.estimate) : 'Pending') : '',
       detailStepText: selRaw ? ('Step ' + selRaw.step + ' of ' + STEPS.length) : '',
       detailPctLabel: detailPct + '%',
@@ -1990,7 +2272,38 @@ class Component extends DCLogic {
       detailSteps,
       detailCtaShow: selRaw ? !selRaw.completed : false,
       detailCtaLabel: selRaw ? selRaw.cta : '',
-      detailOnCta: selRaw ? (selRaw.ctaHref ? (() => { window.location.href = selRaw.ctaHref; }) : nav(selRaw.ctaRoute || 'cases')) : (() => {}),
+      detailOnCta: selRaw ? (selRaw.ctaHref ? (() => { window.location.href = selRaw.ctaHref; }) : (() => this.setState({ route: selRaw.ctaRoute || 'cases' }))) : (() => {}),
+      detailCompletionDate: selRaw ? this.fdate(selRaw.completion) : '',
+      detailSubmissionDate: selRaw && selRaw.completed ? this.fdate('2026-04-12') : 'Pending',
+      // assigned team + activity (shared)
+      team, caseActivity,
+      // quick actions from case detail
+      goUpload: goCase('upload'), goVerify: goCase('verify'), goHmrc: goCase('hmrc'), goDraft: goCase('draft'), goConfirmation: goCase('confirmation'),
+      backToCase: () => this.setState({ route: 'case-detail' }),
+      // ── Document Upload Centre ──
+      isUpload: route === 'upload' && !clientEmpty, uploadCats,
+      // ── AML / Identity Verification ──
+      isVerify: route === 'verify' && !clientEmpty,
+      // ── HMRC Agent Authorisation ──
+      isHmrc: route === 'hmrc' && !clientEmpty,
+      // ── Draft CGT Review & Approval ──
+      isDraft: route === 'draft' && !clientEmpty, draftRows,
+      draftApproved: this.state.draftApproved, draftPending: !this.state.draftApproved,
+      approveOpen: this.state.approveOpen,
+      approveOverlayStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.approveOpen ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
+      openApprove: () => this.setState({ approveOpen: true }), closeApprove: () => this.setState({ approveOpen: false }),
+      // ── Complete-profile reminder ──
+      profileReminderStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.profileReminder ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
+      dismissProfileReminder: () => this.setState({ profileReminder: false }),
+      goCompleteProfile: () => { window.location.href = 'complete-profile.dc.html'; },
+      confirmApprove: () => this.setState({ approveOpen: false, draftApproved: true }),
+      complianceAdded: this.state.complianceAdded,
+      toggleCompliance: () => this.setState(s => ({ complianceAdded: !s.complianceAdded })),
+      complianceCtaLabel: this.state.complianceAdded ? 'Added — Compliance Guarantee' : 'Add Compliance Guarantee · £149',
+      complianceCtaStyle: 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font-size:14px;font-weight:600;padding:12px;border-radius:12px;cursor:pointer;border:none;' + (this.state.complianceAdded ? 'background:var(--su-bg);color:var(--su-tx);' : 'background:var(--navy);color:#fff;'),
+      // ── Submission Confirmation ──
+      isConfirmation: route === 'confirmation' && !clientEmpty,
+      subRef: submission.ref, subDate: submission.date, subAmountDue: submission.amountDue, subPayBy: submission.payBy,
       // empty-state bindings (shared across all portals)
       clientEmpty, partnerEmpty, adminEmpty,
       emptyIcon: ecfg.icon, emptyTitle: ecfg.title, emptyDesc: ecfg.desc,
