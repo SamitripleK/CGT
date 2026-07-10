@@ -7,7 +7,6 @@
     { "source": "/login", "destination": "/FileCGTOnline Auth.dc.html" },
     { "source": "/signup", "destination": "/FileCGTOnline Auth.dc.html" },
     { "source": "/portal", "destination": "/FileCGTOnline Portal.dc.html" },
-    { "source": "/complete-profile", "destination": "/complete-profile.dc.html" },
     { "source": "/new-case", "destination": "/new-case.html" },
     { "source": "/partner", "destination": "/partner-onboarding.html" }
   ]

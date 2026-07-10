@@ -1,4 +1,4 @@
-// dc-hover.js — makes `style-hover="..."` attributes work in plain HTML.
+// dc-hover.js, makes `style-hover="..."` attributes work in plain HTML.
 // The Claude Design sources use inline `style-hover` declarations that the
 // design runtime applies on hover. Inline styles can't carry a :hover rule,
 // so we apply them imperatively: on mouseenter set the hover declarations,

@@ -147,50 +147,48 @@
         </a>
       </sc-for>
     </nav>
+
+    <!-- bottom: profile card with dropdown (Profile / Settings / Theme) -->
+    <div style="margin-top:12px;padding-top:14px;border-top:1px solid var(--border);">
+      <div style="position:relative;">
+        <div style="{{ profileMenuStyle }}">
+          <a onClick="{{ goProfileItem }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;border-radius:8px;padding:9px 10px;cursor:pointer;text-decoration:none;color:var(--tx);font-size:14px;" style-hover="background:var(--surface-2);"><i class="ti ti-user" style="font-size:17px;color:var(--tx-2b);"></i> Profile</a>
+          <a onClick="{{ goSettingsItem }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;border-radius:8px;padding:9px 10px;cursor:pointer;text-decoration:none;color:var(--tx);font-size:14px;" style-hover="background:var(--surface-2);"><i class="ti ti-settings" style="font-size:17px;color:var(--tx-2b);"></i> Settings</a>
+          <div style="height:1px;background:var(--border);margin:6px 4px;"></div>
+          <div style="padding:4px 10px 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--tx-3);">Theme</div>
+          <div style="display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:4px;">
+            <button onClick="{{ setThemeLight }}" style="{{ themeLightStyle }}"><i class="ti ti-sun" style="font-size:16px;"></i> Light</button>
+            <button onClick="{{ setThemeDark }}" style="{{ themeDarkStyle }}"><i class="ti ti-moon" style="font-size:16px;"></i> Dark</button>
+          </div>
+        </div>
+        <button onClick="{{ toggleProfileMenu }}" style="display:flex;align-items:center;gap:10px;width:100%;border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:9px 10px;cursor:pointer;font-family:'Jost',sans-serif;text-align:left;" style-hover="background:var(--surface-2);">
+          <span style="display:flex;width:36px;height:36px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:#adee68;color:#0a1120;font-size:13px;font-weight:600;">JW</span>
+          <span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:600;color:var(--tx);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">James Whitfield</span><span style="display:block;font-size:12px;color:var(--tx-2);line-height:1.25;">Client</span></span>
+          <i class="ti ti-chevron-down" style="color:var(--tx-3);font-size:18px;flex-shrink:0;"></i>
+        </button>
+      </div>
+    </div>
   </aside>
 
   <!-- MAIN COLUMN -->
   <div data-role="main" style="margin-left:264px;">
-    <!-- top bar -->
-    <header style="position:sticky;top:0;z-index:30;display:flex;height:64px;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border);background:var(--surface-blur);backdrop-filter:blur(8px);padding:0 32px;">
-      <p data-role="hide-mobile" style="font-size:13px;color:var(--tx-2);">Secure client portal</p>
-      <div data-role="mobile-flow" style="display:none;position:relative;">
-        <button onClick="{{ toggleFlow }}" style="display:flex;align-items:center;gap:7px;border-radius:8px;border:1px solid var(--border);background:var(--surface);padding:6px 10px;cursor:pointer;font-family:'Jost',sans-serif;">
-          <i class="{{ flowIcon }}" style="color:var(--tx);font-size:16px;"></i>
-          <span style="font-size:13px;font-weight:500;color:var(--tx);">{{ flowLabel }}</span>
-          <i class="ti ti-selector" style="color:var(--tx-3);font-size:15px;"></i>
-        </button>
-        <div style="{{ flowMenuStyle }}">
-          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--tx-3);padding:8px 10px 6px;">Switch portal</p>
-          <sc-for list="{{ flowItems }}" as="f" hint-placeholder-count="3">
-            <button onClick="{{ f.onClick }}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:none;background:transparent;border-radius:8px;padding:9px 10px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);">
-              <span style="display:flex;width:32px;height:32px;flex-shrink:0;align-items:center;justify-content:center;border-radius:8px;background:var(--chip);"><i class="{{ f.icon }}" style="color:var(--tx);font-size:16px;"></i></span>
-              <span style="flex:1;"><span style="display:block;font-size:14px;color:var(--tx);">{{ f.label }}</span><span style="display:block;font-size:12px;color:var(--tx-2);">{{ f.desc }}</span></span>
-              <sc-if value="{{ f.active }}" hint-placeholder-val="{{ true }}"><i class="ti ti-check" style="color:#43a047;font-size:16px;"></i></sc-if>
-            </button>
-          </sc-for>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button onClick="{{ toggleTheme }}" title="{{ themeLabel }}" aria-label="{{ themeLabel }}" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9999px;border:1px solid var(--border);background:var(--surface);color:var(--tx-2b);cursor:pointer;transition:background-color .18s,color .18s;" style-hover="background:var(--surface-2);color:var(--tx);">
-          <i class="{{ themeIcon }}" style="font-size:18px;"></i>
-        </button>
-        <a onClick="{{ goMessages }}" style="position:relative;padding:8px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);">
-          <i class="ti ti-bell" style="color:var(--tx-2b);font-size:20px;"></i>
-          <span style="position:absolute;right:6px;top:6px;width:8px;height:8px;border-radius:9999px;background:#f44336;"></span>
-        </a>
-        <a onClick="{{ goProfile }}" style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-          <span style="display:flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:9999px;background:#adee68;color:#0a1120;font-size:13px;font-weight:600;">JW</span>
-          <span data-role="hide-mobile" style="font-size:14px;color:var(--tx);">James Whitfield</span>
-        </a>
-      </div>
-    </header>
-
-    <main style="padding:16px;max-width:1200px;margin:0 auto;">
+    <main style="padding:24px 16px 16px;max-width:1200px;margin:0 auto;">
 
       <!-- ══ DASHBOARD ══ -->
       <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
         <div style="max-width:920px;margin:0 auto;">
+          <!-- ── Complete-profile notification ── -->
+          <div style="{{ profileBannerStyle }}">
+            <span style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--wa-bg);color:var(--wa-tx);"><i class="ti ti-user-exclamation" style="font-size:20px;"></i></span>
+            <div style="flex:1;min-width:200px;">
+              <p style="font-size:15px;font-weight:600;color:var(--tx);">Complete your profile</p>
+              <p style="font-size:13px;color:var(--tx-2);margin-top:2px;">Add your phone number and address so our tax team can prepare and file your return.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button onClick="{{ dismissProfileReminder }}" style="background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Dismiss</button>
+              <button onClick="{{ goCompleteProfile }}" style="display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:9px 16px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Complete profile <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+            </div>
+          </div>
           <!-- ── Greeting ── -->
           <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
             <div>
@@ -208,7 +206,7 @@
 
           <!-- ── FOCAL: your single next step ── -->
           <sc-if value="{{ heroHasAlert }}" hint-placeholder-val="{{ true }}">
-            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-left:4px solid #adee68;border-radius:16px;padding:22px 24px;box-shadow:var(--sh-md);margin-bottom:28px;">
+            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:var(--sh-md);margin-bottom:28px;">
               <span style="display:flex;width:52px;height:52px;flex-shrink:0;align-items:center;justify-content:center;border-radius:14px;background:var(--su-bg);"><i class="{{ heroIcon }}" style="font-size:26px;color:var(--su-tx);"></i></span>
               <div style="flex:1;min-width:200px;">
                 <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--tx-3);">{{ heroKicker }}</p>
@@ -268,7 +266,7 @@
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">All of your Capital Gains Tax filings in one place.</p>
           </div>
           <h2 style="font-size:20px;font-weight:600;margin-bottom:12px;">Active</h2>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
             <sc-for list="{{ activeCases }}" as="c" hint-placeholder-count="3">
               <div style="{{ c.cardStyle }}">
                 <!-- steps bar (top) -->
@@ -301,7 +299,7 @@
             </sc-for>
           </div>
           <h2 style="font-size:20px;font-weight:600;margin:40px 0 16px;">Completed</h2>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
             <sc-for list="{{ completedCases }}" as="c" hint-placeholder-count="1">
               <div style="{{ c.cardStyle }}">
                 <!-- steps bar (top) -->
@@ -486,7 +484,7 @@
           <div style="margin-bottom:12px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Identity verification</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">A quick, secure check we're legally required to complete before filing.</p></div>
           <div style="display:flex;align-items:center;gap:12px;background:var(--wa-bg);border:1px solid var(--wa-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;">
             <i class="ti ti-clock" style="color:var(--wa-tx);font-size:22px;"></i>
-            <div style="flex:1;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Verification in progress</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">One item still needs your attention — see the checklist below.</p></div>
+            <div style="flex:1;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Verification in progress</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">One item still needs your attention, see the checklist below.</p></div>
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-bottom:12px;">
             <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;"><i class="ti ti-shield-lock" style="color:var(--tx);font-size:20px;"></i><h2 style="font-size:16px;font-weight:700;color:var(--tx);">Why we need this</h2></div>
@@ -519,12 +517,12 @@
             <div style="display:flex;flex-direction:column;gap:12px;">
               <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">1</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">You'll receive an email from HMRC with an authorisation request. Open it and sign in to your Government Gateway account.</p></div>
               <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">2</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">Review the request from <b style="color:var(--tx);">FileCGTOnline (Everest &amp; Co)</b> and confirm you want us to act as your agent.</p></div>
-              <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">3</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">Once you approve, come back here — we'll confirm it's connected and take it from there.</p></div>
+              <div style="display:flex;gap:14px;"><span style="display:flex;width:28px;height:28px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">3</span><p style="font-size:14px;color:var(--tx-2);line-height:1.6;">Once you approve, come back here, we'll confirm it's connected and take it from there.</p></div>
             </div>
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);margin-bottom:12px;">
             <h3 style="font-size:15px;font-weight:600;color:var(--tx);margin-bottom:10px;">Common problems</h3>
-            <p style="font-size:13px;color:var(--tx-2);line-height:1.6;">Can't find the email? Check spam, or ask us to resend. Forgotten your Government Gateway login? You can recover it on the HMRC sign-in page — we can stay on the phone with you while you do.</p>
+            <p style="font-size:13px;color:var(--tx-2);line-height:1.6;">Can't find the email? Check spam, or ask us to resend. Forgotten your Government Gateway login? You can recover it on the HMRC sign-in page, we can stay on the phone with you while you do.</p>
           </div>
           <div style="display:flex;align-items:center;gap:12px;background:var(--su-bg);border-radius:16px;padding:20px;flex-wrap:wrap;">
             <i class="ti ti-headset" style="color:var(--su-tx);font-size:24px;"></i>
@@ -542,7 +540,7 @@
           <sc-if value="{{ draftApproved }}" hint-placeholder-val="{{ false }}">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 28px;text-align:center;box-shadow:var(--sh-sm);">
               <div style="display:inline-flex;width:64px;height:64px;align-items:center;justify-content:center;border-radius:9999px;background:var(--su-bg);color:var(--su-tx);margin-bottom:12px;"><i class="ti ti-circle-check" style="font-size:34px;"></i></div>
-              <h1 style="font-size:24px;font-weight:700;color:var(--tx);">Draft approved — thank you</h1>
+              <h1 style="font-size:24px;font-weight:700;color:var(--tx);">Draft approved, thank you</h1>
               <p style="font-size:15px;color:var(--tx-2);margin-top:8px;max-width:460px;margin-left:auto;margin-right:auto;">We've recorded your approval and our team will now submit your return to HMRC. You'll get a confirmation as soon as it's filed.</p>
               <button onClick="{{ backToCase }}" style="margin-top:12px;display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Back to case</button>
             </div>
@@ -640,7 +638,7 @@
           <!-- what next -->
           <div style="background:var(--in-bg);border:1px solid var(--in-bd);border-radius:16px;padding:20px;display:flex;gap:12px;">
             <i class="ti ti-sparkles" style="color:var(--in-tx);font-size:20px;flex-shrink:0;"></i>
-            <div><h3 style="font-size:15px;font-weight:600;color:var(--tx);">What happens next</h3><p style="font-size:14px;color:var(--in-tx);line-height:1.6;margin-top:4px;">Make your payment to HMRC by the deadline above. If you file a Self Assessment tax return, remember to include this disposal there too — we can help. Questions? <a onClick="{{ goMessages }}" style="text-decoration:underline;cursor:pointer;">Message your team</a>.</p></div>
+            <div><h3 style="font-size:15px;font-weight:600;color:var(--tx);">What happens next</h3><p style="font-size:14px;color:var(--in-tx);line-height:1.6;margin-top:4px;">Make your payment to HMRC by the deadline above. If you file a Self Assessment tax return, remember to include this disposal there too, we can help. Questions? <a onClick="{{ goMessages }}" style="text-decoration:underline;cursor:pointer;">Message your team</a>.</p></div>
           </div>
         </div>
       </sc-if>
@@ -655,24 +653,6 @@
           <div style="display:flex;gap:10px;margin-top:12px;">
             <button onClick="{{ closeApprove }}" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Cancel</button>
             <button onClick="{{ confirmApprove }}" style="flex:1;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Yes, approve &amp; submit</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Complete-profile reminder modal -->
-      <div style="{{ profileReminderStyle }}">
-        <div style="background:var(--surface);border-radius:16px;padding:28px;max-width:440px;width:100%;box-shadow:var(--sh-2xl);">
-          <div style="display:flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:14px;background:var(--wa-bg);color:var(--wa-tx);margin-bottom:12px;"><i class="ti ti-user-exclamation" style="font-size:26px;"></i></div>
-          <h3 style="font-size:20px;font-weight:700;color:var(--tx);">Complete your profile</h3>
-          <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:8px;">Your account isn't fully set up yet. To file a CGT return we need to verify your email and phone, and have your address on record. It only takes a minute.</p>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
-            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-mail" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Verify email</span></div>
-            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-device-mobile" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Verify phone</span></div>
-            <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:10px;padding:9px 12px;"><i class="ti ti-map-pin" style="font-size:15px;color:var(--tx-3);"></i><span style="font-size:13px;color:var(--tx-2);">Add your address</span></div>
-          </div>
-          <div style="display:flex;gap:10px;margin-top:16px;">
-            <button onClick="{{ dismissProfileReminder }}" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Later</button>
-            <button onClick="{{ goCompleteProfile }}" style="flex:1;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Complete now</button>
           </div>
         </div>
       </div>
@@ -741,8 +721,9 @@
             <div style="display:flex;flex-direction:column;gap:12px;">
               <div style="background:var(--navy);border-radius:16px;padding:20px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><i class="ti ti-sparkles" style="color:#c8ec96;font-size:18px;"></i><h3 style="font-size:16px;font-weight:600;color:#fff;">AI help assistant</h3></div>
-                <p style="font-size:14px;color:#cdd4e1;margin-bottom:12px;">Need a quick answer about your documents or process? The assistant can help instantly.</p>
-                <p style="font-size:12px;color:#c8ec96;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-info-circle" style="font-size:14px;margin-top:1px;"></i> For advice on your specific figures, message your team here — they handle anything affecting your return.</p>
+                <p style="font-size:14px;color:#cdd4e1;margin-bottom:14px;">Need a quick answer about your documents or process? The assistant can help instantly.</p>
+                <button onClick="{{ openAI }}" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:11px 16px;border:none;border-radius:12px;cursor:pointer;margin-bottom:14px;" style-hover="background:#9ce04f;"><i class="ti ti-sparkles" style="font-size:16px;"></i> Ask AI</button>
+                <p style="font-size:12px;color:#c8ec96;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-info-circle" style="font-size:14px;margin-top:1px;"></i> For advice on your specific figures, message your team here, they handle anything affecting your return.</p>
               </div>
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;">
                 <h3 style="font-size:16px;font-weight:600;margin-bottom:12px;">Message categories</h3>
@@ -849,10 +830,31 @@
       <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
         <div>
           <div style="margin-bottom:12px;">
-            <h1 style="font-size:28px;line-height:34px;font-weight:600;">Profile &amp; settings</h1>
-            <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Manage your personal details, security and how we contact you.</p>
+            <h1 style="font-size:28px;line-height:34px;font-weight:600;">Profile</h1>
+            <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Your personal details. Keep these up to date so we can prepare and file your return.</p>
           </div>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:560px;">
+            <!-- Xama identity verification (top) -->
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
+              <div style="display:flex;align-items:flex-start;gap:14px;">
+                <img src="xama-logo.png" alt="Xama" style="width:46px;height:46px;border-radius:12px;flex-shrink:0;" />
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                    <h3 style="font-size:16px;font-weight:600;">Identity verification</h3>
+                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:3px 10px;border-radius:9999px;background:var(--wa-bg);color:var(--wa-tx);"><span style="width:7px;height:7px;border-radius:9999px;background:var(--wa-tx);"></span> Not verified</span>
+                  </div>
+                  <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:6px;">We verify your identity and address through <b style="color:var(--tx);">Xama</b>, our regulated partner. This is a legal anti-money-laundering requirement before we can file your return, and takes about two minutes.</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-id" style="font-size:14px;color:var(--tx-3);"></i> Photo ID</span>
+                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-home-2" style="font-size:14px;color:var(--tx-3);"></i> Proof of address</span>
+                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-shield-search" style="font-size:14px;color:var(--tx-3);"></i> PEP &amp; sanctions</span>
+                  </div>
+                  <a href="https://www.xamatech.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#0a0a0a;color:#fff;font-size:14px;font-weight:600;padding:11px 18px;border-radius:12px;text-decoration:none;cursor:pointer;" style-hover="background:#222;">Verify with Xama <i class="ti ti-external-link" style="font-size:16px;"></i></a>
+                  <p style="font-size:12px;color:var(--tx-3);margin-top:10px;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-lock" style="font-size:13px;margin-top:1px;"></i> You'll be taken to Xama's secure portal. Your documents are handled by our regulated identity provider.</p>
+                </div>
+              </div>
+            </div>
+
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
               <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-user" style="color:var(--tx);font-size:18px;"></i> Personal details</h3>
               <div style="display:flex;flex-direction:column;gap:12px;">
@@ -863,6 +865,18 @@
                 <button style="align-self:flex-start;background:var(--navy);color:#fff;font-size:14px;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Save changes</button>
               </div>
             </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ══ SETTINGS ══ -->
+      <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="margin-bottom:12px;">
+            <h1 style="font-size:28px;line-height:34px;font-weight:600;">Settings</h1>
+            <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Security, how we contact you, and your data.</p>
+          </div>
+          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
               <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-lock" style="color:var(--tx);font-size:18px;"></i> Security</h3>
               <div style="display:flex;flex-direction:column;gap:12px;">
@@ -918,8 +932,7 @@
     </sc-for>
   </nav>
 
-  <!-- AI ASSISTANT -->
-  <button onClick="{{ openAI }}" style="{{ aiButtonStyle }}"><i class="ti ti-sparkles" style="color:#c8ec96;font-size:20px;"></i> Ask AI</button>
+  <!-- AI ASSISTANT · panel opens from the Messages section (no floating button on the dashboard) -->
   <div style="{{ aiOverlayStyle }}" onClick="{{ closeAI }}"></div>
   <div style="{{ aiPanelStyle }}">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--border);flex-shrink:0;">
@@ -984,7 +997,7 @@
     <!-- hero -->
     <span style="display:inline-flex;align-items:center;gap:6px;background:var(--su-bg);border:1px solid #e4f5c7;color:var(--link);font-size:13px;font-weight:500;padding:6px 14px;border-radius:9999px;"><i class="ti ti-sparkles" style="font-size:15px;"></i> Welcome to FileCGTOnline</span>
     <h1 style="font-size:clamp(28px,5vw,40px);line-height:1.15;font-weight:600;color:var(--tx);margin-top:16px;">Let's file your first<br>Capital Gains Tax return.</h1>
-    <p style="font-size:16px;line-height:1.6;color:var(--tx-2);margin-top:12px;max-width:560px;">You don't have any cases yet. Starting is simple — most people are up and running in about 10 minutes. We'll guide you through every step and our tax team handles the hard part.</p>
+    <p style="font-size:16px;line-height:1.6;color:var(--tx-2);margin-top:12px;max-width:560px;">You don't have any cases yet. Starting is simple, most people are up and running in about 10 minutes. We'll guide you through every step and our tax team handles the hard part.</p>
 
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;">
       <a href="new-case.html" style="display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:16px;font-weight:600;padding:14px 26px;border:none;border-radius:12px;cursor:pointer;text-decoration:none;box-shadow:var(--sh-lg);" style-hover="background:#9ce04f;"><i class="ti ti-rocket" style="font-size:18px;"></i> Start CGT Filing</a>
@@ -1021,7 +1034,7 @@
             </div>
           </sc-for>
         </div>
-        <p style="font-size:13px;color:var(--tx-3);margin-top:16px;">Don't have everything yet? No problem — you can start now and add documents later.</p>
+        <p style="font-size:13px;color:var(--tx-3);margin-top:16px;">Don't have everything yet? No problem, you can start now and add documents later.</p>
       </div>
       <div style="background:var(--navy);border-radius:16px;padding:24px;display:flex;flex-direction:column;">
         <i class="ti ti-shield-check" style="color:#c8ec96;font-size:24px;"></i>
@@ -1140,7 +1153,7 @@
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px;">
             <h3 style="font-size:16px;font-weight:600;margin-bottom:4px;">Your referral link</h3>
-            <p style="font-size:13px;color:var(--tx-2);margin-bottom:12px;">Share this with clients who need CGT support — they'll be linked to you automatically.</p>
+            <p style="font-size:13px;color:var(--tx-2);margin-bottom:12px;">Share this with clients who need CGT support, they'll be linked to you automatically.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
               <input value="https://filecgt.online/p/harbour-slate-2291" readonly style="flex:1;min-width:220px;border:1px solid var(--border-2);border-radius:12px;background:var(--surface-2);padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" />
               <button onClick="{{ copyLink }}" style="display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:14px;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="{{ copyIcon }}" style="font-size:15px;"></i> {{ copyLabel }}</button>
@@ -1181,7 +1194,7 @@
       <sc-if value="{{ isPReferrals }}" hint-placeholder-val="{{ false }}">
         <div>
           <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
-            <div><h1 style="font-size:28px;line-height:34px;font-weight:600;">Referrals</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Track every client you've referred. You see progress only — never sensitive financial details.</p></div>
+            <div><h1 style="font-size:28px;line-height:34px;font-weight:600;">Referrals</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Track every client you've referred. You see progress only, never sensitive financial details.</p></div>
             <button onClick="{{ goPSubmit }}" style="display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:15px;font-weight:500;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;"><i class="ti ti-user-plus" style="font-size:16px;"></i> Submit new referral</button>
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
@@ -1221,7 +1234,7 @@
               </div>
             </div>
             <div style="margin-top:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Notes for our team (optional)</label><textarea rows="3" placeholder="Anything that will help us support this client…" style="width:100%;resize:none;border:1px solid var(--border-2);border-radius:12px;padding:12px;font-size:14px;outline:none;"></textarea></div>
-            <div style="display:flex;gap:12px;border-radius:12px;border:1px solid #e4f5c7;background:var(--su-bg);padding:14px;margin-top:16px;"><i class="ti ti-lock" style="color:var(--link);font-size:18px;flex-shrink:0;"></i><p style="font-size:13px;color:var(--link);line-height:1.6;">We may receive a referral fee, which won't affect the price your client pays. You'll only ever see referral progress — never their financial details.</p></div>
+            <div style="display:flex;gap:12px;border-radius:12px;border:1px solid #e4f5c7;background:var(--su-bg);padding:14px;margin-top:16px;"><i class="ti ti-lock" style="color:var(--link);font-size:18px;flex-shrink:0;"></i><p style="font-size:13px;color:var(--link);line-height:1.6;">We may receive a referral fee, which won't affect the price your client pays. You'll only ever see referral progress, never their financial details.</p></div>
             <button style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:500;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Submit referral</button>
           </div>
         </div>
@@ -1395,7 +1408,7 @@
       <!-- ADMIN DASHBOARD -->
       <sc-if value="{{ isADash }}" hint-placeholder-val="{{ true }}">
         <div>
-          <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Operations overview</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">What needs attention first — viewing as {{ role }}</p></div>
+          <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Operations overview</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">What needs attention first, viewing as {{ role }}</p></div>
           <div data-role="col2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
             <sc-for list="{{ adminKpiCards }}" as="k" hint-placeholder-count="8">
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;"><p style="font-size:12px;color:var(--tx-2);">{{ k.label }}</p><p style="font-size:24px;font-weight:600;margin-top:2px;color:{{ k.color }};">{{ k.value }}</p></div>
@@ -1488,7 +1501,7 @@
           <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
             <sc-for list="{{ aiDrafts }}" as="d" hint-placeholder-count="3">
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><div><p style="font-size:14px;color:var(--tx);">{{ d.type }}</p><p style="font-size:12px;color:var(--tx-3);">{{ d.client }} · {{ d.caseId }}</p></div><sc-if value="{{ d.complexShow }}" hint-placeholder-val="{{ false }}"><span style="background:var(--er-bg);color:var(--er-tx);font-size:11px;padding:3px 10px;border-radius:9999px;">Complex — needs advisor</span></sc-if></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><div><p style="font-size:14px;color:var(--tx);">{{ d.type }}</p><p style="font-size:12px;color:var(--tx-3);">{{ d.client }} · {{ d.caseId }}</p></div><sc-if value="{{ d.complexShow }}" hint-placeholder-val="{{ false }}"><span style="background:var(--er-bg);color:var(--er-tx);font-size:11px;padding:3px 10px;border-radius:9999px;">Complex, needs advisor</span></sc-if></div>
                 <p style="font-size:14px;color:var(--tx-2b);line-height:1.6;background:var(--surface-2);border-radius:12px;padding:12px;margin-bottom:12px;">{{ d.preview }}</p>
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span style="font-size:12px;color:var(--tx-2);">Confidence</span><div style="flex:1;height:6px;background:var(--muted);border-radius:9999px;overflow:hidden;"><div style="{{ d.confBarStyle }}"></div></div><span style="font-size:13px;font-weight:600;color:{{ d.confColor }};">{{ d.confidence }}</span></div>
                 <div style="display:flex;gap:8px;"><button style="flex:1;background:#adee68;color:#0a1120;font-size:13px;padding:9px;border:none;border-radius:8px;cursor:pointer;" style-hover="background:#9ce04f;">Approve</button><button style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;padding:9px;border-radius:8px;cursor:pointer;" style-hover="background:var(--surface-2);">Edit</button><button style="background:var(--surface);border:1px solid var(--border);color:var(--er-tx);font-size:13px;padding:9px 12px;border-radius:8px;cursor:pointer;">Reject</button></div>
@@ -1668,7 +1681,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false };
+  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false, profileMenuOpen: false };
 
   componentDidMount() {
     try {
@@ -1712,7 +1725,7 @@ class Component extends DCLogic {
     const CASES = [
       { id: 'case-1', title: '14 Elm Grove, Bristol BS6 6RG', service: 'Residential CGT', stage: 2, step: 6, deadline: '2026-07-19', completion: '2026-05-20', days: 20, rag: 'amber', action: true, estimate: 12480, cta: 'Upload documents', ctaRoute: 'upload', completed: false },
       { id: 'case-2', title: 'Unit 7, Kingsway Business Park', service: 'Commercial CGT', stage: 1, step: 2, deadline: '2026-08-30', completion: '2026-07-01', days: 62, rag: 'green', action: true, estimate: 0, cta: 'Continue questionnaire', ctaRoute: 'cases', ctaHref: 'new-case.html#step-7', completed: false },
-      { id: 'case-3', title: 'Shares — Meridian Holdings plc', service: 'Other CGT', stage: 3, step: 8, deadline: '2026-06-30', completion: '2026-05-02', days: 1, rag: 'red', action: true, estimate: 4220, cta: 'Review draft', ctaRoute: 'draft', completed: false },
+      { id: 'case-3', title: 'Shares, Meridian Holdings plc', service: 'Other CGT', stage: 3, step: 8, deadline: '2026-06-30', completion: '2026-05-02', days: 1, rag: 'red', action: true, estimate: 4220, cta: 'Review draft', ctaRoute: 'draft', completed: false },
       { id: 'case-4', title: '29 Maple Court, Leeds LS8 2QN', service: 'Residential CGT', stage: 3, step: 10, deadline: '2026-04-12', completion: '2026-02-11', days: 0, rag: 'grey', action: false, estimate: 8650, cta: 'View confirmation', ctaRoute: 'confirmation', completed: true },
     ];
     // progress fill colour: navy conveys confident forward progress; urgency lives in pills/accent
@@ -1741,10 +1754,9 @@ class Component extends DCLogic {
         currentTitle: STEPS[c.step - 1], bars, ctaLabel: c.cta,
         deadlineDateLabel: 'HMRC deadline ' + this.fdate(c.deadline),
         actionNeeded: c.action,
-        // subtle left accent on cases that need attention (amber/red) for at-a-glance urgency
-        cardStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;' + (urgent ? 'border-left:4px solid ' + accentColor + ';' : ''),
+        cardStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;',
         // full-width list-row variant used on the dashboard (shallower padding, tighter gap)
-        rowStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;' + (urgent ? 'border-left:4px solid ' + accentColor + ';' : ''),
+        rowStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;',
         onCta: c.ctaHref ? (() => { window.location.href = c.ctaHref; }) : (() => this.setState({ route: c.ctaRoute || 'cases', selectedCase: c.id })),
         onView: () => this.setState({ route: 'case-detail', selectedCase: c.id }),
       };
@@ -1810,7 +1822,7 @@ class Component extends DCLogic {
     const upBadge = (s) => 'display:inline-flex;align-items:center;gap:5px;border-radius:9999px;padding:4px 11px;font-size:12.5px;font-weight:600;background:' + upStatus[s][0] + ';color:' + upStatus[s][1] + ';';
     const UPLOAD_CATS = [
       { name: 'Sale Completion Statement', why: 'Confirms your final sale price and completion date.', required: true, status: 'Reviewed', files: [{ name: 'Sale Completion Statement.pdf', size: '1.2 MB' }] },
-      { name: 'Purchase Completion Statement', why: 'Shows what you originally paid — this reduces your taxable gain.', required: true, status: 'Uploaded', files: [{ name: 'Purchase Completion Statement.pdf', size: '980 KB' }] },
+      { name: 'Purchase Completion Statement', why: 'Shows what you originally paid, this reduces your taxable gain.', required: true, status: 'Uploaded', files: [{ name: 'Purchase Completion Statement.pdf', size: '980 KB' }] },
       { name: 'Improvement Receipts', why: 'Money spent improving the property can lower your CGT bill.', required: false, status: 'Processing', files: [{ name: 'Kitchen renovation invoice.jpg', size: '3.1 MB' }] },
       { name: 'Identity Documents', why: 'Required by law (anti-money-laundering) before we can file for you.', required: true, status: 'Reviewed', files: [{ name: 'Passport.jpg', size: '2.4 MB' }] },
       { name: 'Proof of Address', why: 'A utility bill or bank statement dated within the last 3 months.', required: true, status: 'Action required', files: [] },
@@ -1879,8 +1891,8 @@ class Component extends DCLogic {
     const baseThread = [
       { id: 'm1', author: 'Sarah Hughes', initials: 'SH', staff: true, category: 'General update', time: '12 Jun, 09:14', body: "Hi James, thanks for uploading your completion statements. I've started the first review and will be in touch shortly with any questions." },
       { id: 'm2', author: 'Daniel Okafor', initials: 'DO', staff: true, category: 'Query from team', time: '15 Jun, 14:30', body: 'Could you confirm whether the property was ever your main residence? If so, roughly which dates did you live there?' },
-      { id: 'm3', author: 'James Whitfield', initials: 'JW', staff: false, category: 'General update', time: '15 Jun, 18:02', body: 'Yes — we lived there from March 2015 to August 2019, then let it out afterwards.' },
-      { id: 'm4', author: 'Sarah Hughes', initials: 'SH', staff: true, category: 'Action required', time: '18 Jun, 11:20', body: 'Perfect, thank you. One last thing — your council tax bill is slightly out of date. Could you upload a more recent proof of address (within the last 3 months)?' },
+      { id: 'm3', author: 'James Whitfield', initials: 'JW', staff: false, category: 'General update', time: '15 Jun, 18:02', body: 'Yes, we lived there from March 2015 to August 2019, then let it out afterwards.' },
+      { id: 'm4', author: 'Sarah Hughes', initials: 'SH', staff: true, category: 'Action required', time: '18 Jun, 11:20', body: 'Perfect, thank you. One last thing, your council tax bill is slightly out of date. Could you upload a more recent proof of address (within the last 3 months)?' },
     ];
     const threadData = this.state.thread || baseThread;
     const thread = threadData.map(m => ({
@@ -1919,33 +1931,33 @@ class Component extends DCLogic {
       { key: 'cases', label: 'My Cases', icon: 'ti ti-folders' },
       { key: 'documents', label: 'Documents', icon: 'ti ti-file-text' },
       { key: 'messages', label: 'Messages', icon: 'ti ti-message', badge: 2 },
+      { key: 'notifications', label: 'Notifications', icon: 'ti ti-bell', badge: 2, to: 'messages' },
       { key: 'payments', label: 'Payments', icon: 'ti ti-credit-card' },
       { key: 'refer', label: 'Refer & Earn', icon: 'ti ti-gift' },
-      { key: 'profile', label: 'Profile & Settings', icon: 'ti ti-settings' },
     ];
     const navItems = navDef.map(n => {
       const active = route === n.key;
       return {
-        label: n.label, icon: n.icon, badge: this.state.empty ? null : n.badge, onClick: nav(n.key),
+        label: n.label, icon: n.icon, badge: this.state.empty ? null : n.badge, onClick: nav(n.to || n.key),
         style: navBase + (active ? 'background:var(--navy);color:#fff;' : 'color:var(--tx-2b);'),
         badgeStyle: 'display:flex;width:20px;height:20px;align-items:center;justify-content:center;border-radius:9999px;font-size:11px;' + (active ? 'background:rgba(255,255,255,0.2);color:#fff;' : 'background:#f44336;color:#fff;'),
       };
     });
     const shortLabel = { dashboard: 'Home', cases: 'Cases', documents: 'Docs', messages: 'Messages', payments: 'Payments' };
-    const mobileNav = navDef.slice(0, 5).map(n => ({
-      icon: n.icon, short: shortLabel[n.key], onClick: nav(n.key),
-      color: route === n.key ? 'var(--tx)' : 'var(--tx-3)',
-    }));
+    const mobileNav = ['dashboard', 'cases', 'documents', 'messages', 'payments'].map(k => {
+      const n = navDef.find(x => x.key === k);
+      return { icon: n.icon, short: shortLabel[k], onClick: nav(n.to || n.key), color: route === n.key ? 'var(--tx)' : 'var(--tx-3)' };
+    });
 
     // AI assistant
     const answerFor = (q) => {
       const l = q.toLowerCase();
-      if (l.includes('document')) return "Right now we're waiting on a recent Proof of Address (within the last 3 months) — a utility bill, bank statement or council tax bill all work. Everything else has been received. You can upload from the Documents tab or snap a photo on your phone.";
-      if (l.includes('status')) return "Your case is at Stage 2, Step 6 — 'Queries & further information'. That means our team is reviewing your details and may ask a couple of questions. No filing happens until you review and approve the draft.";
+      if (l.includes('document')) return "Right now we're waiting on a recent Proof of Address (within the last 3 months), a utility bill, bank statement or council tax bill all work. Everything else has been received. You can upload from the Documents tab or snap a photo on your phone.";
+      if (l.includes('status')) return "Your case is at Stage 2, Step 6, 'Queries & further information'. That means our team is reviewing your details and may ask a couple of questions. No filing happens until you review and approve the draft.";
       if (l.includes('proof of address')) return "It's a legal requirement (anti-money-laundering) to confirm where you live before we can file on your behalf. It must be dated within the last 3 months and show your name and address.";
       if (l.includes('estimate')) return "Your provisional estimate is based on the figures you've entered so far (sale price, purchase price, costs and reliefs). It's marked 'provisional' because our tax team verifies everything before it becomes final.";
       if (l.includes('approve')) return "After you approve your draft, we submit it to HMRC and you'll receive a submission reference and confirmation document. We'll also give you clear instructions on how and when to pay HMRC.";
-      return "I can explain documents, questionnaire questions, your case status and general CGT process. For advice on your specific final figures, I'll point you to your tax team — they handle anything that affects your return.";
+      return "I can explain documents, questionnaire questions, your case status and general CGT process. For advice on your specific final figures, I'll point you to your tax team, they handle anything that affects your return.";
     };
     const aiAsk = (text) => {
       const t = (text != null ? text : this.state.aiDraft || '').trim();
@@ -1967,13 +1979,13 @@ class Component extends DCLogic {
     const pill = (spec) => { const a = spec.split(','); return 'display:inline-flex;align-items:center;gap:6px;border-radius:9999px;padding:3px 10px;font-size:13px;white-space:nowrap;background:' + a[0] + ';color:' + a[1] + ';'; };
     const flowMeta = { onboarding: { label: 'Client · First-time', icon: 'ti ti-sparkles' }, client: { label: 'Client Portal', icon: 'ti ti-users' }, partner: { label: 'Partner Portal', icon: 'ti ti-briefcase' }, admin: { label: 'Staff Admin', icon: 'ti ti-shield-check' } };
     const flowDefs = [
-      { key: 'onboarding', label: 'Client · First-time', desc: 'New client — no cases yet', icon: 'ti ti-sparkles', home: 'onboarding', empty: false },
-      { key: 'client', label: 'Client Portal', desc: 'Populated — active cases', icon: 'ti ti-users', home: 'dashboard', empty: false },
-      { key: 'partner', label: 'Partner Portal', desc: 'Populated — live referrals', icon: 'ti ti-briefcase', home: 'p-dashboard', empty: false },
-      { key: 'admin', label: 'Staff Admin', desc: 'Populated — operations', icon: 'ti ti-shield-check', home: 'a-dashboard', empty: false },
-      { key: 'client', label: 'Client Portal · Empty', desc: 'Empty state — no cases yet', icon: 'ti ti-folder-open', home: 'dashboard', empty: true },
-      { key: 'partner', label: 'Partner Portal · Empty', desc: 'Empty state — no referrals', icon: 'ti ti-folder-open', home: 'p-dashboard', empty: true },
-      { key: 'admin', label: 'Staff Admin · Empty', desc: 'Empty state — no cases', icon: 'ti ti-folder-open', home: 'a-dashboard', empty: true },
+      { key: 'onboarding', label: 'Client · First-time', desc: 'New client, no cases yet', icon: 'ti ti-sparkles', home: 'onboarding', empty: false },
+      { key: 'client', label: 'Client Portal', desc: 'Populated, active cases', icon: 'ti ti-users', home: 'dashboard', empty: false },
+      { key: 'partner', label: 'Partner Portal', desc: 'Populated, live referrals', icon: 'ti ti-briefcase', home: 'p-dashboard', empty: false },
+      { key: 'admin', label: 'Staff Admin', desc: 'Populated, operations', icon: 'ti ti-shield-check', home: 'a-dashboard', empty: false },
+      { key: 'client', label: 'Client Portal · Empty', desc: 'Empty state, no cases yet', icon: 'ti ti-folder-open', home: 'dashboard', empty: true },
+      { key: 'partner', label: 'Partner Portal · Empty', desc: 'Empty state, no referrals', icon: 'ti ti-folder-open', home: 'p-dashboard', empty: true },
+      { key: 'admin', label: 'Staff Admin · Empty', desc: 'Empty state, no cases', icon: 'ti ti-folder-open', home: 'a-dashboard', empty: true },
     ];
     const flowItems = flowDefs.map(f => ({ label: f.label, desc: f.desc, icon: f.icon, active: portal === f.key && !!empty === !!f.empty, onClick: setPortal(f.key, f.home, f.empty) }));
     const flowMenuStyle = 'position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--sh-lg);padding:6px;display:' + (flowOpen ? 'block' : 'none') + ';';
@@ -2010,7 +2022,7 @@ class Component extends DCLogic {
     ];
     const partnerMsgs = [
       { about: 'Margaret Doyle', body: "Thanks for this referral, Eleanor. We've reached the team-review stage and everything is on track. We'll let you know if we need anything.", time: '22 Jun, 09:30', unread: true },
-      { about: 'Gareth Lewis', body: 'Good news — this client has completed their filing. Thank you for the referral!', time: '29 May, 16:10', unread: false },
+      { about: 'Gareth Lewis', body: 'Good news, this client has completed their filing. Thank you for the referral!', time: '29 May, 16:10', unread: false },
     ];
     const resTypeColor = { Guide: 'var(--in-bg),var(--in-tx)', Compliance: 'var(--wa-bg),var(--wa-tx)', Download: 'var(--chip),var(--tx)', Template: 'var(--su-bg),var(--su-tx)' };
     const RESOURCES = [
@@ -2049,7 +2061,7 @@ class Component extends DCLogic {
     /* ═══════════ ADMIN ═══════════ */
     const role = this.state.role, roleOpen = this.state.roleOpen;
     const ROLES = ['Super Admin', 'Admin', 'Tax Advisor / Client Manager', 'Tax Assistant', 'Admin Staff'];
-    // ═══ Staff permissions matrix (RBAC spec) — true | false | 'view' | 'granted' | 'assigned' ═══
+    // ═══ Staff permissions matrix (RBAC spec), true | false | 'view' | 'granted' | 'assigned' ═══
     const PERM_MATRIX = {
       'Super Admin':                  { viewAllCases:true, viewRestricted:true,      markRestricted:true,  reassignCases:true,  internalNotes:true,  commTax:true,  commAdmin:true, approveAI:true,  uploadDocs:true, reviewCGT:true,   signOffCGT:true,  submitHMRC:true,  managePartners:true,  managePricing:true,  viewFinancials:true,  manageUsers:true,  configCapacity:true },
       'Admin':                        { viewAllCases:true, viewRestricted:'granted', markRestricted:true,  reassignCases:true,  internalNotes:true,  commTax:true,  commAdmin:true, approveAI:true,  uploadDocs:true, reviewCGT:true,   signOffCGT:true,  submitHMRC:true,  managePartners:true,  managePricing:false, viewFinancials:true,  manageUsers:false, configCapacity:true },
@@ -2088,14 +2100,14 @@ class Component extends DCLogic {
       { id: 'CGT-2280', client: 'Meridian Holdings (R. Patel)', asset: 'Meridian Holdings plc shares', service: 'Other CGT', step: 9, rag: 'red', days: 1, deadline: '2026-06-30', manager: 'Aisha Khan', payment: 'Paid', aml: 'Verified', status: 'Submitted', restricted: true, estimate: 42200, partner: '' },
       { id: 'CGT-2275', client: 'Tomasz Nowak', asset: 'Unit 4, Avon Trade Park', service: 'Commercial CGT', step: 3, rag: 'green', days: 54, deadline: '2026-08-22', manager: 'Unassigned', payment: 'Paid', aml: 'Action required', status: 'Awaiting staff', restricted: false, estimate: 0, partner: 'Harbour & Slate Solicitors' },
       { id: 'CGT-2270', client: 'Gareth Lewis', asset: '8 Cotham Brow, Bristol', service: 'Residential CGT', step: 5, rag: 'red', days: 9, deadline: '2026-07-08', manager: 'Aisha Khan', payment: 'Paid', aml: 'Verified', status: 'Action required', restricted: false, estimate: 8650, partner: '' },
-      { id: 'CGT-2261', client: 'Hannah Owusu', asset: 'Crypto disposal — mixed', service: 'Other CGT', step: 2, rag: 'green', days: 71, deadline: '2026-09-08', manager: 'Unassigned', payment: 'Failed', aml: 'Not started', status: 'Awaiting staff', restricted: false, estimate: 0, partner: '' },
+      { id: 'CGT-2261', client: 'Hannah Owusu', asset: 'Crypto disposal, mixed', service: 'Other CGT', step: 2, rag: 'green', days: 71, deadline: '2026-09-08', manager: 'Unassigned', payment: 'Failed', aml: 'Not started', status: 'Awaiting staff', restricted: false, estimate: 0, partner: '' },
     ];
     const dLabel = (r, days) => r === 'grey' ? 'Completed' : days <= 0 ? 'Due today' : days + 'd left';
     const mapACase = (c) => ({
       id: c.id, client: c.client, asset: c.asset, service: c.service, manager: c.manager,
       statusStyle: pill(statusColor[c.status]), status: c.status, ragStyle: badge(c.rag), ragDot: dot(c.rag), ragLabel: dLabel(c.rag, c.days),
       payStyle: pill(payColor[c.payment]), payment: c.payment, amlStyle: pill(amlColor[c.aml]), aml: c.aml,
-      deadlineLabel: this.fdate(c.deadline), restricted: c.restricted, estimateLabel: c.estimate > 0 ? this.gbp(c.estimate) : '—', stepText: 'Step ' + c.step + '/10',
+      deadlineLabel: this.fdate(c.deadline), restricted: c.restricted, estimateLabel: c.estimate > 0 ? this.gbp(c.estimate) : '-', stepText: 'Step ' + c.step + '/10',
     });
     const adminCases = ACASES.map(mapACase);
     const adminNeeding = ACASES.filter(c => c.status === 'Action required' || c.rag === 'red').map(mapACase);
@@ -2132,7 +2144,7 @@ class Component extends DCLogic {
     ];
     const AI_DRAFTS = [
       { caseId: 'CGT-2291', client: 'Margaret Doyle', type: 'Document request', confidence: 92, preview: 'Hi Margaret, thank you for your documents. Could you please upload a recent proof of address dated within the last 3 months?', complex: false },
-      { caseId: 'CGT-2288', client: 'James Whitfield', type: 'Complex client reply', confidence: 64, preview: 'Regarding your question about Private Residence Relief on the let period — based on the dates provided, the relief would be apportioned…', complex: true },
+      { caseId: 'CGT-2288', client: 'James Whitfield', type: 'Complex client reply', confidence: 64, preview: 'Regarding your question about Private Residence Relief on the let period, based on the dates provided, the relief would be apportioned…', complex: true },
       { caseId: 'CGT-2270', client: 'Gareth Lewis', type: 'Process explanation', confidence: 88, preview: "Here's what happens next with your HMRC authorisation: you'll receive a request in your Government Gateway account…", complex: false },
     ].map(d => ({ client: d.client, caseId: d.caseId, type: d.type, confidence: d.confidence + '%', preview: d.preview, complexShow: d.complex, confBarStyle: 'height:100%;border-radius:9999px;width:' + d.confidence + '%;background:' + (d.confidence >= 85 ? '#43a047' : d.confidence >= 70 ? '#ffc107' : '#e53935') + ';', confColor: d.confidence >= 85 ? 'var(--su-tx)' : d.confidence >= 70 ? 'var(--wa-tx)' : 'var(--er-tx)' }));
     const extractState = { 'AI extracted': 'var(--in-bg),var(--in-tx)', 'Staff verified': 'var(--su-bg),var(--su-tx)', 'Client confirmed': 'var(--su-bg),var(--su-tx)', 'Needs review': 'var(--wa-bg),var(--wa-tx)' };
@@ -2146,7 +2158,7 @@ class Component extends DCLogic {
     ].map(e => ({ field: e.field, value: e.value, confidence: e.confidence + '%', state: e.state, stateStyle: pill(extractState[e.state]) }));
     const APARTNERS = [
       { firm: 'Harbour & Slate Solicitors', contact: 'Eleanor Briggs', type: 'Solicitor', referrals: 14, status: 'Active', body: 'SRA 482910' },
-      { firm: 'Westfield Estate Agents', contact: 'Mo Rahman', type: 'Estate agent', referrals: 9, status: 'Active', body: '—' },
+      { firm: 'Westfield Estate Agents', contact: 'Mo Rahman', type: 'Estate agent', referrals: 9, status: 'Active', body: '-' },
       { firm: 'Clearwater Financial', contact: 'Janet Cole', type: 'IFA / financial adviser', referrals: 5, status: 'Active', body: 'FCA 716522' },
       { firm: 'Pinnacle Mortgages', contact: 'David Yeung', type: 'Mortgage broker', referrals: 0, status: 'Pending approval', body: 'FCA 904411' },
     ].map(p => ({ firm: p.firm, contact: p.contact, type: p.type, referrals: p.referrals, status: p.status, statusStyle: pill(p.status === 'Active' ? 'var(--su-bg),var(--su-tx)' : p.status === 'Pending approval' ? 'var(--wa-bg),var(--wa-tx)' : 'var(--muted),var(--tx-2b)'), body: p.body }));
@@ -2167,7 +2179,7 @@ class Component extends DCLogic {
       { time: '28 Jun, 11:05', user: 'Daniel Okafor', role: 'Tax Assistant', action: 'Revealed client NI number', caseId: 'CGT-2291', severity: 'Sensitive' },
       { time: '27 Jun, 09:30', user: 'Sarah Hughes', role: 'Tax Advisor / Client Manager', action: 'Draft sent to client', caseId: 'CGT-2288', severity: 'Info' },
       { time: '26 Jun, 14:18', user: 'System', role: 'Admin', action: 'Partner referral received & linked', caseId: 'CGT-2275', severity: 'Info' },
-      { time: '25 Jun, 10:02', user: 'Priya Patel', role: 'Super Admin', action: 'Changed Aisha Khan capacity 20 → 22', caseId: '—', severity: 'Sensitive' },
+      { time: '25 Jun, 10:02', user: 'Priya Patel', role: 'Super Admin', action: 'Changed Aisha Khan capacity 20 → 22', caseId: '-', severity: 'Sensitive' },
     ].map(a => ({ time: a.time, user: a.user, role: a.role, action: a.action, caseId: a.caseId, severity: a.severity, sevStyle: pill(sevColor[a.severity]) }));
     const aPayments = ACASES.map(c => ({ client: c.client, ref: c.id, service: c.service, amount: c.service === 'Other CGT' ? '£495' : c.service === 'Commercial CGT' ? '£695' : '£595', payStyle: pill(payColor[c.payment]), payment: c.payment }));
     const reportCards = [
@@ -2193,8 +2205,8 @@ class Component extends DCLogic {
 
     /* ═══════════ CLIENT · FIRST-TIME (ONBOARDING) PORTAL ═══════════ */
     const onboardSteps = [
-      { num: '1', icon: 'ti ti-home-search', title: 'Tell us about your disposal', desc: 'Answer a few simple questions about the property, shares or other asset you sold. No jargon — we guide you through every field.' },
-      { num: '2', icon: 'ti ti-cloud-upload', title: 'Upload your documents securely', desc: 'Add your completion statements and receipts. You can snap a photo on your phone — we extract the figures for you.' },
+      { num: '1', icon: 'ti ti-home-search', title: 'Tell us about your disposal', desc: 'Answer a few simple questions about the property, shares or other asset you sold. No jargon, we guide you through every field.' },
+      { num: '2', icon: 'ti ti-cloud-upload', title: 'Upload your documents securely', desc: 'Add your completion statements and receipts. You can snap a photo on your phone, we extract the figures for you.' },
       { num: '3', icon: 'ti ti-checkbox', title: 'We prepare & file with HMRC', desc: 'Our tax team checks everything, you approve the draft, and we submit your CGT return to HMRC on your behalf.' },
     ];
     const onboardChecklist = [
@@ -2216,7 +2228,7 @@ class Component extends DCLogic {
       payments:      { icon: 'ti ti-credit-card',      title: 'No invoices yet',           desc: 'Your payments, invoices and add-ons will appear here after you start a filing.', cta: '', ctaKind: '' },
       refer:         { icon: 'ti ti-gift',             title: 'Nothing to show yet',       desc: "You haven't referred anyone yet. Share your link and you both earn credit.", cta: '', ctaKind: '' },
       // partner
-      'p-dashboard': { icon: 'ti ti-users',            title: 'No referrals yet',          desc: "When you refer a client, you'll track their progress here — without seeing sensitive financial details.", cta: 'Submit new referral', ctaKind: 'psubmit' },
+      'p-dashboard': { icon: 'ti ti-users',            title: 'No referrals yet',          desc: "When you refer a client, you'll track their progress here, without seeing sensitive financial details.", cta: 'Submit new referral', ctaKind: 'psubmit' },
       'p-referrals': { icon: 'ti ti-users',            title: 'No referrals yet',          desc: 'Clients you refer will appear here so you can follow their progress from invite to filed.', cta: 'Submit new referral', ctaKind: 'psubmit' },
       'p-messages':  { icon: 'ti ti-message',          title: 'No messages yet',           desc: 'Updates from the FileCGTOnline team about your referrals will appear here.', cta: '', ctaKind: '' },
       // admin
@@ -2251,7 +2263,7 @@ class Component extends DCLogic {
 
     return {
       isDashboard: route === 'dashboard' && !clientEmpty, isCases: route === 'cases' && !clientEmpty, isDocuments: route === 'documents' && !clientEmpty,
-      isMessages: route === 'messages' && !clientEmpty, isPayments: route === 'payments' && !clientEmpty, isRefer: route === 'refer' && !clientEmpty, isProfile: route === 'profile',
+      isMessages: route === 'messages' && !clientEmpty, isPayments: route === 'payments' && !clientEmpty, isRefer: route === 'refer' && !clientEmpty, isProfile: route === 'profile', isSettings: route === 'settings',
       // case detail (full journey)
       isCaseDetail: route === 'case-detail' && !clientEmpty && !!selRaw,
       backToCases: nav('dashboard'),
@@ -2292,14 +2304,14 @@ class Component extends DCLogic {
       approveOpen: this.state.approveOpen,
       approveOverlayStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.approveOpen ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
       openApprove: () => this.setState({ approveOpen: true }), closeApprove: () => this.setState({ approveOpen: false }),
-      // ── Complete-profile reminder ──
-      profileReminderStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.profileReminder ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
+      // ── Complete-profile notification (dashboard banner) ──
+      profileBannerStyle: 'display:' + (this.state.profileReminder ? 'flex' : 'none') + ';align-items:center;gap:14px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:18px;box-shadow:var(--sh-sm);',
       dismissProfileReminder: () => this.setState({ profileReminder: false }),
-      goCompleteProfile: () => { window.location.href = 'complete-profile.dc.html'; },
+      goCompleteProfile: () => this.setState({ route: 'profile', profileReminder: false, profileMenuOpen: false }),
       confirmApprove: () => this.setState({ approveOpen: false, draftApproved: true }),
       complianceAdded: this.state.complianceAdded,
       toggleCompliance: () => this.setState(s => ({ complianceAdded: !s.complianceAdded })),
-      complianceCtaLabel: this.state.complianceAdded ? 'Added — Compliance Guarantee' : 'Add Compliance Guarantee · £149',
+      complianceCtaLabel: this.state.complianceAdded ? 'Added, Compliance Guarantee' : 'Add Compliance Guarantee · £149',
       complianceCtaStyle: 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font-size:14px;font-weight:600;padding:12px;border-radius:12px;cursor:pointer;border:none;' + (this.state.complianceAdded ? 'background:var(--su-bg);color:var(--su-tx);' : 'background:var(--navy);color:#fff;'),
       // ── Submission Confirmation ──
       isConfirmation: route === 'confirmation' && !clientEmpty,
@@ -2314,7 +2326,7 @@ class Component extends DCLogic {
       heroStripStyle: heroRaw ? 'display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-radius:16px;padding:16px 18px;background:' + heroTint[heroRaw.rag].bg + ';border:1px solid ' + heroTint[heroRaw.rag].bd + ';' : '',
       heroIconWrapStyle: heroRaw ? 'display:flex;width:44px;height:44px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--surface);color:' + heroTint[heroRaw.rag].ic + ';' : '',
       heroIcon: heroRaw && heroRaw.rag === 'red' ? 'ti ti-alert-triangle' : 'ti ti-clock-exclamation',
-      heroKicker: heroRaw ? (heroRaw.rag === 'red' ? 'Urgent — needs action now' : 'Deadline approaching') : '',
+      heroKicker: heroRaw ? (heroRaw.rag === 'red' ? 'Urgent, needs action now' : 'Deadline approaching') : '',
       heroKickerStyle: heroRaw ? 'font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:' + heroTint[heroRaw.rag].ic + ';' : '',
       heroTitle: heroRaw ? heroRaw.title : '',
       heroSub: heroRaw ? ('HMRC deadline ' + this.fdate(heroRaw.deadline)) : '',
@@ -2338,6 +2350,17 @@ class Component extends DCLogic {
         try { document.documentElement.setAttribute('data-theme', next); localStorage.setItem('cgt-theme', next); } catch (e) {}
         this.setState({ theme: next });
       },
+      // sidebar theme segmented (Light / Dark)
+      setThemeLight: () => { try { document.documentElement.setAttribute('data-theme', 'light'); localStorage.setItem('cgt-theme', 'light'); } catch (e) {} this.setState({ theme: 'light' }); },
+      setThemeDark: () => { try { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('cgt-theme', 'dark'); } catch (e) {} this.setState({ theme: 'dark' }); },
+      themeSegBase: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:background .15s,color .15s,box-shadow .15s;',
+      themeLightStyle: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:.15s;' + (this.state.theme !== 'dark' ? 'background:var(--surface);color:var(--tx);box-shadow:var(--sh-sm);' : 'background:transparent;color:var(--tx-2);'),
+      themeDarkStyle: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:.15s;' + (this.state.theme === 'dark' ? 'background:var(--surface);color:var(--tx);box-shadow:var(--sh-sm);' : 'background:transparent;color:var(--tx-2);'),
+      // sidebar profile dropdown (Profile / Settings)
+      toggleProfileMenu: () => this.setState(s => ({ profileMenuOpen: !s.profileMenuOpen })),
+      profileMenuStyle: 'position:absolute;left:0;right:0;bottom:calc(100% + 8px);z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--sh-lg);padding:6px;display:' + (this.state.profileMenuOpen ? 'block' : 'none') + ';',
+      goProfileItem: () => this.setState({ route: 'profile', profileMenuOpen: false }),
+      goSettingsItem: () => this.setState({ route: 'settings', profileMenuOpen: false }),
       goCases: nav('cases'), goDocuments: nav('documents'), goMessages: nav('messages'), goPayments: nav('payments'), goProfile: nav('profile'),
       toggleFlow: () => {},
       activeCases, completedCases, recentDocs, filteredDocs, docTabs, invoices, referrals, thread,

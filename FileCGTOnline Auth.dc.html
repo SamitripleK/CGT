@@ -53,7 +53,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     </a>
     <div style="position:relative;z-index:1;">
       <h1 style="font-size:38px;font-weight:600;color:#fff;line-height:1.15;letter-spacing:-0.01em;margin-bottom:20px;">{{ heroTitle }}</h1>
-      <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:380px;margin-bottom:32px;">A qualified UK accountant calculates your Capital Gains Tax and files it with HMRC — correctly and on time.</p>
+      <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:380px;margin-bottom:32px;">A qualified UK accountant calculates your Capital Gains Tax and files it with HMRC, correctly and on time.</p>
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="display:flex;align-items:center;gap:12px;"><i class="ti ti-circle-check-filled" style="color:#83C341;font-size:20px;"></i><span style="font-size:15px;color:rgba(255,255,255,0.85);">Track every case in one secure place</span></div>
         <div style="display:flex;align-items:center;gap:12px;"><i class="ti ti-circle-check-filled" style="color:#83C341;font-size:20px;"></i><span style="font-size:15px;color:rgba(255,255,255,0.85);">Upload documents and message your team</span></div>
@@ -92,7 +92,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
         <div>
           <h2 style="font-size:28px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Create your account</h2>
-          <p style="font-size:15px;color:var(--tx-2);margin-bottom:24px;">It only takes a minute. You'll complete your profile and verify your details after signing up.</p>
+          <p style="font-size:15px;color:var(--tx-2);margin-bottom:24px;">It only takes a minute. We'll verify your email, then you can finish your profile from your dashboard.</p>
 
           <button onClick="{{ submit }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--surface);border:1px solid var(--border-2);border-radius:12px;padding:13px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;color:var(--tx);cursor:pointer;" style-hover="background:var(--surface-2);">
             <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
@@ -113,6 +113,20 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
         </div>
       </sc-if>
 
+      <!-- ═══ VERIFY EMAIL ═══ -->
+      <sc-if value="{{ isVerify }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;width:56px;height:56px;align-items:center;justify-content:center;border-radius:16px;background:var(--green-tint);color:#6FAE32;margin-bottom:16px;"><i class="ti ti-mail-check" style="font-size:28px;"></i></div>
+          <h2 style="font-size:28px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Verify your email</h2>
+          <p style="font-size:15px;color:var(--tx-2);margin-bottom:24px;">We've sent a 6-digit code to <b style="color:var(--tx);">{{ email }}</b>. Enter it below to activate your account.</p>
+          <label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Verification code</label>
+          <input value="{{ code }}" onInput="{{ onCode }}" inputmode="numeric" maxlength="6" placeholder="––––––" style="width:100%;text-align:center;letter-spacing:12px;font-size:24px;font-weight:600;border:1px solid var(--border-2);border-radius:12px;padding:14px;color:var(--tx);outline:none;background:var(--surface);margin-bottom:16px;" />
+          <button onClick="{{ verifyEmail }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Verify &amp; continue <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
+          <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:20px;">Didn't get the code? <a onClick="{{ resendCode }}" style="color:var(--tx);font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">{{ resendLabel }}</a></p>
+          <p style="text-align:center;font-size:13px;color:var(--tx-3);margin-top:8px;"><a onClick="{{ backToSignup }}" style="cursor:pointer;color:var(--tx-2);" style-hover="text-decoration:underline;"><i class="ti ti-arrow-left" style="font-size:13px;"></i> Use a different email</a></p>
+        </div>
+      </sc-if>
+
       <p style="text-align:center;font-size:12px;color:var(--tx-3);margin-top:28px;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="ti ti-lock" style="font-size:14px;"></i> Secured with 256-bit encryption</p>
     </div>
   </div>
@@ -121,7 +135,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { mode: 'login', firstName: '', lastName: '', email: '', theme: 'light' };
+  state = { mode: 'login', firstName: '', lastName: '', email: '', code: '', resent: false, theme: 'light' };
 
   componentDidMount() {
     try {
@@ -137,17 +151,26 @@ class Component extends DCLogic {
 
   renderVals() {
     const s = this.state;
-    const isLogin = s.mode === 'login', isSignup = s.mode === 'signup';
+    const isLogin = s.mode === 'login', isSignup = s.mode === 'signup', isVerify = s.mode === 'verify';
     const go = () => { window.location.href = 'FileCGTOnline Portal.dc.html'; };
     const createAccount = () => {
       try {
-        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email }));
+        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, emailVerified: false, profileSkipped: true, profileComplete: false }));
       } catch (e) {}
-      window.location.href = 'complete-profile.dc.html';
+      this.setState({ mode: 'verify', code: '', resent: false });
+    };
+    const verifyEmail = () => {
+      try { const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}'); su.emailVerified = true; localStorage.setItem('cgt-signup', JSON.stringify(su)); } catch (e) {}
+      window.location.href = 'FileCGTOnline Portal.dc.html';
     };
 
     return {
-      isLogin, isSignup,
+      isLogin, isSignup, isVerify,
+      code: s.code, onCode: e => this.setState({ code: e.target.value.replace(/[^0-9]/g, '').slice(0, 6) }),
+      verifyEmail,
+      resendLabel: s.resent ? 'Code re-sent' : 'Resend code',
+      resendCode: () => this.setState({ resent: true }),
+      backToSignup: () => this.setState({ mode: 'signup', code: '' }),
       themeIcon: this.state.theme === 'dark' ? 'ti ti-sun' : 'ti ti-moon',
       toggleTheme: () => {
         const next = this.state.theme === 'dark' ? 'light' : 'dark';
