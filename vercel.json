@@ -8,6 +8,10 @@
     { "source": "/signup", "destination": "/FileCGTOnline Auth.dc.html" },
     { "source": "/portal", "destination": "/FileCGTOnline Portal.dc.html" },
     { "source": "/new-case", "destination": "/new-case.html" },
-    { "source": "/partner", "destination": "/partner-onboarding.html" }
+    { "source": "/partner", "destination": "/partner-onboarding.html" },
+    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
+    { "source": "/privacy-notice", "destination": "/privacy-notice.html" },
+    { "source": "/letter-of-engagement", "destination": "/letter-of-engagement.html" },
+    { "source": "/cookie-policy", "destination": "/cookie-policy.html" }
   ]
 }

@@ -107,7 +107,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
             <div style="flex:1;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Last name</label><input value="{{ lastName }}" onInput="{{ onLastName }}" placeholder="Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
           </div>
 
-          <label style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;cursor:pointer;"><input type="checkbox" style="width:16px;height:16px;margin-top:2px;accent-color:#83C341;flex-shrink:0;" /><span style="font-size:13px;color:var(--tx-2);line-height:1.5;">I agree to the <a href="#" style="color:#6FAE32;text-decoration:underline;">Terms of Service</a> and <a href="#" style="color:#6FAE32;text-decoration:underline;">Privacy Policy</a>.</span></label>
+          <label style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;cursor:pointer;"><input type="checkbox" style="width:16px;height:16px;margin-top:2px;accent-color:#83C341;flex-shrink:0;" /><span style="font-size:13px;color:var(--tx-2);line-height:1.5;">I agree to the <a href="/terms-of-service" target="_blank" rel="noopener" style="color:#6FAE32;text-decoration:underline;">Terms of Service</a> and <a href="/privacy-notice" target="_blank" rel="noopener" style="color:#6FAE32;text-decoration:underline;">Privacy Notice</a>.</span></label>
           <button onClick="{{ createAccount }}" style="width:100%;background:#83C341;color:#0a1120;font-size:15px;font-weight:600;padding:14px;border:none;border-radius:12px;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#6FAE32;">Create account <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
           <p style="text-align:center;font-size:14px;color:var(--tx-2);margin-top:22px;">Already have an account? <a onClick="{{ toggleMode }}" style="color:var(--tx);font-weight:600;cursor:pointer;" style-hover="text-decoration:underline;">Log in</a></p>
         </div>
@@ -155,7 +155,7 @@ class Component extends DCLogic {
     const go = () => { window.location.href = 'FileCGTOnline Portal.dc.html'; };
     const createAccount = () => {
       try {
-        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, emailVerified: false, profileSkipped: true, profileComplete: false }));
+        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, emailVerified: false, profileSkipped: true, profileComplete: false, caseStarted: false }));
       } catch (e) {}
       this.setState({ mode: 'verify', code: '', resent: false });
     };

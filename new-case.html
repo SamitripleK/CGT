@@ -25,7 +25,7 @@
 })();
 </script>
 <title>Start a New Case · FileCGTOnline</title>
-<meta name="description" content="Guided Capital Gains Tax case setup, choose your service, add details, pay securely, sign, answer guided questions, upload documents, verify your identity and submit for review." />
+<meta name="description" content="Guided Capital Gains Tax case setup in 3 simple steps: your case information, an AI-assisted chat, then review, pricing and secure payment." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -107,44 +107,9 @@ a{color:inherit;}
   background:transparent;border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-in);cursor:pointer;transition:.15s;}
 .btn-exit:hover{background:var(--cream);color:var(--text);}
 
-/* mobile progress (tablet/mobile only) */
-.mprog{display:none;padding:14px 20px 16px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:var(--top-h);z-index:40;}
-.mprog .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;}
-.mprog .phase{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--green-link);}
-.mprog .count{font-size:12.5px;color:var(--muted);}
-.mprog h2{font-size:18px;font-weight:600;}
-.mprog .bar{height:6px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;margin-top:10px;}
-.mprog .fill{height:100%;background:var(--green);border-radius:var(--r-pill);transition:width .4s cubic-bezier(.4,0,.2,1);}
-
 /* grid */
 .grid{flex:1;display:grid;grid-template-columns:266px minmax(0,1fr);grid-template-areas:"nav main";
   gap:36px;max-width:1060px;width:100%;margin:0 auto;padding:30px 24px calc(var(--bar-h) + 32px);}
-
-/* ---------- step navigation (desktop) ---------- */
-.stepnav{grid-area:nav;position:sticky;top:calc(var(--top-h) + 28px);align-self:start;max-height:calc(100vh - var(--top-h) - 56px);overflow:auto;
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:18px 14px;}
-.phase{margin-bottom:8px;}
-.phase:last-child{margin-bottom:0;}
-.phase-head{display:flex;align-items:center;gap:9px;padding:8px 10px 4px;}
-.phase-num{width:20px;height:20px;border-radius:6px;background:var(--cream);color:var(--muted-3);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.phase.active .phase-num{background:var(--navy);color:var(--lime);}
-.phase.done .phase-num{background:var(--su-soft);color:var(--su-tx);}
-.phase-title{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);}
-.phase.active .phase-title{color:var(--text);}
-
-.snav{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:none;background:transparent;
-  padding:9px 10px;border-radius:var(--r-in);cursor:pointer;transition:.15s;color:var(--muted-3);font-size:14px;position:relative;}
-.snav:not(:disabled):hover{background:var(--cream);}
-.snav[disabled]{cursor:not-allowed;color:var(--muted-2);opacity:.75;}
-.snav.current{background:var(--navy);color:#fff;font-weight:500;}
-.snav .dot{width:26px;height:26px;border-radius:8px;background:var(--cream-2);color:var(--muted-3);font-size:12.5px;font-weight:600;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.15s;}
-.snav.current .dot{background:rgba(255,255,255,0.16);color:#fff;}
-.snav.done .dot{background:var(--su-soft);color:var(--su-tx);}
-.snav.current.done .dot{background:var(--lime);color:var(--ink);}
-.snav .lbl{flex:1;min-width:0;}
-.snav .mini{display:block;font-size:11.5px;color:var(--muted-2);}
-.snav.current .mini{color:rgba(255,255,255,0.6);}
 
 /* ---------- stage / step content ---------- */
 .stage{grid-area:main;min-width:0;}
@@ -207,6 +172,7 @@ a{color:inherit;}
 
 /* segmented radio (ownership) */
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.seg.seg-3{grid-template-columns:repeat(3,1fr);}
 .seg .opt{display:flex;align-items:center;gap:12px;padding:16px;border:1.5px solid var(--border);border-radius:var(--r-in);cursor:pointer;transition:.16s;font-size:15px;font-weight:500;}
 .seg .opt:hover{border-color:var(--border-in);}
 .seg .opt.sel{border-color:var(--green);background:var(--su-soft);}
@@ -257,7 +223,9 @@ a{color:inherit;}
 .pay-m.sel{border-color:var(--text);background:var(--surface);box-shadow:0 0 0 3px rgba(27,45,79,0.08);}
 .pay-m i{font-size:20px;}
 .pay-m.apple{background:#000;color:#fff;border-color:#000;}
-.pay-m.gpay{background:var(--surface);}
+.pay-m.gpay{background:#fff;border-color:#dadce0;}
+.pay-m.gpay.sel{box-shadow:0 0 0 3px rgba(27,45,79,0.18);}
+.pay-logo{height:24px;width:auto;display:block;}
 .stripe-fields{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
 .stripe-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted-2);margin-top:2px;}
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
@@ -271,75 +239,8 @@ a{color:inherit;}
 .big-ico.ok{background:var(--su-soft);}.big-ico.ok i{color:var(--su-tx);}
 .big-ico.bad{background:var(--er-bg);}.big-ico.bad i{color:var(--er-tx);}
 
-/* ---------- agreement ---------- */
-.doc-scroll{height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r-in);padding:20px 22px;background:var(--surface);font-size:13.5px;line-height:1.7;color:var(--muted-3);}
-.doc-scroll h4{font-size:15px;color:var(--text);margin:16px 0 6px;}
-.doc-scroll h4:first-child{margin-top:0;}
-.sign-pad{border:1.5px dashed var(--border-in);border-radius:var(--r-in);padding:16px;background:var(--cream);}
-.sign-input{width:100%;border:none;background:transparent;outline:none;font-size:30px;font-family:'Segoe Script','Bradley Hand',cursive;color:var(--text);padding:8px 4px;border-bottom:2px solid var(--border-in);}
-.sign-input::placeholder{font-family:'Jost',sans-serif;font-size:15px;color:var(--muted-2);}
 .chk-row{display:flex;align-items:flex-start;gap:11px;cursor:pointer;font-size:14px;line-height:1.55;color:var(--muted-3);}
 .chk-row input{width:18px;height:18px;margin-top:1px;accent-color:var(--green);flex-shrink:0;}
-
-/* ---------- questionnaire ---------- */
-.q-progress{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
-.q-progress .bar{flex:1;height:8px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;}
-.q-progress .fill{height:100%;background:var(--green);width:18%;border-radius:var(--r-pill);transition:width .4s;}
-.q-progress .pct{font-size:14px;font-weight:600;color:var(--text);}
-.q-sec{border:1px solid var(--border);border-radius:var(--r-card);margin-bottom:12px;overflow:hidden;background:var(--surface);}
-.q-sec summary{display:flex;align-items:center;gap:13px;padding:16px 18px;cursor:pointer;list-style:none;user-select:none;}
-.q-sec summary::-webkit-details-marker{display:none;}
-.q-sec .snum{width:30px;height:30px;border-radius:9px;background:var(--cream);color:var(--muted-3);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.q-sec[data-done="1"] .snum{background:var(--su-soft);color:var(--su-tx);}
-.q-sec .stitle{flex:1;font-size:15px;font-weight:600;}
-.q-sec .stitle span{display:block;font-size:12.5px;font-weight:400;color:var(--muted);}
-.q-sec .chev{color:var(--muted-2);transition:.25s;}
-.q-sec[open] .chev{transform:rotate(180deg);}
-.q-sec .qbody{padding:4px 18px 20px;border-top:1px solid var(--line);}
-.ai-field{border:1px solid var(--border);background:var(--in-bg);border-radius:var(--r-in);padding:13px 15px;}
-.ai-tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--in-tx);background:var(--in-bg);padding:3px 10px;border-radius:var(--r-pill);margin-bottom:9px;}
-.ai-actions{display:flex;gap:8px;margin-top:10px;}
-.chip-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:var(--r-pill);border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:.15s;}
-.chip-btn:hover{border-color:var(--green);color:var(--green-link);}
-.chip-btn.solid{background:var(--navy);color:#fff;border-color:var(--text);}
-.chip-btn.solid:hover{background:var(--navy-dark);color:#fff;}
-
-/* ---------- documents ---------- */
-.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.doc-card{border:1px solid var(--border);border-radius:var(--r-card);padding:18px;background:var(--surface);display:flex;flex-direction:column;}
-.doc-card .dc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-.doc-card h4{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;}
-.doc-card .why{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:12px;flex:1;}
-.doc-card .fmt{font-size:11.5px;color:var(--muted-2);margin-bottom:12px;}
-.drop{border:1.5px dashed var(--border-in);border-radius:var(--r-in);padding:16px;text-align:center;cursor:pointer;transition:.16s;background:var(--cream);}
-.drop:hover,.drop.drag{border-color:var(--green);background:var(--su-soft);}
-.drop i{font-size:24px;color:var(--muted-2);}
-.drop p{font-size:13px;color:var(--muted-3);margin-top:6px;}
-.drop .cam{font-size:12px;color:var(--green-link);margin-top:4px;display:none;}
-.uploaded{display:none;align-items:center;gap:11px;border:1px solid var(--border);border-radius:var(--r-in);padding:11px 13px;background:var(--surface);}
-.uploaded.show{display:flex;}
-.uploaded .fi{width:36px;height:36px;border-radius:9px;background:var(--er-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.uploaded .fi i{color:var(--er-tx);font-size:18px;}
-.uploaded .meta{flex:1;min-width:0;}
-.uploaded .meta .nm{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.uploaded .meta .sz{font-size:11.5px;color:var(--muted-2);}
-.uploaded .act{display:flex;gap:4px;}
-.icon-btn{width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:var(--muted-2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
-.icon-btn:hover{background:var(--cream);color:var(--text);}
-.icon-btn.danger:hover{background:var(--er-bg);color:var(--er-tx);}
-.up-progress{display:none;height:5px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;margin-top:10px;}
-.up-progress.show{display:block;}
-.up-progress .fill{height:100%;width:0;background:var(--green);transition:width .2s;}
-
-/* ---------- verification ---------- */
-.verify-check{display:flex;flex-direction:column;gap:10px;}
-.vc-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--r-in);font-size:14px;}
-.vc-item .vi{width:34px;height:34px;border-radius:9px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.vc-item .vi i{color:var(--text);font-size:18px;}
-.vc-item .vt{flex:1;}
-.vc-item .vt span{display:block;font-size:12.5px;color:var(--muted);}
-.provider{display:flex;align-items:center;gap:14px;padding:18px;border:1px dashed var(--border-in);border-radius:var(--r-in);background:var(--cream);}
-.provider .plogo{width:46px;height:46px;border-radius:12px;background:var(--navy);color:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
 
 /* ---------- review ---------- */
 .review-list{display:flex;flex-direction:column;}
@@ -355,25 +256,6 @@ a{color:inherit;}
 .rev-item .edit{font-size:13px;font-weight:500;color:var(--green-link);background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:8px;transition:.15s;}
 .rev-item .edit:hover{background:var(--su-soft);}
 
-/* ---------- summary (right rail) ---------- */
-.summary{grid-area:side;position:sticky;top:calc(var(--top-h) + 28px);align-self:start;}
-.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--sh-card);}
-.sum-head{background:var(--navy);color:#fff;padding:18px 20px;}
-.sum-head .lab{font-size:11.5px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:.06em;}
-.sum-head .ref{font-size:17px;font-weight:600;margin-top:3px;}
-.sum-head .svc{font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px;}
-.sum-body{padding:18px 20px;}
-.sum-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;font-size:14px;border-bottom:1px solid var(--line);}
-.sum-row:last-child{border-bottom:none;}
-.sum-row .k{color:var(--muted);}
-.sum-row .v{font-weight:500;text-align:right;}
-.sum-progress{padding:16px 20px;background:var(--cream);border-top:1px solid var(--border);}
-.sum-progress .row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:8px;}
-.sum-progress .bar{height:7px;background:var(--line);border-radius:var(--r-pill);overflow:hidden;}
-.sum-progress .fill{height:100%;background:var(--green);border-radius:var(--r-pill);transition:width .4s;}
-.sum-help{padding:16px 20px;font-size:12.5px;color:var(--muted);line-height:1.55;border-top:1px solid var(--border);display:flex;gap:9px;}
-.sum-help i{color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px;}
-
 /* ---------- action bar ---------- */
 .actionbar{position:fixed;left:0;right:0;bottom:0;z-index:45;height:var(--bar-h);display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:0 24px;background:var(--surface-blur);backdrop-filter:blur(10px);border-top:1px solid var(--border);}
@@ -384,6 +266,7 @@ a{color:inherit;}
 .btn-primary:disabled{background:var(--border-in);color:#fff;cursor:not-allowed;}
 .btn-lime{background:var(--lime);color:var(--ink);}
 .btn-lime:hover{background:var(--lime-hover);}
+.btn-lime:disabled{background:var(--border-in);color:var(--muted);cursor:not-allowed;}
 .btn-ghost{background:transparent;color:var(--muted-3);border-color:var(--border);}
 .btn-ghost:hover{background:var(--cream);color:var(--text);}
 .btn-text{background:transparent;color:var(--muted-3);border:none;padding:12px 14px;}
@@ -427,62 +310,14 @@ a{color:inherit;}
 
 .hide{display:none !important;}
 
-/* ============================================================
-   RESTRUCTURE ADDITIONS · intro · estimate · deadline · celebrate · roadmap
-   ============================================================ */
-
-/* ---- intro / how-it-works ---- */
-body.on-intro .grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"main";}
-body.on-intro .stepnav,body.on-intro .summary{display:none !important;}
-body.on-intro .mprog{display:none !important;}
-body.on-intro .actionbar{display:none !important;}
-.introview{display:none;max-width:940px;margin:0 auto;animation:rise .4s cubic-bezier(.4,0,.2,1);}
-.introview.show{display:block;}
-.intro-hero{text-align:center;margin:10px auto 24px;max-width:620px;}
-.intro-hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--green-link);background:var(--su-soft);padding:7px 15px;border-radius:var(--r-pill);margin-bottom:18px;}
-.intro-hero h1{font-size:34px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px;}
-.intro-hero h1 .hl{color:var(--green);}
-.intro-hero p{font-size:16.5px;color:var(--muted);line-height:1.6;}
-.journey{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:26px;}
-.jcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px 20px;box-shadow:var(--sh-card);transition:.2s;overflow:hidden;}
-.jcard:hover{transform:translateY(-3px);box-shadow:var(--sh-pop);}
-.jcard .jtop{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
-.jcard .jnum{width:38px;height:38px;border-radius:12px;background:var(--navy);color:var(--lime);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.jcard .jwho{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill);}
-.jwho.you{background:var(--su-soft);color:var(--su-tx);}
-.jwho.team{background:var(--in-bg);color:var(--in-tx);}
-.jwho.both{background:var(--wa-bg);color:var(--wa-tx);}
-.jcard h3{font-size:18px;font-weight:600;margin:8px 0 4px;}
-.jcard .jsub{font-size:13.5px;color:var(--muted);line-height:1.5;margin-bottom:0;}
-.jcard ul{list-style:none;display:grid;gap:9px;}
-.jcard li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--muted-3);line-height:1.45;}
-.jcard li i{font-size:16px;color:var(--green);flex-shrink:0;margin-top:1px;}
-.jcard .jtime{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted-2);display:flex;align-items:center;gap:7px;}
-.intro-reassure{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:26px;}
-.ir-item{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted-3);background:var(--surface);border:1px solid var(--border);padding:10px 16px;border-radius:var(--r-pill);}
-.ir-item i{color:var(--su-tx);font-size:17px;}
-.intro-cta{text-align:center;margin-bottom:30px;}
-.intro-cta .note{font-size:13px;color:var(--muted-2);margin-top:12px;}
-.journey .jcard{padding:20px 20px;}
-.journey .jcard h3{margin-top:10px;}
-
-/* ---- provisional CGT estimate ---- */
+/* ---- provisional CGT estimate (compact, review) ---- */
 .est-card{background:linear-gradient(150deg,var(--navy),var(--navy-dark));color:#fff;border-radius:var(--r-card);padding:20px 22px;position:relative;overflow:hidden;}
 .est-card::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(173,238,104,0.10);}
 .est-card .elab{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:7px;}
 .est-card .elab i{color:var(--lime);font-size:15px;}
 .est-card .eval{font-size:38px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin:8px 0 2px;}
 .est-card .eval.empty{font-size:17px;font-weight:500;color:rgba(255,255,255,0.7);letter-spacing:0;}
-.est-card .etag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--lime);background:rgba(173,238,104,0.14);padding:4px 11px;border-radius:var(--r-pill);margin-top:6px;}
 .est-card .ehint{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;margin-top:12px;}
-.est-flash{animation:estflash .5s ease;}
-@keyframes estflash{0%{transform:scale(1);}40%{transform:scale(1.04);}100%{transform:scale(1);}}
-.sum-est{padding:16px 20px;border-top:1px solid var(--border);}
-.sum-est .k{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);display:flex;align-items:center;gap:6px;}
-.sum-est .k i{color:var(--green);font-size:14px;}
-.sum-est .v{font-size:24px;font-weight:700;letter-spacing:-0.01em;margin-top:4px;}
-.sum-est .v.empty{font-size:13.5px;font-weight:500;color:var(--muted-2);letter-spacing:0;}
-.sum-est .prov{font-size:11px;color:var(--muted-2);margin-top:3px;}
 
 /* ---- 60-day deadline countdown (RAG) ---- */
 .deadline{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-in);border:1px solid var(--border);background:var(--surface);}
@@ -498,20 +333,6 @@ body.on-intro .actionbar{display:none !important;}
 .deadline.rag-amber{--rag:var(--wa-dot);} .deadline.rag-amber .dt-main{color:var(--wa-tx);}
 .deadline.rag-red{--rag:var(--er-dot);}   .deadline.rag-red .dt-main{color:var(--er-tx);}
 .deadline.empty .ring{background:var(--cream-2);} .deadline.empty .ring .rn{color:var(--muted-2);font-size:18px;}
-.sum-deadline{padding:16px 20px;border-top:1px solid var(--border);}
-
-/* ---- stage completion celebration ---- */
-.celebrate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(27,45,79,0.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.28s;}
-.celebrate.show{opacity:1;pointer-events:auto;}
-.celebrate .cbox{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--sh-float);padding:34px 32px;text-align:center;max-width:400px;width:92vw;transform:scale(.9);transition:.32s cubic-bezier(.2,.8,.3,1.3);}
-.celebrate.show .cbox{transform:scale(1);}
-.celebrate .cburst{width:78px;height:78px;border-radius:50%;background:var(--su-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:pop .5s cubic-bezier(.2,.8,.3,1.3);}
-.celebrate .cburst i{font-size:42px;color:var(--su-tx);}
-.celebrate h3{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px;}
-.celebrate p{font-size:14.5px;color:var(--muted);line-height:1.55;margin-bottom:20px;}
-.celebrate .cnext{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--green-link);background:var(--su-soft);padding:8px 15px;border-radius:var(--r-pill);margin-bottom:20px;}
-.confetti{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;opacity:0;animation:fall 1.5s ease-in forwards;}
-@keyframes fall{0%{opacity:1;transform:translateY(-20px) rotate(0);}100%{opacity:0;transform:translateY(60vh) rotate(320deg);}}
 
 /* ---- what-happens-next roadmap (success) ---- */
 .roadmap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:8px 22px;text-align:left;max-width:560px;margin:0 auto 22px;box-shadow:var(--sh-card);}
@@ -530,89 +351,96 @@ body.on-intro .actionbar{display:none !important;}
 .referral .rf-t{flex:1;} .referral .rf-t b{font-weight:600;}
 .referral .rf-t p{font-size:13px;color:var(--muted-3);margin-top:2px;}
 
-/* ---- stage nav tag ---- */
-.phase-tag{font-size:10.5px;font-weight:600;color:var(--muted-2);letter-spacing:.03em;margin-left:auto;}
-.phase.active .phase-tag{color:var(--green-link);}
-
-/* ---- refined stage nav · timeline + progressive disclosure ---- */
-.stepnav{padding:22px 16px;}
-.nav-progress{padding:2px 6px 18px;margin-bottom:6px;border-bottom:1px solid var(--line);}
-.nav-progress .npt{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;}
-.nav-progress .npt b{font-size:13px;font-weight:600;color:var(--text);}
-.nav-progress .npt .pc{font-size:12px;color:var(--muted);}
-.nav-progress .npbar{height:6px;background:var(--cream-2);border-radius:var(--r-pill);overflow:hidden;}
-.nav-progress .npbar .f{height:100%;background:var(--green);border-radius:var(--r-pill);transition:width .5s cubic-bezier(.4,0,.2,1);}
-.nstage{position:relative;}
-.nstage:not(:last-child)::before{content:"";position:absolute;left:24px;top:40px;bottom:0;width:2px;background:var(--border);z-index:0;}
-.nstage.done:not(:last-child)::before{background:var(--su-dot);}
-.nstage-row{position:relative;z-index:1;display:flex;align-items:center;gap:13px;padding:10px 8px;border-radius:12px;cursor:pointer;transition:.15s;}
-.nstage-row:hover{background:var(--cream);}
-.ns-node{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;
-  background:var(--cream-2);color:var(--muted-3);box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--border);transition:.18s;}
-.nstage.active .ns-node{background:var(--navy);color:var(--lime);box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--navy),0 0 0 8px rgba(27,45,79,0.10);}
-.nstage.done .ns-node{background:var(--su-dot);color:#fff;box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--su-dot);}
-.ns-info{flex:1;min-width:0;}
-.ns-info .t{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.25;}
-.nstage.upcoming .ns-info .t{color:var(--muted-3);}
-.ns-info .m{font-size:11.5px;color:var(--muted-2);margin-top:2px;}
-.nstage.active .ns-info .m{color:var(--green-link);font-weight:500;}
-.ns-chev{color:var(--muted-2);font-size:17px;transition:.25s;flex-shrink:0;}
-.nstage.open .ns-chev{transform:rotate(180deg);}
-.ns-steps{overflow:hidden;max-height:0;opacity:0;transition:max-height .32s ease,opacity .22s ease;padding-left:41px;}
-.nstage.open .ns-steps{max-height:460px;opacity:1;margin:2px 0 8px;}
-.nstep{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:none;background:transparent;padding:8px 10px;border-radius:9px;cursor:pointer;transition:.15s;color:var(--muted-3);font-size:13.5px;}
-.nstep:not(:disabled):hover{background:var(--cream);color:var(--text);}
-.nstep:disabled{cursor:not-allowed;color:var(--muted-2);opacity:.55;}
-.nstep .sd{width:18px;height:18px;border-radius:50%;border:2px solid var(--border-in);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;transition:.15s;}
-.nstep.current{color:var(--text);font-weight:600;}
-.nstep.current .sd{border-color:var(--green);position:relative;}
-.nstep.current .sd::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);}
-.nstep.done .sd{border-color:var(--su-dot);background:var(--su-dot);}
-
-@media (max-width:900px){ .journey{grid-template-columns:1fr;} }
-@media (max-width:640px){
-  .intro-hero h1{font-size:26px;}
-  .est-card .eval{font-size:32px;}
-  .celebrate .cbox{padding:26px 22px;}
-}
-
 /* ============================================================
-   RESPONSIVE
+   3-STEP CLIENT REDESIGN · top stepper · AI chat · fee reveal
    ============================================================ */
+/* single-column layout */
+.grid.solo{grid-template-columns:minmax(0,1fr);grid-template-areas:"main";max-width:720px;gap:24px;padding-top:26px;}
+
+/* top stepper (mobile-first, replaces the sidebar timeline) */
+.cstepper-top{flex:1;min-width:0;display:flex;justify-content:center;}
+.cstepper-top .inner{display:flex;align-items:center;gap:10px;width:100%;max-width:480px;}
+.cstep{display:flex;align-items:center;gap:9px;flex:0 1 auto;min-width:0;}
+.cstep .cnode{width:30px;height:30px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:var(--cream-2);color:var(--muted-3);transition:.2s;}
+.cstep .clabel{font-size:13.5px;font-weight:600;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.2s;}
+.cstep.current .cnode{background:var(--navy);color:var(--lime);box-shadow:0 0 0 4px rgba(27,45,79,0.10);}
+.cstep.current .clabel{color:var(--text);}
+.cstep.done .cnode{background:var(--su-dot);color:#fff;}
+.cstep.done .clabel{color:var(--su-tx);}
+.cbar{flex:1 1 20px;height:3px;border-radius:var(--r-pill);background:var(--cream-2);min-width:14px;transition:.3s;}
+.cbar.done{background:var(--su-dot);}
+@media (max-width:760px){ .cstep .clabel{display:none;} .cstepper-top .inner{gap:8px;max-width:none;} .cbar{flex:1 1 auto;} #autosave{display:none;} }
+
+/* ---- AI chat (step 2) ---- */
+.chat-scroll{display:flex;flex-direction:column;gap:14px;min-height:200px;}
+.msg{display:flex;gap:10px;max-width:90%;animation:rise .28s ease;}
+.msg.ai{align-self:flex-start;}
+.msg.user{align-self:flex-end;flex-direction:row-reverse;}
+.msg .av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.msg.ai .av{background:var(--navy);color:var(--lime);}
+.msg.ai .av i{font-size:17px;}
+.bubble{padding:12px 15px;border-radius:16px;font-size:14.5px;line-height:1.5;}
+.msg.ai .bubble{background:var(--surface);border:1px solid var(--border);border-top-left-radius:5px;}
+.msg.user .bubble{background:var(--navy);color:#fff;border-top-right-radius:5px;}
+.msg.note{max-width:100%;}
+.msg.note .bubble{background:var(--su-soft);border:1px dashed var(--su-dot);color:var(--muted-3);font-size:13.5px;border-radius:12px;display:flex;gap:9px;align-items:flex-start;}
+.msg.note .bubble i{color:var(--su-tx);font-size:16px;flex-shrink:0;margin-top:1px;}
+.typing{display:inline-flex;gap:5px;padding:15px 16px;align-items:center;}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--muted-2);animation:blink 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,60%,100%{opacity:.25;transform:translateY(0);}30%{opacity:1;transform:translateY(-2px);}}
+.chat-dock{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);min-height:60px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:9px;}
+.qchip{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;padding:11px 16px;border-radius:var(--r-pill);border:1.5px solid var(--border-in);background:var(--surface);cursor:pointer;transition:.15s;color:var(--text);}
+.qchip:hover{border-color:var(--green);background:var(--su-soft);color:var(--green-link);}
+.qchip i{font-size:16px;color:var(--green);}
+.dock-input{display:flex;gap:10px;align-items:center;}
+.dock-input .input-wrap{flex:1;}
+.dock-input .input{width:100%;}
+.dock-input .btn{flex-shrink:0;}
+.dock-skip{margin-top:10px;}
+
+/* ---- fee reveal (step 3) ---- */
+.fee-hero{background:linear-gradient(150deg,var(--navy),var(--navy-dark));color:#fff;border-radius:var(--r-lg);padding:28px 26px;text-align:center;position:relative;overflow:hidden;}
+.fee-hero::after{content:"";position:absolute;right:-50px;top:-50px;width:180px;height:180px;border-radius:50%;background:rgba(173,238,104,0.10);}
+.fee-hero .fl{font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
+.fee-hero .fv{font-size:48px;font-weight:700;letter-spacing:-0.02em;margin:6px 0 4px;animation:pop .4s cubic-bezier(.2,.8,.3,1.3);}
+.fee-hero .fsub{font-size:13.5px;color:rgba(255,255,255,0.72);}
+
+/* ---------- responsive ---------- */
 @media (max-width:1080px){
   .grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"main";gap:20px;padding:20px 18px calc(var(--bar-h) + 24px);}
-  .stepnav{display:none;}
-  .mprog{display:block;}
   .topbar .brand .ctx{display:none;}
 }
 @media (max-width:640px){
   .topbar{padding:0 16px;}
-  .btn-exit span{display:none;}
-  .btn-exit{padding:9px;}
   .step-head h1{font-size:23px;}
-  .two-col,.seg,.doc-grid,.pay-methods,.trust-grid{grid-template-columns:1fr;}
+  .two-col,.seg,.seg.seg-3,.pay-methods,.trust-grid{grid-template-columns:1fr;}
   .choice{padding:16px;}
-  .choice .check{display:none;}
   .card,.card-lg{padding:18px;}
   .actionbar{padding:0 14px;gap:8px;}
   .btn{padding:12px 16px;font-size:14.5px;}
   .actionbar .btn-lg{padding:13px 18px;}
   .btn .btn-full-lbl{display:none;}
-  .drop .cam{display:block;}
   .success-hero h1{font-size:26px;}
   .success-ctas{flex-direction:column;}
   .success-ctas .btn{width:100%;}
+  .fee-hero .fv{font-size:40px;}
+  .msg{max-width:96%;}
 }
 </style>
 </head>
-<body class="on-intro">
+<body>
 <div class="wizard">
 
-  <!-- ================= TOP BAR ================= -->
+  <!-- ================= TOP BAR (with 3-step stepper) ================= -->
   <header class="topbar">
     <div class="brand">
       <img class="logo-l" src="cgt-logo.svg" alt="FileCGTOnline" />
       <img class="logo-d" src="cgt-logo-light.svg" alt="FileCGTOnline" />
+    </div>
+    <div class="cstepper-top" id="cstepperWrap">
+      <div class="inner" id="cstepper"><!-- built by JS --></div>
     </div>
     <div class="tools">
       <span id="autosave" class="autosave"><i class="ti ti-cloud-check"></i> <span id="autosaveTxt">All changes saved</span></span>
@@ -620,290 +448,108 @@ body.on-intro .actionbar{display:none !important;}
     </div>
   </header>
 
-  <!-- ============ MOBILE / TABLET PROGRESS ============ -->
-  <div class="mprog">
-    <div class="row">
-      <span class="phase" id="mPhase">Stage 1 · Get started</span>
-      <span class="count" id="mCount">Step 1 of 9</span>
-    </div>
-    <h2 id="mTitle">Choose your service</h2>
-    <div class="bar"><div class="fill" id="mFill" style="width:10%"></div></div>
-  </div>
-
   <!-- ================= GRID ================= -->
-  <div class="grid">
-
-    <!-- ---------- STEP NAV (desktop) ---------- -->
-    <aside class="stepnav" id="stepnav"><!-- built by JS --></aside>
-
-    <!-- ---------- STAGE ---------- -->
+  <div class="grid solo">
     <main class="stage" id="stage">
 
-      <!-- ===== INTRO · HOW YOUR CASE WORKS ===== -->
-      <section class="introview show" id="introview">
-        <div class="intro-hero">
-          <h1>Your Capital Gains Tax, <span class="hl">done properly</span>, in 3 simple stages.</h1>
-          <p>A few short steps from you. Our tax team does the rest, and you approve everything before it reaches HMRC.</p>
-        </div>
-
-        <div class="intro-cta">
-          <button class="btn btn-lime btn-lg" id="btnStartCase"><i class="ti ti-arrow-right"></i> Start my case</button>
-          <div class="note">~15 minutes · Saves as you go · No payment until Step 6</div>
-        </div>
-
-        <div class="journey">
-          <div class="jcard">
-            <div class="jtop"><span class="jnum">1</span><span class="jwho you">You</span></div>
-            <h3>Get started</h3>
-            <div class="jsub">Set up your case, sign the engagement letter, and pay securely.</div>
-          </div>
-          <div class="jcard">
-            <div class="jtop"><span class="jnum">2</span><span class="jwho both">You + team</span></div>
-            <h3>We prepare your return</h3>
-            <div class="jsub">Answer a few questions and upload documents, we do the tax work.</div>
-          </div>
-          <div class="jcard">
-            <div class="jtop"><span class="jnum">3</span><span class="jwho team">Our team</span></div>
-            <h3>We file with HMRC</h3>
-            <div class="jsub">You approve the draft, then we submit and confirm.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== STEP 1 · SERVICE ===== -->
+      <!-- ===== STEP 1 · CASE INFORMATION ===== -->
       <section class="step" data-step="1">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-checklist"></i> Stage 1 · Get started · Step 1 of 9</span>
-          <h1>Which type of Capital Gains Tax case is this?</h1>
-          <p>Choose the option that best matches what you sold. Our team reviews every case before submission, so don’t worry about getting it perfect.</p>
-        </div>
-        <div class="choices" id="serviceChoices">
-          <label class="choice" data-service="residential" data-price="149" data-name="Residential Property CGT">
-            <span class="ico"><i class="ti ti-home"></i></span>
-            <span class="body">
-              <h3>Residential Property CGT</h3>
-              <span class="desc">You sold a home, buy-to-let, or other residential property in the UK.</span>
-              <span class="meta">
-                <span class="pill price"><i class="ti ti-tag"></i> From £149</span>
-                <span class="pill"><i class="ti ti-clock"></i> ~15 min to set up</span>
-                <span class="pill"><i class="ti ti-calendar-due"></i> 60-day HMRC rule</span>
-              </span>
-              <span class="bestfor"><b>Best for:</b> landlords, second homes, inherited property, and homes that weren’t always your main residence.</span>
-            </span>
-            <span class="check"><i class="ti ti-check"></i></span>
-          </label>
-
-          <label class="choice" data-service="commercial" data-price="199" data-name="Commercial Property CGT">
-            <span class="ico"><i class="ti ti-building-warehouse"></i></span>
-            <span class="body">
-              <h3>Commercial Property CGT</h3>
-              <span class="desc">You sold commercial premises, land, or a mixed-use property.</span>
-              <span class="meta">
-                <span class="pill price"><i class="ti ti-tag"></i> From £199</span>
-                <span class="pill"><i class="ti ti-clock"></i> ~15 min to set up</span>
-                <span class="pill"><i class="ti ti-briefcase"></i> Reliefs reviewed</span>
-              </span>
-              <span class="bestfor"><b>Best for:</b> shops, offices, warehouses, development land, and business premises.</span>
-            </span>
-            <span class="check"><i class="ti ti-check"></i></span>
-          </label>
-
-          <label class="choice" data-service="other" data-price="149" data-name="Other CGT">
-            <span class="ico"><i class="ti ti-chart-line"></i></span>
-            <span class="body">
-              <h3>Other CGT</h3>
-              <span class="desc">Shares, crypto, business assets, or other chargeable assets.</span>
-              <span class="meta">
-                <span class="pill price"><i class="ti ti-tag"></i> From £149</span>
-                <span class="pill"><i class="ti ti-clock"></i> ~10 min to set up</span>
-                <span class="pill"><i class="ti ti-coin-bitcoin"></i> Shares · crypto · more</span>
-              </span>
-              <span class="bestfor"><b>Best for:</b> selling shares, disposing of cryptocurrency, or selling part or all of a business.</span>
-            </span>
-            <span class="check"><i class="ti ti-check"></i></span>
-          </label>
-        </div>
-        <div class="alert calm" style="margin-top:16px;"><i class="ti ti-help-circle"></i><div><b>Not sure which one to choose?</b> Select the closest option. Our team will review your case before submission and move it if needed.</div></div>
-      </section>
-
-      <!-- ===== STEP 2 · CASE DETAILS ===== -->
-      <section class="step" data-step="2">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-file-description"></i> Stage 1 · Get started · Step 2 of 9</span>
-          <h1>A few basic details</h1>
-          <p>Just enough for us to create and identify your case. You can leave optional fields blank, our team can follow up if anything is unclear.</p>
+          <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 3 · Case information</span>
+          <h1>Let's set up your CGT case</h1>
+          <p>A couple of quick details to get started — then our assistant takes it from here in a short chat.</p>
         </div>
         <div class="card card-lg">
-          <!-- address (residential/commercial) -->
+          <div class="field">
+            <label>What did you sell?</label>
+            <div class="seg seg-3" id="assetSeg">
+              <div class="opt sel" data-service="residential" data-price="149" data-name="Residential Property CGT"><span class="radio"></span> Residential property</div>
+              <div class="opt" data-service="commercial" data-price="199" data-name="Commercial Property CGT"><span class="radio"></span> Commercial property</div>
+              <div class="opt" data-service="other" data-price="149" data-name="Other CGT"><span class="radio"></span> Other asset</div>
+            </div>
+          </div>
           <div class="field" id="fldAddress">
             <label>Property address</label>
-            <div class="input-wrap">
-              <i class="ti ti-map-pin prefix"></i>
-              <input class="input" id="inAddress" placeholder="Start typing a UK postcode or address…" autocomplete="off" />
-            </div>
-            <div class="hint">Start typing and choose your address from the list (UK address search).</div>
+            <div class="input-wrap"><i class="ti ti-map-pin prefix"></i><input class="input" id="inAddress" placeholder="Start typing a UK postcode or address…" autocomplete="off" /></div>
+            <div class="hint">Start typing and choose your address from the list.</div>
             <div class="field-err" id="errAddress"><i class="ti ti-alert-circle"></i> Please add the property address.</div>
           </div>
-          <!-- asset name (other) -->
           <div class="field hide" id="fldAsset">
             <label>Asset name or description</label>
-            <div class="input-wrap">
-              <i class="ti ti-tag prefix"></i>
-              <input class="input" id="inAsset" placeholder="e.g. Tesla shares disposal, Crypto asset disposal" />
-            </div>
-            <div class="hint">Give it a name you’ll recognise, for example “Tesla Shares Disposal” or “Crypto Asset Disposal”.</div>
+            <div class="input-wrap"><i class="ti ti-tag prefix"></i><input class="input" id="inAsset" placeholder="e.g. Tesla shares disposal, Crypto asset disposal" /></div>
+            <div class="hint">Give it a name you'll recognise later.</div>
             <div class="field-err" id="errAsset"><i class="ti ti-alert-circle"></i> Please name the asset you disposed of.</div>
           </div>
-
-          <div class="two-col">
-            <div class="field">
-              <label>Sale / disposal date</label>
-              <input class="input" id="inDispDate" type="date" />
-              <div class="field-err" id="errDispDate"><i class="ti ti-alert-circle"></i> Please add the disposal date.</div>
-            </div>
-            <div class="field">
-              <label>Sale / disposal amount</label>
-              <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" id="inSale" type="number" placeholder="0" /></div>
-              <div class="field-err" id="errSale"><i class="ti ti-alert-circle"></i> Please add the sale amount.</div>
-            </div>
-          </div>
-
-          <div class="two-col">
-            <div class="field">
-              <label>Purchase / acquisition date <span class="optional">optional</span></label>
-              <input class="input" id="inBuyDate" type="date" />
-              <label class="chk-dontknow"><input type="checkbox" id="dkBuyDate"> I don’t know this yet</label>
-            </div>
-            <div class="field">
-              <label>Purchase / acquisition price <span class="optional">optional</span></label>
-              <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" id="inBuy" type="number" placeholder="0" /></div>
-              <label class="chk-dontknow"><input type="checkbox" id="dkBuy"> I don’t know this yet</label>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Selling &amp; buying costs <span class="optional">optional</span></label>
-            <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" id="inCosts" type="number" placeholder="0" /></div>
-            <div class="hint">Solicitor fees, estate-agent fees, and stamp duty you paid when buying. A rough figure is fine, it improves your estimate.</div>
-          </div>
-
-          <div class="field" style="margin-top:4px;">
-            <label>Case reference</label>
-            <div class="input-wrap"><i class="ti ti-hash prefix"></i><input class="input" id="inRef" placeholder="Auto-generated" style="background:var(--cream);" /></div>
-            <div class="hint">We generate this for you so it’s easy to find later. You can rename it.</div>
+          <div class="field" style="margin-bottom:0;">
+            <label>Sale / completion date</label>
+            <input class="input" id="inDispDate" type="date" />
+            <div class="field-err" id="errDispDate"><i class="ti ti-alert-circle"></i> Please add the sale date.</div>
           </div>
         </div>
-        <div class="two-col" style="margin-top:16px;gap:16px;align-items:stretch;">
-          <div class="est-card" id="estCard2">
-            <div class="elab"><i class="ti ti-sparkles"></i> Provisional CGT estimate</div>
-            <div class="eval empty" id="estVal2">Add your sale &amp; purchase price to see it</div>
-            <span class="etag hide" id="estTag2"><i class="ti ti-info-circle"></i> Subject to full review</span>
-            <div class="ehint">A rough guide only, calculated from what you’ve entered. Your tax team confirms the real figure, and often finds reliefs that reduce it.</div>
-          </div>
-          <div class="deadline empty" id="deadline2" style="align-self:stretch;">
-            <div class="ring" style="--pct:0;"><span class="rn" id="dl2Num">–</span></div>
-            <div class="dtx">
-              <div class="dt-lab">Your HMRC deadline</div>
-              <div class="dt-main" id="dl2Main">Add your sale date</div>
-              <div class="dt-sub" id="dl2Sub">UK residential CGT must be reported &amp; paid within 60 days of completion.</div>
-            </div>
+        <div class="deadline empty" id="deadline2" style="margin-top:16px;">
+          <div class="ring" style="--pct:0;"><span class="rn" id="dl2Num">–</span></div>
+          <div class="dtx">
+            <div class="dt-lab">Your HMRC deadline</div>
+            <div class="dt-main" id="dl2Main">Add your sale date</div>
+            <div class="dt-sub" id="dl2Sub">UK residential CGT must be reported &amp; paid within 60 days of completion.</div>
           </div>
         </div>
-        <div class="alert info" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>From here on, <b>your information saves automatically</b>. Missing something? The tax team can ask for details later, nothing is set in stone.</div></div>
       </section>
 
-      <!-- ===== STEP 3 · OWNERSHIP ===== -->
+      <!-- ===== STEP 2 · AI CHAT ONBOARDING ===== -->
+      <section class="step" data-step="2">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-sparkles"></i> Step 2 of 3 · Guided by AI</span>
+          <h1>A quick chat about your disposal</h1>
+          <p>Answer in your own words. Our assistant asks only what's relevant and notes everything for your case.</p>
+        </div>
+        <div class="chat">
+          <div class="chat-scroll" id="chatScroll"></div>
+          <div class="chat-dock" id="chatDock"></div>
+        </div>
+      </section>
+
+      <!-- ===== STEP 3 · REVIEW, PRICING & PAYMENT ===== -->
       <section class="step" data-step="3">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-users"></i> Stage 1 · Get started · Step 3 of 9</span>
-          <h1>Who owns this?</h1>
-          <p>This helps us calculate the right share of the gain and set up the correct returns.</p>
+          <span class="eyebrow"><i class="ti ti-receipt"></i> Step 3 of 3 · Review &amp; pay</span>
+          <h1>Review, pricing &amp; payment</h1>
+          <p>Check what we captured, see your fixed fee, and pay securely to start your case.</p>
         </div>
+
+        <!-- review -->
         <div class="card card-lg">
-          <p class="flabel" style="margin-bottom:12px;">Is this property or asset solely owned by you?</p>
-          <div class="seg" id="ownSeg">
-            <div class="opt sel" data-own="sole"><span class="radio"></span> Yes, I’m the sole owner</div>
-            <div class="opt" data-own="joint"><span class="radio"></span> No, it’s jointly owned</div>
-          </div>
+          <div class="section-label">Case summary <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted-2);">· auto-generated from your chat</span></div>
+          <div class="review-list" id="reviewList"></div>
+        </div>
 
-          <div id="jointBlock" class="hide" style="margin-top:22px;">
-            <div class="two-col">
-              <div class="field">
-                <label>Your ownership percentage</label>
-                <div class="input-wrap"><input class="input" id="inPct" type="number" placeholder="50" style="padding-right:34px;" /><i class="ti ti-percentage prefix" style="left:auto;right:14px;"></i></div>
-              </div>
-              <div class="field">
-                <label>Number of co-owners</label>
-                <input class="input" id="inCoOwners" type="number" placeholder="1" />
-              </div>
+        <!-- pricing -->
+        <div class="card card-lg">
+          <div class="fee-hero">
+            <div class="fl">Your estimated fee</div>
+            <div class="fv" id="feeVal">£149</div>
+            <div class="fsub">Fixed price · confirmed after our tax team's review</div>
+          </div>
+          <div id="feeBreakdown" style="margin-top:18px;"></div>
+          <div class="field" style="margin:16px 0 4px;">
+            <label>Have a promo code?</label>
+            <div class="discount-row">
+              <input class="input" id="inCode" placeholder="ENTER CODE" />
+              <button class="btn btn-ghost" id="applyCode" style="padding:12px 18px;">Apply</button>
             </div>
-            <div class="section-label" style="margin-top:8px;">Co-owner details</div>
-            <div class="two-col">
-              <div class="field"><label>Co-owner name</label><input class="input" placeholder="e.g. Sarah Whitfield" /></div>
-              <div class="field"><label>Co-owner email</label><input class="input" type="email" placeholder="name@email.com" /></div>
-            </div>
-            <button class="chip-btn" id="addOwner" style="margin-bottom:16px;"><i class="ti ti-plus"></i> Add another owner</button>
-            <div class="alert success"><i class="ti ti-discount-2"></i><div><b>Joint owner discount:</b> if all owners file through FileCGTOnline, each owner may receive a discount on their case.</div></div>
-          </div>
-
-          <div class="alert calm" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>Each owner usually has their <b>own CGT return, payment and invoice</b>. You can invite co-owners now or later.</div></div>
-        </div>
-      </section>
-
-      <!-- ===== STEP 5 · PRICE ===== -->
-      <section class="step" data-step="5">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-receipt"></i> Stage 1 · Get started · Step 5 of 9</span>
-          <h1>Review your price</h1>
-          <p>A clear, fixed fee, no surprises. This provisional estimate is confirmed once our tax team reviews your case.</p>
-        </div>
-        <div class="two-col" style="gap:16px;align-items:start;">
-          <div class="card card-lg">
-            <div class="section-label">Order summary</div>
-            <div class="price-row"><span class="lab" id="prSvc">Residential Property CGT</span><span class="val" id="prBase">£149</span></div>
-            <div class="price-row disc hide" id="prJointRow"><span class="lab"><i class="ti ti-discount-2" style="color:var(--su-tx);font-size:15px;"></i> Joint owner discount</span><span class="val" id="prJoint">–£30</span></div>
-            <div class="price-row disc hide" id="prCodeRow"><span class="lab"><i class="ti ti-ticket" style="color:var(--su-tx);font-size:15px;"></i> Discount code <b id="prCodeName"></b></span><span class="val" id="prCode">–£15</span></div>
-            <div class="field" style="margin:16px 0 4px;">
-              <label>Have a discount code?</label>
-              <div class="discount-row">
-                <input class="input" id="inCode" placeholder="ENTER CODE" />
-                <button class="btn btn-ghost" id="applyCode" style="padding:12px 18px;">Apply</button>
-              </div>
-              <div class="field-err" id="errCode"><i class="ti ti-alert-circle"></i> That code isn’t valid. Try <b>CGT10</b>.</div>
-              <div class="hint hide" id="okCode" style="color:var(--su-tx);"><i class="ti ti-check"></i> Code applied.</div>
-            </div>
-            <div class="price-total"><span class="lab">Total due today</span><span class="val" id="prTotal">£149</span></div>
-            <div class="alert calm" style="margin-top:16px;font-size:13px;"><i class="ti ti-file-invoice"></i><div>A VAT invoice is generated automatically and saved to your Documents after payment.</div></div>
-          </div>
-          <div class="card card-lg">
-            <div class="section-label">What’s included</div>
-            <ul class="incl-list">
-              <li><i class="ti ti-circle-check"></i> Guided CGT case setup</li>
-              <li><i class="ti ti-circle-check"></i> Secure document upload</li>
-              <li><i class="ti ti-circle-check"></i> Full review by our qualified tax team</li>
-              <li><i class="ti ti-circle-check"></i> Draft return prepared for you</li>
-              <li><i class="ti ti-circle-check"></i> Your approval before anything is submitted</li>
-              <li><i class="ti ti-circle-check"></i> HMRC submission &amp; confirmation</li>
-            </ul>
-            <div class="alert success" style="margin-top:18px;"><i class="ti ti-shield-lock"></i><div>Payments are encrypted and processed securely by Stripe. We never see your card details.</div></div>
+            <div class="field-err" id="errCode"><i class="ti ti-alert-circle"></i> That code isn't valid. Try <b>CGT10</b>.</div>
+            <div class="hint hide" id="okCode" style="color:var(--su-tx);"><i class="ti ti-check"></i> Code applied.</div>
           </div>
         </div>
-      </section>
 
-      <!-- ===== STEP 6 · PAYMENT ===== -->
-      <section class="step" data-step="6">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-credit-card"></i> Stage 1 · Get started · Step 6 of 9</span>
-          <h1>Secure payment</h1>
-          <p>Your work begins as soon as payment is received and the engagement letter is signed.</p>
-        </div>
-
+        <!-- payment -->
         <div class="card card-lg" id="payForm">
+          <div class="section-label">Payment</div>
           <div class="pay-methods">
-            <div class="pay-m apple" data-pay="apple"><i class="ti ti-brand-apple"></i> Pay</div>
-            <div class="pay-m gpay" data-pay="google"><i class="ti ti-brand-google"></i> Pay</div>
+            <div class="pay-m apple sel" data-pay="apple"><img src="apple-pay.svg" alt="Apple Pay" class="pay-logo" /></div>
+            <div class="pay-m gpay" data-pay="google"><img src="google-pay.svg" alt="Google Pay" class="pay-logo" /></div>
           </div>
-          <div class="pay-m sel" data-pay="card" style="width:100%;justify-content:flex-start;"><i class="ti ti-credit-card"></i> Credit or debit card</div>
+          <div class="pay-m" data-pay="card" style="width:100%;justify-content:flex-start;"><i class="ti ti-credit-card"></i> Credit or debit card</div>
           <div class="stripe-fields">
             <div class="field"><label>Card number</label><div class="input-wrap"><i class="ti ti-credit-card prefix"></i><input class="input" placeholder="1234 1234 1234 1234" inputmode="numeric"></div></div>
             <div class="two-col">
@@ -912,171 +558,14 @@ body.on-intro .actionbar{display:none !important;}
             </div>
             <span class="stripe-badge"><i class="ti ti-lock"></i> Secured by Stripe · encrypted checkout</span>
           </div>
-          <div class="trust-grid" style="margin-top:18px;">
-            <div class="trust"><i class="ti ti-shield-check"></i> Secure, encrypted payment</div>
-            <div class="trust"><i class="ti ti-file-invoice"></i> Invoice generated automatically</div>
-            <div class="trust"><i class="ti ti-lock"></i> PCI-compliant checkout</div>
-            <div class="trust"><i class="ti ti-briefcase"></i> Work begins after signing</div>
-          </div>
+          <label class="chk-row" style="margin-top:18px;"><input type="checkbox" id="agreeChk"><span>I agree to the <a href="/letter-of-engagement" target="_blank" rel="noopener" style="color:var(--green-link);text-decoration:underline;">Letter of Engagement</a> and <a href="/terms-of-service" target="_blank" rel="noopener" style="color:var(--green-link);text-decoration:underline;">Terms of Service</a>, authorising FileCGTOnline to act on my behalf.</span></label>
         </div>
 
         <div class="card card-lg pay-processing" id="payProcessing">
           <div class="spinner"></div>
           <h3 style="font-size:19px;font-weight:600;">Processing your payment…</h3>
-          <p style="color:var(--muted);margin-top:6px;">Please don’t close this window. This only takes a moment.</p>
+          <p style="color:var(--muted);margin-top:6px;">Please don't close this window. This only takes a moment.</p>
         </div>
-
-        <div class="alert success hide" id="paidNote" style="margin-top:16px;"><i class="ti ti-circle-check"></i><div><span class="alert-title">Payment received</span>Your case is active and our tax team will begin work right away.</div></div>
-
-        <div class="card card-lg pay-failed" id="payFailed">
-          <div class="big-ico bad"><i class="ti ti-x"></i></div>
-          <h3 style="font-size:20px;font-weight:600;">Payment didn’t go through</h3>
-          <p style="color:var(--muted);margin-top:8px;max-width:46ch;margin-inline:auto;">No money was taken. Please check your card details and try again, or use a different payment method.</p>
-          <button class="btn btn-primary" id="payRetry" style="margin-top:18px;"><i class="ti ti-refresh"></i> Retry payment</button>
-        </div>
-      </section>
-
-      <!-- ===== STEP 4 · AGREEMENT ===== -->
-      <section class="step" data-step="4">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-writing-sign"></i> Stage 1 · Get started · Step 4 of 9</span>
-          <h1>Sign your engagement letter</h1>
-          <p>This confirms we’re acting for you. Please read it, then add your signature below.</p>
-        </div>
-        <div class="card card-lg">
-          <div class="section-label">Letter of Engagement</div>
-          <div class="doc-scroll" id="docScroll">
-            <h4>1. Our engagement</h4>
-            <p>This letter sets out the basis on which Everest &amp; Co Accountants Limited (trading as FileCGTOnline) will act for you in the preparation and submission of your Capital Gains Tax return to HM Revenue &amp; Customs.</p>
-            <h4>2. Your responsibilities</h4>
-            <p>You are responsible for providing complete and accurate information relating to your disposal, including sale and purchase details, allowable costs, and any reliefs you may be entitled to. You remain legally responsible for the contents of your return, which we will prepare for your approval before submission.</p>
-            <h4>3. Our responsibilities</h4>
-            <p>We will calculate your Capital Gains Tax liability based on the information provided, prepare a draft return for your review, and submit it to HMRC once you have approved it. We will act with reasonable care and skill and in accordance with ICAEW professional standards.</p>
-            <h4>4. Fees</h4>
-            <p>Our fee for this service is fixed and payable in advance, as shown at checkout. Additional work outside the agreed scope will be quoted separately and only undertaken with your approval.</p>
-            <h4>5. Data protection</h4>
-            <p>We process your personal data in line with UK GDPR and our Privacy Policy. Your documents are stored securely and shared only with those working on your case.</p>
-            <h4>6. Accuracy guarantee</h4>
-            <p>Where we make an error in preparing your return, we will correct it at no cost to you and support you in any related correspondence with HMRC.</p>
-            <p style="margin-top:16px;color:var(--muted-2);">- End of Letter of Engagement -</p>
-          </div>
-          <div class="alert calm" style="margin:16px 0;font-size:13px;"><i class="ti ti-file-text"></i><div>You’re also agreeing to our <a href="#" style="color:var(--green-link);font-weight:600;text-decoration:underline;">Terms &amp; Conditions</a> and <a href="#" style="color:var(--green-link);font-weight:600;text-decoration:underline;">Privacy Policy</a>.</div></div>
-
-          <label class="chk-row" style="margin-bottom:18px;"><input type="checkbox" id="agreeChk"> I have read and agree to the Letter of Engagement and Terms &amp; Conditions.</label>
-
-          <div class="field">
-            <label>Type your full name to sign</label>
-            <div class="sign-pad"><input class="sign-input" id="signName" placeholder="Type your full legal name" autocomplete="off"></div>
-          </div>
-          <div class="alert info" style="margin-top:4px;font-size:13px;"><i class="ti ti-shield-lock"></i><div>Your signature will be recorded with the <b>date, time and security details</b> for audit purposes.</div></div>
-
-          <div class="alert success hide" id="signedState" style="margin-top:16px;">
-            <i class="ti ti-circle-check"></i>
-            <div>
-              <span class="alert-title">Signed successfully</span>
-              Signed by <b id="signedBy">-</b> · <span id="signedStamp">-</span>
-              <div style="margin-top:8px;"><button class="chip-btn" id="downloadCopy"><i class="ti ti-download"></i> Download signed copy (PDF)</button></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== STEP 7 · QUESTIONS ===== -->
-      <section class="step" data-step="7">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-list-check"></i> Stage 2 · Your information · Step 7 of 9</span>
-          <h1>Guided questions</h1>
-          <p>Answer what you can. Our team can follow up if anything is unclear, and your answers save as you go.</p>
-        </div>
-        <div class="card card-lg" style="padding:20px 22px;">
-          <div class="q-progress">
-            <span style="font-size:13px;color:var(--muted);white-space:nowrap;">Questionnaire</span>
-            <div class="bar"><div class="fill" id="qFill"></div></div>
-            <span class="pct" id="qPct">18%</span>
-          </div>
-
-          <details class="q-sec" data-done="1" open>
-            <summary><span class="snum"><i class="ti ti-check"></i></span><span class="stitle">Personal tax details<span>Your UTR, residency and tax band</span></span><i class="ti ti-chevron-down chev"></i></summary>
-            <div class="qbody">
-              <div class="field"><label>What is your Income Tax band this year?</label>
-                <select class="select" id="inBand"><option value="basic">Basic rate</option><option value="higher" selected>Higher rate</option><option value="higher">Additional rate</option><option value="higher">I’m not sure</option></select>
-                <div class="hint">Not sure? Choose “I’m not sure”, we’ll confirm it from your records.</div>
-              </div>
-              <div class="field" style="margin-bottom:0;"><label>Unique Taxpayer Reference (UTR) <span class="optional">optional</span></label><input class="input" placeholder="10-digit UTR"></div>
-            </div>
-          </details>
-
-          <details class="q-sec" data-done="1">
-            <summary><span class="snum"><i class="ti ti-check"></i></span><span class="stitle">Sale / disposal details<span>What you sold and when</span></span><i class="ti ti-chevron-down chev"></i></summary>
-            <div class="qbody">
-              <div class="ai-field">
-                <span class="ai-tag"><i class="ti ti-sparkles"></i> AI-prefilled</span>
-                <label class="flabel">Sale price</label>
-                <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" value="385000" style="background:var(--surface);"></div>
-                <p class="hint" style="margin-top:8px;">AI found this value in your uploaded completion statement. Please confirm or edit it.</p>
-                <div class="ai-actions"><button class="chip-btn solid"><i class="ti ti-check"></i> Confirm</button><button class="chip-btn"><i class="ti ti-pencil"></i> Edit</button></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="q-sec" data-done="0">
-            <summary><span class="snum">3</span><span class="stitle">Costs &amp; fees<span>Legal fees, agent fees, stamp duty</span></span><i class="ti ti-chevron-down chev"></i></summary>
-            <div class="qbody">
-              <div class="field" style="margin-bottom:0;"><label>Total allowable costs on sale &amp; purchase</label>
-                <div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" placeholder="0"></div>
-                <div class="hint">Include solicitor and estate-agent fees, and stamp duty paid when you bought. Not sure of the exact figure? Add your best estimate.</div>
-              </div>
-            </div>
-          </details>
-
-          <details class="q-sec" data-done="0">
-            <summary><span class="snum">4</span><span class="stitle">Main residence &amp; letting history<span>Private Residence Relief (PPR)</span></span><i class="ti ti-chevron-down chev"></i></summary>
-            <div class="qbody">
-              <div class="field" style="margin-bottom:0;"><label>Did you ever live in this property as your main home?</label>
-                <div class="seg"><div class="opt sel"><span class="radio"></span> Yes</div><div class="opt"><span class="radio"></span> No</div></div>
-                <div class="hint">If yes, you may qualify for Private Residence Relief, which can reduce your bill.</div>
-              </div>
-            </div>
-          </details>
-
-          <details class="q-sec" data-done="0">
-            <summary><span class="snum">5</span><span class="stitle">Losses, other disposals &amp; notes<span>Anything else we should know</span></span><i class="ti ti-chevron-down chev"></i></summary>
-            <div class="qbody">
-              <div class="field" style="margin-bottom:0;"><label>Additional notes for our team <span class="optional">optional</span></label>
-                <textarea class="input" rows="3" placeholder="Anything you’d like us to know about this disposal…"></textarea>
-              </div>
-            </div>
-          </details>
-
-          <div class="alert calm" style="margin-top:8px;font-size:13px;"><i class="ti ti-device-floppy"></i><div>Your answers are saved automatically. You can stop any time and pick up where you left off.</div></div>
-        </div>
-      </section>
-
-      <!-- ===== STEP 8 · DOCUMENTS ===== -->
-      <section class="step" data-step="8">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-upload"></i> Stage 2 · Your information · Step 8 of 9</span>
-          <h1>Upload your documents</h1>
-          <p>Add what you have now, you can return and finish the rest later. Required items are clearly marked.</p>
-        </div>
-        <div class="doc-grid" id="docGrid">
-          <!-- doc cards built by JS -->
-        </div>
-        <div class="alert warn hide" id="docMissing" style="margin-top:16px;"><i class="ti ti-alert-triangle"></i><div><b>Still needed:</b> <span id="docMissingList"></span>. You can continue and add these later, but we’ll need them before filing.</div></div>
-        <div class="alert calm" style="margin-top:16px;font-size:13px;"><i class="ti ti-file-info"></i><div>Accepted formats: PDF, JPG, JPEG, PNG, DOCX · up to 25MB per file. On mobile you can upload straight from your camera.</div></div>
-      </section>
-
-      <!-- ===== STEP 9 · REVIEW ===== -->
-      <section class="step" data-step="9">
-        <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-clipboard-check"></i> Stage 3 · Review &amp; hand over · Step 9 of 9</span>
-          <h1>Review &amp; submit your case</h1>
-          <p>You’re almost done. Check everything below, then send your case to our tax team.</p>
-        </div>
-        <div class="card card-lg">
-          <div class="review-list" id="reviewList"><!-- built by JS --></div>
-        </div>
-        <div class="alert info" style="margin-top:16px;"><i class="ti ti-info-circle"></i><div>After submitting, our team will review your information and contact you if anything else is needed. This estimate stays <b>provisional until reviewed</b>.</div></div>
       </section>
 
       <!-- ===== SUCCESS SCREEN ===== -->
@@ -1096,10 +585,10 @@ body.on-intro .actionbar{display:none !important;}
 
           <div style="max-width:560px;margin:0 auto 12px;text-align:left;"><div class="section-label" style="margin-bottom:0;">What happens next</div></div>
           <div class="roadmap">
-            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Set up, paid &amp; engagement signed <span class="who you">You · done</span></h4><p>Your case is created and we’re formally acting for you.</p></div></div>
-            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Information &amp; documents provided <span class="who you">You · done</span></h4><p>We have what we need to begin, you can still add more any time.</p></div></div>
+            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Set up, paid &amp; engagement signed <span class="who you">You · done</span></h4><p>Your case is created and we're formally acting for you.</p></div></div>
+            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Information provided <span class="who you">You · done</span></h4><p>We have what we need to begin, you can still add more any time.</p></div></div>
             <div class="rm-item"><span class="rmi now"><i class="ti ti-player-play"></i></span><div class="rmt"><h4>Identity check &amp; first review <span class="who team">Our team · now</span></h4><p>We verify your identity and a tax assistant reviews everything, raising any queries.</p></div></div>
-            <div class="rm-item"><span class="rmi next">4</span><div class="rmt"><h4>HMRC agent authorisation <span class="who you">A quick step for you</span></h4><p>We’ll send simple instructions to authorise us with HMRC. Stuck? Book a free 10-minute call.</p></div></div>
+            <div class="rm-item"><span class="rmi next">4</span><div class="rmt"><h4>HMRC agent authorisation <span class="who you">A quick step for you</span></h4><p>We'll send simple instructions to authorise us with HMRC. Stuck? Book a free 10-minute call.</p></div></div>
             <div class="rm-item"><span class="rmi next">5</span><div class="rmt"><h4>Draft return prepared &amp; signed off <span class="who team">Our team</span></h4><p>Your client manager prepares the full calculation and reviews it before you see it.</p></div></div>
             <div class="rm-item"><span class="rmi next">6</span><div class="rmt"><h4>You review &amp; approve the draft <span class="who you">You approve</span></h4><p>Clear figures in plain English. Nothing is filed until you say yes.</p></div></div>
             <div class="rm-item"><span class="rmi next">7</span><div class="rmt"><h4>We file with HMRC &amp; confirm <span class="who team">Our team</span></h4><p>We submit and send your confirmation, deadline to pay, and records to keep.</p></div></div>
@@ -1107,7 +596,7 @@ body.on-intro .actionbar{display:none !important;}
 
           <div class="referral">
             <i class="ti ti-gift"></i>
-            <div class="rf-t"><b>Know someone else who’s sold a property or asset?</b><p>You’ll get a referral link on your dashboard, earn account credit for every friend who files with us.</p></div>
+            <div class="rf-t"><b>Know someone else who's sold a property or asset?</b><p>You'll get a referral link on your dashboard, earn account credit for every friend who files with us.</p></div>
           </div>
 
           <div class="success-ctas">
@@ -1148,176 +637,103 @@ body.on-intro .actionbar{display:none !important;}
 <!-- ================= TOAST ================= -->
 <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toastTxt">Saved</span></div>
 
-<!-- ================= STAGE CELEBRATION ================= -->
-<div class="celebrate" id="celebrate">
-  <div class="cbox">
-    <div class="cburst"><i class="ti ti-confetti"></i></div>
-    <h3 id="celTitle">Stage complete!</h3>
-    <p id="celBody">Nice work, that part’s done.</p>
-    <span class="cnext" id="celNext"><i class="ti ti-arrow-right"></i> Up next</span>
-    <div><button class="btn btn-primary btn-lg" id="celGo">Keep going</button></div>
-  </div>
-</div>
-
 <script>
 (() => {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
+  const fmtGBP = n => '£'+Number(n).toLocaleString('en-GB');
 
-  /* ---------- step model ---------- */
-  const STEPS = [
-    {n:1, stage:1, key:'Service',       title:'Choose your service'},
-    {n:2, stage:1, key:'Case details',  title:'A few basic details'},
-    {n:3, stage:1, key:'Ownership',     title:'Who owns this?'},
-    {n:4, stage:1, key:'Agreement',     title:'Sign your engagement letter'},
-    {n:5, stage:1, key:'Price',         title:'Review your price'},
-    {n:6, stage:1, key:'Payment',       title:'Secure payment'},
-    {n:7, stage:2, key:'Questions',     title:'Guided questions'},
-    {n:8, stage:2, key:'Documents',     title:'Upload your documents'},
-    {n:9, stage:3, key:'Review',        title:'Review & submit'},
+  /* ---------- 3-step client model ---------- */
+  const CLIENT_STEPS = [
+    {n:1, key:'Case info'},
+    {n:2, key:'AI chat'},
+    {n:3, key:'Review & pay'},
   ];
-  const STAGES = [
-    {n:1, title:'Get started',        tag:'You · ~15 min', steps:[1,2,3,4,5,6]},
-    {n:2, title:'Your information',   tag:'You + our team', steps:[7,8]},
-    {n:3, title:'Review & hand over', tag:'Handover',       steps:[9]},
-  ];
-  const stageOf = n => STEPS[n-1].stage;
 
   const state = {
-    view:'intro', step:1, maxReached:1, autosave:false,
-    service:null, serviceName:null, basePrice:0,
+    step:1, maxReached:1, autosave:false,
+    service:'residential', serviceName:'Residential Property CGT', basePrice:149,
     address:'', asset:'', dispDate:'', sale:'', buy:'', buyDate:'', costs:'', ref:'',
     ownership:'sole', sharePct:'', taxBand:'higher',
-    codeApplied:null, codeDiscount:0, jointDiscount:0,
-    paid:false, signed:false, verified:false, submitted:false,
-    expandedStage:null, _pendingNext:null,
+    improvements:'', improveAmt:'', livedThere:'', livedYears:'', lettings:'', reconstruct:false, notes:'',
+    codeApplied:null, codeDiscount:0,
+    paid:false, submitted:false, chatStarted:false, chatDone:false,
   };
 
-  /* ================= NAV RENDER · timeline + progressive disclosure ================= */
-  function buildNav(){
-    const nav = $('#stepnav'); if(!nav) return;
-    const curStage = stageOf(state.step);
-    const pct = Math.round((state.step/9)*100);
-    let html = `<div class="nav-progress">
-        <div class="npt"><b>Your progress</b><span class="pc">Stage ${curStage} of 3</span></div>
-        <div class="npbar"><div class="f" style="width:${pct}%"></div></div>
-      </div><div class="nstages">`;
-    STAGES.forEach(st=>{
-      const done = st.steps.every(s=>s < state.step);
-      const active = st.steps.includes(state.step);
-      const reachable = st.steps[0] <= state.maxReached;
-      const open = state.expandedStage===st.n;
-      const cls = ['nstage', active?'active':'', done?'done':'', open?'open':'', reachable?'':'upcoming'].filter(Boolean).join(' ');
-      const node = done ? '<i class="ti ti-check"></i>' : st.n;
-      const steps = st.steps.map(sn=>{
-        const s=STEPS[sn-1], sdone=sn<state.step, scur=sn===state.step, scan=sn<=state.maxReached;
-        return `<button class="nstep ${scur?'current':''} ${sdone?'done':''}" data-goto="${sn}" ${scan?'':'disabled'}>
-            <span class="sd">${sdone?'<i class="ti ti-check" style="font-size:11px;"></i>':''}</span><span>${s.key}</span></button>`;
-      }).join('');
-      html += `<div class="${cls}">
-        <div class="nstage-row" data-stagerow="${st.n}">
-          <span class="ns-node">${node}</span>
-          <span class="ns-info"><span class="t">${st.title}</span></span>
-          <i class="ti ti-chevron-down ns-chev"></i>
-        </div>
-        <div class="ns-steps">${steps}</div>
-      </div>`;
+  /* ================= TOP STEPPER ================= */
+  function buildStepper(){
+    const wrap = $('#cstepper'); if(!wrap) return;
+    let html = '';
+    CLIENT_STEPS.forEach((s,i)=>{
+      const done = s.n < state.step, cur = s.n === state.step;
+      const cls = ['cstep', cur?'current':'', done?'done':''].filter(Boolean).join(' ');
+      const node = done ? '<i class="ti ti-check"></i>' : s.n;
+      html += `<div class="${cls}"><span class="cnode">${node}</span><span class="clabel">${s.key}</span></div>`;
+      if(i<CLIENT_STEPS.length-1) html += `<span class="cbar ${s.n<state.step?'done':''}"></span>`;
     });
-    html += '</div>';
-    nav.innerHTML = html;
-    nav.querySelectorAll('[data-stagerow]').forEach(r=>r.addEventListener('click',()=>{
-      const n=+r.getAttribute('data-stagerow');
-      state.expandedStage = state.expandedStage===n ? null : n;   // toggle: any stage can expand to preview its steps
-      buildNav();
-    }));
-    nav.querySelectorAll('.nstep[data-goto]').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation();
-      const sn=+b.getAttribute('data-goto');
-      if(sn<=state.maxReached) goTo(sn);
-    }));
+    wrap.innerHTML = html;
   }
 
-  /* ================= RENDER ================= */
+  /* ================= RENDER / NAV ================= */
   function show(step){
     $$('.step').forEach(el=>el.classList.toggle('show', +el.dataset.step===step));
     $('#successWrap').classList.remove('show');
-    window.scrollTo({top:0,behavior:'smooth'});
-    const st = STEPS[step-1], ph = STAGES[st.stage-1];
-    // mobile progress
-    $('#mPhase').textContent = `Stage ${ph.n} · ${ph.title}`;
-    $('#mCount').textContent = `Step ${st.n} of 9`;
-    $('#mTitle').textContent = st.title;
-    const pct = Math.round((step/9)*100);
-    $('#mFill').style.width = pct+'%';
-    // action bar
-    $('#btnBack').style.visibility = step===1 ? 'hidden':'visible';
-    const next = $('#btnNext');
-    if(step===9){ next.innerHTML = 'Submit case for review <i class="ti ti-send"></i>'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
-    else if(step===6 && !state.paid){ next.innerHTML = 'Pay now <i class="ti ti-lock"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
-    else { next.innerHTML = 'Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
-    buildNav();
-    updateSummary();
-    if(step===5) renderPrice();
-    if(step===6){
-      $('#payForm').style.display = state.paid ? 'none' : 'block';
-      $('#payProcessing').classList.remove('show');
-      $('#payFailed').classList.remove('show');
-      const pn=$('#paidNote'); if(pn) pn.classList.toggle('hide', !state.paid);
-    }
-    if(step===9) renderReview();
-    refreshNextState();
-  }
-
-  function goTo(step){ state.step = step; state.maxReached = Math.max(state.maxReached, step); state.view='wizard'; show(step); }
-
-  /* ================= INTRO · HOW IT WORKS ================= */
-  function showIntro(){
-    state.view='intro';
-    document.body.classList.add('on-intro');
-    $('#introview').classList.add('show');
-    $$('.step').forEach(el=>el.classList.remove('show'));
-    $('#successWrap').classList.remove('show');
-    $('#actionbar').style.display='none';
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  function startCase(){
-    document.body.classList.remove('on-intro');
-    $('#introview').classList.remove('show');
+    $('#cstepperWrap').style.display='';
     $('#actionbar').style.display='flex';
-    goTo(1);
+    window.scrollTo({top:0,behavior:'smooth'});
+    // action bar
+    $('#btnBack').style.visibility = step===1 ? 'hidden' : 'visible';
+    const next = $('#btnNext');
+    if(step===2){ next.style.display='none'; }
+    else if(step===3){ next.style.display='inline-flex'; next.innerHTML='Proceed to Payment <i class="ti ti-lock"></i>'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
+    else { next.style.display='inline-flex'; next.innerHTML='Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
+    buildStepper();
+    if(step===2 && !state.chatStarted) startChat();
+    if(step===3){ renderReview(); renderFee(); refreshPayCta(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show'); }
   }
-  $('#btnStartCase').addEventListener('click',startCase);
+  function goTo(step){ state.step=step; state.maxReached=Math.max(state.maxReached,step); show(step); }
 
-  /* ================= PROVISIONAL CGT ESTIMATE ================= */
-  const fmtGBP = n => '£'+Number(n).toLocaleString('en-GB');
-  function calcEstimate(){
-    const sale=+state.sale||0, buy=+state.buy||0, costs=+state.costs||0;
-    if(!sale || !buy) return null;                     // need enough data (req: "once sufficient data is entered")
-    const share = state.ownership==='joint' ? ((+state.sharePct||50)/100) : 1;
-    const gain = (sale - buy - costs) * share;
-    if(gain<=0) return 0;
-    const taxable = Math.max(0, gain - 3000);          // annual exempt amount
-    const higher = state.taxBand!=='basic';
-    const rate = state.service==='residential' ? (higher?0.24:0.18) : (higher?0.20:0.10);
-    return Math.round(taxable*rate);
-  }
-  function updateEstimate(){
-    const est=calcEstimate();
-    const v2=$('#estVal2'), t2=$('#estTag2'), card2=$('#estCard2');
-    const sv=$('#sumEstVal'), sp=$('#sumEstProv');
-    if(est===null){
-      if(v2){ v2.textContent='Add your sale & purchase price to see it'; v2.classList.add('empty'); }
-      if(t2) t2.classList.add('hide');
-      if(sv){ sv.textContent='Awaiting your figures'; sv.classList.add('empty'); }
-      if(sp) sp.textContent='Subject to full review by our tax team';
+  /* ================= STEP 1 · CASE INFO ================= */
+  $$('#assetSeg .opt').forEach(o=>o.addEventListener('click',()=>{
+    $$('#assetSeg .opt').forEach(x=>x.classList.remove('sel')); o.classList.add('sel');
+    state.service = o.dataset.service;
+    state.serviceName = o.dataset.name;
+    state.basePrice = +o.dataset.price;
+    const isProp = state.service==='residential'||state.service==='commercial';
+    $('#fldAddress').classList.toggle('hide', !isProp);
+    $('#fldAsset').classList.toggle('hide', isProp);
+    autosave();
+  }));
+  ['inAddress','inAsset','inDispDate'].forEach(id=>{
+    const el=$('#'+id); if(!el) return;
+    el.addEventListener('input',()=>{
+      if(id==='inAddress') state.address=el.value;
+      if(id==='inAsset') state.asset=el.value;
+      if(id==='inDispDate'){ state.dispDate=el.value; updateDeadline(); }
+      autosave();
+    });
+  });
+
+  const genRef = ()=>{
+    const map={residential:'RES',commercial:'COM',other:'CGT'};
+    const p = map[state.service]||'CGT';
+    const n = 20000 + Math.floor(((Date.now()/1000)%40000));
+    return `${p}-${n}`;
+  };
+
+  function validateStep1(){
+    let ok=true;
+    const isProp = state.service==='residential'||state.service==='commercial';
+    if(isProp){
+      if(!$('#inAddress').value.trim()){ $('#errAddress').classList.add('show'); $('#inAddress').classList.add('err'); ok=false; }
+      else { $('#errAddress').classList.remove('show'); $('#inAddress').classList.remove('err'); }
     } else {
-      const txt = est===0 ? 'No tax likely due' : fmtGBP(est);
-      if(v2){ v2.textContent=txt; v2.classList.remove('empty'); }
-      if(t2) t2.classList.remove('hide');
-      if(sv){ sv.textContent=txt; sv.classList.remove('empty'); }
-      if(sp) sp.textContent='Provisional · subject to full review';
-      if(card2){ card2.classList.remove('est-flash'); void card2.offsetWidth; card2.classList.add('est-flash'); }
+      if(!$('#inAsset').value.trim()){ $('#errAsset').classList.add('show'); $('#inAsset').classList.add('err'); ok=false; }
+      else { $('#errAsset').classList.remove('show'); $('#inAsset').classList.remove('err'); }
     }
+    if(!$('#inDispDate').value){ $('#errDispDate').classList.add('show'); ok=false; }
+    else $('#errDispDate').classList.remove('show');
+    return ok;
   }
 
   /* ================= 60-DAY DEADLINE (RAG) ================= */
@@ -1331,333 +747,353 @@ body.on-intro .actionbar{display:none !important;}
     const pct = Math.max(3, Math.min(100, Math.round((days/60)*100)));
     return {days,dl,rag,pct};
   }
-  function setDeadline(wrapId,numId,mainId,subId){
-    const wrap=$('#'+wrapId); if(!wrap) return;
-    const ring=wrap.querySelector('.ring'), num=$('#'+numId), main=$('#'+mainId), sub=$('#'+subId);
+  function updateDeadline(){
+    const wrap=$('#deadline2'); if(!wrap) return;
+    const ring=wrap.querySelector('.ring'), num=$('#dl2Num'), main=$('#dl2Main'), sub=$('#dl2Sub');
     const info=calcDeadline();
     wrap.classList.remove('rag-green','rag-amber','rag-red','empty');
-    if(!info){ wrap.classList.add('empty'); ring.style.setProperty('--pct',0); num.textContent='–'; return; }
+    if(!info){ wrap.classList.add('empty'); ring.style.setProperty('--pct',0); num.textContent='–'; main.textContent='Add your sale date'; return; }
     wrap.classList.add('rag-'+info.rag);
     ring.style.setProperty('--pct', info.pct);
     const dueStr = info.dl.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
     if(info.days<0){ num.textContent='!'; main.textContent='Deadline passed'; sub.textContent='Was due '+dueStr+', we’ll help you file quickly.'; }
     else { num.textContent=info.days; main.textContent=info.days+' day'+(info.days===1?'':'s')+' left'; sub.textContent='Report & pay by '+dueStr; }
   }
-  function updateDeadline(){ setDeadline('deadline2','dl2Num','dl2Main','dl2Sub'); setDeadline('sumDeadline','sumDlNum','sumDlMain','sumDlSub'); }
 
-  /* ================= STAGE CELEBRATION ================= */
-  const CEL={
-    1:{t:'Stage 1 complete 🎉', b:'Your case is set up, paid and your engagement letter is signed, we’re now formally acting for you.'},
-    2:{t:'Stage 2 complete 🎉', b:'Thanks! We’ve got your information and documents. One last step and it’s with our team.'},
-  };
-  function spawnConfetti(){
-    const box=$('#celebrate .cbox'); box.querySelectorAll('.confetti').forEach(c=>c.remove());
-    const cols=['#83C341','#adee68','#1b2d4f','#ffc107','#43a047'];
-    for(let i=0;i<16;i++){
-      const c=document.createElement('span'); c.className='confetti';
-      c.style.left=(6+Math.random()*88)+'%';
-      c.style.background=cols[i%cols.length];
-      c.style.animationDelay=(Math.random()*0.3)+'s';
-      box.appendChild(c);
+  /* ================= PROVISIONAL CGT ESTIMATE ================= */
+  function calcEstimate(){
+    const sale=+state.sale||0, buy=+state.buy||0, costs=+state.costs||0;
+    if(!sale || !buy) return null;
+    const share = state.ownership==='joint' ? ((+state.sharePct||50)/100) : 1;
+    const gain = (sale - buy - costs) * share;
+    if(gain<=0) return 0;
+    const taxable = Math.max(0, gain - 3000);
+    const higher = state.taxBand!=='basic';
+    const rate = state.service==='residential' ? (higher?0.24:0.18) : (higher?0.20:0.10);
+    return Math.round(taxable*rate);
+  }
+
+  /* ================= STEP 2 · AI CHAT ENGINE ================= */
+  const assetWord = ()=> state.service==='other' ? 'asset' : 'property';
+  const money = v => '£'+Number(v||0).toLocaleString('en-GB');
+
+  // Ordered question queue; each answer may inject follow-ups.
+  function baseQuestions(){
+    return [
+      {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First — how was it owned?"],
+        input:{type:'chips', options:[{label:'I owned it on my own',value:'sole',icon:'ti ti-user'},{label:'Jointly with someone',value:'joint',icon:'ti ti-users'}]},
+        set:v=>{state.ownership=v;}, label:v=> v==='joint'?'Jointly owned':'Owned on my own',
+        followups:v=> v==='joint' ? [{id:'share', ai:["Got it. What was your ownership share?"],
+            input:{type:'chips', noOther:true, options:[{label:'50%',value:'50'},{label:'25%',value:'25'},{label:'75%',value:'75'},{label:'Another %',value:'other'}]},
+            set:v=>{ if(v!=='other') state.sharePct=v; }, label:v=> v==='other'?'A different share':(v+'%'),
+            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem — what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
+
+      {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved — your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
+
+      {id:'buyKnown', ai:["Do you have the original purchase details for this "+assetWord()+"?"],
+        input:{type:'chips', options:[{label:'Yes, I have them',value:'yes',icon:'ti ti-check'},{label:"I'm not sure of the figures",value:'no',icon:'ti ti-help'}]},
+        set:v=>{ state.reconstruct = (v==='no'); }, label:v=> v==='yes'?'I have the details':"Not sure of the figures",
+        followups:v=> v==='yes' ? [
+          {id:'buyDate', ai:["When did you acquire it?"], input:{type:'date'}, set:v=>{state.buyDate=v;}, label:v=> fmtDate(v)},
+          {id:'buy', ai:["And how much did you pay for it?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.buy=v;}, label:v=> money(v)},
+        ] : [
+          {id:'reconNote', ai:[{note:"That's fine — we can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
+        ] },
+
+      {id:'sale', ai:["How much did you sell it for?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.sale=v;}, label:v=> money(v)},
+
+      {id:'costs', ai:["Any selling or buying costs? (solicitor, estate-agent fees, stamp duty)"],
+        input:{type:'chips', noOther:true, options:[{label:'Enter a figure',value:'enter'},{label:'None / not sure',value:'none'}]},
+        set:v=>{ if(v==='none') state.costs=''; }, label:v=> v==='none'?'None / not sure':'I have costs',
+        followups:v=> v==='enter' ? [{id:'costsN', ai:["Roughly how much in total?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.costs=v;}, label:v=> money(v)}] : [] },
+
+      {id:'improve', ai:["Did you make any capital improvements (e.g. an extension or major renovation)?"],
+        input:{type:'chips', options:[{label:'Yes',value:'yes'},{label:'No',value:'no'}]},
+        set:v=>{state.improvements=v;}, label:v=> v==='yes'?'Yes, there were improvements':'No improvements',
+        followups:v=> v==='yes' ? [{id:'improveAmt', ai:["Roughly how much did the improvements cost?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.improveAmt=v;}, label:v=> money(v)}] : [] },
+    ];
+  }
+  // residential-only relief questions, appended when applicable
+  function residenceQuestions(){
+    if(state.service!=='residential') return [];
+    return [
+      {id:'lived', ai:["Did you ever live in this property as your main home?"],
+        input:{type:'chips', options:[{label:'Yes',value:'yes'},{label:'No',value:'no'}]},
+        set:v=>{state.livedThere=v;}, label:v=> v==='yes'?'Yes, it was my main home':'No, never my main home',
+        followups:v=> v==='yes' ? [
+          {id:'livedYears', ai:["Roughly how long did you live there?"], input:{type:'chips', options:[{label:'Under 2 years',value:'<2'},{label:'2–5 years',value:'2-5'},{label:'5+ years',value:'5+'}]}, set:v=>{state.livedYears=v;}, label:v=>v},
+          {id:'let', ai:["And was it ever let out to tenants?"], input:{type:'chips', options:[{label:'Yes, it was let',value:'yes'},{label:'No',value:'no'}]}, set:v=>{state.lettings=v;}, label:v=> v==='yes'?'Yes, it was let':'No letting'},
+        ] : [] },
+    ];
+  }
+  function tailQuestions(){
+    return [
+      {id:'band', ai:["Almost there. What's your Income Tax band this year?"],
+        input:{type:'chips', options:[{label:'Basic rate',value:'basic'},{label:'Higher rate',value:'higher'},{label:'Additional rate',value:'higher'},{label:"I'm not sure",value:'higher'}]},
+        set:v=>{state.taxBand=v;}, label:v=> v==='basic'?'Basic rate':'Higher / additional'},
+      {id:'notes', ai:["Anything else you'd like our team to know about this disposal?"],
+        input:{type:'text', placeholder:'Type a note, or skip', optional:true}, set:v=>{state.notes=v;}, label:v=> v?('“'+v+'”'):'Nothing to add'},
+    ];
+  }
+
+  const fmtDate = iso => { if(!iso) return '-'; const d=new Date(iso); return isNaN(d)?iso:d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); };
+
+  let queue=[], qi=0;
+  const scroll = ()=> $('#chatDock').scrollIntoView({behavior:'smooth',block:'end'});
+  function pushMsg(role, html, extraCls){
+    const wrap=document.createElement('div');
+    wrap.className='msg '+role+(extraCls?(' '+extraCls):'');
+    if(role==='ai' && extraCls!=='note') wrap.innerHTML='<span class="av"><i class="ti ti-sparkles"></i></span><div class="bubble">'+html+'</div>';
+    else if(extraCls==='note') wrap.innerHTML='<div class="bubble"><i class="ti ti-info-circle"></i><span>'+html+'</span></div>';
+    else wrap.innerHTML='<div class="bubble">'+html+'</div>';
+    $('#chatScroll').appendChild(wrap); scroll(); return wrap;
+  }
+  function typingOn(){
+    const t=document.createElement('div'); t.className='msg ai'; t.id='typingRow';
+    t.innerHTML='<span class="av"><i class="ti ti-sparkles"></i></span><div class="bubble typing"><span></span><span></span><span></span></div>';
+    $('#chatScroll').appendChild(t); scroll();
+  }
+  function typingOff(){ const t=$('#typingRow'); if(t) t.remove(); }
+
+  function startChat(){
+    state.chatStarted=true;
+    $('#chatScroll').innerHTML=''; $('#chatDock').innerHTML='';
+    const who = state.service==='other' ? (state.asset||'your asset') : (state.address||'your property');
+    queue = [
+      {id:'hi', ai:["Hi! I'm your FileCGTOnline assistant ✨","I'll ask a few quick questions about <b>"+esc(who)+"</b> and note everything down for your case."], input:{type:'auto'}},
+      ...baseQuestions(), ...residenceQuestions(), ...tailQuestions(),
+    ];
+    qi=0; enableAutosave(); ask();
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  function ask(){
+    $('#chatDock').innerHTML='';
+    if(qi>=queue.length){ finishChat(); return; }
+    const q=queue[qi];
+    typingOn();
+    setTimeout(()=>{
+      typingOff();
+      (q.ai||[]).forEach(line=>{
+        if(typeof line==='object' && line.note) pushMsg('ai', line.note, 'note');
+        else pushMsg('ai', line);
+      });
+      if(q.input.type==='auto'){ qi++; setTimeout(ask, 520); return; }
+      renderDock(q);
+    }, 620);
+  }
+
+  function answer(q, value, label){
+    pushMsg('user', esc(label));
+    if(q.set) q.set(value);
+    autosave();
+    if(q.followups){ const fu=q.followups(value)||[]; if(fu.length) queue.splice(qi+1,0,...fu); }
+    qi++; ask();
+  }
+
+  function renderDock(q){
+    const dock=$('#chatDock'); dock.innerHTML='';
+    const t=q.input.type;
+    if(t==='chips'){
+      const row=document.createElement('div'); row.className='chip-row';
+      q.input.options.forEach(o=>{
+        const b=document.createElement('button'); b.className='qchip';
+        b.innerHTML=(o.icon?('<i class="'+o.icon+'"></i>'):'')+esc(o.label);
+        b.addEventListener('click',()=>answer(q, o.value, q.label?q.label(o.value):o.label));
+        row.appendChild(b);
+      });
+      if(!q.input.noOther){
+        const ob=document.createElement('button'); ob.className='qchip';
+        ob.innerHTML='<i class="ti ti-dots"></i> Other';
+        ob.addEventListener('click',()=>renderOther(q));
+        row.appendChild(ob);
+      }
+      dock.appendChild(row);
+    } else if(t==='number' || t==='date' || t==='text'){
+      const box=document.createElement('div'); box.className='dock-input';
+      let inputHtml;
+      if(t==='number'){
+        const pre = q.input.prefix ? '<i class="'+(q.input.prefix==='£'?'ti ti-currency-pound':'ti ti-percentage')+' prefix"></i>' : '';
+        inputHtml='<div class="input-wrap">'+pre+'<input class="input" type="number" inputmode="decimal" placeholder="'+(q.input.placeholder||'')+'"'+(q.input.prefix?' style="padding-left:30px;"':'')+'></div>';
+      } else if(t==='date'){
+        inputHtml='<div class="input-wrap"><input class="input" type="date"></div>';
+      } else {
+        inputHtml='<div class="input-wrap"><input class="input" type="text" placeholder="'+(q.input.placeholder||'')+'"></div>';
+      }
+      box.innerHTML=inputHtml+'<button class="btn btn-primary" id="dockSend">Send <i class="ti ti-arrow-right"></i></button>';
+      dock.appendChild(box);
+      const inp=box.querySelector('input');
+      const send=()=>{
+        const val=inp.value.trim();
+        if(!val && !q.input.optional){ inp.classList.add('err'); inp.focus(); return; }
+        answer(q, val, q.label?q.label(val):val);
+      };
+      box.querySelector('#dockSend').addEventListener('click',send);
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') send(); });
+      if(q.input.optional){
+        const skip=document.createElement('div'); skip.className='chip-row dock-skip';
+        const sb=document.createElement('button'); sb.className='qchip'; sb.innerHTML='<i class="ti ti-arrow-forward-up"></i> Skip';
+        sb.addEventListener('click',()=>answer(q,'', q.label?q.label(''):'Skipped'));
+        skip.appendChild(sb); dock.appendChild(skip);
+      }
+      setTimeout(()=>inp.focus(),50);
     }
   }
-  function celebrate(stageN, nextStep){
-    const c=CEL[stageN]||{t:'Nice progress!',b:''};
-    const ns=STAGES[stageN]; // next stage object
-    $('#celTitle').textContent=c.t;
-    $('#celBody').textContent=c.b;
-    $('#celNext').innerHTML = ns ? `<i class="ti ti-arrow-right"></i> Up next · Stage ${ns.n}: ${ns.title}` : '';
-    state._pendingNext=nextStep;
-    spawnConfetti();
-    $('#celebrate').classList.add('show');
+
+  // "Other" on a chip question → free-text box for a custom answer
+  function renderOther(q){
+    const dock=$('#chatDock'); dock.innerHTML='';
+    const box=document.createElement('div'); box.className='dock-input';
+    box.innerHTML='<div class="input-wrap"><i class="ti ti-pencil prefix"></i><input class="input" type="text" placeholder="Type your own answer…" style="padding-left:30px;"></div><button class="btn btn-primary" id="dockSend">Send <i class="ti ti-arrow-right"></i></button>';
+    dock.appendChild(box);
+    const inp=box.querySelector('input');
+    const send=()=>{ const val=inp.value.trim(); if(!val){ inp.classList.add('err'); inp.focus(); return; } answer(q, val, val); };
+    box.querySelector('#dockSend').addEventListener('click',send);
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter') send(); });
+    const back=document.createElement('div'); back.className='chip-row dock-skip';
+    const bb=document.createElement('button'); bb.className='qchip'; bb.innerHTML='<i class="ti ti-arrow-back-up"></i> Back to options';
+    bb.addEventListener('click',()=>renderDock(q));
+    back.appendChild(bb); dock.appendChild(back);
+    setTimeout(()=>inp.focus(),50);
   }
-  function proceedCelebrate(){ $('#celebrate').classList.remove('show'); if(state._pendingNext){ const n=state._pendingNext; state._pendingNext=null; goTo(n); } }
-  $('#celGo').addEventListener('click',proceedCelebrate);
-  $('#celebrate').addEventListener('click',e=>{ if(e.target.id==='celebrate') proceedCelebrate(); });
 
-  /* ================= AUTOSAVE ================= */
-  let saveT;
-  function autosave(){
-    if(!state.autosave) return;
-    const el = $('#autosave'); const txt=$('#autosaveTxt');
-    el.classList.add('on','saving'); el.classList.remove('saved');
-    el.querySelector('i').className='ti ti-loader-2';
-    txt.textContent='Saving…';
-    clearTimeout(saveT);
-    saveT = setTimeout(()=>{ el.classList.remove('saving'); el.classList.add('saved'); el.querySelector('i').className='ti ti-cloud-check'; txt.textContent='All changes saved'; }, 700);
+  function finishChat(){
+    state.chatDone=true;
+    typingOn();
+    setTimeout(()=>{
+      typingOff();
+      pushMsg('ai', "Perfect — that's everything I need.");
+      pushMsg('ai', "I've put together your case summary and worked out your fixed fee.");
+      const dock=$('#chatDock'); dock.innerHTML='';
+      const row=document.createElement('div'); row.className='chip-row';
+      const b=document.createElement('button'); b.className='qchip'; b.style.borderColor='var(--green)';
+      b.innerHTML='<i class="ti ti-arrow-right"></i> See my summary &amp; price';
+      b.addEventListener('click',()=>goTo(3));
+      row.appendChild(b); dock.appendChild(row);
+      $('#chatDock').scrollIntoView({behavior:'smooth',block:'end'});
+    }, 620);
   }
-  function enableAutosave(){ if(!state.autosave){ state.autosave=true; $('#autosave').classList.add('on','saved'); $('#autosaveTxt').textContent='All changes saved'; } }
 
-  function toast(msg){ const t=$('#toast'); $('#toastTxt').textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
-
-  /* ================= SUMMARY ================= */
-  const badge = (cls,txt,dot)=>`<span class="badge ${cls}">${dot?`<span class="d" style="background:${dot}"></span>`:''}${txt}</span>`;
-  function updateSummary(){ updateEstimate(); updateDeadline(); }
-
-  /* ================= STEP 1 · SERVICE ================= */
-  $$('#serviceChoices .choice').forEach(c=>{
-    c.addEventListener('click',()=>{
-      $$('#serviceChoices .choice').forEach(x=>x.classList.remove('sel'));
-      c.classList.add('sel');
-      state.service = c.dataset.service;
-      state.serviceName = c.dataset.name;
-      state.basePrice = +c.dataset.price;
-      // service-driven fields in step 2
-      const isProp = state.service==='residential'||state.service==='commercial';
-      $('#fldAddress').classList.toggle('hide', !isProp);
-      $('#fldAsset').classList.toggle('hide', isProp);
-      refreshNextState(); updateSummary();
-    });
-  });
-
-  /* ================= STEP 2 · CASE DETAILS ================= */
-  const genRef = ()=>{
-    const map={residential:'RES',commercial:'COM',other:'CGT'};
-    const p = map[state.service]||'CGT';
-    const n = 20000 + Math.floor(((Date.now()/1000)%40000));
-    return `${p}-${n}`;
-  };
-  ['inAddress','inAsset','inDispDate','inSale','inBuyDate','inBuy','inCosts','inRef'].forEach(id=>{
-    const el=$('#'+id); if(!el) return;
-    el.addEventListener('input',()=>{
-      if(id==='inAddress') state.address=el.value;
-      if(id==='inAsset') state.asset=el.value;
-      if(id==='inDispDate') state.dispDate=el.value;
-      if(id==='inSale') state.sale=el.value;
-      if(id==='inBuyDate') state.buyDate=el.value;
-      if(id==='inBuy') state.buy=el.value;
-      if(id==='inCosts') state.costs=el.value;
-      if(id==='inRef') state.ref=el.value;
-      autosave(); refreshNextState(); updateSummary();
-    });
-  });
-  $('#dkBuyDate').addEventListener('change',e=>{ $('#inBuyDate').disabled=e.target.checked; if(e.target.checked)$('#inBuyDate').value=''; autosave(); });
-  $('#dkBuy').addEventListener('change',e=>{ $('#inBuy').disabled=e.target.checked; if(e.target.checked)$('#inBuy').value=''; autosave(); });
-
-  /* ================= STEP 3 · OWNERSHIP ================= */
-  $$('#ownSeg .opt').forEach(o=>o.addEventListener('click',()=>{
-    $$('#ownSeg .opt').forEach(x=>x.classList.remove('sel')); o.classList.add('sel');
-    state.ownership=o.dataset.own;
-    $('#jointBlock').classList.toggle('hide', state.ownership!=='joint');
-    state.jointDiscount = state.ownership==='joint' ? Math.round(state.basePrice*0.2) : 0;
-    autosave(); updateSummary();
-  }));
-  $('#addOwner').addEventListener('click',()=>toast('Another co-owner row added'));
-  $('#inPct').addEventListener('input',e=>{ state.sharePct=e.target.value; autosave(); updateSummary(); });
-  $('#inBand').addEventListener('change',e=>{ state.taxBand=e.target.value; autosave(); updateSummary(); });
-
-  /* ================= STEP 4 · PRICE ================= */
-  function total(){ return Math.max(0, state.basePrice - state.jointDiscount - state.codeDiscount); }
-  function renderPrice(){
-    $('#prSvc').textContent = state.serviceName||'-';
-    $('#prBase').textContent = '£'+state.basePrice;
-    $('#prJointRow').classList.toggle('hide', !state.jointDiscount);
-    $('#prJoint').textContent = '–£'+state.jointDiscount;
-    $('#prCodeRow').classList.toggle('hide', !state.codeDiscount);
-    $('#prCode').textContent = '–£'+state.codeDiscount;
-    $('#prCodeName').textContent = state.codeApplied?('· '+state.codeApplied):'';
-    $('#prTotal').textContent = '£'+total().toLocaleString('en-GB');
+  /* ================= STEP 3 · PRICING ================= */
+  function priceItems(){
+    const items=[{label: state.serviceName, amt: state.basePrice}];
+    if(state.ownership==='joint') items.push({label:'Joint ownership handling', amt:49});
+    if(state.livedThere==='yes' || state.lettings==='yes') items.push({label:'Private Residence / Lettings relief', amt:59});
+    if(state.improvements==='yes') items.push({label:'Improvement costs adjustment', amt:29});
+    if(state.reconstruct) items.push({label:'Acquisition value reconstruction', amt:39});
+    return items;
+  }
+  function total(){ let t=priceItems().reduce((s,i)=>s+i.amt,0); t-=(state.codeDiscount||0); return Math.max(0,t); }
+  function renderFee(){
+    $('#feeVal').textContent = fmtGBP(total());
+    const items=priceItems();
+    let rows = items.map(i=>`<div class="price-row"><span class="lab">${i.label}</span><span class="val">${fmtGBP(i.amt)}</span></div>`).join('');
+    if(state.codeDiscount) rows += `<div class="price-row disc"><span class="lab"><i class="ti ti-ticket" style="color:var(--su-tx);font-size:15px;"></i> Promo ${state.codeApplied||''}</span><span class="val">–${fmtGBP(state.codeDiscount)}</span></div>`;
+    rows += `<div class="price-total"><span class="lab">Total due today</span><span class="val">${fmtGBP(total())}</span></div>`;
+    $('#feeBreakdown').innerHTML = rows;
   }
   $('#applyCode').addEventListener('click',()=>{
     const v=$('#inCode').value.trim().toUpperCase();
-    if(v==='CGT10'){ state.codeApplied='CGT10'; state.codeDiscount=15; $('#errCode').classList.remove('show'); $('#okCode').classList.remove('hide'); toast('Discount applied'); }
+    if(v==='CGT10'){ state.codeApplied='CGT10'; state.codeDiscount=15; $('#errCode').classList.remove('show'); $('#okCode').classList.remove('hide'); toast('Promo applied'); }
     else { state.codeDiscount=0; state.codeApplied=null; $('#errCode').classList.add('show'); $('#okCode').classList.add('hide'); }
-    renderPrice(); updateSummary();
+    renderFee();
   });
 
-  /* ================= STEP 5 · PAYMENT ================= */
-  $$('#payForm .pay-m').forEach(m=>m.addEventListener('click',()=>{ $$('#payForm .pay-m').forEach(x=>x.classList.remove('sel')); m.classList.add('sel'); }));
-  function startPayment(){
-    $('#payForm').style.display='none';
-    $('#payProcessing').classList.add('show');
-    setTimeout(()=>{
-      $('#payProcessing').classList.remove('show');
-      // demo: succeed, no interstitial confirmation; go straight on (stage 1 completes here)
-      state.paid=true; updateSummary(); refreshNextState();
-      const s=state.step;
-      if(s<9){ if(stageOf(s+1)!==stageOf(s)) celebrate(stageOf(s), s+1); else goTo(s+1); }
-    },1600);
-  }
-  $('#payRetry').addEventListener('click',()=>{ $('#payFailed').classList.remove('show'); $('#payForm').style.display='block'; });
-
-  /* ================= STEP 6 · AGREEMENT ================= */
-  function refreshSign(){
-    const ok = $('#agreeChk').checked && $('#signName').value.trim().length>=3;
-    if(state.signed) return;
-    $('#btnNext').disabled = !ok && state.step===4;
-  }
-  $('#agreeChk').addEventListener('change',refreshNextState);
-  $('#signName').addEventListener('input',refreshNextState);
-  function doSign(){
-    state.signed=true;
-    const now=new Date();
-    $('#signedBy').textContent=$('#signName').value.trim();
-    $('#signedStamp').textContent=now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+', '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · IP recorded';
-    $('#signedState').classList.remove('hide');
-    updateSummary();
-  }
-  $('#downloadCopy').addEventListener('click',()=>toast('Signed copy downloaded'));
-
-  /* ================= STEP 8 · DOCUMENTS ================= */
-  const DOCS=[
-    {id:'sale',name:'Sale Completion Statement',req:true, why:'We use this to confirm your sale price and date.'},
-    {id:'purchase',name:'Purchase Completion Statement',req:true, why:'This shows what you originally paid for the asset.'},
-    {id:'improve',name:'Improvement Receipts',req:false, why:'Costs of improvements can reduce your gain.'},
-    {id:'id',name:'Identity Documents',req:true, why:'Required by HMRC to verify who you are.'},
-    {id:'addr',name:'Proof of Address',req:true, why:'A recent utility bill or bank statement (last 3 months).'},
-    {id:'other',name:'Other Supporting Documents',req:false, why:'Anything else you think is relevant to your case.'},
-  ];
-  function buildDocs(){
-    const g=$('#docGrid'); g.innerHTML='';
-    DOCS.forEach(d=>{
-      const card=document.createElement('div'); card.className='doc-card';
-      card.innerHTML=`
-        <div class="dc-head">
-          <h4><i class="ti ti-file-text" style="color:var(--green);"></i> ${d.name}</h4>
-          <span class="badge ${d.req?'b-amber':'b-grey'}">${d.req?'Required':'Optional'}</span>
-        </div>
-        <p class="why">${d.why}</p>
-        <p class="fmt">PDF, JPG, PNG, DOCX · max 25MB</p>
-        <div class="drop" data-doc="${d.id}">
-          <i class="ti ti-cloud-upload"></i>
-          <p>Drag &amp; drop or <b style="color:var(--green-link)">browse</b></p>
-          <p class="cam"><i class="ti ti-camera"></i> Or take a photo</p>
-          <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png,.docx">
-        </div>
-        <div class="up-progress" data-prog="${d.id}"><div class="fill"></div></div>
-        <div class="uploaded" data-file="${d.id}">
-          <span class="fi"><i class="ti ti-file-type-pdf"></i></span>
-          <span class="meta"><span class="nm">-</span><span class="sz">-</span></span>
-          <span class="badge b-green" style="margin-left:auto;"><i class="ti ti-circle-check"></i> Uploaded</span>
-          <span class="act"><button class="icon-btn" title="Replace"><i class="ti ti-refresh"></i></button><button class="icon-btn danger" title="Delete"><i class="ti ti-trash"></i></button></span>
-        </div>`;
-      g.appendChild(card);
-      const drop=card.querySelector('.drop'), input=card.querySelector('input[type=file]');
-      const prog=card.querySelector('.up-progress'), fill=prog.querySelector('.fill');
-      const up=card.querySelector('.uploaded');
-      const openPick=()=>input.click();
-      drop.addEventListener('click',openPick);
-      ['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
-      ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
-      drop.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
-      input.addEventListener('change',()=>{ if(input.files[0]) handleFile(input.files[0]); });
-      function handleFile(file){
-        drop.style.display='none'; prog.classList.add('show'); let p=0;
-        const t=setInterval(()=>{ p+=Math.random()*30; fill.style.width=Math.min(p,100)+'%';
-          if(p>=100){ clearInterval(t); prog.classList.remove('show'); fill.style.width='0';
-            up.querySelector('.nm').textContent=file.name;
-            up.querySelector('.sz').textContent=(file.size/1048576).toFixed(1)+' MB · '+d.name;
-            up.classList.add('show'); d.done=true; autosave(); refreshDocMissing();
-          }
-        },150);
-      }
-      card.querySelector('.icon-btn.danger').addEventListener('click',()=>{ up.classList.remove('show'); drop.style.display='block'; input.value=''; d.done=false; refreshDocMissing(); });
-      card.querySelector('.icon-btn:not(.danger)').addEventListener('click',openPick);
-    });
-  }
-  function refreshDocMissing(){
-    const missing=DOCS.filter(d=>d.req&&!d.done).map(d=>d.name);
-    $('#docMissing').classList.toggle('hide', missing.length===0);
-    $('#docMissingList').textContent=missing.join(', ');
-  }
-
-  /* ================= STEP 9 · REVIEW ================= */
+  /* ================= STEP 3 · REVIEW ================= */
   function renderReview(){
+    const isProp = state.service!=='other';
     const rows=[
-      {t:'Service selected', s:state.service?'ok':'miss', d:state.serviceName||'Not chosen', go:1},
-      {t:'Basic case details', s:(state.sale&&(state.address||state.asset))?'ok':'prog', d:state.ref||'Incomplete', go:2},
-      {t:'Ownership details', s:'ok', d:state.ownership==='joint'?'Jointly owned':'Sole owner', go:3},
-      {t:'Agreement signed', s:state.signed?'ok':'miss', d:state.signed?'Signed':'Not signed', go:4},
-      {t:'Payment', s:state.paid?'ok':'miss', d:state.paid?('Paid · £'+total().toLocaleString('en-GB')):'Not paid', go:6},
-      {t:'Guided questions', s:'prog', d:'2 of 5 sections complete', go:7},
-      {t:'Documents uploaded', s:DOCS.filter(d=>d.req&&!d.done).length?'prog':'ok', d:DOCS.filter(d=>d.done).length+' uploaded', go:8},
+      {icon:'ti ti-category', t:'Service', d:state.serviceName, go:1},
+      {icon: isProp?'ti ti-map-pin':'ti ti-tag', t: isProp?'Property':'Asset', d:(isProp?state.address:state.asset)||'Not provided', go:1},
+      {icon:'ti ti-calendar', t:'Sale date', d: state.dispDate?fmtDate(state.dispDate):'Not provided', go:1},
+      {icon:'ti ti-users', t:'Ownership', d: state.ownership==='joint'?('Joint'+(state.sharePct?(' · '+state.sharePct+'% share'):'')):'Sole owner', go:2},
+      {icon:'ti ti-currency-pound', t:'Sale price', d: state.sale?money(state.sale):'Not provided', go:2},
+      {icon:'ti ti-shopping-cart', t:'Purchase', d: state.reconstruct?'To be reconstructed':((state.buy?money(state.buy):'Not provided')+(state.buyDate?(' · '+fmtDate(state.buyDate)):'')), go:2},
+      {icon:'ti ti-tools', t:'Improvements', d: state.improvements==='yes'?(state.improveAmt?money(state.improveAmt):'Yes'):'None', go:2},
     ];
-    const icon={ok:'ti ti-check',prog:'ti ti-progress',miss:'ti ti-alert-triangle'};
-    const lab={ok:'Completed',prog:'In progress',miss:'Action required'};
-    const cls={ok:'b-green',prog:'b-amber',miss:'b-red'};
+    if(state.service==='residential') rows.push({icon:'ti ti-home', t:'Main residence relief', d: state.livedThere==='yes'?('Lived there'+(state.lettings==='yes'?' · let out':'')):'Not a main home', go:2});
+    rows.push({icon:'ti ti-percentage', t:'Tax band', d: state.taxBand==='basic'?'Basic rate':'Higher / additional', go:2});
+    const est=calcEstimate();
+    if(est!==null) rows.push({icon:'ti ti-sparkles', t:'Provisional CGT estimate', d: est===0?'No tax likely due':(fmtGBP(est)+' · subject to review'), go:2});
+    if(state.notes) rows.push({icon:'ti ti-note', t:'Your note', d:'“'+state.notes+'”', go:2});
+
     $('#reviewList').innerHTML = rows.map(r=>`
       <div class="rev-item">
-        <span class="ri ${r.s}"><i class="${icon[r.s]}"></i></span>
-        <div class="rt"><h4>${r.t}</h4><p>${r.d}</p></div>
-        <span class="badge ${cls[r.s]}" style="margin-right:4px;">${lab[r.s]}</span>
+        <span class="ri ok"><i class="${r.icon}"></i></span>
+        <div class="rt"><h4>${r.t}</h4><p>${esc(r.d)}</p></div>
         <button class="edit" data-go="${r.go}">Edit</button>
       </div>`).join('');
-    $$('#reviewList .edit').forEach(b=>b.addEventListener('click',()=>goTo(+b.dataset.go)));
+    $$('#reviewList .edit').forEach(b=>b.addEventListener('click',()=>{
+      const g=+b.dataset.go;
+      if(g===2){ state.chatStarted=false; state.chatDone=false; goTo(2); }
+      else goTo(1);
+    }));
   }
 
-  /* ================= SUBMIT / SUCCESS ================= */
-  function submitCase(){
-    state.submitted=true;
-    $$('.step').forEach(el=>el.classList.remove('show'));
-    $('#actionbar').style.display='none';
-    $('.mprog').style.display='none';
-    $('#stepnav').style.display='none';
-    $('#scName').textContent = state.address || state.asset || state.serviceName;
-    $('#scRef').textContent = state.ref || genRef();
-    $('#successWrap').classList.add('show');
+  /* ================= STEP 3 · PAYMENT ================= */
+  $$('#payForm .pay-m').forEach(m=>m.addEventListener('click',()=>{ $$('#payForm .pay-m').forEach(x=>x.classList.remove('sel')); m.classList.add('sel'); }));
+  $('#agreeChk').addEventListener('change',refreshPayCta);
+  function refreshPayCta(){ if(state.step===3) $('#btnNext').disabled = !$('#agreeChk').checked; }
+  function startPayment(){
+    if(!$('#agreeChk').checked){ toast('Please accept the engagement letter to continue'); return; }
+    $('#payForm').style.display='none';
+    $('#payProcessing').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(()=>{ $('#payProcessing').classList.remove('show'); state.paid=true; submitCase(); },1600);
   }
 
-  /* ================= VALIDATION / NEXT ================= */
-  function validate(step){
-    let ok=true; const bad=[];
-    if(step===1 && !state.service){ bad.push('service'); ok=false; }
-    if(step===2){
-      const isProp=state.service==='residential'||state.service==='commercial';
-      if(isProp && !$('#inAddress').value.trim()){ $('#errAddress').classList.add('show'); $('#inAddress').classList.add('err'); ok=false; } else {$('#errAddress').classList.remove('show');$('#inAddress').classList.remove('err');}
-      if(!isProp && !$('#inAsset').value.trim()){ $('#errAsset').classList.add('show'); $('#inAsset').classList.add('err'); ok=false; } else {$('#errAsset').classList.remove('show');$('#inAsset').classList.remove('err');}
-      if(!$('#inDispDate').value){ $('#errDispDate').classList.add('show'); ok=false; } else $('#errDispDate').classList.remove('show');
-      if(!$('#inSale').value){ $('#errSale').classList.add('show'); $('#inSale').classList.add('err'); ok=false; } else {$('#errSale').classList.remove('show');$('#inSale').classList.remove('err');}
-    }
-    return ok;
-  }
-  // Continue button enable/disable per step
-  function refreshNextState(){
-    const s=state.step, n=$('#btnNext'); n.disabled=false;
-    if(s===1 && !state.service) n.disabled=true;
-    if(s===4 && !state.signed){ n.disabled = !($('#agreeChk').checked && $('#signName').value.trim().length>=3); }
-  }
-
+  /* ================= ACTION BAR ================= */
   function next(){
-    const s=state.step;
-    if(!validate(s)){ toast('Please complete the highlighted fields'); return; }
-    // step-specific actions
-    if(s===2){ if(!state.ref){ state.ref=genRef(); $('#inRef').value=state.ref; } enableAutosave(); toast('Case created · '+state.ref); }
-    if(s===4 && !state.signed){ doSign(); toast('Engagement letter signed'); }
-    if(s===6 && !state.paid){ startPayment(); return; }
-    if(s===9){ submitCase(); return; }
-    if(s<9){
-      if(stageOf(s+1)!==stageOf(s)){ celebrate(stageOf(s), s+1); return; }
-      goTo(s+1);
+    if(state.step===1){
+      if(!validateStep1()){ toast('Please complete the highlighted fields'); return; }
+      if(!state.ref) state.ref=genRef();
+      enableAutosave(); toast('Case created · '+state.ref);
+      goTo(2); return;
     }
+    if(state.step===3){ startPayment(); return; }
   }
   $('#btnNext').addEventListener('click',next);
   $('#btnBack').addEventListener('click',()=>{ if(state.step>1) goTo(state.step-1); });
 
+  /* ================= AUTOSAVE / TOAST ================= */
+  let saveT;
+  function autosave(){
+    if(!state.autosave) return;
+    const el=$('#autosave'), txt=$('#autosaveTxt');
+    el.classList.add('on','saving'); el.classList.remove('saved'); el.querySelector('i').className='ti ti-loader-2'; txt.textContent='Saving…';
+    clearTimeout(saveT);
+    saveT=setTimeout(()=>{ el.classList.remove('saving'); el.classList.add('saved'); el.querySelector('i').className='ti ti-cloud-check'; txt.textContent='All changes saved'; },700);
+  }
+  function enableAutosave(){ if(!state.autosave){ state.autosave=true; $('#autosave').classList.add('on','saved'); $('#autosaveTxt').textContent='All changes saved'; } }
+  function toast(msg){ const t=$('#toast'); $('#toastTxt').textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
   /* ---- Save & Exit modal ---- */
-  const openModal=()=>{ $('#overlay').classList.add('show'); $('#modal').classList.add('show'); };
   const closeModal=()=>{ $('#overlay').classList.remove('show'); $('#modal').classList.remove('show'); };
   $('#modalCancel').addEventListener('click',closeModal);
   $('#overlay').addEventListener('click',closeModal);
 
+  /* ================= SUBMIT / SUCCESS ================= */
+  function submitCase(){
+    state.submitted=true;
+    // Mark the first-time journey complete so the portal shows the single new case.
+    try { const su = JSON.parse(localStorage.getItem('cgt-signup')||'{}'); su.caseStarted = true; su.profileComplete = true; localStorage.setItem('cgt-signup', JSON.stringify(su)); } catch(e){}
+    $$('.step').forEach(el=>el.classList.remove('show'));
+    $('#actionbar').style.display='none';
+    $('#cstepperWrap').style.display='none';
+    $('#scName').textContent = state.service==='other' ? (state.asset||state.serviceName) : (state.address||state.serviceName);
+    $('#scRef').textContent = state.ref || genRef();
+    const info=calcDeadline(); if(info && info.days>=0) $('#scDeadline').textContent = info.days+' day'+(info.days===1?'':'s')+' left';
+    $('#successWrap').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
   /* ---------- init ---------- */
-  buildDocs(); refreshDocMissing(); buildNav();
-  // deep-link: open at a specific step via #step-N (e.g. from "Continue questionnaire"); otherwise show the how-it-works intro
+  buildStepper();
   (function(){
     var m=(location.hash||'').match(/step-?(\d+)/i);
-    if(m){
-      var start=Math.min(9,Math.max(1,parseInt(m[1],10)));
-      document.body.classList.remove('on-intro');
-      $('#introview').classList.remove('show');
-      $('#actionbar').style.display='flex';
-      state.maxReached=start; goTo(start);
-    } else {
-      showIntro();
-    }
+    var start = m ? Math.min(3,Math.max(1,parseInt(m[1],10))) : 1;
+    state.maxReached=start; goTo(start);
   })();
-  // set qFill from data-done
-  const done=$$('.q-sec[data-done="1"]').length, tot=$$('.q-sec').length;
-  const qp=Math.round((done/tot)*100); $('#qFill').style.width=qp+'%'; $('#qPct').textContent=qp+'%';
 })();
 </script>
 </body>

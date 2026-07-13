@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(function(){
+  function apply(t){document.documentElement.setAttribute('data-theme',t);}
+  try{var s=localStorage.getItem('cgt-theme');apply((s==='dark'||s==='light')?s:'light');}catch(e){apply('light');}
+  window.toggleTheme=function(){
+    var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
+    var next=cur==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',next);
+    try{localStorage.setItem('cgt-theme',next);}catch(e){}
+    var ic=document.getElementById('themeIco'); if(ic)ic.className=next==='dark'?'ti ti-sun':'ti ti-moon';
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var ic=document.getElementById('themeIco');
+    if(ic)ic.className=document.documentElement.getAttribute('data-theme')==='dark'?'ti ti-sun':'ti ti-moon';
+  });
+})();
+</script>
+<title>Letter of Engagement · File CGT Online</title>
+<meta name="description" content="Letter of Engagement for the File CGT Online 60-day UK residential property Capital Gains Tax return service." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<style>
+:root{
+  --page:#F6F2EA; --surface:#fff; --surface-2:#EFE9DC; --surface-blur:rgba(255,255,255,0.9);
+  --border:#F0EBE0; --border-2:#D9D3C6;
+  --tx:#1B2D4F; --tx-2:#6B7689; --tx-2b:#5A6678; --tx-3:#8A93A3;
+  --navy:#1B2D4F; --navy-2:#253F6E; --green-link:#5f7a2e; --lime:#adee68;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#0f1526; --surface:#171f33; --surface-2:#1c2439; --surface-blur:rgba(16,21,38,0.85);
+  --border:#2a3450; --border-2:#38466a;
+  --tx:#eaf0fb; --tx-2:#9fadc4; --tx-2b:#b9c4d8; --tx-3:#7d8ba4;
+  --navy:#2c3a5f; --navy-2:#3a4c7d; --green-link:#a9d97a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--page);color:var(--tx);-webkit-font-smoothing:antialiased;line-height:1.6;transition:background-color .22s ease,color .22s ease;}
+::selection{background:var(--lime);color:#0a1120;}
+a{color:inherit;}
+.logo-d{display:none !important;}
+html[data-theme="dark"] .logo-l{display:none !important;}
+html[data-theme="dark"] .logo-d{display:block !important;}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;
+  padding:0 clamp(16px,4vw,32px);background:var(--surface-blur);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.topbar .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+.topbar .brand img{height:24px;width:auto;display:block;}
+.back-link{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;color:var(--tx-2);text-decoration:none;}
+.back-link:hover{color:var(--tx);}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex-shrink:0;border-radius:9999px;border:1px solid var(--border);background:var(--surface);color:var(--tx-2);cursor:pointer;transition:.15s;}
+.theme-toggle:hover{background:var(--page);color:var(--tx);}
+.theme-toggle i{font-size:18px;}
+.tools{display:flex;align-items:center;gap:14px;}
+
+/* document */
+.doc{max-width:820px;margin:0 auto;padding:clamp(32px,5vw,64px) clamp(20px,4vw,28px) 72px;}
+.doc-head{padding-bottom:26px;border-bottom:2px solid var(--navy);margin-bottom:8px;}
+.doc-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green-link);margin-bottom:14px;}
+.doc-head h1{font-size:clamp(30px,5vw,42px);line-height:1.12;font-weight:700;letter-spacing:-0.01em;color:var(--tx);}
+.doc-head .sub{font-size:16.5px;color:var(--tx-2);margin-top:10px;font-style:italic;}
+.doc-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:13px;color:var(--tx-3);}
+.doc-meta span{display:inline-flex;align-items:center;gap:6px;}
+.doc-meta i{font-size:15px;}
+
+/* preamble: recipient details + intro */
+.preamble{padding:26px 0 4px;}
+.recipient{font-size:15px;line-height:1.95;color:var(--tx-2b);margin-bottom:22px;}
+.recipient .rk{color:var(--tx-3);font-weight:500;}
+.recipient .gap{display:inline-block;width:26px;}
+.intro{font-size:15.5px;line-height:1.78;color:var(--tx-2b);}
+
+/* sections */
+.section{padding:30px 0;border-top:1px solid var(--border-2);}
+.section:first-of-type{border-top:none;}
+.section h2{font-size:21px;font-weight:600;letter-spacing:-0.01em;color:var(--tx);margin-bottom:16px;display:flex;gap:12px;}
+.section h2 .num{color:var(--green-link);font-variant-numeric:tabular-nums;}
+.clause{display:grid;grid-template-columns:44px 1fr;gap:6px 14px;margin-bottom:16px;}
+.clause:last-child{margin-bottom:0;}
+.clause .cnum{font-size:15px;font-weight:600;color:var(--tx-3);font-variant-numeric:tabular-nums;padding-top:1px;}
+.clause p,.clause .ctext{font-size:15.5px;line-height:1.78;color:var(--tx-2b);}
+.clause .ctext > p{margin-bottom:12px;}
+.clause a,.section a{color:var(--green-link);text-decoration:underline;text-underline-offset:2px;}
+
+/* prose paragraph without a clause number (e.g. Acceptance) */
+.prose{font-size:15.5px;line-height:1.78;color:var(--tx-2b);}
+
+/* lettered sub-list */
+.sublist{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:12px;}
+.sublist li{display:grid;grid-template-columns:32px 1fr;gap:10px;font-size:15.5px;line-height:1.78;color:var(--tx-2b);}
+.sublist .l{font-weight:500;color:var(--tx-3);}
+.sublist b{color:var(--tx);font-weight:600;}
+
+/* sign-off */
+.signoff{margin-top:36px;padding-top:26px;border-top:1px solid var(--border-2);font-size:15.5px;color:var(--tx-2b);line-height:1.9;}
+.signoff b{font-weight:600;color:var(--tx);font-size:17px;}
+
+/* footer */
+.site-footer{border-top:1px solid var(--border);background:var(--surface);padding:36px clamp(16px,4vw,32px);}
+.foot-inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+.foot-links{display:flex;align-items:center;justify-content:center;gap:10px 22px;flex-wrap:wrap;}
+.foot-links a{font-size:13px;font-weight:500;color:var(--tx-3);text-decoration:none;}
+.foot-links a:hover{color:var(--tx);}
+.foot-links a.current{color:var(--tx);}
+.foot-links .dot{color:var(--tx-3);}
+.foot-copy{font-size:12px;color:var(--tx-3);line-height:1.6;}
+
+@media (max-width:640px){
+  .clause{grid-template-columns:38px 1fr;gap:4px 10px;}
+  .back-link span{display:none;}
+  .section h2{font-size:19px;}
+  .recipient .gap{width:0;display:block;height:0;}
+}
+@media print{
+  .topbar,.site-footer,.theme-toggle{display:none !important;}
+  body{background:#fff;color:#000;}
+  .doc{max-width:none;padding:0;}
+  .section{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a href="variation-d-soft-rounded.html" class="brand" aria-label="File CGT Online home">
+      <img class="logo-l" src="cgt-logo.svg" alt="File CGT Online" />
+      <img class="logo-d" src="cgt-logo-light.svg" alt="File CGT Online" />
+    </a>
+    <div class="tools">
+      <a href="variation-d-soft-rounded.html" class="back-link"><i class="ti ti-arrow-left" style="font-size:15px;"></i> <span>Back to site</span></a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme"><i id="themeIco" class="ti ti-moon"></i></button>
+    </div>
+  </header>
+
+  <!-- DOCUMENT -->
+  <main class="doc">
+    <div class="doc-head">
+      <span class="doc-eyebrow"><i class="ti ti-file-certificate" style="font-size:14px;"></i> Legal</span>
+      <h1>Letter of Engagement</h1>
+      <p class="sub">Capital Gains Tax, 60-Day UK Residential Property Disposal Return</p>
+      <div class="doc-meta">
+        <span><i class="ti ti-calendar-event"></i> Effective 6 July 2026</span>
+        <span><i class="ti ti-building-bank"></i> Everest and Co Accountants Limited · regulated by the ICAEW</span>
+      </div>
+    </div>
+
+    <div class="preamble">
+      <div class="recipient">
+        <div><span class="rk">To:</span> [Client Full Name], [Client Address]</div>
+        <div><span class="rk">Email:</span> [Client Email]<span class="gap"></span><span class="rk">Telephone:</span> [Client Telephone]</div>
+        <div><span class="rk">Date:</span> [Date of Acceptance]<span class="gap"></span><span class="rk">Our reference:</span> [Case Reference]</div>
+      </div>
+      <p class="intro">Thank you for instructing File CGT Online to prepare and file your Capital Gains Tax return on the disposal of UK residential property. This Letter of Engagement, together with the Terms of Service and the Privacy Notice, records the terms on which we act for you. Please read it before you accept it and pay; by marking the acceptance provided and completing checkout you enter into a binding agreement with us.</p>
+    </div>
+
+    <section class="section">
+      <h2><span class="num">1.</span> Interpretation</h2>
+      <div class="clause"><span class="cnum">1.1</span><div class="ctext"><p>In this Letter of Engagement the following definitions apply:</p>
+        <ul class="sublist">
+          <li><span class="l">(a)</span><span><b>&ldquo;CGT Return&rdquo;</b> means the UK Property Disposal return required to be delivered to HMRC in respect of a Reportable Disposal;</span></li>
+          <li><span class="l">(b)</span><span><b>&ldquo;Engagement Documents&rdquo;</b> means this Letter of Engagement, the Terms of Service and the Privacy Notice;</span></li>
+          <li><span class="l">(c)</span><span><b>&ldquo;Firm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo;</b> mean Everest and Co Accountants Limited, trading as File CGT Online;</span></li>
+          <li><span class="l">(d)</span><span><b>&ldquo;HMRC&rdquo;</b> means His Majesty&rsquo;s Revenue and Customs;</span></li>
+          <li><span class="l">(e)</span><span><b>&ldquo;Reportable Disposal&rdquo;</b> means a disposal of UK residential property by an individual that gives rise to an obligation to deliver a return, and to pay any tax due, within 60 days of the date of completion under Schedule 2 to the Finance Act 2019 (as amended) and the Taxation of Chargeable Gains Act 1992;</span></li>
+          <li><span class="l">(f)</span><span><b>&ldquo;Service&rdquo;</b> means the service described in clause 3; and</span></li>
+          <li><span class="l">(g)</span><span><b>&ldquo;you&rdquo; and &ldquo;your&rdquo;</b> mean the individual identified above who accepts this Letter of Engagement.</span></li>
+        </ul>
+      </div></div>
+      <div class="clause"><span class="cnum">1.2</span><p>The Engagement Documents constitute the entire agreement between you and us in relation to the Service and supersede any prior discussion or representation.</p></div>
+      <div class="clause"><span class="cnum">1.3</span><p>Headings are for convenience only and do not affect interpretation. A reference to legislation is to that legislation as amended, extended or re-enacted from time to time.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">2.</span> The Firm and its regulation</h2>
+      <div class="clause"><span class="cnum">2.1</span><p>File CGT Online is a trading name of Everest and Co Accountants Limited, a company registered in England and Wales under number 16144493, whose registered office is at 61 Worcester Street, Wolverhampton, West Midlands, WV2 4LQ. The Firm is a member of, and regulated by, the Institute of Chartered Accountants in England and Wales (&ldquo;ICAEW&rdquo;). Everest and Co Accountants Limited is the party contracting with you under the Engagement Documents and is the controller of the personal data you provide.</p></div>
+      <div class="clause"><span class="cnum">2.2</span><p>Our engagement, and the provision of the Service, are governed by the law of England and Wales.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">3.</span> Scope of the Service</h2>
+      <div class="clause"><span class="cnum">3.1</span><div class="ctext"><p>Within the package you have selected and paid for, we are engaged to provide the following Service in respect of a single Reportable Disposal:</p>
+        <ul class="sublist">
+          <li><span class="l">(a)</span><span>prepare the CGT Return from the information and documents you provide;</span></li>
+          <li><span class="l">(b)</span><span>compute the chargeable gain and the Capital Gains Tax payable, applying such reliefs, allowances and elections as the information you provide shows you are entitled to claim;</span></li>
+          <li><span class="l">(c)</span><span>advise you of the amount of tax payable, the date by which it must be paid, and how to pay HMRC;</span></li>
+          <li><span class="l">(d)</span><span>submit the CGT Return to HMRC once, and only once, you have approved it and authorised us in writing (which includes electronically) to do so; and</span></li>
+          <li><span class="l">(e)</span><span>provide you with a copy of the CGT Return as submitted, together with HMRC&rsquo;s confirmation of receipt.</span></li>
+        </ul>
+      </div></div>
+      <div class="clause"><span class="cnum">3.2</span><p>Each CGT Return is reviewed and approved by a suitably qualified member of the Firm before it is submitted to HMRC. This is a fixed requirement of the Service and cannot be waived.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">4.</span> Matters outside the scope</h2>
+      <div class="clause"><span class="cnum">4.1</span><div class="ctext"><p>The Service does not include, and we are not engaged to provide, any of the following:</p>
+        <ul class="sublist">
+          <li><span class="l">(a)</span><span>the preparation, review or filing of any Self Assessment tax return, whether or not the Reportable Disposal must also be reported through Self Assessment; such work would require a separate engagement and separate fee;</span></li>
+          <li><span class="l">(b)</span><span>advice on whether, when or how to make any disposal, or any tax planning or structuring advice;</span></li>
+          <li><span class="l">(c)</span><span>any audit, or any independent verification of the figures, valuations or documents you supply, on which we are entitled to rely as true, correct and complete;</span></li>
+          <li><span class="l">(d)</span><span>the obtaining or provision of any valuation, which remains your responsibility;</span></li>
+          <li><span class="l">(e)</span><span>advice on any tax other than Capital Gains Tax on the Reportable Disposal, or on any legal, investment or financial matter; we do not conduct investment business and do not make referrals in relation to it; or</span></li>
+          <li><span class="l">(f)</span><span>any work not comprised in the package you have purchased, unless separately agreed in writing and paid for in advance.</span></li>
+        </ul>
+      </div></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">5.</span> Eligibility</h2>
+      <div class="clause"><span class="cnum">5.1</span><p>The Service is available only to individuals who have, or reasonably expect to have, an obligation in respect of a Reportable Disposal. It is available both to individuals resident in the United Kingdom and to individuals not so resident who have such an obligation.</p></div>
+      <div class="clause"><span class="cnum">5.2</span><p>The Service is not available to companies, trustees, personal representatives or partnerships, nor in respect of any disposal that does not give rise to a 60-day reporting obligation. If we determine that your circumstances fall outside the Service, we will notify you and, where our initial review has not begun, refund the fee in accordance with clause 9.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">6.</span> The statutory time limit</h2>
+      <div class="clause"><span class="cnum">6.1</span><p>A CGT Return, and payment of the tax due, must reach HMRC within 60 days of the date of completion of the Reportable Disposal. Failure to meet that time limit gives rise to penalties and interest for which you, and not we, are responsible.</p></div>
+      <div class="clause"><span class="cnum">6.2</span><p>We can meet the time limit only if you provide complete and accurate information and documents, and respond to our enquiries, promptly. We accept no responsibility for penalties, interest or other liabilities arising where information is provided late or incompletely, or where the 60-day period has expired or is close to expiry when you engage us, notwithstanding that we may file within the time limit.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">7.</span> Your obligations</h2>
+      <div class="clause"><span class="cnum">7.1</span><p>You confirm that you are an individual dealing with your own tax affairs, and that all information you provide will be full, accurate and not misleading.</p></div>
+      <div class="clause"><span class="cnum">7.2</span><p>You are, and remain, legally responsible for your CGT Return. You must review the CGT Return we prepare and satisfy yourself that it is correct and complete before approving it. This responsibility cannot be delegated to us.</p></div>
+      <div class="clause"><span class="cnum">7.3</span><p>You must notify us promptly of any change in your circumstances, and of any error of which you become aware whether before or after submission, so that we may advise you and, where appropriate, assist you in making a disclosure to HMRC.</p></div>
+      <div class="clause"><span class="cnum">7.4</span><p>You authorise us to act as your agent with HMRC for the purposes of the Reportable Disposal, and to obtain from and provide to HMRC such information as we consider necessary. You agree to complete promptly any authorisation steps we request.</p></div>
+      <div class="clause"><span class="cnum">7.5</span><p>You acknowledge that we are required to act honestly and with reasonable care in our dealings with HMRC, and you agree that we may notify HMRC of any error we consider material, having first informed you.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">8.</span> Identity verification and anti-money laundering</h2>
+      <div class="clause"><span class="cnum">8.1</span><p>As a firm supervised by the ICAEW, we are required by the Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017 to verify your identity before undertaking the substantive work. Verification is carried out electronically and, where necessary, by reference to documents you supply.</p></div>
+      <div class="clause"><span class="cnum">8.2</span><p>We are unable to commence the substantive work until verification is complete. We may be unable to act, or may be required to cease acting and to make a report, where our legal obligations so require, and we are not obliged to inform you if a report is made.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">9.</span> Fees, payment and cancellation</h2>
+      <div class="clause"><span class="cnum">9.1</span><p>The fee for the Service is the fixed fee for the package you select. The total fee, inclusive of VAT and any mandatory charge, is displayed to you in full before payment. Optional additional services, if any, are identified and priced separately and are charged only if you select them.</p></div>
+      <div class="clause"><span class="cnum">9.2</span><p>The fee is payable in full at the point of purchase, before any work begins. We will not commence work until payment has been confirmed.</p></div>
+      <div class="clause"><span class="cnum">9.3</span><p>Right to cancel. As this contract is concluded at a distance, you have the right to cancel within 14 days without giving a reason, under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013.</p></div>
+      <div class="clause"><span class="cnum">9.4</span><p>Request to begin immediately. Because of the statutory time limit at clause 6, you will be asked to request expressly that we begin work immediately, within the 14-day cancellation period, and to acknowledge that you will lose your right to cancel once the Service has been fully performed by submission of the CGT Return. You confirm this by the acceptance you give at clause 13.</p></div>
+      <div class="clause"><span class="cnum">9.5</span><div class="ctext"><p>Refunds.</p>
+        <ul class="sublist">
+          <li><span class="l">(a)</span><span>where you cancel before a member of the Firm has begun the initial review of your case, you will receive a full refund;</span></li>
+          <li><span class="l">(b)</span><span>where you cancel after the initial review has begun but before the CGT Return has been submitted, you must, having requested that we begin work, pay for the work performed up to cancellation. Because the substantive professional work for the Service, case set-up, identity verification and the qualified review is performed at the outset, the sum properly due for the work performed will ordinarily equal the full fixed fee, and accordingly no refund will ordinarily be due once the initial review has begun; and</span></li>
+          <li><span class="l">(c)</span><span>once the CGT Return has been submitted, the Service has been fully performed, the right to cancel is lost, and no refund is due.</span></li>
+        </ul>
+      </div></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">10.</span> Communications; recording; automated and AI-assisted processing</h2>
+      <div class="clause"><span class="cnum">10.1</span><p>We will communicate with you principally through your online account and by email. Email is not a secure medium and carries a risk of interception, delay or non-receipt, which you accept in return for its speed and convenience unless you request a secure channel.</p></div>
+      <div class="clause"><span class="cnum">10.2</span><p>We use software, automation and artificial-intelligence-assisted tools to help process your information, read documents and prepare your CGT Return efficiently. Such tools support, and do not replace, the work of our qualified staff. No decision affecting your CGT Return is taken by automated means alone; a qualified member of the Firm reviews and approves the CGT Return before submission.</p></div>
+      <div class="clause"><span class="cnum">10.3</span><p>Telephone and video calls may be recorded, and messages retained, for training, quality-assurance and compliance purposes. Certain processing may be carried out on our behalf outside the United Kingdom under appropriate safeguards. Further detail is set out in the Privacy Notice.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">11.</span> Termination</h2>
+      <div class="clause"><span class="cnum">11.1</span><p>Either party may terminate the engagement by notice in writing. Your statutory right to cancel under clause 9 applies as there set out.</p></div>
+      <div class="clause"><span class="cnum">11.2</span><p>We may terminate the engagement, or decline to continue, where you fail to provide information we require, where identity verification cannot be completed, where we reasonably believe information provided to us or to HMRC is false or misleading, or where we are required to do so by law or professional rules.</p></div>
+      <div class="clause"><span class="cnum">11.3</span><p>On termination, our fee for work properly performed to the date of termination is payable in accordance with clause 9, and we owe you no further duty following termination.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">12.</span> Liability</h2>
+      <div class="clause"><span class="cnum">12.1</span><p>We will perform the Service with reasonable care and skill.</p></div>
+      <div class="clause"><span class="cnum">12.2</span><p>Nothing in the Engagement Documents excludes or restricts our liability for death or personal injury caused by our negligence, for fraud or fraudulent misrepresentation, or for any other liability that cannot lawfully be excluded or restricted. Your statutory rights under the Consumer Rights Act 2015 are unaffected.</p></div>
+      <div class="clause"><span class="cnum">12.3</span><p>Subject to clause 12.2, our total aggregate liability to you arising out of or in connection with the engagement, whether in contract, tort (including negligence), breach of statutory duty or otherwise, shall not exceed the greater of (a) &pound;1m figure to be confirmed against the Firm&rsquo;s professional indemnity cover and (b) ten times the fee paid by you for the Service.</p></div>
+      <div class="clause"><span class="cnum">12.4</span><p>Subject to clause 12.2, we shall not be liable for any penalty, interest or additional tax arising from information provided to us late, incompletely, inaccurately or misleadingly, or from a failure to act on our advice; nor for any indirect or consequential loss, or loss of profit, opportunity or anticipated saving.</p></div>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">13.</span> Acceptance</h2>
+      <p class="prose">By marking the acceptance provided and completing payment, you confirm that: you have read and agree to this Letter of Engagement and the other Engagement Documents; the information you have provided is correct; you are authorised to instruct us in respect of your own tax affairs; and you expressly request that we begin work within the cancellation period and understand that you will lose your right to cancel once the CGT Return has been submitted. Your acceptance is recorded electronically together with the date, time, IP address and device from which it is given.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="num">14.</span> Complaints</h2>
+      <div class="clause"><span class="cnum">14.1</span><p>We are committed to providing a high standard of service. If you are dissatisfied, please contact our Complaints Handler at <a href="mailto:complaints@filecgtonline.co.uk">complaints@filecgtonline.co.uk</a>. We will investigate any complaint promptly and fairly.</p></div>
+      <div class="clause"><span class="cnum">14.2</span><p>If we are unable to resolve your complaint to your satisfaction, you may refer it to the ICAEW (<a href="https://www.icaew.com" target="_blank" rel="noopener">www.icaew.com</a>).</p></div>
+    </section>
+
+    <div class="signoff">
+      Signed for and on behalf of<br>
+      <b>File CGT Online</b>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <div class="foot-links">
+        <a href="/cookie-policy">Cookie policy</a>
+        <span class="dot">·</span>
+        <a href="/privacy-notice">Privacy Notice</a>
+        <span class="dot">·</span>
+        <a href="/terms-of-service">Terms of Service</a>
+        <span class="dot">·</span>
+        <a href="/letter-of-engagement" class="current" aria-current="page">Letter of Engagement</a>
+      </div>
+      <p class="foot-copy">© 2026 File CGT Online · Operated by Everest &amp; Co Accountants Limited, Wolverhampton · Registered in England &amp; Wales</p>
+    </div>
+  </footer>
+
+  <!-- COOKIE CONSENT BANNER -->
+  <style>
+  #cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:300;max-width:560px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 24px 60px -20px rgba(10,17,32,0.5);padding:20px 22px;display:none;font-family:'Jost',sans-serif;}
+  #cookie-banner.show{display:block;animation:ckin .32s cubic-bezier(.2,.8,.3,1.3);}
+  @keyframes ckin{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  #cookie-banner h3{font-size:16px;font-weight:600;color:var(--tx);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  #cookie-banner p{font-size:13.5px;line-height:1.6;color:var(--tx-2);margin-bottom:16px;}
+  #cookie-banner p a{color:#6FAE32;text-decoration:underline;font-weight:500;}
+  #cookie-banner .ck-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  #cookie-banner button{font-family:'Jost',sans-serif;font-size:14px;font-weight:600;padding:11px 18px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.15s;}
+  #cookie-banner .ck-accept{background:#83C341;color:#0a1120;}
+  #cookie-banner .ck-accept:hover{background:#6FAE32;}
+  #cookie-banner .ck-ess{background:var(--surface);color:var(--tx);border-color:var(--border);}
+  #cookie-banner .ck-ess:hover{background:var(--page);}
+  @media (max-width:480px){#cookie-banner .ck-actions{flex-direction:column;}#cookie-banner button{width:100%;}}
+  @media print{#cookie-banner{display:none !important;}}
+  </style>
+  <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <h3><i class="ti ti-cookie" style="color:#83C341;"></i> We use cookies</h3>
+    <p>We use essential cookies to make File CGT Online work, and optional analytics cookies to help us improve it. Read our <a href="/cookie-policy">Cookie Policy</a>.</p>
+    <div class="ck-actions">
+      <button type="button" class="ck-accept" id="ck-accept">Accept all cookies</button>
+      <button type="button" class="ck-ess" id="ck-ess">Necessary only</button>
+    </div>
+  </div>
+  <script>
+  (function(){var KEY='cgt-cookie-consent';function el(){return document.getElementById('cookie-banner');}function show(){var b=el();if(b)b.classList.add('show');}function hide(){var b=el();if(b)b.classList.remove('show');}function set(v){try{localStorage.setItem(KEY,v);}catch(e){}hide();}window.openCookiePrefs=function(){show();};document.addEventListener('DOMContentLoaded',function(){var v=null;try{v=localStorage.getItem(KEY);}catch(e){}if(v!=='all'&&v!=='essential'){setTimeout(show,600);}var a=document.getElementById('ck-accept'),e2=document.getElementById('ck-ess');if(a)a.addEventListener('click',function(){set('all');});if(e2)e2.addEventListener('click',function(){set('essential');});});})();
+  </script>
+
+</body>
+</html>
