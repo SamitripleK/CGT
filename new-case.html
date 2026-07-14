@@ -25,7 +25,7 @@
 })();
 </script>
 <title>Start a New Case · FileCGTOnline</title>
-<meta name="description" content="Guided Capital Gains Tax case setup in 3 simple steps: your case information, an AI-assisted chat, then review, pricing and secure payment." />
+<meta name="description" content="Guided Capital Gains Tax case setup in 4 simple steps: your case information, an AI-assisted chat, review and pricing, then your Letter of Engagement and secure payment." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -119,7 +119,8 @@ a{color:inherit;}
 
 .step-head{margin-bottom:22px;}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--green-link);background:var(--su-soft);padding:6px 13px;border-radius:var(--r-pill);margin-bottom:14px;}
+  color:#3f5615;background:var(--su-bg);padding:6px 13px;border-radius:var(--r-pill);margin-bottom:14px;}
+html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg);}
 .step-head h1{font-size:28px;line-height:1.2;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px;}
 .step-head p{font-size:15.5px;color:var(--muted);max-width:60ch;}
 
@@ -276,7 +277,14 @@ a{color:inherit;}
 /* ---------- success screen ---------- */
 .success-wrap{display:none;}
 .success-wrap.show{display:block;}
-.success-hero{max-width:640px;margin:0 auto;text-align:center;padding:20px;}
+.success-hero{max-width:1000px;margin:0 auto;padding:20px;}
+.success-top{text-align:center;max-width:620px;margin:0 auto 32px;}
+.success-grid{display:grid;grid-template-columns:1.04fr 1fr;gap:22px;align-items:start;}
+.sc-col{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.sc-col-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-3);}
+.sc-col-head i{font-size:16px;color:var(--su-tx);}
+.case-receipt .sc-col-head{margin:-2px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+.success-grid .case-receipt,.success-grid .roadmap,.success-grid .referral,.success-grid .sc-expect{max-width:none;margin:0;}
 .success-hero .burst{width:88px;height:88px;border-radius:50%;background:var(--su-soft);display:flex;align-items:center;justify-content:center;margin:8px auto 22px;animation:pop .5s cubic-bezier(.2,.8,.3,1.3);}
 .success-hero .burst i{font-size:46px;color:var(--su-tx);}
 @keyframes pop{0%{transform:scale(.4);opacity:0;}100%{transform:scale(1);opacity:1;}}
@@ -287,7 +295,8 @@ a{color:inherit;}
 .receipt-row:last-child{border-bottom:none;}
 .receipt-row .k{color:var(--muted);}
 .receipt-row .v{font-weight:600;}
-.success-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.success-ctas{display:flex;flex-direction:column;gap:10px;margin-top:2px;}
+.success-ctas .btn{width:100%;justify-content:center;}
 
 /* ---------- modal ---------- */
 .overlay{position:fixed;inset:0;background:rgba(27,45,79,0.4);z-index:80;opacity:0;pointer-events:none;transition:.25s;}
@@ -300,6 +309,20 @@ a{color:inherit;}
 .modal h3{font-size:20px;font-weight:600;margin-bottom:8px;}
 .modal p{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:22px;}
 .modal .m-actions{display:flex;gap:10px;justify-content:flex-end;}
+
+/* inline edit modal (review screen) */
+.modal-edit{width:min(500px,94vw);padding:24px;}
+.modal-edit .m-ehead{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.modal-edit .m-ehead .m-ico{margin-bottom:0;width:46px;height:46px;flex-shrink:0;}
+.modal-edit .m-ehead h3{margin-bottom:0;}
+.modal-edit .edit-form{max-height:min(58vh,460px);overflow-y:auto;margin:0 -4px 20px;padding:2px 4px 0;}
+.modal-edit .edit-form .field:last-child{margin-bottom:0;}
+.seg-edit{display:flex;flex-wrap:wrap;gap:10px;}
+.opt-edit{flex:1 1 auto;min-width:calc(50% - 5px);padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-in);background:var(--surface);
+  font-size:14.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;text-align:center;}
+.opt-edit:hover{border-color:var(--border-in);}
+.opt-edit.sel{border-color:var(--green);background:var(--su-soft);}
+.modal-edit textarea.input{resize:vertical;min-height:92px;line-height:1.55;}
 
 /* ---------- toast ---------- */
 .toast{position:fixed;bottom:calc(var(--bar-h) + 18px);left:50%;transform:translateX(-50%) translateY(20px);z-index:90;
@@ -357,22 +380,23 @@ a{color:inherit;}
 /* single-column layout */
 .grid.solo{grid-template-columns:minmax(0,1fr);grid-template-areas:"main";max-width:720px;gap:24px;padding-top:26px;}
 
-/* top stepper (mobile-first, replaces the sidebar timeline) */
-.cstepper-top{flex:1;min-width:0;display:flex;justify-content:center;}
-.cstepper-top .inner{display:flex;align-items:center;gap:10px;width:100%;max-width:480px;}
-.cstep{display:flex;align-items:center;gap:9px;flex:0 1 auto;min-width:0;}
+/* top stepper (absolutely centred in the bar, full labels) */
+.cstepper-top{position:absolute;left:50%;transform:translateX(-50%);display:flex;justify-content:center;pointer-events:none;max-width:calc(100% - 320px);}
+.cstepper-top .inner{display:flex;align-items:center;gap:10px;pointer-events:auto;}
+.cstep{display:flex;align-items:center;gap:9px;flex:0 0 auto;}
 .cstep .cnode{width:30px;height:30px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:var(--cream-2);color:var(--muted-3);transition:.2s;}
-.cstep .clabel{font-size:13.5px;font-weight:600;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.2s;}
+.cstep .clabel{font-size:13.5px;font-weight:600;color:var(--muted-2);white-space:nowrap;transition:.2s;}
 .cstep.current .cnode{background:var(--navy);color:var(--lime);box-shadow:0 0 0 4px rgba(27,45,79,0.10);}
 .cstep.current .clabel{color:var(--text);}
 .cstep.done .cnode{background:var(--su-dot);color:#fff;}
 .cstep.done .clabel{color:var(--su-tx);}
-.cbar{flex:1 1 20px;height:3px;border-radius:var(--r-pill);background:var(--cream-2);min-width:14px;transition:.3s;}
+.cbar{width:22px;flex:0 0 auto;height:3px;border-radius:var(--r-pill);background:var(--cream-2);transition:.3s;}
 .cbar.done{background:var(--su-dot);}
-@media (max-width:760px){ .cstep .clabel{display:none;} .cstepper-top .inner{gap:8px;max-width:none;} .cbar{flex:1 1 auto;} #autosave{display:none;} }
+@media (max-width:900px){ .cstep .clabel{display:none;} .cstepper-top{max-width:none;} .cstepper-top .inner{gap:8px;} .cbar{width:16px;} }
 
-/* ---- AI chat (step 2) ---- */
-.chat-scroll{display:flex;flex-direction:column;gap:14px;min-height:200px;}
+/* ---- AI chat (step 2) — contained scroll, pinned reply dock ---- */
+.chat{display:flex;flex-direction:column;height:calc(100vh - 300px);height:calc(100dvh - 300px);min-height:320px;max-height:660px;}
+.chat-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:6px;}
 .msg{display:flex;gap:10px;max-width:90%;animation:rise .28s ease;}
 .msg.ai{align-self:flex-start;}
 .msg.user{align-self:flex-end;flex-direction:row-reverse;}
@@ -389,7 +413,7 @@ a{color:inherit;}
 .typing span{width:7px;height:7px;border-radius:50%;background:var(--muted-2);animation:blink 1.2s infinite;}
 .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
 @keyframes blink{0%,60%,100%{opacity:.25;transform:translateY(0);}30%{opacity:1;transform:translateY(-2px);}}
-.chat-dock{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);min-height:60px;}
+.chat-dock{flex:0 0 auto;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);min-height:56px;background:var(--cream);}
 .chip-row{display:flex;flex-wrap:wrap;gap:9px;}
 .qchip{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;padding:11px 16px;border-radius:var(--r-pill);border:1.5px solid var(--border-in);background:var(--surface);cursor:pointer;transition:.15s;color:var(--text);}
 .qchip:hover{border-color:var(--green);background:var(--su-soft);color:var(--green-link);}
@@ -407,15 +431,80 @@ a{color:inherit;}
 .fee-hero .fv{font-size:48px;font-weight:700;letter-spacing:-0.02em;margin:6px 0 4px;animation:pop .4s cubic-bezier(.2,.8,.3,1.3);}
 .fee-hero .fsub{font-size:13.5px;color:rgba(255,255,255,0.72);}
 
+/* ---- review & pay redesign (step 4) ---- */
+.fee-incl{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px;}
+.fee-incl li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:var(--muted-3);}
+.fee-incl li i{color:var(--su-tx);font-size:17px;flex-shrink:0;margin-top:1px;}
+.fee-incl b{color:var(--text);font-weight:600;}
+.fee-anchor{margin-top:16px;background:var(--wa-bg);border-radius:var(--r-in);padding:12px 14px;font-size:12.5px;line-height:1.55;color:var(--wa-tx);display:flex;gap:9px;}
+.fee-anchor i{font-size:16px;flex-shrink:0;margin-top:1px;}
+.fee-anchor b{font-weight:700;}
+.promo-toggle{margin-top:16px;background:none;border:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--green-link);}
+.promo-toggle:hover{text-decoration:underline;}
+.pay-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.pay-deadline{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--wa-tx);background:var(--wa-bg);padding:4px 10px;border-radius:var(--r-pill);}
+.pay-express{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+.pay-wallet{display:flex;align-items:center;justify-content:center;padding:15px;border:1.5px solid var(--border);border-radius:var(--r-in);cursor:pointer;transition:.15s;}
+.pay-wallet.apple{background:#000;border-color:#000;}
+.pay-wallet.gpay{background:#fff;border-color:#dadce0;}
+.pay-wallet.sel{box-shadow:0 0 0 3px rgba(131,195,65,0.35);}
+.pay-or{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--muted-2);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+.pay-or::before,.pay-or::after{content:"";height:1px;background:var(--line);flex:1;}
+.pay-card-toggle{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r-in);background:var(--surface);color:var(--text);font-size:14.5px;font-weight:500;cursor:pointer;transition:.15s;}
+.pay-card-toggle:hover{border-color:var(--border-in);}
+.pay-card-toggle.sel{border-color:var(--text);box-shadow:0 0 0 3px rgba(27,45,79,0.08);}
+.pay-reassure{margin-top:18px;display:flex;gap:10px;align-items:flex-start;background:var(--su-soft);border-radius:var(--r-in);padding:13px 15px;font-size:13px;line-height:1.55;color:var(--su-tx);}
+.pay-reassure i{font-size:18px;flex-shrink:0;}
+.trust-row{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;}
+.trust-row span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted-3);}
+.trust-row i{font-size:14px;color:var(--muted-2);}
+.trust-row .trust-soft i{color:#f6b429;}
+
+/* ---- success redesign ---- */
+.sc-expect{display:flex;gap:10px;align-items:flex-start;text-align:left;background:var(--in-bg);border-radius:var(--r-in);padding:14px 16px;font-size:13.5px;line-height:1.55;color:var(--in-tx);}
+.sc-expect i{font-size:19px;flex-shrink:0;}
+.receipt-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:14px;margin-top:4px;border-top:1px solid var(--line);}
+.receipt-actions .btn{flex:1;justify-content:center;font-size:13px;padding:10px 12px;}
+
+/* ---- letter of engagement (step 3) — rendered inline, native to this step ---- */
+.loe-doc{border:1px solid var(--border-in);border-radius:14px;background:var(--cream);max-height:460px;overflow-y:auto;padding:24px 24px 26px;scroll-behavior:smooth;}
+.loe-doc:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+.loe-doc .loe-title{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green-link);margin-bottom:10px;}
+.loe-doc .loe-h{font-size:23px;font-weight:700;letter-spacing:-0.01em;color:var(--text);line-height:1.15;}
+.loe-doc .loe-sub{font-size:14.5px;font-style:italic;color:var(--muted);margin-top:6px;}
+.loe-doc .loe-meta{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0 2px;font-size:12.5px;color:var(--muted-2);}
+.loe-doc .loe-meta span{display:inline-flex;align-items:center;gap:6px;}
+.loe-doc .loe-meta i{font-size:14px;}
+.loe-doc .loe-intro{font-size:14px;line-height:1.72;color:var(--muted-3);padding:16px 0 4px;border-top:2px solid var(--navy);margin-top:14px;}
+.loe-sec{padding:18px 0;border-top:1px solid var(--border-in);}
+.loe-sec h4{font-size:16px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-bottom:12px;}
+.loe-sec h4 .n{color:var(--green-link);font-variant-numeric:tabular-nums;margin-right:4px;}
+.loe-cl{display:grid;grid-template-columns:34px 1fr;gap:4px 10px;margin-bottom:11px;}
+.loe-cl:last-child{margin-bottom:0;}
+.loe-cl .cn{font-size:13.5px;font-weight:600;color:var(--muted-2);font-variant-numeric:tabular-nums;padding-top:1px;}
+.loe-cl p{font-size:13.5px;line-height:1.7;color:var(--muted-3);margin-bottom:8px;}
+.loe-cl p:last-child{margin-bottom:0;}
+.loe-sub2{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.loe-sub2 li{display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:13.5px;line-height:1.7;color:var(--muted-3);}
+.loe-sub2 .l{font-weight:500;color:var(--muted-2);}
+.loe-sub2 b{color:var(--text);font-weight:600;}
+.loe-doc .loe-sign{margin-top:22px;padding-top:16px;border-top:1px solid var(--border-in);font-size:13.5px;color:var(--muted-3);line-height:1.85;}
+.loe-doc .loe-sign b{font-weight:600;color:var(--text);font-size:15px;}
+
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
   .grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"main";gap:20px;padding:20px 18px calc(var(--bar-h) + 24px);}
   .topbar .brand .ctx{display:none;}
 }
+@media (max-width:860px){
+  .success-grid{grid-template-columns:1fr;}
+}
 @media (max-width:640px){
   .topbar{padding:0 16px;}
   .step-head h1{font-size:23px;}
-  .two-col,.seg,.seg.seg-3,.pay-methods,.trust-grid{grid-template-columns:1fr;}
+  .chat{height:calc(100dvh - 250px);min-height:280px;}
+  .two-col,.seg,.seg.seg-3,.pay-methods,.trust-grid,.pay-express{grid-template-columns:1fr;}
+  .receipt-actions .btn{flex:1 1 100%;}
   .choice{padding:16px;}
   .card,.card-lg{padding:18px;}
   .actionbar{padding:0 14px;gap:8px;}
@@ -433,7 +522,7 @@ a{color:inherit;}
 <body>
 <div class="wizard">
 
-  <!-- ================= TOP BAR (with 3-step stepper) ================= -->
+  <!-- ================= TOP BAR (with 4-step stepper) ================= -->
   <header class="topbar">
     <div class="brand">
       <img class="logo-l" src="cgt-logo.svg" alt="FileCGTOnline" />
@@ -443,7 +532,6 @@ a{color:inherit;}
       <div class="inner" id="cstepper"><!-- built by JS --></div>
     </div>
     <div class="tools">
-      <span id="autosave" class="autosave"><i class="ti ti-cloud-check"></i> <span id="autosaveTxt">All changes saved</span></span>
       <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme"><i id="themeIco" class="ti ti-moon"></i></button>
     </div>
   </header>
@@ -455,7 +543,7 @@ a{color:inherit;}
       <!-- ===== STEP 1 · CASE INFORMATION ===== -->
       <section class="step" data-step="1">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 3 · Case information</span>
+          <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 4 · Case information</span>
           <h1>Let's set up your CGT case</h1>
           <p>A couple of quick details to get started — then our assistant takes it from here in a short chat.</p>
         </div>
@@ -499,7 +587,7 @@ a{color:inherit;}
       <!-- ===== STEP 2 · AI CHAT ONBOARDING ===== -->
       <section class="step" data-step="2">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-sparkles"></i> Step 2 of 3 · Guided by AI</span>
+          <span class="eyebrow"><i class="ti ti-sparkles"></i> Step 2 of 4 · Guided by AI</span>
           <h1>A quick chat about your disposal</h1>
           <p>Answer in your own words. Our assistant asks only what's relevant and notes everything for your case.</p>
         </div>
@@ -509,30 +597,191 @@ a{color:inherit;}
         </div>
       </section>
 
-      <!-- ===== STEP 3 · REVIEW, PRICING & PAYMENT ===== -->
+      <!-- ===== STEP 3 · AGREEMENT (LETTER OF ENGAGEMENT) ===== -->
       <section class="step" data-step="3">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-receipt"></i> Step 3 of 3 · Review &amp; pay</span>
-          <h1>Review, pricing &amp; payment</h1>
-          <p>Check what we captured, see your fixed fee, and pay securely to start your case.</p>
+          <span class="eyebrow"><i class="ti ti-file-certificate"></i> Step 3 of 4 · Agreement</span>
+          <h1>Your Letter of Engagement</h1>
+          <p>Please read the letter setting out how we'll act for you and confirm you agree. Next you'll review your case, pricing and pay.</p>
         </div>
 
-        <!-- review -->
+        <!-- engagement letter (rendered natively, inline) -->
         <div class="card card-lg">
-          <div class="section-label">Case summary <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted-2);">· auto-generated from your chat</span></div>
+          <div class="section-label">Letter of Engagement <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted-2);">· please read before you confirm</span></div>
+          <div class="loe-doc" id="loeDoc" tabindex="0">
+            <div class="loe-title"><i class="ti ti-file-certificate"></i> Legal</div>
+            <h3 class="loe-h">Letter of Engagement</h3>
+            <div class="loe-sub">Capital Gains Tax, 60-Day UK Residential Property Disposal Return</div>
+            <div class="loe-meta">
+              <span><i class="ti ti-calendar-event"></i> Effective 6 July 2026</span>
+              <span><i class="ti ti-building-bank"></i> Everest and Co Accountants Limited · regulated by the ICAEW</span>
+            </div>
+            <p class="loe-intro">Thank you for instructing File CGT Online to prepare and file your Capital Gains Tax return on the disposal of UK residential property. This Letter of Engagement, together with the Terms of Service and the Privacy Notice, records the terms on which we act for you. Please read it before you accept it and pay; by marking the acceptance provided and completing checkout you enter into a binding agreement with us.</p>
+
+            <div class="loe-sec">
+              <h4><span class="n">1.</span> Interpretation</h4>
+              <div class="loe-cl"><span class="cn">1.1</span><div><p>In this Letter of Engagement the following definitions apply:</p>
+                <ul class="loe-sub2">
+                  <li><span class="l">(a)</span><span><b>&ldquo;CGT Return&rdquo;</b> means the UK Property Disposal return required to be delivered to HMRC in respect of a Reportable Disposal;</span></li>
+                  <li><span class="l">(b)</span><span><b>&ldquo;Engagement Documents&rdquo;</b> means this Letter of Engagement, the Terms of Service and the Privacy Notice;</span></li>
+                  <li><span class="l">(c)</span><span><b>&ldquo;Firm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo;</b> mean Everest and Co Accountants Limited, trading as File CGT Online;</span></li>
+                  <li><span class="l">(d)</span><span><b>&ldquo;HMRC&rdquo;</b> means His Majesty&rsquo;s Revenue and Customs;</span></li>
+                  <li><span class="l">(e)</span><span><b>&ldquo;Reportable Disposal&rdquo;</b> means a disposal of UK residential property by an individual that gives rise to an obligation to deliver a return, and to pay any tax due, within 60 days of the date of completion under Schedule 2 to the Finance Act 2019 (as amended) and the Taxation of Chargeable Gains Act 1992;</span></li>
+                  <li><span class="l">(f)</span><span><b>&ldquo;Service&rdquo;</b> means the service described in clause 3; and</span></li>
+                  <li><span class="l">(g)</span><span><b>&ldquo;you&rdquo; and &ldquo;your&rdquo;</b> mean the individual identified above who accepts this Letter of Engagement.</span></li>
+                </ul>
+              </div></div>
+              <div class="loe-cl"><span class="cn">1.2</span><p>The Engagement Documents constitute the entire agreement between you and us in relation to the Service and supersede any prior discussion or representation.</p></div>
+              <div class="loe-cl"><span class="cn">1.3</span><p>Headings are for convenience only and do not affect interpretation. A reference to legislation is to that legislation as amended, extended or re-enacted from time to time.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">2.</span> The Firm and its regulation</h4>
+              <div class="loe-cl"><span class="cn">2.1</span><p>File CGT Online is a trading name of Everest and Co Accountants Limited, a company registered in England and Wales under number 16144493, whose registered office is at 61 Worcester Street, Wolverhampton, West Midlands, WV2 4LQ. The Firm is a member of, and regulated by, the Institute of Chartered Accountants in England and Wales (&ldquo;ICAEW&rdquo;). Everest and Co Accountants Limited is the party contracting with you under the Engagement Documents and is the controller of the personal data you provide.</p></div>
+              <div class="loe-cl"><span class="cn">2.2</span><p>Our engagement, and the provision of the Service, are governed by the law of England and Wales.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">3.</span> Scope of the Service</h4>
+              <div class="loe-cl"><span class="cn">3.1</span><div><p>Within the package you have selected and paid for, we are engaged to provide the following Service in respect of a single Reportable Disposal:</p>
+                <ul class="loe-sub2">
+                  <li><span class="l">(a)</span><span>prepare the CGT Return from the information and documents you provide;</span></li>
+                  <li><span class="l">(b)</span><span>compute the chargeable gain and the Capital Gains Tax payable, applying such reliefs, allowances and elections as the information you provide shows you are entitled to claim;</span></li>
+                  <li><span class="l">(c)</span><span>advise you of the amount of tax payable, the date by which it must be paid, and how to pay HMRC;</span></li>
+                  <li><span class="l">(d)</span><span>submit the CGT Return to HMRC once, and only once, you have approved it and authorised us in writing (which includes electronically) to do so; and</span></li>
+                  <li><span class="l">(e)</span><span>provide you with a copy of the CGT Return as submitted, together with HMRC&rsquo;s confirmation of receipt.</span></li>
+                </ul>
+              </div></div>
+              <div class="loe-cl"><span class="cn">3.2</span><p>Each CGT Return is reviewed and approved by a suitably qualified member of the Firm before it is submitted to HMRC. This is a fixed requirement of the Service and cannot be waived.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">4.</span> Matters outside the scope</h4>
+              <div class="loe-cl"><span class="cn">4.1</span><div><p>The Service does not include, and we are not engaged to provide, any of the following:</p>
+                <ul class="loe-sub2">
+                  <li><span class="l">(a)</span><span>the preparation, review or filing of any Self Assessment tax return, whether or not the Reportable Disposal must also be reported through Self Assessment; such work would require a separate engagement and separate fee;</span></li>
+                  <li><span class="l">(b)</span><span>advice on whether, when or how to make any disposal, or any tax planning or structuring advice;</span></li>
+                  <li><span class="l">(c)</span><span>any audit, or any independent verification of the figures, valuations or documents you supply, on which we are entitled to rely as true, correct and complete;</span></li>
+                  <li><span class="l">(d)</span><span>the obtaining or provision of any valuation, which remains your responsibility;</span></li>
+                  <li><span class="l">(e)</span><span>advice on any tax other than Capital Gains Tax on the Reportable Disposal, or on any legal, investment or financial matter; we do not conduct investment business and do not make referrals in relation to it; or</span></li>
+                  <li><span class="l">(f)</span><span>any work not comprised in the package you have purchased, unless separately agreed in writing and paid for in advance.</span></li>
+                </ul>
+              </div></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">5.</span> Eligibility</h4>
+              <div class="loe-cl"><span class="cn">5.1</span><p>The Service is available only to individuals who have, or reasonably expect to have, an obligation in respect of a Reportable Disposal. It is available both to individuals resident in the United Kingdom and to individuals not so resident who have such an obligation.</p></div>
+              <div class="loe-cl"><span class="cn">5.2</span><p>The Service is not available to companies, trustees, personal representatives or partnerships, nor in respect of any disposal that does not give rise to a 60-day reporting obligation. If we determine that your circumstances fall outside the Service, we will notify you and, where our initial review has not begun, refund the fee in accordance with clause 9.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">6.</span> The statutory time limit</h4>
+              <div class="loe-cl"><span class="cn">6.1</span><p>A CGT Return, and payment of the tax due, must reach HMRC within 60 days of the date of completion of the Reportable Disposal. Failure to meet that time limit gives rise to penalties and interest for which you, and not we, are responsible.</p></div>
+              <div class="loe-cl"><span class="cn">6.2</span><p>We can meet the time limit only if you provide complete and accurate information and documents, and respond to our enquiries, promptly. We accept no responsibility for penalties, interest or other liabilities arising where information is provided late or incompletely, or where the 60-day period has expired or is close to expiry when you engage us, notwithstanding that we may file within the time limit.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">7.</span> Your obligations</h4>
+              <div class="loe-cl"><span class="cn">7.1</span><p>You confirm that you are an individual dealing with your own tax affairs, and that all information you provide will be full, accurate and not misleading.</p></div>
+              <div class="loe-cl"><span class="cn">7.2</span><p>You are, and remain, legally responsible for your CGT Return. You must review the CGT Return we prepare and satisfy yourself that it is correct and complete before approving it. This responsibility cannot be delegated to us.</p></div>
+              <div class="loe-cl"><span class="cn">7.3</span><p>You must notify us promptly of any change in your circumstances, and of any error of which you become aware whether before or after submission, so that we may advise you and, where appropriate, assist you in making a disclosure to HMRC.</p></div>
+              <div class="loe-cl"><span class="cn">7.4</span><p>You authorise us to act as your agent with HMRC for the purposes of the Reportable Disposal, and to obtain from and provide to HMRC such information as we consider necessary. You agree to complete promptly any authorisation steps we request.</p></div>
+              <div class="loe-cl"><span class="cn">7.5</span><p>You acknowledge that we are required to act honestly and with reasonable care in our dealings with HMRC, and you agree that we may notify HMRC of any error we consider material, having first informed you.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">8.</span> Identity verification and anti-money laundering</h4>
+              <div class="loe-cl"><span class="cn">8.1</span><p>As a firm supervised by the ICAEW, we are required by the Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017 to verify your identity before undertaking the substantive work. Verification is carried out electronically and, where necessary, by reference to documents you supply.</p></div>
+              <div class="loe-cl"><span class="cn">8.2</span><p>We are unable to commence the substantive work until verification is complete. We may be unable to act, or may be required to cease acting and to make a report, where our legal obligations so require, and we are not obliged to inform you if a report is made.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">9.</span> Fees, payment and cancellation</h4>
+              <div class="loe-cl"><span class="cn">9.1</span><p>The fee for the Service is the fixed fee for the package you select. The total fee, inclusive of VAT and any mandatory charge, is displayed to you in full before payment. Optional additional services, if any, are identified and priced separately and are charged only if you select them.</p></div>
+              <div class="loe-cl"><span class="cn">9.2</span><p>The fee is payable in full at the point of purchase, before any work begins. We will not commence work until payment has been confirmed.</p></div>
+              <div class="loe-cl"><span class="cn">9.3</span><p>Right to cancel. As this contract is concluded at a distance, you have the right to cancel within 14 days without giving a reason, under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013.</p></div>
+              <div class="loe-cl"><span class="cn">9.4</span><p>Request to begin immediately. Because of the statutory time limit at clause 6, you will be asked to request expressly that we begin work immediately, within the 14-day cancellation period, and to acknowledge that you will lose your right to cancel once the Service has been fully performed by submission of the CGT Return. You confirm this by the acceptance you give at clause 13.</p></div>
+              <div class="loe-cl"><span class="cn">9.5</span><div><p>Refunds.</p>
+                <ul class="loe-sub2">
+                  <li><span class="l">(a)</span><span>where you cancel before a member of the Firm has begun the initial review of your case, you will receive a full refund;</span></li>
+                  <li><span class="l">(b)</span><span>where you cancel after the initial review has begun but before the CGT Return has been submitted, you must, having requested that we begin work, pay for the work performed up to cancellation. Because the substantive professional work for the Service, case set-up, identity verification and the qualified review is performed at the outset, the sum properly due for the work performed will ordinarily equal the full fixed fee, and accordingly no refund will ordinarily be due once the initial review has begun; and</span></li>
+                  <li><span class="l">(c)</span><span>once the CGT Return has been submitted, the Service has been fully performed, the right to cancel is lost, and no refund is due.</span></li>
+                </ul>
+              </div></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">10.</span> Communications; recording; automated and AI-assisted processing</h4>
+              <div class="loe-cl"><span class="cn">10.1</span><p>We will communicate with you principally through your online account and by email. Email is not a secure medium and carries a risk of interception, delay or non-receipt, which you accept in return for its speed and convenience unless you request a secure channel.</p></div>
+              <div class="loe-cl"><span class="cn">10.2</span><p>We use software, automation and artificial-intelligence-assisted tools to help process your information, read documents and prepare your CGT Return efficiently. Such tools support, and do not replace, the work of our qualified staff. No decision affecting your CGT Return is taken by automated means alone; a qualified member of the Firm reviews and approves the CGT Return before submission.</p></div>
+              <div class="loe-cl"><span class="cn">10.3</span><p>Telephone and video calls may be recorded, and messages retained, for training, quality-assurance and compliance purposes. Certain processing may be carried out on our behalf outside the United Kingdom under appropriate safeguards. Further detail is set out in the Privacy Notice.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">11.</span> Termination</h4>
+              <div class="loe-cl"><span class="cn">11.1</span><p>Either party may terminate the engagement by notice in writing. Your statutory right to cancel under clause 9 applies as there set out.</p></div>
+              <div class="loe-cl"><span class="cn">11.2</span><p>We may terminate the engagement, or decline to continue, where you fail to provide information we require, where identity verification cannot be completed, where we reasonably believe information provided to us or to HMRC is false or misleading, or where we are required to do so by law or professional rules.</p></div>
+              <div class="loe-cl"><span class="cn">11.3</span><p>On termination, our fee for work properly performed to the date of termination is payable in accordance with clause 9, and we owe you no further duty following termination.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">12.</span> Liability</h4>
+              <div class="loe-cl"><span class="cn">12.1</span><p>We will perform the Service with reasonable care and skill.</p></div>
+              <div class="loe-cl"><span class="cn">12.2</span><p>Nothing in the Engagement Documents excludes or restricts our liability for death or personal injury caused by our negligence, for fraud or fraudulent misrepresentation, or for any other liability that cannot lawfully be excluded or restricted. Your statutory rights under the Consumer Rights Act 2015 are unaffected.</p></div>
+              <div class="loe-cl"><span class="cn">12.3</span><p>Subject to clause 12.2, our total aggregate liability to you arising out of or in connection with the engagement, whether in contract, tort (including negligence), breach of statutory duty or otherwise, shall not exceed the greater of (a) &pound;1m figure to be confirmed against the Firm&rsquo;s professional indemnity cover and (b) ten times the fee paid by you for the Service.</p></div>
+              <div class="loe-cl"><span class="cn">12.4</span><p>Subject to clause 12.2, we shall not be liable for any penalty, interest or additional tax arising from information provided to us late, incompletely, inaccurately or misleadingly, or from a failure to act on our advice; nor for any indirect or consequential loss, or loss of profit, opportunity or anticipated saving.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">13.</span> Acceptance</h4>
+              <div class="loe-cl"><span class="cn">13.1</span><p>By marking the acceptance provided and completing payment, you confirm that: you have read and agree to this Letter of Engagement and the other Engagement Documents; the information you have provided is correct; you are authorised to instruct us in respect of your own tax affairs; and you expressly request that we begin work within the cancellation period and understand that you will lose your right to cancel once the CGT Return has been submitted. Your acceptance is recorded electronically together with the date, time, IP address and device from which it is given.</p></div>
+            </div>
+
+            <div class="loe-sec">
+              <h4><span class="n">14.</span> Complaints</h4>
+              <div class="loe-cl"><span class="cn">14.1</span><p>We are committed to providing a high standard of service. If you are dissatisfied, please contact our Complaints Handler at <b>complaints@filecgtonline.co.uk</b>. We will investigate any complaint promptly and fairly.</p></div>
+              <div class="loe-cl"><span class="cn">14.2</span><p>If we are unable to resolve your complaint to your satisfaction, you may refer it to the ICAEW (<b>www.icaew.com</b>).</p></div>
+            </div>
+
+            <div class="loe-sign">Signed for and on behalf of<br><b>File CGT Online</b></div>
+          </div>
+          <label class="chk-row" style="margin-top:16px;"><input type="checkbox" id="agreeChk"><span>I confirm I have read and agree to the Letter of Engagement and Terms of Service above, authorising FileCGTOnline to act on my behalf.</span></label>
+        </div>
+
+      </section>
+
+      <!-- ===== STEP 4 · CONFIRM & PAY ===== -->
+      <section class="step" data-step="4">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-circle-check"></i> Step 4 of 4 · Confirm &amp; pay</span>
+          <h1>You're one step from being sorted</h1>
+          <p>Everything below is what our assistant captured. Check it's right, then confirm — and we'll take the 60-day HMRC deadline off your plate.</p>
+        </div>
+
+        <!-- case summary (proof of work you own) -->
+        <div class="card card-lg">
+          <div class="section-label">Here's everything we captured from your chat <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted-2);">· tap Edit to change anything</span></div>
           <div class="review-list" id="reviewList"></div>
         </div>
 
-        <!-- pricing -->
+        <!-- fixed-price value block -->
         <div class="card card-lg">
           <div class="fee-hero">
-            <div class="fl">Your estimated fee</div>
+            <div class="fl">Your fixed price — that's everything</div>
             <div class="fv" id="feeVal">£149</div>
-            <div class="fsub">Fixed price · confirmed after our tax team's review</div>
+            <div class="fsub">One fixed fee. No hidden charges, ever.</div>
           </div>
+          <ul class="fee-incl">
+            <li><i class="ti ti-circle-check"></i> Prepared &amp; checked by a qualified, <b>ICAEW-regulated</b> accountant</li>
+            <li><i class="ti ti-circle-check"></i> Full CGT calculation with <b>every relief</b> you're due</li>
+            <li><i class="ti ti-circle-check"></i> Filed with HMRC only once <b>you</b> approve the draft</li>
+            <li><i class="ti ti-circle-check"></i> Secure document vault &amp; a named point of contact</li>
+          </ul>
           <div id="feeBreakdown" style="margin-top:18px;"></div>
-          <div class="field" style="margin:16px 0 4px;">
-            <label>Have a promo code?</label>
+          <div class="fee-anchor"><i class="ti ti-info-circle"></i> <span>A high-street accountant typically charges <b>£300–£600</b> for a 60-day CGT return. Miss the deadline and HMRC penalties start at <b>£100</b> and climb.</span></div>
+          <button type="button" class="promo-toggle" id="promoToggle"><i class="ti ti-tag"></i> Have a promo code?</button>
+          <div class="field promo-field hide" id="promoField" style="margin:12px 0 2px;">
             <div class="discount-row">
               <input class="input" id="inCode" placeholder="ENTER CODE" />
               <button class="btn btn-ghost" id="applyCode" style="padding:12px 18px;">Apply</button>
@@ -544,13 +793,20 @@ a{color:inherit;}
 
         <!-- payment -->
         <div class="card card-lg" id="payForm">
-          <div class="section-label">Payment</div>
-          <div class="pay-methods">
-            <div class="pay-m apple sel" data-pay="apple"><img src="apple-pay.svg" alt="Apple Pay" class="pay-logo" /></div>
-            <div class="pay-m gpay" data-pay="google"><img src="google-pay.svg" alt="Google Pay" class="pay-logo" /></div>
+          <div class="section-label pay-head">
+            <span>Payment</span>
+            <span style="display:inline-flex;gap:10px;align-items:center;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text);font-size:14.5px;">
+              <span class="pay-deadline" id="payDeadline" style="display:none;"></span>
+              Total due today · <span id="payTotal">£149</span>
+            </span>
           </div>
-          <div class="pay-m" data-pay="card" style="width:100%;justify-content:flex-start;"><i class="ti ti-credit-card"></i> Credit or debit card</div>
-          <div class="stripe-fields">
+          <div class="pay-express">
+            <button type="button" class="pay-wallet apple sel" data-pay="apple"><img src="apple-pay.svg" alt="Apple Pay" class="pay-logo" /></button>
+            <button type="button" class="pay-wallet gpay" data-pay="google"><img src="google-pay.svg" alt="Google Pay" class="pay-logo" /></button>
+          </div>
+          <div class="pay-or">or</div>
+          <button type="button" class="pay-card-toggle" id="cardToggle"><i class="ti ti-credit-card"></i> Pay with credit or debit card</button>
+          <div class="stripe-fields hide" id="cardFields">
             <div class="field"><label>Card number</label><div class="input-wrap"><i class="ti ti-credit-card prefix"></i><input class="input" placeholder="1234 1234 1234 1234" inputmode="numeric"></div></div>
             <div class="two-col">
               <div class="field"><label>Expiry</label><input class="input" placeholder="MM / YY" inputmode="numeric"></div>
@@ -558,7 +814,13 @@ a{color:inherit;}
             </div>
             <span class="stripe-badge"><i class="ti ti-lock"></i> Secured by Stripe · encrypted checkout</span>
           </div>
-          <label class="chk-row" style="margin-top:18px;"><input type="checkbox" id="agreeChk"><span>I agree to the <a href="/letter-of-engagement" target="_blank" rel="noopener" style="color:var(--green-link);text-decoration:underline;">Letter of Engagement</a> and <a href="/terms-of-service" target="_blank" rel="noopener" style="color:var(--green-link);text-decoration:underline;">Terms of Service</a>, authorising FileCGTOnline to act on my behalf.</span></label>
+          <div class="pay-reassure"><i class="ti ti-shield-check"></i> <span>Nothing is filed until you review and approve the draft.</span></div>
+          <div class="trust-row">
+            <span><i class="ti ti-lock"></i> Stripe encrypted</span>
+            <span><i class="ti ti-building-bank"></i> ICAEW-regulated</span>
+            <span class="trust-soft" data-todo="use-real-rating"><i class="ti ti-star-filled"></i> Trustpilot 4.8</span>
+            <span class="trust-soft" data-todo="use-real-count"><i class="ti ti-files"></i> 3,000+ returns filed</span>
+          </div>
         </div>
 
         <div class="card card-lg pay-processing" id="payProcessing">
@@ -571,38 +833,59 @@ a{color:inherit;}
       <!-- ===== SUCCESS SCREEN ===== -->
       <div class="success-wrap" id="successWrap">
         <div class="success-hero">
-          <div class="burst"><i class="ti ti-circle-check"></i></div>
-          <h1>Your case has been submitted for review</h1>
-          <p class="sub">Our team will now check your information, review your documents, and contact you if anything else is needed.</p>
-          <div class="case-receipt">
-            <div class="receipt-row"><span class="k">Case name</span><span class="v" id="scName">-</span></div>
-            <div class="receipt-row"><span class="k">Case reference</span><span class="v" id="scRef">-</span></div>
-            <div class="receipt-row"><span class="k">Current status</span><span class="v"><span class="badge b-amber"><span class="d" style="background:var(--wa-dot);"></span> Under review</span></span></div>
-            <div class="receipt-row"><span class="k">Next step</span><span class="v">Staff review</span></div>
-            <div class="receipt-row"><span class="k">HMRC deadline</span><span class="v" id="scDeadline">47 days left</span></div>
-            <div class="receipt-row"><span class="k">Assigned team</span><span class="v" style="color:var(--muted);font-weight:500;">Being assigned…</span></div>
+
+          <!-- hero (full width) -->
+          <div class="success-top">
+            <div class="burst"><i class="ti ti-circle-check"></i></div>
+            <h1>You're sorted. We're now acting for you.</h1>
+            <p class="sub" id="scSub">Your case is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.</p>
           </div>
 
-          <div style="max-width:560px;margin:0 auto 12px;text-align:left;"><div class="section-label" style="margin-bottom:0;">What happens next</div></div>
-          <div class="roadmap">
-            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Set up, paid &amp; engagement signed <span class="who you">You · done</span></h4><p>Your case is created and we're formally acting for you.</p></div></div>
-            <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Information provided <span class="who you">You · done</span></h4><p>We have what we need to begin, you can still add more any time.</p></div></div>
-            <div class="rm-item"><span class="rmi now"><i class="ti ti-player-play"></i></span><div class="rmt"><h4>Identity check &amp; first review <span class="who team">Our team · now</span></h4><p>We verify your identity and a tax assistant reviews everything, raising any queries.</p></div></div>
-            <div class="rm-item"><span class="rmi next">4</span><div class="rmt"><h4>HMRC agent authorisation <span class="who you">A quick step for you</span></h4><p>We'll send simple instructions to authorise us with HMRC. Stuck? Book a free 10-minute call.</p></div></div>
-            <div class="rm-item"><span class="rmi next">5</span><div class="rmt"><h4>Draft return prepared &amp; signed off <span class="who team">Our team</span></h4><p>Your client manager prepares the full calculation and reviews it before you see it.</p></div></div>
-            <div class="rm-item"><span class="rmi next">6</span><div class="rmt"><h4>You review &amp; approve the draft <span class="who you">You approve</span></h4><p>Clear figures in plain English. Nothing is filed until you say yes.</p></div></div>
-            <div class="rm-item"><span class="rmi next">7</span><div class="rmt"><h4>We file with HMRC &amp; confirm <span class="who team">Our team</span></h4><p>We submit and send your confirmation, deadline to pay, and records to keep.</p></div></div>
-          </div>
+          <!-- two-column body -->
+          <div class="success-grid">
 
-          <div class="referral">
-            <i class="ti ti-gift"></i>
-            <div class="rf-t"><b>Know someone else who's sold a property or asset?</b><p>You'll get a referral link on your dashboard, earn account credit for every friend who files with us.</p></div>
-          </div>
+            <!-- left · your case -->
+            <div class="sc-col">
+              <div class="case-receipt">
+                <div class="sc-col-head"><i class="ti ti-file-invoice"></i> Your case</div>
+                <div class="receipt-row"><span class="k">Case name</span><span class="v" id="scName">-</span></div>
+                <div class="receipt-row"><span class="k">Case reference</span><span class="v" id="scRef">-</span></div>
+                <div class="receipt-row"><span class="k">Current status</span><span class="v"><span class="badge b-green"><span class="d" style="background:var(--su-dot);"></span> Active · we're on it</span></span></div>
+                <div class="receipt-row"><span class="k">Your HMRC deadline</span><span class="v" id="scDeadline">47 days left</span></div>
+                <div class="receipt-row"><span class="k">Your accountant</span><span class="v" style="color:var(--muted);font-weight:500;">Being assigned…</span></div>
+                <div class="receipt-actions">
+                  <button type="button" class="btn btn-ghost" onclick="window.print()"><i class="ti ti-download"></i> Download receipt</button>
+                  <a class="btn btn-ghost" id="scCal" href="#" target="_blank" rel="noopener"><i class="ti ti-calendar-plus"></i> Add deadline to calendar</a>
+                </div>
+              </div>
 
-          <div class="success-ctas">
-            <a class="btn btn-primary btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-layout-dashboard"></i> Go to case dashboard</a>
-            <a class="btn btn-ghost btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-files"></i> View documents</a>
-            <a class="btn btn-ghost btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-message"></i> Send message</a>
+              <div class="sc-expect"><i class="ti ti-clock-hour-4"></i> <span><b>In the next 24 hours:</b> we verify your ID and a qualified accountant begins your return. We'll only email if we need something from you.</span></div>
+
+              <div class="success-ctas">
+                <a class="btn btn-primary btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-layout-dashboard"></i> Go to my case dashboard</a>
+                <a class="btn btn-ghost btn-lg" href="FileCGTOnline Portal.dc.html"><i class="ti ti-message"></i> Message my team</a>
+              </div>
+            </div>
+
+            <!-- right · what happens next -->
+            <div class="sc-col">
+              <div class="sc-col-head"><i class="ti ti-route"></i> Your full journey with us</div>
+              <div class="roadmap">
+                <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Set up, paid &amp; engagement signed <span class="who you">You · done</span></h4><p>Your case is created and we're formally acting for you.</p></div></div>
+                <div class="rm-item"><span class="rmi done"><i class="ti ti-check"></i></span><div class="rmt"><h4>Information provided <span class="who you">You · done</span></h4><p>We have what we need to begin, you can still add more any time.</p></div></div>
+                <div class="rm-item"><span class="rmi now"><i class="ti ti-player-play"></i></span><div class="rmt"><h4>Identity check &amp; first review <span class="who team">Our team · now</span></h4><p>We verify your identity and a tax assistant reviews everything, raising any queries.</p></div></div>
+                <div class="rm-item"><span class="rmi next">4</span><div class="rmt"><h4>HMRC agent authorisation <span class="who you">A quick step for you</span></h4><p>We'll send simple instructions to authorise us with HMRC. Stuck? Book a free 10-minute call.</p></div></div>
+                <div class="rm-item"><span class="rmi next">5</span><div class="rmt"><h4>Draft return prepared &amp; signed off <span class="who team">Our team</span></h4><p>Your client manager prepares the full calculation and reviews it before you see it.</p></div></div>
+                <div class="rm-item"><span class="rmi next">6</span><div class="rmt"><h4>You review &amp; approve the draft <span class="who you">You approve</span></h4><p>Clear figures in plain English. Nothing is filed until you say yes.</p></div></div>
+                <div class="rm-item"><span class="rmi next">7</span><div class="rmt"><h4>We file with HMRC &amp; confirm <span class="who team">Our team</span></h4><p>We submit and send your confirmation, deadline to pay, and records to keep.</p></div></div>
+              </div>
+
+              <div class="referral">
+                <i class="ti ti-gift"></i>
+                <div class="rf-t"><b>Refer a friend, earn £25 credit.</b><p>Know someone who's sold a property or asset? You'll earn £25 account credit for every friend who completes a filing with us. Your referral link is on your dashboard.</p></div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -634,6 +917,19 @@ a{color:inherit;}
   </div>
 </div>
 
+<!-- ================= INLINE EDIT MODAL (review) ================= -->
+<div class="modal modal-edit" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+  <div class="m-ehead">
+    <div class="m-ico"><i class="ti ti-pencil"></i></div>
+    <h3 id="editTitle">Edit</h3>
+  </div>
+  <form class="edit-form" id="editForm" autocomplete="off" onsubmit="return false;"></form>
+  <div class="m-actions">
+    <button type="button" class="btn btn-ghost" id="editCancel">Cancel</button>
+    <button type="button" class="btn btn-primary" id="editSave">Save changes</button>
+  </div>
+</div>
+
 <!-- ================= TOAST ================= -->
 <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toastTxt">Saved</span></div>
 
@@ -643,11 +939,12 @@ a{color:inherit;}
   const $$ = s => Array.from(document.querySelectorAll(s));
   const fmtGBP = n => '£'+Number(n).toLocaleString('en-GB');
 
-  /* ---------- 3-step client model ---------- */
+  /* ---------- 4-step client model ---------- */
   const CLIENT_STEPS = [
     {n:1, key:'Case info'},
     {n:2, key:'AI chat'},
-    {n:3, key:'Review & pay'},
+    {n:3, key:'Engagement'},
+    {n:4, key:'Review'},
   ];
 
   const state = {
@@ -684,12 +981,19 @@ a{color:inherit;}
     // action bar
     $('#btnBack').style.visibility = step===1 ? 'hidden' : 'visible';
     const next = $('#btnNext');
+    next.disabled = false;
     if(step===2){ next.style.display='none'; }
-    else if(step===3){ next.style.display='inline-flex'; next.innerHTML='Proceed to Payment <i class="ti ti-lock"></i>'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
+    else if(step===4){ next.style.display='inline-flex'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
     else { next.style.display='inline-flex'; next.innerHTML='Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
     buildStepper();
     if(step===2 && !state.chatStarted) startChat();
-    if(step===3){ renderReview(); renderFee(); refreshPayCta(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show'); }
+    if(step===3){ refreshPayCta(); }
+    if(step===4){
+      renderReview(); renderFee(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show');
+      // deadline chip at the decision point
+      const dl=calcDeadline(), chip=$('#payDeadline');
+      if(chip){ if(dl && dl.days>=0){ chip.style.display=''; chip.innerHTML='<i class="ti ti-clock"></i> '+dl.days+' day'+(dl.days===1?'':'s')+' left'; } else chip.style.display='none'; }
+    }
   }
   function goTo(step){ state.step=step; state.maxReached=Math.max(state.maxReached,step); show(step); }
 
@@ -839,7 +1143,7 @@ a{color:inherit;}
   const fmtDate = iso => { if(!iso) return '-'; const d=new Date(iso); return isNaN(d)?iso:d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); };
 
   let queue=[], qi=0;
-  const scroll = ()=> $('#chatDock').scrollIntoView({behavior:'smooth',block:'end'});
+  const scroll = ()=>{ const s=$('#chatScroll'); if(s) s.scrollTo({top:s.scrollHeight,behavior:'smooth'}); };
   function pushMsg(role, html, extraCls){
     const wrap=document.createElement('div');
     wrap.className='msg '+role+(extraCls?(' '+extraCls):'');
@@ -963,14 +1267,14 @@ a{color:inherit;}
     setTimeout(()=>{
       typingOff();
       pushMsg('ai', "Perfect — that's everything I need.");
-      pushMsg('ai', "I've put together your case summary and worked out your fixed fee.");
+      pushMsg('ai', "Next, please review your Letter of Engagement. After that you'll see your case summary and fixed fee.");
       const dock=$('#chatDock'); dock.innerHTML='';
       const row=document.createElement('div'); row.className='chip-row';
       const b=document.createElement('button'); b.className='qchip'; b.style.borderColor='var(--green)';
-      b.innerHTML='<i class="ti ti-arrow-right"></i> See my summary &amp; price';
+      b.innerHTML='<i class="ti ti-arrow-right"></i> Review engagement letter';
       b.addEventListener('click',()=>goTo(3));
       row.appendChild(b); dock.appendChild(row);
-      $('#chatDock').scrollIntoView({behavior:'smooth',block:'end'});
+      scroll();
     }, 620);
   }
 
@@ -986,6 +1290,8 @@ a{color:inherit;}
   function total(){ let t=priceItems().reduce((s,i)=>s+i.amt,0); t-=(state.codeDiscount||0); return Math.max(0,t); }
   function renderFee(){
     $('#feeVal').textContent = fmtGBP(total());
+    const pt=$('#payTotal'); if(pt) pt.textContent = fmtGBP(total());
+    if(state.step===4){ const b=$('#btnNext'); if(b) b.innerHTML='Pay '+fmtGBP(total())+' &amp; start my case <i class="ti ti-lock"></i>'; }
     const items=priceItems();
     let rows = items.map(i=>`<div class="price-row"><span class="lab">${i.label}</span><span class="val">${fmtGBP(i.amt)}</span></div>`).join('');
     if(state.codeDiscount) rows += `<div class="price-row disc"><span class="lab"><i class="ti ti-ticket" style="color:var(--su-tx);font-size:15px;"></i> Promo ${state.codeApplied||''}</span><span class="val">–${fmtGBP(state.codeDiscount)}</span></div>`;
@@ -998,40 +1304,127 @@ a{color:inherit;}
     else { state.codeDiscount=0; state.codeApplied=null; $('#errCode').classList.add('show'); $('#okCode').classList.add('hide'); }
     renderFee();
   });
+  const promoToggle=$('#promoToggle');
+  if(promoToggle) promoToggle.addEventListener('click',()=>{ const f=$('#promoField'); f.classList.toggle('hide'); if(!f.classList.contains('hide')) $('#inCode').focus(); });
 
   /* ================= STEP 3 · REVIEW ================= */
   function renderReview(){
     const isProp = state.service!=='other';
     const rows=[
-      {icon:'ti ti-category', t:'Service', d:state.serviceName, go:1},
-      {icon: isProp?'ti ti-map-pin':'ti ti-tag', t: isProp?'Property':'Asset', d:(isProp?state.address:state.asset)||'Not provided', go:1},
-      {icon:'ti ti-calendar', t:'Sale date', d: state.dispDate?fmtDate(state.dispDate):'Not provided', go:1},
-      {icon:'ti ti-users', t:'Ownership', d: state.ownership==='joint'?('Joint'+(state.sharePct?(' · '+state.sharePct+'% share'):'')):'Sole owner', go:2},
-      {icon:'ti ti-currency-pound', t:'Sale price', d: state.sale?money(state.sale):'Not provided', go:2},
-      {icon:'ti ti-shopping-cart', t:'Purchase', d: state.reconstruct?'To be reconstructed':((state.buy?money(state.buy):'Not provided')+(state.buyDate?(' · '+fmtDate(state.buyDate)):'')), go:2},
-      {icon:'ti ti-tools', t:'Improvements', d: state.improvements==='yes'?(state.improveAmt?money(state.improveAmt):'Yes'):'None', go:2},
+      {icon:'ti ti-category', t:'Service', d:state.serviceName, field:'service'},
+      {icon: isProp?'ti ti-map-pin':'ti ti-tag', t: isProp?'Property':'Asset', d:(isProp?state.address:state.asset)||'Not provided', field:'location'},
+      {icon:'ti ti-calendar', t:'Sale date', d: state.dispDate?fmtDate(state.dispDate):'Not provided', field:'dispDate'},
+      {icon:'ti ti-users', t:'Ownership', d: state.ownership==='joint'?('Joint'+(state.sharePct?(' · '+state.sharePct+'% share'):'')):'Sole owner', field:'ownership'},
+      {icon:'ti ti-currency-pound', t:'Sale price', d: state.sale?money(state.sale):'Not provided', field:'sale'},
+      {icon:'ti ti-shopping-cart', t:'Purchase', d: state.reconstruct?'To be reconstructed':((state.buy?money(state.buy):'Not provided')+(state.buyDate?(' · '+fmtDate(state.buyDate)):'')), field:'purchase'},
+      {icon:'ti ti-tools', t:'Improvements', d: state.improvements==='yes'?(state.improveAmt?money(state.improveAmt):'Yes'):'None', field:'improvements'},
     ];
-    if(state.service==='residential') rows.push({icon:'ti ti-home', t:'Main residence relief', d: state.livedThere==='yes'?('Lived there'+(state.lettings==='yes'?' · let out':'')):'Not a main home', go:2});
-    rows.push({icon:'ti ti-percentage', t:'Tax band', d: state.taxBand==='basic'?'Basic rate':'Higher / additional', go:2});
+    if(state.service==='residential') rows.push({icon:'ti ti-home', t:'Main residence relief', d: state.livedThere==='yes'?('Lived there'+(state.lettings==='yes'?' · let out':'')):'Not a main home', field:'residence'});
+    rows.push({icon:'ti ti-percentage', t:'Tax band', d: state.taxBand==='basic'?'Basic rate':'Higher / additional', field:'taxBand'});
     const est=calcEstimate();
-    if(est!==null) rows.push({icon:'ti ti-sparkles', t:'Provisional CGT estimate', d: est===0?'No tax likely due':(fmtGBP(est)+' · subject to review'), go:2});
-    if(state.notes) rows.push({icon:'ti ti-note', t:'Your note', d:'“'+state.notes+'”', go:2});
+    if(est!==null) rows.push({icon:'ti ti-sparkles', t:'Provisional CGT estimate', d: est===0?'No tax likely due':(fmtGBP(est)+' · subject to review')});
+    rows.push({icon:'ti ti-note', t:'Your note', d: state.notes?('“'+state.notes+'”'):'Nothing added', field:'notes'});
 
     $('#reviewList').innerHTML = rows.map(r=>`
       <div class="rev-item">
         <span class="ri ok"><i class="${r.icon}"></i></span>
         <div class="rt"><h4>${r.t}</h4><p>${esc(r.d)}</p></div>
-        <button class="edit" data-go="${r.go}">Edit</button>
+        ${r.field?`<button class="edit" data-field="${r.field}">Edit</button>`:''}
       </div>`).join('');
-    $$('#reviewList .edit').forEach(b=>b.addEventListener('click',()=>{
-      const g=+b.dataset.go;
-      if(g===2){ state.chatStarted=false; state.chatDone=false; goTo(2); }
-      else goTo(1);
-    }));
+    $$('#reviewList .edit').forEach(b=>b.addEventListener('click',()=>openEdit(b.dataset.field)));
+  }
+
+  /* ================= STEP 4 · INLINE EDIT (modal) ================= */
+  function segCtl(name, options, current){
+    return `<div class="seg-edit" data-ctl="${name}">`+options.map(o=>
+      `<button type="button" class="opt-edit${o[0]===current?' sel':''}" data-val="${esc(o[0])}">${esc(o[1])}</button>`).join('')+`</div>`;
+  }
+  function segVal(root,name){ const s=root.querySelector('[data-ctl="'+name+'"] .opt-edit.sel'); return s?s.dataset.val:''; }
+  function numRow(id,label,val){ return `<div class="field"><label>${label}</label><div class="input-wrap"><i class="ti ti-currency-pound prefix"></i><input class="input" type="number" inputmode="numeric" id="${id}" value="${esc(val||'')}" placeholder="0"></div></div>`; }
+
+  const REV_FIELDS = {
+    service:{ title:'Service',
+      render(){ return `<div class="field"><label>What did you sell?</label>${segCtl('service',[['residential','Residential property'],['commercial','Commercial property'],['other','Other asset']],state.service)}</div>`; },
+      save(r){ const v=segVal(r,'service')||state.service; const map={residential:['Residential Property CGT',149],commercial:['Commercial Property CGT',199],other:['Other CGT',149]}; state.service=v; state.serviceName=map[v][0]; state.basePrice=map[v][1]; } },
+    location:{ title(){ return state.service==='other'?'Asset':'Property'; },
+      render(){ return state.service==='other'
+        ? `<div class="field"><label>Asset name or description</label><div class="input-wrap"><i class="ti ti-tag prefix"></i><input class="input" id="ef_asset" value="${esc(state.asset||'')}" placeholder="e.g. Tesla shares disposal"></div></div>`
+        : `<div class="field"><label>Property address</label><div class="input-wrap"><i class="ti ti-map-pin prefix"></i><input class="input" id="ef_addr" value="${esc(state.address||'')}" placeholder="Property address"></div></div>`; },
+      save(r){ if(state.service==='other'){ const e=r.querySelector('#ef_asset'); if(e) state.asset=e.value.trim(); } else { const e=r.querySelector('#ef_addr'); if(e) state.address=e.value.trim(); } } },
+    dispDate:{ title:'Sale date',
+      render(){ return `<div class="field"><label>Sale / completion date</label><input class="input" type="date" id="ef_disp" value="${esc(state.dispDate||'')}"></div>`; },
+      save(r){ const e=r.querySelector('#ef_disp'); if(e){ state.dispDate=e.value; updateDeadline(); } } },
+    ownership:{ title:'Ownership',
+      render(){ return `<div class="field"><label>How was it owned?</label>${segCtl('own',[['sole','On my own'],['joint','Jointly']],state.ownership)}</div><div class="field" id="ef_shareWrap"${state.ownership==='joint'?'':' style="display:none;"'}><label>Your ownership share (%)</label><input class="input" type="number" id="ef_share" min="1" max="100" value="${esc(state.sharePct||'')}" placeholder="e.g. 50"></div>`; },
+      wire(r){ r.querySelectorAll('[data-ctl="own"] .opt-edit').forEach(o=>o.addEventListener('click',()=>{ r.querySelector('#ef_shareWrap').style.display = o.dataset.val==='joint'?'':'none'; })); },
+      save(r){ const v=segVal(r,'own')||state.ownership; state.ownership=v; if(v==='joint'){ const e=r.querySelector('#ef_share'); state.sharePct=e?e.value:''; } else state.sharePct=''; } },
+    sale:{ title:'Sale price',
+      render(){ return numRow('ef_sale','How much did you sell it for?',state.sale); },
+      save(r){ const e=r.querySelector('#ef_sale'); if(e) state.sale=e.value; } },
+    purchase:{ title:'Purchase',
+      render(){ return `<label class="chk-row" style="margin-bottom:16px;"><input type="checkbox" id="ef_recon"${state.reconstruct?' checked':''}><span>I'm not sure of the purchase figures — reconstruct the acquisition value for me</span></label><div id="ef_buyWrap"${state.reconstruct?' style="display:none;"':''}><div class="field"><label>Purchase / acquisition date</label><input class="input" type="date" id="ef_buyDate" value="${esc(state.buyDate||'')}"></div>${numRow('ef_buy','Purchase price',state.buy)}</div>`; },
+      wire(r){ const c=r.querySelector('#ef_recon'); c.addEventListener('change',()=>{ r.querySelector('#ef_buyWrap').style.display=c.checked?'none':''; }); },
+      save(r){ state.reconstruct=r.querySelector('#ef_recon').checked; if(!state.reconstruct){ const d=r.querySelector('#ef_buyDate'), b=r.querySelector('#ef_buy'); if(d) state.buyDate=d.value; if(b) state.buy=b.value; } } },
+    improvements:{ title:'Improvements',
+      render(){ return `<div class="field"><label>Any capital improvements (e.g. an extension or major renovation)?</label>${segCtl('imp',[['yes','Yes'],['no','No']],state.improvements)}</div><div id="ef_impWrap"${state.improvements==='yes'?'':' style="display:none;"'}>${numRow('ef_impAmt','Roughly, the improvement cost',state.improveAmt)}</div>`; },
+      wire(r){ r.querySelectorAll('[data-ctl="imp"] .opt-edit').forEach(o=>o.addEventListener('click',()=>{ r.querySelector('#ef_impWrap').style.display=o.dataset.val==='yes'?'':'none'; })); },
+      save(r){ const v=segVal(r,'imp')||state.improvements; state.improvements=v; if(v==='yes'){ const e=r.querySelector('#ef_impAmt'); if(e) state.improveAmt=e.value; } else state.improveAmt=''; } },
+    residence:{ title:'Main residence relief',
+      render(){ return `<div class="field"><label>Did you ever live in this property as your main home?</label>${segCtl('lived',[['yes','Yes'],['no','No']],state.livedThere)}</div><div class="field" id="ef_letWrap"${state.livedThere==='yes'?'':' style="display:none;"'}><label>Was it ever let out to tenants?</label>${segCtl('let',[['yes','Yes, it was let'],['no','No']],state.lettings)}</div>`; },
+      wire(r){ r.querySelectorAll('[data-ctl="lived"] .opt-edit').forEach(o=>o.addEventListener('click',()=>{ r.querySelector('#ef_letWrap').style.display=o.dataset.val==='yes'?'':'none'; })); },
+      save(r){ const v=segVal(r,'lived')||state.livedThere; state.livedThere=v; if(v==='yes'){ state.lettings=segVal(r,'let')||state.lettings; } else state.lettings=''; } },
+    taxBand:{ title:'Tax band',
+      render(){ return `<div class="field"><label>Your Income Tax band this year</label>${segCtl('band',[['basic','Basic rate'],['higher','Higher / additional']],state.taxBand==='basic'?'basic':'higher')}</div>`; },
+      save(r){ state.taxBand=segVal(r,'band')||state.taxBand; } },
+    notes:{ title:'Your note',
+      render(){ return `<div class="field"><label>Anything you'd like our team to know about this disposal?</label><textarea class="input" id="ef_notes" rows="4" placeholder="Type a note, or leave blank">${esc(state.notes||'')}</textarea></div>`; },
+      save(r){ const e=r.querySelector('#ef_notes'); if(e) state.notes=e.value.trim(); } },
+  };
+
+  let editKey=null;
+  function syncStep1(){
+    const isProp=state.service==='residential'||state.service==='commercial';
+    $$('#assetSeg .opt').forEach(o=>o.classList.toggle('sel', o.dataset.service===state.service));
+    $('#fldAddress').classList.toggle('hide', !isProp);
+    $('#fldAsset').classList.toggle('hide', isProp);
+    const a=$('#inAddress'), as=$('#inAsset'), dd=$('#inDispDate');
+    if(a) a.value=state.address||''; if(as) as.value=state.asset||''; if(dd) dd.value=state.dispDate||'';
+  }
+  function openEdit(key){
+    const f=REV_FIELDS[key]; if(!f) return;
+    editKey=key;
+    $('#editTitle').textContent = (typeof f.title==='function'?f.title():f.title);
+    const body=$('#editForm'); body.innerHTML=f.render();
+    // generic segmented-control selection
+    body.querySelectorAll('.seg-edit').forEach(seg=>{
+      seg.querySelectorAll('.opt-edit').forEach(o=>o.addEventListener('click',()=>{
+        seg.querySelectorAll('.opt-edit').forEach(x=>x.classList.remove('sel')); o.classList.add('sel');
+      }));
+    });
+    if(f.wire) f.wire(body);
+    $('#overlay').classList.add('show'); $('#editModal').classList.add('show');
+    const first=body.querySelector('input,textarea'); if(first) setTimeout(()=>{ try{first.focus();}catch(e){} },50);
+  }
+  function closeEdit(){ $('#editModal').classList.remove('show'); if(!$('#modal').classList.contains('show')) $('#overlay').classList.remove('show'); editKey=null; }
+  function saveEdit(){
+    const f=REV_FIELDS[editKey]; if(!f){ closeEdit(); return; }
+    f.save($('#editForm'));
+    syncStep1(); autosave();
+    closeEdit();
+    renderReview(); renderFee();
+    toast('Updated');
   }
 
   /* ================= STEP 3 · PAYMENT ================= */
-  $$('#payForm .pay-m').forEach(m=>m.addEventListener('click',()=>{ $$('#payForm .pay-m').forEach(x=>x.classList.remove('sel')); m.classList.add('sel'); }));
+  $$('#payForm .pay-wallet').forEach(m=>m.addEventListener('click',()=>{
+    $$('#payForm .pay-wallet').forEach(x=>x.classList.remove('sel')); m.classList.add('sel');
+    $('#cardFields').classList.add('hide'); $('#cardToggle').classList.remove('sel');
+  }));
+  $('#cardToggle').addEventListener('click',()=>{
+    const f=$('#cardFields'), reveal=f.classList.contains('hide');
+    f.classList.toggle('hide'); $('#cardToggle').classList.toggle('sel',reveal);
+    if(reveal) $$('#payForm .pay-wallet').forEach(x=>x.classList.remove('sel'));
+  });
   $('#agreeChk').addEventListener('change',refreshPayCta);
   function refreshPayCta(){ if(state.step===3) $('#btnNext').disabled = !$('#agreeChk').checked; }
   function startPayment(){
@@ -1050,7 +1443,8 @@ a{color:inherit;}
       enableAutosave(); toast('Case created · '+state.ref);
       goTo(2); return;
     }
-    if(state.step===3){ startPayment(); return; }
+    if(state.step===3){ goTo(4); return; }
+    if(state.step===4){ startPayment(); return; }
   }
   $('#btnNext').addEventListener('click',next);
   $('#btnBack').addEventListener('click',()=>{ if(state.step>1) goTo(state.step-1); });
@@ -1060,17 +1454,23 @@ a{color:inherit;}
   function autosave(){
     if(!state.autosave) return;
     const el=$('#autosave'), txt=$('#autosaveTxt');
+    if(!el||!txt) return;
     el.classList.add('on','saving'); el.classList.remove('saved'); el.querySelector('i').className='ti ti-loader-2'; txt.textContent='Saving…';
     clearTimeout(saveT);
     saveT=setTimeout(()=>{ el.classList.remove('saving'); el.classList.add('saved'); el.querySelector('i').className='ti ti-cloud-check'; txt.textContent='All changes saved'; },700);
   }
-  function enableAutosave(){ if(!state.autosave){ state.autosave=true; $('#autosave').classList.add('on','saved'); $('#autosaveTxt').textContent='All changes saved'; } }
+  function enableAutosave(){ if(!state.autosave){ state.autosave=true; const el=$('#autosave'); if(el){ el.classList.add('on','saved'); $('#autosaveTxt').textContent='All changes saved'; } } }
   function toast(msg){ const t=$('#toast'); $('#toastTxt').textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
 
   /* ---- Save & Exit modal ---- */
-  const closeModal=()=>{ $('#overlay').classList.remove('show'); $('#modal').classList.remove('show'); };
+  const closeModal=()=>{ $('#modal').classList.remove('show'); if(!$('#editModal').classList.contains('show')) $('#overlay').classList.remove('show'); };
   $('#modalCancel').addEventListener('click',closeModal);
-  $('#overlay').addEventListener('click',closeModal);
+  $('#overlay').addEventListener('click',()=>{ closeModal(); closeEdit(); });
+
+  /* ---- inline edit modal ---- */
+  $('#editCancel').addEventListener('click',closeEdit);
+  $('#editSave').addEventListener('click',saveEdit);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeEdit(); closeModal(); } });
 
   /* ================= SUBMIT / SUCCESS ================= */
   function submitCase(){
@@ -1080,9 +1480,24 @@ a{color:inherit;}
     $$('.step').forEach(el=>el.classList.remove('show'));
     $('#actionbar').style.display='none';
     $('#cstepperWrap').style.display='none';
-    $('#scName').textContent = state.service==='other' ? (state.asset||state.serviceName) : (state.address||state.serviceName);
+    const caseName = state.service==='other' ? (state.asset||state.serviceName) : (state.address||state.serviceName);
+    $('#scName').textContent = caseName;
     $('#scRef').textContent = state.ref || genRef();
-    const info=calcDeadline(); if(info && info.days>=0) $('#scDeadline').textContent = info.days+' day'+(info.days===1?'':'s')+' left';
+    const scSub=$('#scSub'); if(scSub) scSub.innerHTML = 'Your case for <b>'+esc(caseName)+'</b> is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.';
+    const info=calcDeadline();
+    if(info && info.days>=0) $('#scDeadline').textContent = info.days+' day'+(info.days===1?'':'s')+' left';
+    // "Add deadline to calendar" — Google Calendar all-day event on the HMRC deadline
+    const cal=$('#scCal');
+    if(cal && info && info.dl){
+      const d=info.dl, pad=n=>String(n).padStart(2,'0');
+      const ymd=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
+      const end=new Date(d.getTime()+86400000), ymdE=end.getFullYear()+pad(end.getMonth()+1)+pad(end.getDate());
+      const url='https://calendar.google.com/calendar/render?action=TEMPLATE'
+        +'&text='+encodeURIComponent('HMRC CGT deadline — '+caseName)
+        +'&dates='+ymd+'/'+ymdE
+        +'&details='+encodeURIComponent('60-day Capital Gains Tax return & payment due to HMRC. Case ref '+($('#scRef').textContent)+' · File CGT Online is handling this for you.');
+      cal.setAttribute('href',url);
+    }
     $('#successWrap').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -1091,7 +1506,7 @@ a{color:inherit;}
   buildStepper();
   (function(){
     var m=(location.hash||'').match(/step-?(\d+)/i);
-    var start = m ? Math.min(3,Math.max(1,parseInt(m[1],10))) : 1;
+    var start = m ? Math.min(4,Math.max(1,parseInt(m[1],10))) : 1;
     state.maxReached=start; goTo(start);
   })();
 })();
