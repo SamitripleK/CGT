@@ -104,6 +104,27 @@
 
   /* first-time (onboarding) top-bar flow switcher: widen the dropdown so labels don't wrap */
   [data-role="onb-flow"]>div{left:auto !important;right:0 !important;width:260px !important;}
+
+  /* ===== Onboarding · "Complete your profile" modal ===== */
+  .onb-label{display:block;font-size:12.5px;font-weight:500;color:var(--tx-2b);margin-bottom:6px;}
+  .onb-input,.onb-select{width:100%;border:1px solid var(--border-2);border-radius:10px;background:var(--surface);padding:11px 13px;font-size:14px;color:var(--tx);outline:none;font-family:'Jost',sans-serif;transition:border-color .15s ease,box-shadow .15s ease;}
+  .onb-input::placeholder{color:var(--tx-3);}
+  .onb-input:focus,.onb-select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,45,79,0.12);}
+  html[data-theme="dark"] .onb-input:focus,html[data-theme="dark"] .onb-select:focus{border-color:var(--link);box-shadow:0 0 0 3px rgba(173,238,104,0.14);}
+  .onb-select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:34px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center;}
+  .onb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .onb-sug-item:hover{background:var(--surface-2);}
+  @media (max-width:560px){
+    .onb-grid2{grid-template-columns:1fr;}
+    .onb-modal-card{border-radius:16px !important;}
+    .onb-pad{padding:18px 16px !important;}
+    .onb-head-pad{padding:18px 16px 14px !important;}
+    .onb-foot-pad{padding:14px 16px !important;}
+    .onb-actions{flex-direction:column !important;}
+    .onb-actions>button{width:100% !important;}
+  }
 </style>
 </helmet>
 
@@ -221,7 +242,7 @@
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <button onClick="{{ dismissProfileReminder }}" style="background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Dismiss</button>
-              <button onClick="{{ goCompleteProfile }}" style="display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:9px 16px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Complete profile <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+              <button onClick="{{ openOnbModal }}" style="display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:9px 16px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Complete profile <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
             </div>
           </div>
           <!-- ── Greeting ── -->
@@ -238,20 +259,6 @@
             </div>
             <button onClick="{{ startNewCase }}" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:15px;font-weight:600;padding:11px 20px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);"><i class="ti ti-plus" style="font-size:16px;"></i> New case</button>
           </div>
-
-          <!-- ── FOCAL: your single next step ── -->
-          <sc-if value="{{ heroHasAlert }}" hint-placeholder-val="{{ true }}">
-            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:var(--sh-md);margin-bottom:28px;">
-              <span style="display:flex;width:52px;height:52px;flex-shrink:0;align-items:center;justify-content:center;border-radius:14px;background:var(--su-bg);"><i class="{{ heroIcon }}" style="font-size:26px;color:var(--su-tx);"></i></span>
-              <div style="flex:1;min-width:200px;">
-                <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--tx-3);">{{ heroKicker }}</p>
-                <p style="font-size:19px;font-weight:700;color:var(--tx);margin-top:4px;">{{ heroTitle }}</p>
-                <p style="font-size:14px;color:var(--tx-2);margin-top:3px;">{{ heroSub }}</p>
-              </div>
-              <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--tx-2);"><i class="ti ti-clock" style="font-size:15px;"></i> {{ heroDeadlineLabel }}</span>
-              <button onClick="{{ heroOnCta }}" style="display:inline-flex;align-items:center;gap:8px;background:#adee68;color:#0a1120;font-size:15px;font-weight:600;padding:13px 22px;border:none;border-radius:12px;cursor:pointer;box-shadow:var(--sh-sm);" style-hover="background:#9ce04f;">{{ heroCtaLabel }} <i class="ti ti-arrow-right" style="font-size:16px;"></i></button>
-            </div>
-          </sc-if>
 
           <!-- ── Your cases (compact list) ── -->
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
@@ -868,37 +875,53 @@
             <h1 style="font-size:28px;line-height:34px;font-weight:600;">Profile</h1>
             <p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Your personal details. Keep these up to date so we can prepare and file your return.</p>
           </div>
-          <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;">
-            <!-- Xama identity verification (top) -->
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <div style="display:flex;align-items:flex-start;gap:14px;">
-                <img src="xama-logo.png" alt="Xama" style="width:46px;height:46px;border-radius:12px;flex-shrink:0;" />
-                <div style="flex:1;min-width:0;">
-                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                    <h3 style="font-size:16px;font-weight:600;">Identity verification</h3>
-                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:3px 10px;border-radius:9999px;background:var(--wa-bg);color:var(--wa-tx);"><span style="width:7px;height:7px;border-radius:9999px;background:var(--wa-tx);"></span> Not verified</span>
-                  </div>
-                  <p style="font-size:14px;color:var(--tx-2);line-height:1.6;margin-top:6px;">We verify your identity and address through <b style="color:var(--tx);">Xama</b>, our regulated partner. This is a legal anti-money-laundering requirement before we can file your return, and takes about two minutes.</p>
-                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;">
-                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-id" style="font-size:14px;color:var(--tx-3);"></i> Photo ID</span>
-                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-home-2" style="font-size:14px;color:var(--tx-3);"></i> Proof of address</span>
-                    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx-2b);background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;padding:5px 11px;"><i class="ti ti-shield-search" style="font-size:14px;color:var(--tx-3);"></i> PEP &amp; sanctions</span>
-                  </div>
-                  <a href="https://www.xamatech.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#0a0a0a;color:#fff;font-size:14px;font-weight:600;padding:11px 18px;border-radius:12px;text-decoration:none;cursor:pointer;" style-hover="background:#222;">Verify with Xama <i class="ti ti-external-link" style="font-size:16px;"></i></a>
-                  <p style="font-size:12px;color:var(--tx-3);margin-top:10px;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-lock" style="font-size:13px;margin-top:1px;"></i> You'll be taken to Xama's secure portal. Your documents are handled by our regulated identity provider.</p>
-                </div>
+
+          <!-- ── Profile completion tracker (Goal-Gradient Effect + Zeigarnik) ── -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px;margin-bottom:12px;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+              <div style="min-width:0;">
+                <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;"><i class="ti ti-rosette-discount-check" style="color:var(--tx);font-size:18px;"></i> Profile completion</h3>
+                <p style="font-size:13.5px;color:var(--tx-2);margin-top:3px;">A complete profile lets our tax team verify you and file without delays.</p>
+              </div>
+              <div style="text-align:right;flex-shrink:0;">
+                <span style="font-size:22px;font-weight:700;color:var(--tx);">{{ profPctLabel }}</span>
+                <p style="font-size:12px;color:var(--tx-2);">{{ profDoneSummary }}</p>
               </div>
             </div>
+            <div style="height:8px;border-radius:9999px;background:var(--track);overflow:hidden;margin-bottom:16px;"><div style="{{ profProgressStyle }}"></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ profChecklist }}" as="i" hint-placeholder-count="3">
+                <div style="{{ i.rowStyle }}">
+                  <sc-if value="{{ i.hasLogo }}" hint-placeholder-val="{{ false }}"><img src="{{ i.logo }}" alt="Xama" style="width:32px;height:32px;border-radius:9px;flex-shrink:0;object-fit:cover;" /></sc-if>
+                  <sc-if value="{{ !i.hasLogo }}" hint-placeholder-val="{{ true }}"><span style="{{ i.iconWrapStyle }}"><i class="{{ i.icon }}" style="font-size:16px;"></i></span></sc-if>
+                  <div style="flex:1;min-width:0;"><p style="font-size:14px;font-weight:500;color:var(--tx);">{{ i.label }}</p><p style="font-size:12.5px;color:var(--tx-2);">{{ i.statusText }}</p></div>
+                  <sc-if value="{{ i.showAction }}" hint-placeholder-val="{{ true }}"><button onClick="{{ i.onAction }}" style="display:inline-flex;align-items:center;gap:5px;flex-shrink:0;background:var(--surface);border:1px solid var(--border-2);color:var(--tx);font-size:13px;font-weight:500;padding:7px 13px;border-radius:9999px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);border-color:var(--navy);">{{ i.actionLabel }} <i class="ti ti-arrow-right" style="font-size:14px;"></i></button></sc-if>
+                  <sc-if value="{{ i.done }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;flex-shrink:0;font-size:12.5px;font-weight:600;color:var(--su-tx);"><i class="ti ti-check" style="font-size:15px;"></i> Done</span></sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
 
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
-              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-user" style="color:var(--tx);font-size:18px;"></i> Personal details</h3>
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Full name</label><input value="James Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
-                <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input value="james.whitfield@email.com" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
-                <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Mobile number</label><input value="07700 900482" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
-                <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Address</label><input value="14 Elm Grove, Bristol BS6 6RG" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--tx);outline:none;" /></div>
-                <button style="align-self:flex-start;background:var(--navy);color:#fff;font-size:14px;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Save changes</button>
+          <!-- Personal details (full width) · single edit entry point -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px;">
+              <h3 style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;"><i class="ti ti-user" style="color:var(--tx);font-size:18px;"></i> Personal details</h3>
+              <span style="{{ profileStatusStyle }}"><span style="{{ profileStatusDot }}"></span> {{ profileStatusLabel }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="display:flex;width:36px;height:36px;flex-shrink:0;align-items:center;justify-content:center;border-radius:10px;background:var(--surface-2);color:var(--tx-2);"><i class="ti ti-id-badge-2" style="font-size:18px;"></i></span>
+                <div style="min-width:0;"><p style="font-size:12px;color:var(--tx-2);">Full name</p><p style="font-size:15px;color:var(--tx);">{{ profileName }}</p></div>
               </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="display:flex;width:36px;height:36px;flex-shrink:0;align-items:center;justify-content:center;border-radius:10px;background:var(--surface-2);color:var(--tx-2);"><i class="ti ti-mail" style="font-size:18px;"></i></span>
+                <div style="min-width:0;"><p style="font-size:12px;color:var(--tx-2);">Email address</p><p style="font-size:15px;color:var(--tx);word-break:break-word;">{{ profileEmail }}</p></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="display:flex;width:36px;height:36px;flex-shrink:0;align-items:center;justify-content:center;border-radius:10px;background:var(--surface-2);color:var(--tx-2);"><i class="ti ti-phone" style="font-size:18px;"></i></span>
+                <div style="min-width:0;"><p style="font-size:12px;color:var(--tx-2);">Mobile number</p><p style="{{ profileMobileStyle }}">{{ profileMobile }}</p></div>
+              </div>
+              <button onClick="{{ openOnbModal }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:500;padding:11px 18px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);"><i class="ti ti-edit" style="font-size:16px;"></i> Edit info</button>
             </div>
           </div>
         </div>
@@ -1018,6 +1041,199 @@
         <button onClick="{{ closeProfileModal }}" style="display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px 18px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);">Do this later</button>
       </div>
       <p style="font-size:12px;color:var(--tx-3);margin-top:14px;display:flex;align-items:flex-start;gap:6px;"><i class="ti ti-lock" style="font-size:13px;margin-top:1px;"></i> You'll be taken to Xama's secure portal. Your documents are handled by our regulated identity provider.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ ONBOARDING · "Complete your profile" wizard (Step 1 contact · Step 2 address history · success) ═══════════ -->
+  <div style="{{ onbOverlayStyle }}" role="dialog" aria-modal="true" aria-labelledby="onb-title">
+    <div class="onb-modal-card" style="width:100%;max-width:560px;background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-2xl);max-height:calc(100vh - 48px);display:flex;flex-direction:column;overflow:hidden;margin:auto;">
+
+      <!-- Header + step tracker -->
+      <div class="onb-head-pad" style="position:relative;padding:22px 24px 16px;border-bottom:1px solid var(--border-3);flex-shrink:0;">
+        <button onClick="{{ onbHeaderClose }}" aria-label="{{ onbCloseAria }}" style="position:absolute;top:16px;right:16px;display:flex;width:34px;height:34px;align-items:center;justify-content:center;background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;cursor:pointer;color:var(--tx-2);line-height:1;" style-hover="background:var(--muted);"><i class="ti ti-x" style="font-size:18px;"></i></button>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 11px;border-radius:9999px;background:var(--su-bg);color:var(--link);border:1px solid #e4f5c7;"><i class="ti ti-sparkles" style="font-size:14px;"></i> {{ onbKicker }}</span>
+        <h2 id="onb-title" style="font-size:21px;font-weight:600;color:var(--tx);margin-top:12px;">{{ onbTitle }}</h2>
+        <p style="font-size:14px;line-height:1.6;color:var(--tx-2);margin-top:6px;max-width:48ch;">{{ onbDesc }}</p>
+        <sc-if value="{{ onbShowStepper }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;gap:12px;margin-top:16px;">
+            <div style="flex:1;display:flex;gap:6px;"><span style="{{ onbSeg1Style }}"></span><span style="{{ onbSeg2Style }}"></span></div>
+            <span style="font-size:12px;font-weight:600;color:var(--tx-2b);white-space:nowrap;">{{ onbStepNumLabel }}</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- Body (scrolls) -->
+      <div class="onb-pad" style="padding:20px 24px;overflow-y:auto;flex:1;">
+
+        <!-- ═══ STEP 1 · Contact ═══ -->
+        <sc-if value="{{ onbStep1 }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:flex-start;gap:10px;background:var(--in-bg);border:1px solid var(--in-bd);border-radius:12px;padding:12px 14px;margin-bottom:20px;">
+            <i class="ti ti-phone-check" style="font-size:18px;color:var(--in-tx);flex-shrink:0;margin-top:1px;"></i>
+            <p style="font-size:13px;line-height:1.55;color:var(--in-tx);"><b>Why we ask:</b> we'll only use your number to update you about your case and reach you quickly if HMRC has a deadline — never for marketing.</p>
+          </div>
+          <div>
+            <label class="onb-label" for="onb-mobile">Mobile number</label>
+            <div style="display:flex;gap:8px;">
+              <select class="onb-select" value="{{ onbMobileCode }}" onChange="{{ onbSetMobileCode }}" aria-label="Country dialing code" style="width:120px;flex-shrink:0;">
+                <sc-for list="{{ onbDialCodes }}" as="d" hint-placeholder-count="3"><option value="{{ d.value }}">{{ d.label }}</option></sc-for>
+              </select>
+              <input id="onb-mobile" class="onb-input" value="{{ onbMobile }}" onInput="{{ onbSetMobile }}" inputmode="tel" placeholder="7700 900123" style="flex:1;min-width:0;" />
+            </div>
+            <p style="{{ onbMobileErrStyle }}">Enter a valid mobile number.</p>
+          </div>
+        </sc-if>
+
+        <!-- ═══ STEP 2 · Address history ═══ -->
+        <sc-if value="{{ onbStep2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:flex-start;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:16px;">
+            <i class="ti ti-info-circle" style="font-size:18px;color:var(--tx-2b);flex-shrink:0;margin-top:1px;"></i>
+            <p style="font-size:13px;line-height:1.55;color:var(--tx-2b);"><b style="color:var(--tx);">Why 3 years?</b> Anti-money-laundering rules require us to confirm where you've lived for the last 3 years. If you've been at your current address that long, it's the only one you'll need.</p>
+          </div>
+
+          <!-- Progress toward 3 years -->
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
+              <span style="font-size:13px;color:var(--tx-2b);">Collected <b style="color:var(--tx);">{{ onbTotalLabel }}</b> of {{ onbReqLabel }}</span>
+              <span style="{{ onbEnoughBadgeStyle }}"><i class="ti ti-check" style="font-size:13px;"></i> Complete</span>
+            </div>
+            <div style="height:7px;border-radius:9999px;background:var(--track);overflow:hidden;"><div style="{{ onbProgressFillStyle }}"></div></div>
+          </div>
+
+          <!-- Address cards -->
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ onbAddresses }}" as="a" hint-placeholder-count="1">
+              <div style="{{ a.cardStyle }}">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <span style="display:flex;width:30px;height:30px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9px;background:var(--navy);color:#fff;font-size:12px;font-weight:600;">{{ a.stepBadge }}</span>
+                    <div style="min-width:0;"><p style="font-size:14px;font-weight:600;color:var(--tx);">{{ a.heading }}</p><p style="font-size:12px;color:var(--tx-2);">{{ a.subheading }}</p></div>
+                  </div>
+                  <sc-if value="{{ a.showRemove }}" hint-placeholder-val="{{ false }}"><button onClick="{{ a.onRemove }}" aria-label="Remove this address" style="display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:var(--tx-3);font-size:13px;font-family:'Jost',sans-serif;flex-shrink:0;" style-hover="color:var(--er-tx);"><i class="ti ti-trash" style="font-size:15px;"></i> Remove</button></sc-if>
+                </div>
+
+                <!-- (1) Address search -->
+                <sc-if value="{{ a.showSearchInput }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:relative;">
+                    <i class="ti ti-search" style="position:absolute;left:12px;top:20px;transform:translateY(-50%);font-size:16px;color:var(--tx-3);pointer-events:none;"></i>
+                    <input class="onb-input" value="{{ a.query }}" onInput="{{ a.onQuery }}" placeholder="Start typing your address or postcode" style="padding-left:36px;" />
+                    <sc-if value="{{ a.showSug }}" hint-placeholder-val="{{ false }}">
+                      <div style="position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:6;background:var(--surface);border:1px solid var(--border-2);border-radius:10px;box-shadow:var(--sh-lg);overflow:hidden;">
+                        <sc-for list="{{ a.suggestions }}" as="s" hint-placeholder-count="3">
+                          <button class="onb-sug-item" onClick="{{ s.onPick }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:none;border-bottom:1px solid var(--border-3);background:transparent;padding:10px 13px;cursor:pointer;font-family:'Jost',sans-serif;">
+                            <i class="ti ti-map-pin" style="font-size:15px;color:var(--tx-3);flex-shrink:0;"></i>
+                            <span style="min-width:0;"><span style="display:block;font-size:14px;color:var(--tx);">{{ s.line1 }}</span><span style="display:block;font-size:12px;color:var(--tx-2);">{{ s.meta }}</span></span>
+                          </button>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;">
+                    <button onClick="{{ a.onManual }}" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:var(--link);font-size:13px;font-weight:500;font-family:'Jost',sans-serif;padding:0;"><i class="ti ti-pencil" style="font-size:14px;"></i> Enter address manually</button>
+                    <button onClick="{{ a.onIntl }}" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:var(--link);font-size:13px;font-weight:500;font-family:'Jost',sans-serif;padding:0;"><i class="ti ti-world" style="font-size:14px;"></i> International address</button>
+                  </div>
+                </sc-if>
+
+                <!-- (2) Selected address summary -->
+                <sc-if value="{{ a.showPicked }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:flex-start;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 13px;">
+                    <i class="ti ti-map-pin-check" style="font-size:18px;color:#43a047;flex-shrink:0;margin-top:1px;"></i>
+                    <div style="flex:1;min-width:0;"><p style="font-size:14px;font-weight:500;color:var(--tx);">{{ a.pickedLine1 }}</p><p style="font-size:13px;color:var(--tx-2);">{{ a.pickedMeta }}</p></div>
+                    <button onClick="{{ a.onEditPicked }}" style="background:none;border:none;cursor:pointer;color:var(--link);font-size:13px;font-weight:500;flex-shrink:0;font-family:'Jost',sans-serif;">Edit</button>
+                  </div>
+                </sc-if>
+
+                <!-- (3) Manual / International fields -->
+                <sc-if value="{{ a.showManual }}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <sc-if value="{{ a.isIntl }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--in-tx);background:var(--in-bg);border-radius:9999px;padding:3px 9px;margin-bottom:12px;"><i class="ti ti-world" style="font-size:13px;"></i> International address</span></sc-if>
+                    <div style="display:flex;flex-direction:column;gap:12px;">
+                      <div><label class="onb-label">Address line 1</label><input class="onb-input" value="{{ a.line1 }}" onInput="{{ a.onLine1 }}" placeholder="House number and street" /></div>
+                      <div><label class="onb-label">Address line 2 <span style="color:var(--tx-3);font-weight:400;">(optional)</span></label><input class="onb-input" value="{{ a.line2 }}" onInput="{{ a.onLine2 }}" placeholder="Apartment, suite, unit, etc." /></div>
+                      <div class="onb-grid2">
+                        <div><label class="onb-label">City / Town</label><input class="onb-input" value="{{ a.city }}" onInput="{{ a.onCity }}" placeholder="City" /></div>
+                        <div><label class="onb-label">State / Province</label><input class="onb-input" value="{{ a.region }}" onInput="{{ a.onRegion }}" placeholder="County or state" /></div>
+                      </div>
+                      <div class="onb-grid2">
+                        <div><label class="onb-label">Postal / ZIP code</label><input class="onb-input" value="{{ a.postal }}" onInput="{{ a.onPostal }}" placeholder="Postcode" /></div>
+                        <div><label class="onb-label">Country</label>
+                          <select class="onb-select" value="{{ a.country }}" onChange="{{ a.onCountry }}" aria-label="Country">
+                            <option value="">Select country</option>
+                            <sc-for list="{{ a.countries }}" as="c" hint-placeholder-count="3"><option value="{{ c.value }}">{{ c.label }}</option></sc-for>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button onClick="{{ a.onSearchBack }}" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:var(--link);font-size:13px;font-weight:500;margin-top:12px;font-family:'Jost',sans-serif;padding:0;"><i class="ti ti-search" style="font-size:14px;"></i> Search for address instead</button>
+                  </div>
+                </sc-if>
+                <p style="{{ a.locErrStyle }}">Please provide this address.</p>
+
+                <!-- Duration -->
+                <div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--border-2);">
+                  <label class="onb-label">How long have you lived at this address?</label>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <select class="onb-select" value="{{ a.years }}" onChange="{{ a.onYears }}" aria-label="Years at this address" style="flex:1;">
+                      <option value="">Years</option>
+                      <sc-for list="{{ a.yearsOpts }}" as="y" hint-placeholder-count="3"><option value="{{ y.value }}">{{ y.label }}</option></sc-for>
+                    </select>
+                    <select class="onb-select" value="{{ a.months }}" onChange="{{ a.onMonths }}" aria-label="Months at this address" style="flex:1;">
+                      <option value="">Months</option>
+                      <sc-for list="{{ a.monthsOpts }}" as="m" hint-placeholder-count="3"><option value="{{ m.value }}">{{ m.label }}</option></sc-for>
+                    </select>
+                  </div>
+                  <p style="{{ a.durErrStyle }}">Please tell us how long you lived here.</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- Need-more prompt (shown until 3 years is reached) -->
+          <div style="{{ onbNeedMoreStyle }}">
+            <i class="ti ti-info-circle" style="font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+            <span style="font-size:13px;line-height:1.5;">{{ onbNeedMoreLabel }}</span>
+          </div>
+
+          <!-- Add previous address -->
+          <button onClick="{{ onbAddPrev }}" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px;background:var(--surface);border:1px dashed var(--border-2);color:var(--tx);font-size:14px;font-weight:500;padding:12px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);border-color:var(--navy);"><i class="ti ti-plus" style="font-size:16px;"></i> Add previous address</button>
+        </sc-if>
+
+        <!-- ═══ STEP 3 · Success ═══ -->
+        <sc-if value="{{ onbStep3 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 8px 12px;">
+            <span style="display:flex;width:76px;height:76px;align-items:center;justify-content:center;border-radius:9999px;background:var(--su-bg);margin-bottom:8px;"><i class="ti ti-circle-check" style="font-size:44px;color:#43a047;"></i></span>
+            <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;margin-top:14px;">
+              <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:left;"><i class="ti ti-phone" style="font-size:18px;color:var(--su-tx);flex-shrink:0;"></i><span style="font-size:13.5px;color:var(--tx-2b);">Contact number saved</span></div>
+              <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:left;"><i class="ti ti-map-pin" style="font-size:18px;color:var(--su-tx);flex-shrink:0;"></i><span style="font-size:13.5px;color:var(--tx-2b);">3 years of address history collected</span></div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- Footer · actions change per step -->
+      <div class="onb-foot-pad" style="flex-shrink:0;border-top:1px solid var(--border-3);padding:16px 24px;background:var(--surface);">
+        <p style="{{ onbErrStyle }}"><i class="ti ti-alert-circle" style="font-size:15px;flex-shrink:0;"></i> {{ onbErrText }}</p>
+
+        <!-- Step 1 -->
+        <sc-if value="{{ onbStep1 }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ onbContinue }}" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px 20px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);">Continue <i class="ti ti-arrow-right" style="font-size:17px;"></i></button>
+          <button onClick="{{ onbSkip }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;font-weight:500;padding:12px 0 2px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="color:var(--tx);">Skip for now</button>
+        </sc-if>
+
+        <!-- Step 2 -->
+        <sc-if value="{{ onbStep2 }}" hint-placeholder-val="{{ false }}">
+          <div class="onb-actions" style="display:flex;gap:10px;">
+            <button onClick="{{ onbBack }}" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--border-2);color:var(--tx);font-size:15px;font-weight:500;padding:13px 18px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back</button>
+            <button onClick="{{ onbSave }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px 20px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);"><i class="ti ti-check" style="font-size:17px;"></i> Save &amp; finish</button>
+          </div>
+          <button onClick="{{ onbSkip }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;font-weight:500;padding:12px 0 2px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="color:var(--tx);">Skip for now</button>
+        </sc-if>
+
+        <!-- Step 3 -->
+        <sc-if value="{{ onbStep3 }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ onbFinish }}" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px 20px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);">Go to dashboard <i class="ti ti-arrow-right" style="font-size:17px;"></i></button>
+        </sc-if>
+      </div>
+
     </div>
   </div>
 
@@ -1745,7 +1961,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false, profileMenuOpen: false, notifOpen: false, profileModalOpen: false, pendingNewCase: false, identityVerified: false, firstTimeClient: false };
+  state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false, profileMenuOpen: false, notifOpen: false, profileModalOpen: false, pendingNewCase: false, identityVerified: false, firstTimeClient: false,
+    onbModalOpen: false, onb: { step: 1, mobileCode: '+44', mobile: '', tried: false, addresses: [ { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' } ] } };
 
   componentDidMount() {
     try {
@@ -1755,6 +1972,9 @@ class Component extends DCLogic {
       if (t !== this.state.theme) this.setState({ theme: t });
     } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
     const h = (window.location.hash || '').replace('#', '').toLowerCase();
+    let su = {};
+    try { su = JSON.parse(localStorage.getItem('cgt-signup') || '{}'); } catch (e) { su = {}; }
+
     if (h === 'partner') this.setState({ portal: 'partner', route: 'p-dashboard' });
     else if (h === 'admin') this.setState({ portal: 'admin', route: 'a-dashboard' });
     else if (h === 'onboarding' || h === 'client-new' || h === 'first-time') this.setState({ portal: 'onboarding', route: 'onboarding' });
@@ -1765,25 +1985,49 @@ class Component extends DCLogic {
     else {
       // No recognised hash → follow the real signup journey stored in localStorage.
       // (When there is no signup, we leave the demo default: populated 4-case portal.)
-      try {
-        const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}');
-        if (su.email && su.caseStarted) {
-          // Completed the new-case flow once → single representative case, minimal elsewhere.
-          this.setState({ portal: 'client', route: 'dashboard', empty: false, firstTimeClient: true, identityVerified: true });
-        } else if (su.email) {
-          // Signed up, no case yet → empty client dashboard + profile popup.
-          this.setState({ portal: 'client', route: 'dashboard', empty: true, identityVerified: !!su.profileComplete, profileModalOpen: !su.profileComplete });
-        }
-      } catch (e) {}
+      if (su.email && su.caseStarted) {
+        // Completed the new-case flow once → single representative case, minimal elsewhere.
+        this.setState({ portal: 'client', route: 'dashboard', empty: false, firstTimeClient: true, identityVerified: true });
+      } else if (su.email) {
+        // Signed up, no case yet → empty client dashboard.
+        this.setState({ portal: 'client', route: 'dashboard', empty: true, identityVerified: !!su.profileComplete });
+      }
     }
-    try {
-      const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}');
-      if (su.profileSkipped && !su.profileComplete) this.setState({ profileReminder: true });
-    } catch (e) {}
+
+    // Hydrate the onboarding working copy from any saved profile, once, on page load.
+    if (su.email) this.setState({ onb: this._restoreOnb(su) });
+
+    // Auto-open the "complete your profile" modal on EVERY client-dashboard landing while
+    // the profile is incomplete — regardless of how the dashboard was reached (signup
+    // redirect, #client hash, or a client who has already started a case).
+    const landsOnClientDashboard = (h === '' || h === 'client' || h === 'client-empty');
+    if (landsOnClientDashboard && su.email && !su.profileComplete) this.setState({ onbModalOpen: true });
+
+    // Persistent dashboard reminder banner once the modal has been skipped.
+    if (su.profileSkipped && !su.profileComplete) this.setState({ profileReminder: true });
   }
 
   gbp(n) { return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n); }
   fdate(iso) { return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+
+  /* ── Onboarding (complete-profile) modal: immutable state helpers ── */
+  _blankAddr() { return { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' }; }
+  _setOnb(patch) { this.setState(s => ({ onb: { ...s.onb, ...patch } })); }
+  _setAddr(i, patch) { this.setState(s => ({ onb: { ...s.onb, addresses: s.onb.addresses.map((a, j) => j === i ? { ...a, ...patch } : a) } })); }
+  _addAddr() { this.setState(s => ({ onb: { ...s.onb, addresses: [...s.onb.addresses, this._blankAddr()] } })); }
+  _removeAddr(i) { this.setState(s => ({ onb: { ...s.onb, addresses: s.onb.addresses.filter((_, j) => j !== i) } })); }
+  _restoreOnb(su) {
+    const def = this.state.onb;
+    if (!su || (!su.mobile && !(su.addresses && su.addresses.length))) return def;
+    let mobileCode = def.mobileCode, mobile = '';
+    if (su.mobile) { const m = String(su.mobile).match(/^(\+\d+)\s*([\s\S]*)$/); if (m) { mobileCode = m[1]; mobile = m[2]; } else { mobile = String(su.mobile); } }
+    const addresses = (su.addresses && su.addresses.length ? su.addresses : def.addresses).map(a => ({
+      mode: 'manual', query: '', picked: false,
+      line1: a.line1 || '', line2: a.line2 || '', city: a.city || '', region: a.region || '', postal: a.postal || '',
+      country: a.country || 'United Kingdom', years: a.years ? String(a.years) : '', months: a.months ? String(a.months) : ''
+    }));
+    return { ...def, mobileCode, mobile, addresses };
+  }
 
   renderVals() {
     const nav = (route) => () => this.setState({ route });
@@ -2348,11 +2592,9 @@ class Component extends DCLogic {
     );
     const partnerEmpty = isPartner && empty && PARTNER_EMPTY.includes(route);
     const adminEmpty = isAdmin && empty && ADMIN_EMPTY.includes(route);
-    // New-case entry point: gated behind Xama identity verification for the client portal.
-    const startNewCase = () => {
-      if (this.state.identityVerified) window.location.href = 'new-case.html';
-      else this.setState({ profileModalOpen: true, pendingNewCase: true });
-    };
+    // New-case entry point: go straight to the new-case flow (Xama identity verification
+    // happens later as its own step, not as a gate on starting a case).
+    const startNewCase = () => { window.location.href = 'new-case.html'; };
     const emptyCta = () => { if (ecfg.ctaKind === 'newcase') startNewCase(); else if (ecfg.ctaKind === 'psubmit') this.setState({ route: 'p-submit' }); };
 
     /* ═══════════ DASHBOARD WIDGETS (messages + documents) ═══════════ */
@@ -2362,6 +2604,155 @@ class Component extends DCLogic {
     const lastStaffMsg = [..._thread].reverse().find(m => m.staff) || _thread[_thread.length - 1];
     const docsActionCount = DOCS.filter(d => d.status === 'Action required').length;
     const docsTotal = DOCS.length;
+
+    /* ═══════════ ONBOARDING · "Complete your profile" modal (mobile + 3-year address history) ═══════════ */
+    const DIAL_CODES = [
+      { code: '+44', label: 'UK  +44' }, { code: '+353', label: 'IE  +353' }, { code: '+1', label: 'US  +1' },
+      { code: '+61', label: 'AU  +61' }, { code: '+64', label: 'NZ  +64' }, { code: '+91', label: 'IN  +91' },
+      { code: '+27', label: 'ZA  +27' }, { code: '+971', label: 'AE  +971' }, { code: '+65', label: 'SG  +65' },
+      { code: '+34', label: 'ES  +34' }, { code: '+33', label: 'FR  +33' }, { code: '+49', label: 'DE  +49' },
+      { code: '+39', label: 'IT  +39' }, { code: '+31', label: 'NL  +31' }, { code: '+351', label: 'PT  +351' }, { code: '+41', label: 'CH  +41' },
+    ];
+    const COUNTRIES = ['United Kingdom','Ireland','United States','Canada','Australia','New Zealand','India','South Africa','United Arab Emirates','Singapore','Hong Kong','Spain','France','Germany','Italy','Netherlands','Portugal','Switzerland','Sweden','Norway','Denmark','Belgium','Austria','Poland','Japan','Other'];
+    const ADDR_BOOK = [
+      { line1: '10 Downing Street', city: 'London', postal: 'SW1A 2AA' },
+      { line1: '221B Baker Street', city: 'London', postal: 'NW1 6XE' },
+      { line1: '14 Elm Grove', city: 'Bristol', postal: 'BS6 6RG' },
+      { line1: '1 Royal Crescent', city: 'Bath', postal: 'BA1 2LR' },
+      { line1: '29 Maple Court', city: 'Leeds', postal: 'LS8 2QN' },
+      { line1: '7 Kingsway', city: 'Rochdale', postal: 'OL16 4NG' },
+      { line1: '48 Deansgate', city: 'Manchester', postal: 'M3 2FN' },
+      { line1: '12 Hanover Street', city: 'Edinburgh', postal: 'EH2 2DL' },
+    ];
+    const REQ_MONTHS = 36;
+    const onb = this.state.onb;
+    const onbStep = onb.step || 1;
+    const onbTried = !!onb.tried;
+    let onbFirst = '';
+    try { onbFirst = (JSON.parse(localStorage.getItem('cgt-signup') || '{}').firstName) || ''; } catch (e) {}
+    const monthsOf = (a) => (parseInt(a.years, 10) || 0) * 12 + (parseInt(a.months, 10) || 0);
+    const fmtDur = (m) => { const y = Math.floor(m / 12), mo = m % 12; const parts = []; if (y) parts.push(y + ' yr'); if (mo) parts.push(mo + ' mo'); return parts.join(' ') || '0 mo'; };
+    const totalMonths = onb.addresses.reduce((s, a) => s + monthsOf(a), 0);
+    const enough = totalMonths >= REQ_MONTHS;
+    const remMonths = Math.max(0, REQ_MONTHS - totalMonths);
+    const addrHasLoc = (a) => a.picked || (!!a.line1.trim() && !!a.city.trim() && !!a.postal.trim() && !!a.country.trim());
+    const addrHasDur = (a) => monthsOf(a) > 0;
+    const mobileValid = onb.mobile.replace(/\D/g, '').length >= 7;
+    const allAddrOk = onb.addresses.every(a => addrHasLoc(a) && addrHasDur(a));
+    const formValid = mobileValid && allAddrOk && enough;
+    const yearsOpts = Array.from({ length: 16 }, (_, n) => ({ value: String(n), label: n === 15 ? '15+' : String(n) }));
+    const monthsOpts = Array.from({ length: 12 }, (_, n) => ({ value: String(n), label: String(n) }));
+    const countryOpts = COUNTRIES.map(c => ({ value: c, label: c }));
+
+    const onbAddresses = onb.addresses.map((a, i) => {
+      const isCurrent = i === 0;
+      const isIntl = a.mode === 'intl';
+      const showManual = a.mode === 'manual' || a.mode === 'intl';
+      const q = a.query.trim().toLowerCase();
+      const matches = (a.mode === 'search' && !a.picked && q.length >= 2)
+        ? ADDR_BOOK.filter(s => (s.line1 + ' ' + s.city + ' ' + s.postal).toLowerCase().includes(q)).slice(0, 5) : [];
+      const suggestions = matches.map(s => ({
+        line1: s.line1, meta: s.city + ', ' + s.postal,
+        onPick: () => this._setAddr(i, { picked: true, mode: 'search', line1: s.line1, city: s.city, postal: s.postal, region: '', country: 'United Kingdom', line2: '', query: s.line1 + ', ' + s.city + ', ' + s.postal }),
+      }));
+      const missingLoc = onbTried && !addrHasLoc(a);
+      const missingDur = onbTried && !addrHasDur(a);
+      return {
+        stepBadge: isCurrent ? 'Now' : ('−' + i),
+        heading: isCurrent ? 'Current home address' : ('Previous address ' + i),
+        subheading: isCurrent ? 'Where you live now' : 'Where you lived before',
+        showRemove: !isCurrent, onRemove: () => this._removeAddr(i),
+        showSearchInput: a.mode === 'search' && !a.picked,
+        showPicked: a.mode === 'search' && a.picked,
+        showManual, isIntl,
+        query: a.query, onQuery: (e) => this._setAddr(i, { query: e.target.value, picked: false }),
+        suggestions, showSug: suggestions.length > 0,
+        onManual: () => this._setAddr(i, { mode: 'manual', picked: false }),
+        onIntl: () => this._setAddr(i, { mode: 'intl', picked: false, country: '' }),
+        onSearchBack: () => this._setAddr(i, { mode: 'search' }),
+        onEditPicked: () => this._setAddr(i, { mode: 'manual', picked: false }),
+        pickedLine1: a.line1, pickedMeta: a.city + (a.postal ? ', ' + a.postal : ''),
+        line1: a.line1, line2: a.line2, city: a.city, region: a.region, postal: a.postal, country: a.country,
+        onLine1: (e) => this._setAddr(i, { line1: e.target.value }), onLine2: (e) => this._setAddr(i, { line2: e.target.value }),
+        onCity: (e) => this._setAddr(i, { city: e.target.value }), onRegion: (e) => this._setAddr(i, { region: e.target.value }),
+        onPostal: (e) => this._setAddr(i, { postal: e.target.value }), onCountry: (e) => this._setAddr(i, { country: e.target.value }),
+        countries: countryOpts,
+        years: a.years, months: a.months, yearsOpts, monthsOpts,
+        onYears: (e) => this._setAddr(i, { years: e.target.value }), onMonths: (e) => this._setAddr(i, { months: e.target.value }),
+        locErrStyle: 'display:' + (missingLoc ? 'block' : 'none') + ';font-size:12px;color:var(--er-tx);margin-top:8px;',
+        durErrStyle: 'display:' + (missingDur ? 'block' : 'none') + ';font-size:12px;color:var(--er-tx);margin-top:8px;',
+        cardStyle: 'border:1px solid ' + ((missingLoc || missingDur) ? 'var(--er-tx)' : 'var(--border)') + ';border-radius:14px;padding:16px;background:var(--surface-2);',
+      };
+    });
+
+    const onbPct = Math.min(100, Math.round(totalMonths / REQ_MONTHS * 100));
+    // Footer error text is step-scoped (Feedforward): step 2 surfaces address issues;
+    // the mobile error shows inline under its field on step 1.
+    let onbErrText = '';
+    if (onbTried && onbStep === 2 && !(allAddrOk && enough)) {
+      if (!allAddrOk) onbErrText = 'Please complete every address and how long you lived there.';
+      else if (!enough) onbErrText = 'We need at least 3 years of address history — add a previous address.';
+    }
+    // Step 1 → 2: only the mobile number gates the move (Progressive Disclosure).
+    const onbContinue = () => {
+      if (!mobileValid) { this._setOnb({ tried: true }); return; }
+      this._setOnb({ step: 2, tried: false });
+    };
+    const onbBack = () => this._setOnb({ step: 1, tried: false });
+    const onbSave = () => {
+      if (!(allAddrOk && enough)) { this._setOnb({ tried: true }); return; }
+      try {
+        const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}');
+        su.profileComplete = true; su.profileSkipped = false;
+        su.mobile = onb.mobileCode + ' ' + onb.mobile.trim();
+        su.addresses = onb.addresses.map(a => ({ line1: a.line1, line2: a.line2, city: a.city, region: a.region, postal: a.postal, country: a.country, years: parseInt(a.years, 10) || 0, months: parseInt(a.months, 10) || 0 }));
+        localStorage.setItem('cgt-signup', JSON.stringify(su));
+      } catch (e) {}
+      // Peak-End Rule: land on a success screen rather than closing abruptly.
+      this.setState(s => ({ onb: { ...s.onb, step: 3, tried: false }, profileReminder: false }));
+    };
+    const onbFinish = () => this.setState({ onbModalOpen: false });
+    const openOnb = () => this.setState(s => ({ onbModalOpen: true, profileReminder: false, onb: { ...s.onb, step: 1, tried: false } }));
+    const onbSkip = () => {
+      try { const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}'); su.profileSkipped = true; localStorage.setItem('cgt-signup', JSON.stringify(su)); } catch (e) {}
+      this.setState({ onbModalOpen: false, profileReminder: true });
+    };
+
+    /* ═══════════ PROFILE PAGE · saved contact + address history (mirrors the onboarding modal) ═══════════ */
+    let suData = {};
+    try { suData = JSON.parse(localStorage.getItem('cgt-signup') || '{}'); } catch (e) { suData = {}; }
+    const profileName = ((suData.firstName || '') + ' ' + (suData.lastName || '')).trim() || 'James Whitfield';
+    const profileEmail = suData.email || 'james.whitfield@email.com';
+    const profileMobileVal = suData.mobile || '';
+    const savedAddrs = Array.isArray(suData.addresses) ? suData.addresses : [];
+    const profTotalMonths = savedAddrs.reduce((s, a) => s + ((parseInt(a.years, 10) || 0) * 12 + (parseInt(a.months, 10) || 0)), 0);
+    const profileComplete = !!suData.profileComplete;
+    const profileAddresses = savedAddrs.map((a, i) => ({
+      badge: i === 0 ? 'Now' : ('−' + i),
+      heading: i === 0 ? 'Current home address' : ('Previous address ' + i),
+      line: [a.line1, a.line2, a.city, a.region, a.postal, a.country].filter(Boolean).join(', '),
+      durLabel: fmtDur((parseInt(a.years, 10) || 0) * 12 + (parseInt(a.months, 10) || 0)),
+    }));
+
+    // Profile-completion tracker (Goal-Gradient Effect + Zeigarnik: show what's left).
+    const idVerified = !!this.state.identityVerified;
+    const profItemsRaw = [
+      { label: 'Contact details', icon: 'ti ti-phone', done: !!profileMobileVal, doneText: 'Mobile number added', toText: 'Add your mobile number', act: openOnb, actLabel: 'Add' },
+      { label: 'Address history', icon: 'ti ti-map-pin', done: profTotalMonths >= 36, doneText: 'Last 3 years covered', toText: 'Add your last 3 years', act: openOnb, actLabel: 'Add' },
+      // Identity verification is powered by Xama — the Xama card is merged into this row (logo shown here).
+      { label: 'Identity verification', icon: 'ti ti-id', logo: 'xama-logo.png', done: idVerified, doneText: 'Verified with Xama', toText: 'Verify your identity with Xama · required before we can file', act: () => window.open('https://www.xamatech.com', '_blank', 'noopener'), actLabel: 'Verify' },
+    ];
+    const profDoneCount = profItemsRaw.filter(i => i.done).length;
+    const profPct = Math.round(profDoneCount / profItemsRaw.length * 100);
+    const profChecklist = profItemsRaw.map(i => ({
+      label: i.label,
+      statusText: i.done ? i.doneText : i.toText,
+      done: i.done, showAction: !i.done, actionLabel: i.actLabel, onAction: i.act,
+      hasLogo: !!i.logo && !i.done, logo: i.logo || '',
+      iconWrapStyle: 'display:flex;width:32px;height:32px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9px;' + (i.done ? 'background:var(--su-bg);color:var(--su-tx);' : 'background:var(--surface);border:1px solid var(--border-2);color:var(--tx-3);'),
+      icon: i.done ? 'ti ti-check' : i.icon,
+      rowStyle: 'display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid ' + (i.done ? 'var(--border)' : 'var(--border-2)') + ';border-radius:12px;background:' + (i.done ? 'var(--surface-2)' : 'var(--surface)') + ';',
+    }));
 
     return {
       isDashboard: route === 'dashboard' && !clientEmpty, isCases: route === 'cases' && !clientEmpty, isDocuments: route === 'documents' && !clientEmpty,
@@ -2421,6 +2812,55 @@ class Component extends DCLogic {
         this.setState({ profileModalOpen: false, identityVerified: true, profileReminder: false, pendingNewCase: false });
         if (proceed) window.location.href = 'new-case.html';
       },
+      // ── Onboarding "Complete your profile" modal (mobile + 3-year address history) ──
+      onbModalOpen: this.state.onbModalOpen,
+      onbOverlayStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.55);backdrop-filter:blur(3px);z-index:140;display:' + (this.state.onbModalOpen ? 'flex' : 'none') + ';align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;',
+      openOnbModal: openOnb,
+      onbSkip, onbSave, onbContinue, onbBack, onbFinish,
+      // Wizard step model (Progressive Disclosure + Goal-Gradient stepper)
+      onbStep1: onbStep === 1, onbStep2: onbStep === 2, onbStep3: onbStep === 3,
+      onbShowStepper: onbStep === 1 || onbStep === 2,
+      onbStepNumLabel: 'Step ' + Math.min(onbStep, 2) + ' of 2',
+      onbSeg1Style: 'flex:1;height:4px;border-radius:9999px;background:var(--navy);',
+      onbSeg2Style: 'flex:1;height:4px;border-radius:9999px;background:' + (onbStep >= 2 ? 'var(--navy)' : 'var(--track)') + ';',
+      onbKicker: onbStep === 3 ? 'All done' : ('Welcome aboard' + (onbFirst ? ', ' + onbFirst : '')),
+      onbTitle: onbStep === 1 ? "Let's set up your profile" : (onbStep === 2 ? 'Your address history' : "You're all set" + (onbFirst ? ', ' + onbFirst : '') + '!'),
+      onbDesc: onbStep === 1
+        ? 'Two quick steps so our tax team can verify your details and file your return correctly. Takes about two minutes.'
+        : (onbStep === 2 ? 'Where have you lived recently? This is the last step.' : 'Thanks — your profile is complete. Our tax team can now prepare and file your Capital Gains Tax return.'),
+      onbCloseAria: onbStep === 3 ? 'Close' : 'Skip for now and close',
+      onbHeaderClose: onbStep === 3 ? onbFinish : onbSkip,
+      onbMobileCode: onb.mobileCode, onbSetMobileCode: (e) => this._setOnb({ mobileCode: e.target.value }),
+      onbMobile: onb.mobile, onbSetMobile: (e) => this._setOnb({ mobile: e.target.value.replace(/[^0-9 +]/g, '') }),
+      onbDialCodes: DIAL_CODES.map(d => ({ value: d.code, label: d.label })),
+      onbMobileErrStyle: 'display:' + ((onbTried && !mobileValid) ? 'block' : 'none') + ';font-size:12px;color:var(--er-tx);margin-top:6px;',
+      onbAddresses,
+      onbTotalLabel: fmtDur(totalMonths), onbReqLabel: '3 years',
+      onbProgressFillStyle: 'height:100%;border-radius:9999px;transition:width .3s ease;width:' + onbPct + '%;background:' + (enough ? '#43a047' : 'var(--navy)') + ';',
+      onbEnoughBadgeStyle: 'display:' + (enough ? 'inline-flex' : 'none') + ';align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--su-tx);background:var(--su-bg);border-radius:9999px;padding:2px 9px;',
+      onbNeedMoreStyle: 'display:' + (enough ? 'none' : 'flex') + ';align-items:flex-start;gap:8px;background:var(--wa-bg);color:var(--wa-tx);border-radius:10px;padding:10px 12px;margin-top:14px;',
+      onbNeedMoreLabel: 'Add previous addresses until you reach 3 years — about ' + fmtDur(remMonths) + ' still to cover.',
+      onbAddPrev: () => this._addAddr(),
+      onbErrStyle: 'display:' + ((onbTried && onbErrText) ? 'flex' : 'none') + ';align-items:center;gap:6px;font-size:13px;color:var(--er-tx);margin-bottom:10px;',
+      onbErrText,
+      // ── Profile page · saved contact details + address history ──
+      profileName, profileEmail,
+      profileMobile: profileMobileVal || 'Not provided yet',
+      profileMobileStyle: 'font-size:15px;color:' + (profileMobileVal ? 'var(--tx)' : 'var(--tx-3)') + ';',
+      profileComplete,
+      profileStatusStyle: 'display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:9999px;' + (profileComplete ? 'background:var(--su-bg);color:var(--su-tx);' : 'background:var(--wa-bg);color:var(--wa-tx);'),
+      profileStatusDot: 'width:7px;height:7px;border-radius:9999px;background:' + (profileComplete ? 'var(--su-tx)' : 'var(--wa-tx)') + ';',
+      profileStatusLabel: profileComplete ? 'Complete' : 'Incomplete',
+      profileEditLabel: profileComplete ? 'Edit contact & address' : 'Complete your profile',
+      profileAddresses,
+      profileHasAddresses: profileAddresses.length > 0,
+      profileHistoryStyle: 'display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:9999px;' + (profTotalMonths >= 36 ? 'background:var(--su-bg);color:var(--su-tx);' : 'background:var(--wa-bg);color:var(--wa-tx);'),
+      profileHistoryLabel: profTotalMonths >= 36 ? '3+ years covered' : (fmtDur(profTotalMonths) + ' of 3 years'),
+      // Profile-completion tracker section
+      profChecklist,
+      profPctLabel: profPct + '%',
+      profDoneSummary: profDoneCount + ' of ' + profItemsRaw.length + ' complete',
+      profProgressStyle: 'height:100%;border-radius:9999px;transition:width .3s ease;width:' + profPct + '%;background:' + (profPct === 100 ? '#43a047' : 'var(--navy)') + ';',
       confirmApprove: () => this.setState({ approveOpen: false, draftApproved: true }),
       complianceAdded: this.state.complianceAdded,
       toggleCompliance: () => this.setState(s => ({ complianceAdded: !s.complianceAdded })),
