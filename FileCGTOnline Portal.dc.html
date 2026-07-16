@@ -177,7 +177,7 @@
     <header style="position:sticky;top:0;z-index:35;display:flex;align-items:center;justify-content:flex-end;gap:10px;height:60px;padding:0 clamp(16px,3vw,28px);border-bottom:1px solid var(--border);background:var(--surface-blur);backdrop-filter:blur(8px);">
       <!-- notification bell + dropdown -->
       <div style="position:relative;">
-        <button onClick="{{ toggleNotif }}" style="position:relative;display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface);cursor:pointer;" style-hover="background:var(--surface-2);">
+        <button onClick="{{ toggleNotif }}" style="position:relative;display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:12px;border:none;background:var(--surface);cursor:pointer;" style-hover="background:var(--surface-2);">
           <i class="ti ti-bell" style="font-size:20px;color:var(--tx-2b);"></i>
           <sc-if value="{{ notifBadgeShow }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#f44336;color:#fff;font-size:11px;font-weight:600;padding:0 5px;border:2px solid var(--surface);">{{ notifCount }}</span></sc-if>
         </button>
@@ -210,7 +210,7 @@
 
       <!-- profile + chevron + dropdown -->
       <div style="position:relative;">
-        <button onClick="{{ toggleProfileMenu }}" style="display:flex;align-items:center;gap:9px;border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:5px 10px 5px 6px;cursor:pointer;font-family:'Jost',sans-serif;text-align:left;" style-hover="background:var(--surface-2);">
+        <button onClick="{{ toggleProfileMenu }}" style="display:flex;align-items:center;gap:9px;border:none;background:var(--surface);border-radius:12px;padding:5px 10px 5px 6px;cursor:pointer;font-family:'Jost',sans-serif;text-align:left;" style-hover="background:var(--surface-2);">
           <span style="display:flex;width:32px;height:32px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:#adee68;color:#0a1120;font-size:12px;font-weight:600;">JW</span>
           <span data-role="hide-mobile" style="min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;color:var(--tx);line-height:1.2;white-space:nowrap;">James Whitfield</span><span style="display:block;font-size:11.5px;color:var(--tx-2);line-height:1.2;">Client</span></span>
           <i class="ti ti-chevron-down" style="color:var(--tx-3);font-size:17px;flex-shrink:0;"></i>
@@ -228,11 +228,11 @@
       </div>
     </header>
 
-    <main style="padding:24px 16px 16px;max-width:1200px;margin:0 auto;">
+    <main style="padding:16px;">
 
       <!-- ══ DASHBOARD ══ -->
       <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
-        <div style="max-width:920px;margin:0 auto;">
+        <div>
           <!-- ── Complete-profile notification ── -->
           <div style="{{ profileBannerStyle }}">
             <span style="display:flex;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--wa-bg);color:var(--wa-tx);"><i class="ti ti-user-exclamation" style="font-size:20px;"></i></span>
