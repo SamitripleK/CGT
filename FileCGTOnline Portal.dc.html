@@ -383,19 +383,16 @@
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
               <div style="display:flex;align-items:flex-start;gap:14px;min-width:0;">
-                <div style="display:flex;width:48px;height:48px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--surface);"><i class="{{ detailIcon }}" style="color:var(--tx);font-size:24px;"></i></div>
+                <div style="display:flex;width:48px;height:48px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:var(--surface-2);"><i class="{{ detailIcon }}" style="color:var(--tx);font-size:24px;"></i></div>
                 <div style="min-width:0;">
                   <h1 style="font-size:24px;line-height:30px;font-weight:700;color:var(--tx);">{{ detailTitle }}</h1>
                   <p style="font-size:14px;color:var(--tx-2);margin-top:3px;">{{ detailStage }}</p>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <span style="{{ detailRagStyle }}"><span style="{{ detailRagDot }}"></span>{{ detailRagLabel }}</span>
-                <span style="{{ detailDeadlineStyle }}"><i class="{{ detailDeadlineIcon }}" style="font-size:13px;"></i> {{ detailDeadlineLabel }}</span>
-              </div>
+              <span style="{{ detailDeadlineStyle }}"><i class="{{ detailDeadlineIcon }}" style="font-size:13px;"></i> {{ detailDeadlineLabel }}</span>
             </div>
-            <!-- progress -->
-            <div style="margin-top:12px;">
+            <!-- step progress -->
+            <div style="margin-top:20px;">
               <div style="{{ detailProgressTrackStyle }}"><div style="{{ detailProgressFillStyle }}"></div></div>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
                 <span style="font-size:13px;color:var(--tx-2);">{{ detailStepText }}</span>
@@ -403,24 +400,34 @@
               </div>
             </div>
             <!-- meta row -->
-            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;padding-top:20px;border-top:1px solid var(--border-3);">
-              <div><p style="font-size:12px;color:var(--tx-3);">Provisional estimate</p><p style="font-size:17px;font-weight:600;color:var(--tx);margin-top:2px;">{{ detailEstimate }}</p></div>
-              <div><p style="font-size:12px;color:var(--tx-3);">Current step</p><p style="font-size:15px;font-weight:500;color:var(--tx);margin-top:4px;">{{ detailCurrentTitle }}</p></div>
-              <div style="display:flex;align-items:flex-end;"><p style="font-size:12px;color:var(--tx-3);display:flex;align-items:center;gap:6px;"><i class="ti ti-calendar-event" style="font-size:14px;"></i> {{ detailDeadlineDate }}</p></div>
+            <div style="display:flex;flex-wrap:wrap;gap:28px;margin-top:16px;padding-top:18px;border-top:1px solid var(--border-3);">
+              <div style="max-width:280px;"><p style="font-size:12px;color:var(--tx-3);">{{ detailEstimateLabel }}</p><p style="font-size:19px;font-weight:700;color:var(--tx);margin-top:2px;">{{ detailEstimate }}</p><p style="font-size:11.5px;color:var(--tx-3);margin-top:3px;line-height:1.4;">{{ detailEstimateNote }}</p></div>
+              <div><p style="font-size:12px;color:var(--tx-3);">HMRC filing deadline</p><p style="font-size:15px;font-weight:600;color:var(--tx);margin-top:4px;display:flex;align-items:center;gap:6px;"><i class="ti ti-calendar-event" style="font-size:14px;color:var(--tx-2);"></i> {{ detailDeadlineOnly }}</p></div>
             </div>
-            <sc-if value="{{ detailCtaShow }}" hint-placeholder-val="{{ true }}">
-              <button onClick="{{ detailOnCta }}" style="margin-top:12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">{{ detailCtaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
-            </sc-if>
           </div>
 
-          <!-- quick actions -->
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
-            <button onClick="{{ goUpload }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-upload" style="font-size:15px;color:var(--tx-2);"></i> Upload documents</button>
-            <button onClick="{{ goVerify }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-shield-check" style="font-size:15px;color:var(--tx-2);"></i> Verify identity</button>
-            <button onClick="{{ goHmrc }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-building-bank" style="font-size:15px;color:var(--tx-2);"></i> HMRC authorisation</button>
-            <button onClick="{{ goDraft }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-file-check" style="font-size:15px;color:var(--tx-2);"></i> Review draft</button>
-            <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:13px;font-weight:500;padding:9px 14px;border-radius:9999px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-message" style="font-size:15px;color:var(--tx-2);"></i> Message team</button>
+          <!-- case tabs: everything for this case, managed in one place -->
+          <div style="display:flex;gap:2px;margin-top:16px;border-bottom:1px solid var(--border);overflow-x:auto;">
+            <sc-for list="{{ caseTabs }}" as="t" hint-placeholder-count="6">
+              <button onClick="{{ t.onClick }}" style="{{ t.style }}"><i class="{{ t.icon }}" style="font-size:16px;"></i> {{ t.label }}</button>
+            </sc-for>
           </div>
+
+          <!-- ── OVERVIEW TAB ── -->
+          <sc-if value="{{ ctOverview }}" hint-placeholder-val="{{ true }}">
+
+          <!-- next step: the single clear action -->
+          <sc-if value="{{ detailNextShow }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ detailNextCardStyle }}">
+              <span style="{{ detailNextIconWrapStyle }}"><i class="{{ detailNextIcon }}" style="font-size:22px;"></i></span>
+              <div style="flex:1;min-width:220px;">
+                <p style="{{ detailNextEyebrowStyle }}">{{ detailNextEyebrow }}</p>
+                <p style="font-size:16px;font-weight:600;color:var(--tx);margin-top:3px;">{{ detailNextTitle }}</p>
+                <p style="font-size:13.5px;color:var(--tx-2);line-height:1.55;margin-top:4px;">{{ detailNextDesc }}</p>
+              </div>
+              <button onClick="{{ detailOnCta }}" style="align-self:center;display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:12px 20px;border:none;border-radius:12px;cursor:pointer;white-space:nowrap;" style-hover="background:#9ce04f;">{{ detailCtaLabel }} <i class="ti ti-arrow-right" style="font-size:15px;"></i></button>
+            </div>
+          </sc-if>
 
           <!-- important dates + assigned team -->
           <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;align-items:start;">
@@ -445,7 +452,8 @@
 
           <!-- journey timeline -->
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--sh-sm);margin-top:12px;">
-            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:12px;">Case journey</h2>
+            <h2 style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:2px;">Full step-by-step progress</h2>
+            <p style="font-size:13px;color:var(--tx-2);margin-bottom:14px;">Every step in your case. We handle the ones marked for our team, you only act on the steps flagged for you.</p>
             <div style="display:flex;flex-direction:column;">
               <sc-for list="{{ detailSteps }}" as="s" hint-placeholder-count="10">
                 <div style="display:flex;gap:14px;">
@@ -474,14 +482,13 @@
               </sc-for>
             </div>
           </div>
+          </sc-if>
         </div>
       </sc-if>
 
-      <!-- ══ DOCUMENT UPLOAD CENTRE ══ -->
+      <!-- ══ DOCUMENTS TAB (upload centre) ══ -->
       <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
         <div>
-          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
-          <div style="margin-bottom:8px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Upload documents</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Add your files by category. On mobile you can snap a photo straight from your camera.</p></div>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--in-bg);border:1px solid var(--in-bd);border-radius:12px;padding:12px 16px;margin:16px 0 20px;">
             <i class="ti ti-info-circle" style="color:var(--in-tx);font-size:18px;"></i>
             <p style="font-size:13px;color:var(--in-tx);flex:1;min-width:200px;">Accepted formats: PDF, JPG, PNG, DOCX · Maximum 25MB per file. Your documents are encrypted and only seen by your tax team.</p>
@@ -522,8 +529,6 @@
       <!-- ══ AML / IDENTITY VERIFICATION ══ -->
       <sc-if value="{{ isVerify }}" hint-placeholder-val="{{ false }}">
         <div>
-          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
-          <div style="margin-bottom:12px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Identity verification</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">A quick, secure check we're legally required to complete before filing.</p></div>
           <div style="display:flex;align-items:center;gap:12px;background:var(--wa-bg);border:1px solid var(--wa-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;">
             <i class="ti ti-clock" style="color:var(--wa-tx);font-size:22px;"></i>
             <div style="flex:1;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Verification in progress</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">One item still needs your attention, see the checklist below.</p></div>
@@ -548,8 +553,6 @@
       <!-- ══ HMRC AGENT AUTHORISATION ══ -->
       <sc-if value="{{ isHmrc }}" hint-placeholder-val="{{ false }}">
         <div>
-          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
-          <div style="margin-bottom:12px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Authorise us with HMRC</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">This lets us submit your return to HMRC on your behalf. We'll guide you through every click.</p></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
             <div style="flex:1;min-width:220px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;"><i class="ti ti-photo" style="font-size:30px;color:var(--tx-3);"></i><p style="font-size:13px;color:var(--tx-2);margin-top:8px;">Step-by-step screenshots</p></div>
             <div style="flex:1;min-width:220px;background:var(--navy);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;cursor:pointer;"><i class="ti ti-player-play" style="font-size:34px;color:#c8ec96;"></i><p style="font-size:13px;color:#fff;margin-top:8px;">Watch the 2-minute video guide</p></div>
@@ -569,7 +572,7 @@
           <div style="display:flex;align-items:center;gap:12px;background:var(--su-bg);border-radius:16px;padding:20px;flex-wrap:wrap;">
             <i class="ti ti-headset" style="color:var(--su-tx);font-size:24px;"></i>
             <div style="flex:1;min-width:200px;"><p style="font-size:15px;font-weight:600;color:var(--tx);">Stuck? We'll do it with you</p><p style="font-size:13px;color:var(--tx-2);margin-top:2px;">Book a free 10-minute call and we'll walk you through it live.</p></div>
-            <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:11px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-calendar" style="font-size:15px;"></i> Book a help call</button>
+            <button onClick="{{ goCaseMessages }}" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:11px 20px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-calendar" style="font-size:15px;"></i> Book a help call</button>
           </div>
         </div>
       </sc-if>
@@ -577,8 +580,6 @@
       <!-- ══ DRAFT CGT REVIEW & APPROVAL ══ -->
       <sc-if value="{{ isDraft }}" hint-placeholder-val="{{ false }}">
         <div>
-          <a onClick="{{ backToCase }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--tx-2);cursor:pointer;margin-bottom:12px;" style-hover="color:var(--tx);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back to case</a>
-
           <sc-if value="{{ draftApproved }}" hint-placeholder-val="{{ false }}">
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 28px;text-align:center;box-shadow:var(--sh-sm);">
               <div style="display:inline-flex;width:64px;height:64px;align-items:center;justify-content:center;border-radius:9999px;background:var(--su-bg);color:var(--su-tx);margin-bottom:12px;"><i class="ti ti-circle-check" style="font-size:34px;"></i></div>
@@ -637,7 +638,7 @@
             <!-- actions -->
             <div style="position:sticky;bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--sh-lg);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <p style="flex:1;min-width:160px;font-size:13px;color:var(--tx-2);">Happy with your draft? Approving lets us file it with HMRC.</p>
-              <button onClick="{{ goMessages }}" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:11px 18px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-message-circle-question" style="font-size:15px;"></i> Raise a query</button>
+              <button onClick="{{ goCaseMessages }}" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:11px 18px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);"><i class="ti ti-message-circle-question" style="font-size:15px;"></i> Raise a query</button>
               <button onClick="{{ openApprove }}" style="display:inline-flex;align-items:center;gap:6px;background:#adee68;color:#0a1120;font-size:14px;font-weight:600;padding:11px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:#9ce04f;">Approve draft <i class="ti ti-check" style="font-size:15px;"></i></button>
             </div>
           </div>
@@ -1069,7 +1070,7 @@
         <sc-if value="{{ onbStep1 }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;align-items:flex-start;gap:10px;background:var(--in-bg);border:1px solid var(--in-bd);border-radius:12px;padding:12px 14px;margin-bottom:20px;">
             <i class="ti ti-phone-check" style="font-size:18px;color:var(--in-tx);flex-shrink:0;margin-top:1px;"></i>
-            <p style="font-size:13px;line-height:1.55;color:var(--in-tx);"><b>Why we ask:</b> we'll only use your number to update you about your case and reach you quickly if HMRC has a deadline — never for marketing.</p>
+            <p style="font-size:13px;line-height:1.55;color:var(--in-tx);"><b>Why we ask:</b> we'll only use your number to update you about your case and reach you quickly if HMRC has a deadline, never for marketing.</p>
           </div>
           <div>
             <label class="onb-label" for="onb-mobile">Mobile number</label>
@@ -1417,13 +1418,43 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
-        <a onClick="{{ goPReferrals }}" style="position:relative;padding:8px;border-radius:9999px;cursor:pointer;"><i class="ti ti-bell" style="color:var(--tx-2b);font-size:20px;"></i><span style="position:absolute;right:6px;top:6px;width:8px;height:8px;border-radius:9999px;background:#f44336;"></span></a>
+        <div style="position:relative;">
+          <button onClick="{{ toggleNotif }}" style="position:relative;display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:12px;border:none;background:var(--surface);cursor:pointer;" style-hover="background:var(--surface-2);">
+            <i class="ti ti-bell" style="font-size:20px;color:var(--tx-2b);"></i>
+            <sc-if value="{{ notifBadgeShow }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#f44336;color:#fff;font-size:11px;font-weight:600;padding:0 5px;border:2px solid var(--surface);">{{ notifCount }}</span></sc-if>
+          </button>
+          <div style="{{ notifMenuStyle }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px 8px;">
+              <p style="font-size:14px;font-weight:600;color:var(--tx);">Notifications</p>
+              <sc-if value="{{ notifBadgeShow }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;font-weight:500;color:var(--link);">{{ notifCount }} new</span></sc-if>
+            </div>
+            <div style="height:1px;background:var(--border);margin:0 4px 4px;"></div>
+            <sc-if value="{{ notifHasItems }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ notifs }}" as="n" hint-placeholder-count="3">
+                <a onClick="{{ n.onClick }}" style="display:flex;gap:10px;padding:10px;border-radius:10px;cursor:pointer;text-decoration:none;" style-hover="background:var(--surface-2);">
+                  <span style="display:flex;width:34px;height:34px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9px;background:{{ n.iconBg }};"><i class="{{ n.icon }}" style="font-size:17px;color:{{ n.iconColor }};"></i></span>
+                  <span style="flex:1;min-width:0;">
+                    <span style="display:block;font-size:13.5px;font-weight:600;color:var(--tx);line-height:1.3;">{{ n.title }}</span>
+                    <span style="display:block;font-size:12.5px;color:var(--tx-2);line-height:1.45;margin-top:1px;">{{ n.desc }}</span>
+                    <span style="display:block;font-size:11.5px;color:var(--tx-3);margin-top:3px;">{{ n.time }}</span>
+                  </span>
+                </a>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ notifEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:26px 16px;text-align:center;">
+                <span style="display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:12px;background:var(--surface);"><i class="ti ti-bell-check" style="font-size:22px;color:var(--tx-2b);"></i></span>
+                <p style="font-size:13px;color:var(--tx-2);margin-top:10px;">You're all caught up.</p>
+              </div>
+            </sc-if>
+          </div>
+        </div>
         <span style="display:flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:9999px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;">EB</span>
         <span data-role="hide-mobile" style="font-size:14px;color:var(--tx);">Eleanor Briggs</span>
       </div>
     </header>
 
-    <main style="padding:16px;max-width:1200px;margin:0 auto;">
+    <main style="padding:16px;max-width:1400px;margin:0 auto;">
       <!-- PARTNER DASHBOARD -->
       <sc-if value="{{ isPDash }}" hint-placeholder-val="{{ true }}">
         <div>
@@ -1494,11 +1525,14 @@
         </div>
       </sc-if>
 
-      <!-- PARTNER SUBMIT -->
-      <sc-if value="{{ isPSubmit }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:720px;">
-          <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Submit a referral</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Tell us who to help. We'll invite them and keep you updated on progress.</p></div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
+      <!-- PARTNER · SUBMIT REFERRAL MODAL -->
+      <div style="{{ pSubmitOverlayStyle }}">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:560px;width:100%;box-shadow:var(--sh-2xl);max-height:calc(100vh - 48px);display:flex;flex-direction:column;overflow:hidden;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 4px;">
+            <div><h3 style="font-size:20px;font-weight:600;color:var(--tx);">Submit a referral</h3><p style="font-size:14px;color:var(--tx-2);margin-top:4px;">Tell us who to help. We'll invite them and keep you updated on progress.</p></div>
+            <button onClick="{{ closePSubmit }}" aria-label="Close" style="background:none;border:none;cursor:pointer;color:var(--tx-2);font-size:20px;padding:4px;line-height:1;flex-shrink:0;" style-hover="color:var(--tx);"><i class="ti ti-x"></i></button>
+          </div>
+          <div style="padding:16px 24px 24px;overflow-y:auto;">
             <div data-role="col2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
               <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">First name</label><input placeholder="Jane" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;outline:none;" /></div>
               <div><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Last name</label><input placeholder="Doe" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:11px 14px;font-size:14px;outline:none;" /></div>
@@ -1515,14 +1549,17 @@
             </div>
             <div style="margin-top:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Notes for our team (optional)</label><textarea rows="3" placeholder="Anything that will help us support this client…" style="width:100%;resize:none;border:1px solid var(--border-2);border-radius:12px;padding:12px;font-size:14px;outline:none;"></textarea></div>
             <div style="display:flex;gap:12px;border-radius:12px;border:1px solid #e4f5c7;background:var(--su-bg);padding:14px;margin-top:16px;"><i class="ti ti-lock" style="color:var(--link);font-size:18px;flex-shrink:0;"></i><p style="font-size:13px;color:var(--link);line-height:1.6;">We may receive a referral fee, which won't affect the price your client pays. You'll only ever see referral progress, never their financial details.</p></div>
-            <button style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:500;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);">Submit referral</button>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <button onClick="{{ closePSubmit }}" style="background:var(--surface);border:1px solid var(--border);color:var(--tx);font-size:14px;font-weight:500;padding:12px 20px;border-radius:12px;cursor:pointer;" style-hover="background:var(--surface-2);">Cancel</button>
+              <button onClick="{{ closePSubmit }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:500;padding:12px 22px;border:none;border-radius:12px;cursor:pointer;" style-hover="background:var(--navy-hover);"><i class="ti ti-send" style="font-size:16px;"></i> Submit referral</button>
+            </div>
           </div>
         </div>
-      </sc-if>
+      </div>
 
       <!-- PARTNER MESSAGES -->
       <sc-if value="{{ isPMessages }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:820px;">
+        <div>
           <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Messages</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Updates from the FileCGTOnline team about your referrals.</p></div>
           <div style="display:flex;flex-direction:column;gap:14px;">
             <sc-for list="{{ partnerMsgs }}" as="m" hint-placeholder-count="2">
@@ -1558,7 +1595,7 @@
 
       <!-- PARTNER COMMISSION -->
       <sc-if value="{{ isPCommission }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:760px;">
+        <div>
           <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Commission</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Track referral fees and payouts.</p></div>
           <div style="background:var(--navy);border-radius:16px;padding:32px;text-align:center;">
             <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(131,195,65,0.16);color:#c8ec96;font-size:12px;font-weight:600;padding:6px 14px;border-radius:9999px;">Phase 2</span>
@@ -1570,7 +1607,7 @@
 
       <!-- PARTNER ACCOUNT -->
       <sc-if value="{{ isPAccount }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:720px;">
+        <div>
           <div style="margin-bottom:24px;"><h1 style="font-size:28px;line-height:34px;font-weight:600;">Account</h1><p style="font-size:15px;color:var(--tx-2);margin-top:4px;">Your firm details and referral settings.</p></div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;">
             <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Firm details</h3>
@@ -1962,7 +1999,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, profileReminder: false, profileMenuOpen: false, notifOpen: false, profileModalOpen: false, pendingNewCase: false, identityVerified: false, firstTimeClient: false,
-    onbModalOpen: false, onb: { step: 1, mobileCode: '+44', mobile: '', tried: false, addresses: [ { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' } ] } };
+    onbModalOpen: false, pSubmitOpen: false, caseTab: 'overview', onb: { step: 1, mobileCode: '+44', mobile: '', tried: false, addresses: [ { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' } ] } };
 
   componentDidMount() {
     try {
@@ -1998,7 +2035,7 @@ class Component extends DCLogic {
     if (su.email) this.setState({ onb: this._restoreOnb(su) });
 
     // Auto-open the "complete your profile" modal on EVERY client-dashboard landing while
-    // the profile is incomplete — regardless of how the dashboard was reached (signup
+    // the profile is incomplete, regardless of how the dashboard was reached (signup
     // redirect, #client hash, or a client who has already started a case).
     const landsOnClientDashboard = (h === '' || h === 'client' || h === 'client-empty');
     if (landsOnClientDashboard && su.email && !su.profileComplete) this.setState({ onbModalOpen: true });
@@ -2069,7 +2106,7 @@ class Component extends DCLogic {
       const accentColor = ragMap[c.rag].dot;
       const urgent = c.rag === 'red' || c.rag === 'amber';
       return {
-        id: c.id, title: c.title, icon: iconFor[c.service], stageLabel: c.service + ' · Stage ' + c.stage,
+        id: c.id, title: c.title, icon: iconFor[c.service], stageLabel: c.completed ? (c.service + ' · Completed') : (c.service + ' · Step ' + c.step + ' of 10'),
         deadlineLabel, deadlineStyle: badge(c.rag), deadlineIcon: c.rag === 'red' ? 'ti ti-alert-triangle' : 'ti ti-clock',
         ragLabel: ragMap[c.rag].label, ragStyle: badge(c.rag), ragDotStyle: dot(c.rag),
         estimateLabel: c.estimate > 0 ? this.gbp(c.estimate) : 'Pending',
@@ -2084,8 +2121,8 @@ class Component extends DCLogic {
         cardStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;',
         // full-width list-row variant used on the dashboard (shallower padding, tighter gap)
         rowStyle: 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s;',
-        onCta: c.ctaHref ? (() => { window.location.href = c.ctaHref; }) : (() => this.setState({ route: c.ctaRoute || 'cases', selectedCase: c.id })),
-        onView: () => this.setState({ route: 'case-detail', selectedCase: c.id }),
+        onCta: c.ctaHref ? (() => { window.location.href = c.ctaHref; }) : (c.completed ? (() => this.setState({ route: 'confirmation', selectedCase: c.id })) : (() => this.setState({ route: 'case-detail', selectedCase: c.id, caseTab: ({ upload: 'documents', verify: 'identity', hmrc: 'hmrc', draft: 'draft' })[c.ctaRoute] || 'overview' }))),
+        onView: () => this.setState({ route: 'case-detail', selectedCase: c.id, caseTab: 'overview' }),
       };
     };
     const activeCases = caseData.filter(c => !c.completed).map(mapCase);
@@ -2097,18 +2134,47 @@ class Component extends DCLogic {
       const num = i + 1;
       const done = selRaw.completed || num < selRaw.step;
       const current = !selRaw.completed && num === selRaw.step;
+      const needsAction = current && !!selRaw.action;
       const status = done ? 'done' : (current ? 'current' : 'upcoming');
       return {
         title, numLabel: done ? '' : String(num), showCheck: done, showLine: num !== STEPS.length,
-        nodeStyle: 'display:flex;width:30px;height:30px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;font-size:13px;font-weight:600;' + (done ? 'background:#43a047;color:#fff;' : current ? 'background:var(--navy);color:#fff;' : 'background:var(--chip);color:var(--tx-3);border:1px solid var(--border);'),
+        nodeStyle: 'display:flex;width:30px;height:30px;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;font-size:13px;font-weight:600;' + (done ? 'background:#43a047;color:#fff;' : current ? (needsAction ? 'background:var(--er-tx);color:#fff;' : 'background:var(--navy);color:#fff;') : 'background:var(--chip);color:var(--tx-3);border:1px solid var(--border);'),
         lineStyle: 'width:2px;flex:1;min-height:16px;margin:4px 0;border-radius:2px;background:' + (done ? '#43a047' : 'var(--border)') + ';',
         titleStyle: 'font-size:15px;font-weight:' + (current ? '600' : '500') + ';color:' + (status === 'upcoming' ? 'var(--tx-3)' : 'var(--tx)') + ';',
-        badgeLabel: done ? 'Completed' : current ? 'In progress' : 'Upcoming',
-        badgeStyle: 'display:inline-flex;align-items:center;white-space:nowrap;border-radius:9999px;padding:2px 10px;font-size:12px;font-weight:600;' + (done ? 'background:var(--su-bg);color:var(--su-tx);' : current ? 'background:var(--in-bg);color:var(--in-tx);' : 'background:var(--muted);color:var(--tx-3);'),
+        badgeLabel: done ? 'Completed' : needsAction ? 'Action needed' : current ? 'In progress' : 'Upcoming',
+        badgeStyle: 'display:inline-flex;align-items:center;white-space:nowrap;border-radius:9999px;padding:2px 10px;font-size:12px;font-weight:600;' + (done ? 'background:var(--su-bg);color:var(--su-tx);' : needsAction ? 'background:var(--er-bg);color:var(--er-tx);' : current ? 'background:var(--in-bg);color:var(--in-tx);' : 'background:var(--muted);color:var(--tx-3);'),
       };
     }) : [];
     const detailPct = selRaw ? (selRaw.completed ? 100 : Math.round((selRaw.step - 1) / STEPS.length * 100)) : 0;
     const goCase = (r) => () => this.setState({ route: r, selectedCase: (this.state.selectedCase || 'case-1') });
+
+    /* One obvious "next step" for the client (Hick's law: reduce the action set to a single clear choice) */
+    const NEXT_BY_ROUTE = {
+      upload: { title: 'Upload your documents', desc: 'Add the documents we still need so your tax team can carry on preparing your return.', icon: 'ti ti-upload' },
+      verify: { title: 'Verify your identity', desc: 'Complete a quick, secure identity and address check. We are legally required to do this before we can file.', icon: 'ti ti-shield-check' },
+      hmrc: { title: 'Authorise us with HMRC', desc: 'Approve our request in your Government Gateway account so we can submit your return for you.', icon: 'ti ti-building-bank' },
+      draft: { title: 'Review and approve your draft', desc: 'Your draft return is ready. Check the figures and approve it, or raise a query, before we file.', icon: 'ti ti-file-check' },
+      cases: { title: 'Continue your questionnaire', desc: 'Pick up where you left off and answer the remaining questions about your disposal.', icon: 'ti ti-forms' },
+      confirmation: { title: 'View your confirmation', desc: 'Your return has been filed. View and download your HMRC confirmation and filed documents.', icon: 'ti ti-circle-check' },
+    };
+    const nextCfg = selRaw ? (NEXT_BY_ROUTE[selRaw.ctaRoute] || { title: selRaw.cta, desc: 'Continue your case.', icon: 'ti ti-arrow-right' }) : null;
+    const nAct = selRaw ? !!selRaw.action : false;
+
+    /* Case workspace tabs: everything for this case is managed on one screen */
+    const caseTab = this.state.caseTab || 'overview';
+    const ROUTE_TO_TAB = { upload: 'documents', verify: 'identity', hmrc: 'hmrc', draft: 'draft', confirmation: 'overview', cases: 'overview' };
+    const CASE_TABS = [
+      { key: 'overview', label: 'Overview', icon: 'ti ti-layout-dashboard' },
+      { key: 'documents', label: 'Documents', icon: 'ti ti-upload' },
+      { key: 'identity', label: 'Identity', icon: 'ti ti-shield-check' },
+      { key: 'hmrc', label: 'HMRC', icon: 'ti ti-building-bank' },
+      { key: 'draft', label: 'Draft', icon: 'ti ti-file-check' },
+      { key: 'messages', label: 'Messages', icon: 'ti ti-message' },
+    ];
+    const caseTabs = CASE_TABS.map(t => ({
+      label: t.label, icon: t.icon, onClick: () => this.setState({ caseTab: t.key }),
+      style: 'display:inline-flex;align-items:center;gap:7px;white-space:nowrap;background:none;border:none;font-family:Jost,sans-serif;font-size:14px;cursor:pointer;padding:11px 14px;border-bottom:2px solid ' + (caseTab === t.key ? 'var(--navy)' : 'transparent') + ';color:' + (caseTab === t.key ? 'var(--tx)' : 'var(--tx-2b)') + ';font-weight:' + (caseTab === t.key ? '600' : '500') + ';',
+    }));
 
     /* ═══════════ ASSIGNED TEAM (shared: dashboard + case detail) ═══════════ */
     const teamAccent = { 'Client Manager': 'var(--navy)', 'Tax Assistant': '#43a047', 'Admin Contact': '#1976d2' };
@@ -2281,7 +2347,13 @@ class Component extends DCLogic {
       { icon: 'ti ti-message', iconBg: 'var(--in-bg)', iconColor: 'var(--in-tx)', title: 'New message from your tax team', desc: 'Sarah replied about your proof of address.', time: 'Yesterday', route: 'messages' },
       { icon: 'ti ti-file-check', iconBg: 'var(--su-bg)', iconColor: 'var(--su-tx)', title: 'Document received', desc: 'Your completion statement was uploaded successfully.', time: '2 days ago', route: 'documents' },
     ];
-    const notifs = (this.state.empty || this.state.firstTimeClient) ? [] : NOTIFS.map(n => ({
+    const PNOTIFS = [
+      { icon: 'ti ti-user-check', iconBg: 'var(--su-bg)', iconColor: 'var(--su-tx)', title: 'Referral completed', desc: 'Gareth Lewis has completed their CGT filing.', time: '2 days ago', route: 'p-referrals' },
+      { icon: 'ti ti-message', iconBg: 'var(--in-bg)', iconColor: 'var(--in-tx)', title: 'Update on Margaret Doyle', desc: 'The FileCGTOnline team sent you an update about this referral.', time: 'Yesterday', route: 'p-referrals' },
+      { icon: 'ti ti-user-plus', iconBg: 'var(--wa-bg)', iconColor: 'var(--wa-tx)', title: 'Referral signed up', desc: 'Tomasz Nowak has created their account.', time: '3 days ago', route: 'p-referrals' },
+    ];
+    const notifSource = this.state.portal === 'partner' ? PNOTIFS : NOTIFS;
+    const notifs = (this.state.empty || this.state.firstTimeClient) ? [] : notifSource.map(n => ({
       icon: n.icon, iconBg: n.iconBg, iconColor: n.iconColor, title: n.title, desc: n.desc, time: n.time,
       onClick: () => this.setState({ route: n.route, notifOpen: false }),
     }));
@@ -2290,7 +2362,7 @@ class Component extends DCLogic {
     const answerFor = (q) => {
       const l = q.toLowerCase();
       if (l.includes('document')) return "Right now we're waiting on a recent Proof of Address (within the last 3 months), a utility bill, bank statement or council tax bill all work. Everything else has been received. You can upload from the Documents tab or snap a photo on your phone.";
-      if (l.includes('status')) return "Your case is at Stage 2, Step 6, 'Queries & further information'. That means our team is reviewing your details and may ask a couple of questions. No filing happens until you review and approve the draft.";
+      if (l.includes('status')) return "Your case is at Step 6 of 10, 'Queries & further information'. That means our team is reviewing your details and may ask a couple of questions. No filing happens until you review and approve the draft.";
       if (l.includes('proof of address')) return "It's a legal requirement (anti-money-laundering) to confirm where you live before we can file on your behalf. It must be dated within the last 3 months and show your name and address.";
       if (l.includes('estimate')) return "Your provisional estimate is based on the figures you've entered so far (sale price, purchase price, costs and reliefs). It's marked 'provisional' because our tax team verifies everything before it becomes final.";
       if (l.includes('approve')) return "After you approve your draft, we submit it to HMRC and you'll receive a submission reference and confirmation document. We'll also give you clear instructions on how and when to pay HMRC.";
@@ -2319,10 +2391,10 @@ class Component extends DCLogic {
       // Temporarily limited to the Client Portal flows only. Re-enable the others to restore the full switcher.
       // { key: 'onboarding', label: 'Client · First-time', desc: 'New client, no cases yet', icon: 'ti ti-sparkles', home: 'onboarding', empty: false },
       { key: 'client', label: 'Client Portal', desc: 'Populated, active cases', icon: 'ti ti-users', home: 'dashboard', empty: false },
-      // { key: 'partner', label: 'Partner Portal', desc: 'Populated, live referrals', icon: 'ti ti-briefcase', home: 'p-dashboard', empty: false },
+      { key: 'partner', label: 'Partner Portal', desc: 'Populated, live referrals', icon: 'ti ti-briefcase', home: 'p-dashboard', empty: false },
       // { key: 'admin', label: 'Staff Admin', desc: 'Populated, operations', icon: 'ti ti-shield-check', home: 'a-dashboard', empty: false },
       { key: 'client', label: 'Client Portal · Empty', desc: 'Empty state, no cases yet', icon: 'ti ti-folder-open', home: 'dashboard', empty: true },
-      // { key: 'partner', label: 'Partner Portal · Empty', desc: 'Empty state, no referrals', icon: 'ti ti-folder-open', home: 'p-dashboard', empty: true },
+      { key: 'partner', label: 'Partner Portal · Empty', desc: 'Empty state, no referrals', icon: 'ti ti-folder-open', home: 'p-dashboard', empty: true },
       // { key: 'admin', label: 'Staff Admin · Empty', desc: 'Empty state, no cases', icon: 'ti ti-folder-open', home: 'a-dashboard', empty: true },
     ];
     const flowItems = flowDefs.map(f => ({ label: f.label, desc: f.desc, icon: f.icon, active: portal === f.key && !!empty === !!f.empty, onClick: setPortal(f.key, f.home, f.empty) }));
@@ -2374,11 +2446,7 @@ class Component extends DCLogic {
 
     const pNavDef = [
       { key: 'p-dashboard', label: 'Dashboard', icon: 'ti ti-layout-dashboard' },
-      { key: 'p-submit', label: 'Submit Referral', icon: 'ti ti-user-plus' },
       { key: 'p-referrals', label: 'Referrals', icon: 'ti ti-users' },
-      { key: 'p-messages', label: 'Messages', icon: 'ti ti-message', badge: 1 },
-      { key: 'p-resources', label: 'Resources', icon: 'ti ti-book' },
-      { key: 'p-commission', label: 'Commission', icon: 'ti ti-coin', tag: 'Phase 2' },
       { key: 'p-account', label: 'Account', icon: 'ti ti-settings' },
     ];
     const navBaseP = 'display:flex;align-items:center;gap:12px;border-radius:12px;padding:10px 12px;font-size:15px;cursor:pointer;transition:background 0.15s;';
@@ -2393,8 +2461,8 @@ class Component extends DCLogic {
     const pShort = { 'p-dashboard': 'Home', 'p-referrals': 'Referrals', 'p-messages': 'Messages', 'p-account': 'Account' };
     const pMobileNav = [
       { key: 'p-dashboard', icon: 'ti ti-layout-dashboard' }, { key: 'p-referrals', icon: 'ti ti-users' },
-      { key: 'p-submit', icon: 'ti ti-user-plus', add: true }, { key: 'p-messages', icon: 'ti ti-message' }, { key: 'p-account', icon: 'ti ti-settings' },
-    ].map(n => ({ icon: n.icon, add: n.add, short: n.add ? 'Refer' : pShort[n.key], onClick: nav(n.key), color: route === n.key ? 'var(--tx)' : 'var(--tx-3)' }));
+      { key: 'p-submit', icon: 'ti ti-user-plus', add: true }, { key: 'p-account', icon: 'ti ti-settings' },
+    ].map(n => ({ icon: n.icon, add: n.add, short: n.add ? 'Refer' : pShort[n.key], onClick: n.key === 'p-submit' ? (() => this.setState({ pSubmitOpen: true })) : nav(n.key), color: route === n.key ? 'var(--tx)' : 'var(--tx-3)' }));
 
     /* ═══════════ ADMIN ═══════════ */
     const role = this.state.role, roleOpen = this.state.roleOpen;
@@ -2595,7 +2663,7 @@ class Component extends DCLogic {
     // New-case entry point: go straight to the new-case flow (Xama identity verification
     // happens later as its own step, not as a gate on starting a case).
     const startNewCase = () => { window.location.href = 'new-case.html'; };
-    const emptyCta = () => { if (ecfg.ctaKind === 'newcase') startNewCase(); else if (ecfg.ctaKind === 'psubmit') this.setState({ route: 'p-submit' }); };
+    const emptyCta = () => { if (ecfg.ctaKind === 'newcase') startNewCase(); else if (ecfg.ctaKind === 'psubmit') this.setState({ pSubmitOpen: true }); };
 
     /* ═══════════ DASHBOARD WIDGETS (messages + documents) ═══════════ */
     const _thread = this.state.thread || baseThread;
@@ -2691,7 +2759,7 @@ class Component extends DCLogic {
     let onbErrText = '';
     if (onbTried && onbStep === 2 && !(allAddrOk && enough)) {
       if (!allAddrOk) onbErrText = 'Please complete every address and how long you lived there.';
-      else if (!enough) onbErrText = 'We need at least 3 years of address history — add a previous address.';
+      else if (!enough) onbErrText = 'We need at least 3 years of address history. Add a previous address.';
     }
     // Step 1 → 2: only the mobile number gates the move (Progressive Disclosure).
     const onbContinue = () => {
@@ -2739,7 +2807,7 @@ class Component extends DCLogic {
     const profItemsRaw = [
       { label: 'Contact details', icon: 'ti ti-phone', done: !!profileMobileVal, doneText: 'Mobile number added', toText: 'Add your mobile number', act: openOnb, actLabel: 'Add' },
       { label: 'Address history', icon: 'ti ti-map-pin', done: profTotalMonths >= 36, doneText: 'Last 3 years covered', toText: 'Add your last 3 years', act: openOnb, actLabel: 'Add' },
-      // Identity verification is powered by Xama — the Xama card is merged into this row (logo shown here).
+      // Identity verification is powered by Xama; the Xama card is merged into this row (logo shown here).
       { label: 'Identity verification', icon: 'ti ti-id', logo: 'xama-logo.png', done: idVerified, doneText: 'Verified with Xama', toText: 'Verify your identity with Xama · required before we can file', act: () => window.open('https://www.xamatech.com', '_blank', 'noopener'), actLabel: 'Verify' },
     ];
     const profDoneCount = profItemsRaw.filter(i => i.done).length;
@@ -2756,43 +2824,51 @@ class Component extends DCLogic {
 
     return {
       isDashboard: route === 'dashboard' && !clientEmpty, isCases: route === 'cases' && !clientEmpty, isDocuments: route === 'documents' && !clientEmpty,
-      isMessages: route === 'messages' && !clientEmpty, isPayments: route === 'payments' && !clientEmpty, isRefer: route === 'refer' && !clientEmpty, isProfile: route === 'profile', isSettings: route === 'settings',
+      isMessages: (route === 'messages' || (route === 'case-detail' && caseTab === 'messages' && !!selRaw)) && !clientEmpty, isPayments: route === 'payments' && !clientEmpty, isRefer: route === 'refer' && !clientEmpty, isProfile: route === 'profile', isSettings: route === 'settings',
       // case detail (full journey)
       isCaseDetail: route === 'case-detail' && !clientEmpty && !!selRaw,
+      caseTabs, ctOverview: route === 'case-detail' && caseTab === 'overview' && !clientEmpty && !!selRaw,
+      goCaseMessages: () => this.setState({ caseTab: 'messages' }),
       backToCases: nav('dashboard'),
       detailTitle: selRaw ? selRaw.title : '',
       detailIcon: selRaw ? iconFor[selRaw.service] : 'ti ti-folder',
-      detailStage: selRaw ? (selRaw.service + ' · Stage ' + selRaw.stage) : '',
-      detailRagStyle: selRaw ? badge(selRaw.rag) : '', detailRagDot: selRaw ? dot(selRaw.rag) : '', detailRagLabel: selRaw ? ragMap[selRaw.rag].label : '',
+      detailStage: selRaw ? (selRaw.completed ? (selRaw.service + ' · Completed') : (selRaw.service + ' · Step ' + selRaw.step + ' of 10')) : '',
       detailDeadlineStyle: selRaw ? badge(selRaw.rag) : '', detailDeadlineIcon: selRaw && selRaw.rag === 'red' ? 'ti ti-alert-triangle' : 'ti ti-clock',
-      detailDeadlineLabel: selRaw ? (selRaw.rag === 'grey' ? 'Completed' : selRaw.days <= 0 ? 'Due today' : selRaw.days + ' day' + (selRaw.days === 1 ? '' : 's') + ' left') : '',
-      detailDeadlineDate: selRaw ? ('HMRC deadline ' + this.fdate(selRaw.deadline)) : '',
+      detailDeadlineLabel: selRaw ? (selRaw.rag === 'grey' ? 'Filed' : selRaw.days <= 0 ? 'Due today' : selRaw.days + ' day' + (selRaw.days === 1 ? '' : 's') + ' to HMRC deadline') : '',
       detailDeadlineOnly: selRaw ? this.fdate(selRaw.deadline) : '',
-      detailEstimate: selRaw ? (selRaw.estimate > 0 ? this.gbp(selRaw.estimate) : 'Pending') : '',
+      detailEstimate: selRaw ? (selRaw.estimate > 0 ? this.gbp(selRaw.estimate) : 'Not yet estimated') : '',
+      detailEstimateLabel: selRaw && selRaw.completed ? 'Capital Gains Tax (filed)' : 'Provisional estimate',
+      detailEstimateNote: selRaw ? (selRaw.completed ? 'Final figure filed with HMRC.' : (selRaw.estimate > 0 ? 'Provisional, subject to full review. Not your final bill.' : "We'll estimate this once your initial details are in.")) : '',
       detailStepText: selRaw ? ('Step ' + selRaw.step + ' of ' + STEPS.length) : '',
       detailPctLabel: detailPct + '%',
       detailProgressTrackStyle: 'position:relative;height:8px;border-radius:9999px;background:var(--track);overflow:hidden;',
       detailProgressFillStyle: 'position:absolute;inset:0 auto 0 0;width:' + detailPct + '%;border-radius:9999px;background:var(--navy);',
-      detailCurrentTitle: selRaw ? STEPS[selRaw.step - 1] : '',
       detailSteps,
-      detailCtaShow: selRaw ? !selRaw.completed : false,
+      detailNextShow: selRaw ? !selRaw.completed : false,
+      detailNextEyebrow: nAct ? 'Action needed from you' : 'Your next step',
+      detailNextEyebrowStyle: 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:' + (nAct ? 'var(--wa-tx)' : 'var(--link)') + ';',
+      detailNextTitle: nextCfg ? nextCfg.title : '',
+      detailNextDesc: nextCfg ? nextCfg.desc : '',
+      detailNextIcon: nextCfg ? nextCfg.icon : 'ti ti-arrow-right',
+      detailNextCardStyle: 'border-radius:16px;padding:20px 22px;margin-top:12px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;box-shadow:var(--sh-sm);border:1px solid ' + (nAct ? 'var(--wa-bg)' : 'var(--border)') + ';background:' + (nAct ? 'var(--wa-bg)' : 'var(--surface)') + ';',
+      detailNextIconWrapStyle: 'display:flex;width:44px;height:44px;flex-shrink:0;align-items:center;justify-content:center;border-radius:12px;background:' + (nAct ? 'var(--surface)' : 'var(--surface-2)') + ';color:' + (nAct ? 'var(--wa-tx)' : 'var(--navy)') + ';',
       detailCtaLabel: selRaw ? selRaw.cta : '',
-      detailOnCta: selRaw ? (selRaw.ctaHref ? (() => { window.location.href = selRaw.ctaHref; }) : (() => this.setState({ route: selRaw.ctaRoute || 'cases' }))) : (() => {}),
+      detailOnCta: selRaw ? (selRaw.ctaHref ? (() => { window.location.href = selRaw.ctaHref; }) : (() => this.setState({ caseTab: ROUTE_TO_TAB[selRaw.ctaRoute] || 'overview' }))) : (() => {}),
       detailCompletionDate: selRaw ? this.fdate(selRaw.completion) : '',
-      detailSubmissionDate: selRaw && selRaw.completed ? this.fdate('2026-04-12') : 'Pending',
+      detailSubmissionDate: selRaw && selRaw.completed ? this.fdate('2026-04-12') : 'Not submitted yet',
       // assigned team + activity (shared)
       team, caseActivity,
       // quick actions from case detail
       goUpload: goCase('upload'), goVerify: goCase('verify'), goHmrc: goCase('hmrc'), goDraft: goCase('draft'), goConfirmation: goCase('confirmation'),
-      backToCase: () => this.setState({ route: 'case-detail' }),
+      backToCase: () => this.setState({ route: 'case-detail', caseTab: 'overview' }),
       // ── Document Upload Centre ──
-      isUpload: route === 'upload' && !clientEmpty, uploadCats,
+      isUpload: route === 'case-detail' && caseTab === 'documents' && !clientEmpty && !!selRaw, uploadCats,
       // ── AML / Identity Verification ──
-      isVerify: route === 'verify' && !clientEmpty,
+      isVerify: route === 'case-detail' && caseTab === 'identity' && !clientEmpty && !!selRaw,
       // ── HMRC Agent Authorisation ──
-      isHmrc: route === 'hmrc' && !clientEmpty,
+      isHmrc: route === 'case-detail' && caseTab === 'hmrc' && !clientEmpty && !!selRaw,
       // ── Draft CGT Review & Approval ──
-      isDraft: route === 'draft' && !clientEmpty, draftRows,
+      isDraft: route === 'case-detail' && caseTab === 'draft' && !clientEmpty && !!selRaw, draftRows,
       draftApproved: this.state.draftApproved, draftPending: !this.state.draftApproved,
       approveOpen: this.state.approveOpen,
       approveOverlayStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.approveOpen ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
@@ -2827,7 +2903,7 @@ class Component extends DCLogic {
       onbTitle: onbStep === 1 ? "Let's set up your profile" : (onbStep === 2 ? 'Your address history' : "You're all set" + (onbFirst ? ', ' + onbFirst : '') + '!'),
       onbDesc: onbStep === 1
         ? 'Two quick steps so our tax team can verify your details and file your return correctly. Takes about two minutes.'
-        : (onbStep === 2 ? 'Where have you lived recently? This is the last step.' : 'Thanks — your profile is complete. Our tax team can now prepare and file your Capital Gains Tax return.'),
+        : (onbStep === 2 ? 'Where have you lived recently? This is the last step.' : 'Thanks, your profile is complete. Our tax team can now prepare and file your Capital Gains Tax return.'),
       onbCloseAria: onbStep === 3 ? 'Close' : 'Skip for now and close',
       onbHeaderClose: onbStep === 3 ? onbFinish : onbSkip,
       onbMobileCode: onb.mobileCode, onbSetMobileCode: (e) => this._setOnb({ mobileCode: e.target.value }),
@@ -2839,7 +2915,7 @@ class Component extends DCLogic {
       onbProgressFillStyle: 'height:100%;border-radius:9999px;transition:width .3s ease;width:' + onbPct + '%;background:' + (enough ? '#43a047' : 'var(--navy)') + ';',
       onbEnoughBadgeStyle: 'display:' + (enough ? 'inline-flex' : 'none') + ';align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--su-tx);background:var(--su-bg);border-radius:9999px;padding:2px 9px;',
       onbNeedMoreStyle: 'display:' + (enough ? 'none' : 'flex') + ';align-items:flex-start;gap:8px;background:var(--wa-bg);color:var(--wa-tx);border-radius:10px;padding:10px 12px;margin-top:14px;',
-      onbNeedMoreLabel: 'Add previous addresses until you reach 3 years — about ' + fmtDur(remMonths) + ' still to cover.',
+      onbNeedMoreLabel: 'Add previous addresses until you reach 3 years, about ' + fmtDur(remMonths) + ' still to cover.',
       onbAddPrev: () => this._addAddr(),
       onbErrStyle: 'display:' + ((onbTried && onbErrText) ? 'flex' : 'none') + ';align-items:center;gap:6px;font-size:13px;color:var(--er-tx);margin-bottom:10px;',
       onbErrText,
@@ -2909,7 +2985,7 @@ class Component extends DCLogic {
       themeSegBase: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:background .15s,color .15s,box-shadow .15s;',
       themeLightStyle: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:.15s;' + (this.state.theme !== 'dark' ? 'background:var(--surface);color:var(--tx);box-shadow:var(--sh-sm);' : 'background:transparent;color:var(--tx-2);'),
       themeDarkStyle: 'flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border-radius:9px;border:none;cursor:pointer;font-family:\'Jost\',sans-serif;font-size:13px;font-weight:600;transition:.15s;' + (this.state.theme === 'dark' ? 'background:var(--surface);color:var(--tx);box-shadow:var(--sh-sm);' : 'background:transparent;color:var(--tx-2);'),
-      // top-bar profile dropdown (Profile / Settings / Theme) — opens downward, right-aligned
+      // top-bar profile dropdown (Profile / Settings / Theme), opens downward, right-aligned
       toggleProfileMenu: () => this.setState(s => ({ profileMenuOpen: !s.profileMenuOpen, notifOpen: false })),
       profileMenuStyle: 'position:absolute;top:calc(100% + 8px);right:0;width:230px;z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--sh-lg);padding:6px;display:' + (this.state.profileMenuOpen ? 'block' : 'none') + ';',
       goProfileItem: () => this.setState({ route: 'profile', profileMenuOpen: false }),
@@ -2952,8 +3028,9 @@ class Component extends DCLogic {
 
       // partner
       pNav, pMobileNav, partnerReferrals, partnerRecent, partnerNeeds, partnerKpis, partnerMsgs, resources: RESOURCES,
-      isPDash: route === 'p-dashboard' && !partnerEmpty, isPSubmit: route === 'p-submit', isPReferrals: route === 'p-referrals' && !partnerEmpty, isPMessages: route === 'p-messages' && !partnerEmpty, isPResources: route === 'p-resources', isPCommission: route === 'p-commission', isPAccount: route === 'p-account',
-      goPSubmit: nav('p-submit'), goPReferrals: nav('p-referrals'),
+      isPDash: route === 'p-dashboard' && !partnerEmpty, isPReferrals: route === 'p-referrals' && !partnerEmpty, isPMessages: route === 'p-messages' && !partnerEmpty, isPResources: route === 'p-resources', isPCommission: route === 'p-commission', isPAccount: route === 'p-account',
+      pSubmitOverlayStyle: 'position:fixed;inset:0;background:rgba(10,17,32,0.5);z-index:120;display:' + (this.state.pSubmitOpen ? 'flex' : 'none') + ';align-items:center;justify-content:center;padding:20px;',
+      goPSubmit: () => this.setState({ pSubmitOpen: true }), closePSubmit: () => this.setState({ pSubmitOpen: false }), goPReferrals: nav('p-referrals'),
 
       // admin
       aNav, adminKpiCards, adminCases, adminNeeding, priorityQueue, queueRows, advisors: ADVISORS, activity, aiDrafts: AI_DRAFTS, extraction: EXTRACTION, adminPartners: APARTNERS, staff: STAFF, audit: AUDIT, aPayments, reportCards, adminReferrals: partnerReferrals,

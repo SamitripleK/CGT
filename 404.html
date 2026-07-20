@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(function(){
+  function apply(t){document.documentElement.setAttribute('data-theme',t);}
+  try{var s=localStorage.getItem('cgt-theme');apply((s==='dark'||s==='light')?s:'light');}catch(e){apply('light');}
+  window.toggleTheme=function(){
+    var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
+    var next=cur==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',next);
+    try{localStorage.setItem('cgt-theme',next);}catch(e){}
+    var ic=document.getElementById('themeIco'); if(ic)ic.className=next==='dark'?'ti ti-sun':'ti ti-moon';
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var ic=document.getElementById('themeIco');
+    if(ic)ic.className=document.documentElement.getAttribute('data-theme')==='dark'?'ti ti-sun':'ti ti-moon';
+  });
+})();
+</script>
+<title>Page not found · CGT Online</title>
+<meta name="description" content="The page you were looking for could not be found." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<style>
+  :root{
+    --page:#F6F2EA; --surface:#fff;
+    --border:#F0EBE0; --border-2:#D9D3C6;
+    --tx:#1B2D4F; --tx-2:#6B7689; --tx-3:#8A93A3;
+    --green:#83C341; --green-d:#6FAE32;
+  }
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --page:#0f1526; --surface:#171f33;
+    --border:#2a3450; --border-2:#38466a;
+    --tx:#eaf0fb; --tx-2:#9fadc4; --tx-3:#7d8ba4;
+  }
+  .logo-d{display:none !important;}
+  html[data-theme="dark"] .logo-l{display:none !important;}
+  html[data-theme="dark"] .logo-d{display:block !important;}
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Jost',sans-serif;background:var(--page);color:var(--tx);min-height:100vh;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+       padding:48px 24px;transition:background-color .22s ease,color .22s ease;}
+
+  /* Quiet theme toggle, present for consistency, but visually recessive (Von Restorff: it must not compete) */
+  .theme-btn{position:fixed;top:24px;right:24px;display:inline-flex;align-items:center;justify-content:center;
+             width:40px;height:40px;border-radius:100px;border:1px solid var(--border);background:transparent;
+             color:var(--tx-3);cursor:pointer;transition:color .18s ease,border-color .18s ease;}
+  .theme-btn:hover{color:var(--tx-2);border-color:var(--border-2);}
+
+  .logo-l,.logo-d{height:24px;width:auto;margin-bottom:52px;opacity:.9;}
+
+  .code{font-size:104px;font-weight:600;line-height:1;letter-spacing:-0.04em;color:var(--tx);margin-bottom:20px;}
+  .code b{font-weight:600;color:var(--green);} /* the single point of emphasis */
+
+  h1{font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:12px;}
+  p{font-size:16px;color:var(--tx-2);line-height:1.6;max-width:340px;margin-bottom:36px;}
+
+  /* One clear action (Hick's Law) */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;
+       padding:14px 28px;border-radius:100px;background:var(--green);color:#0a1120;text-decoration:none;
+       transition:background-color .18s ease;}
+  .btn:hover{background:var(--green-d);}
+
+  /* Everything else, demoted to a whisper */
+  .quiet{margin-top:22px;font-size:14px;}
+  .quiet a{color:var(--tx-3);text-decoration:none;transition:color .18s ease;}
+  .quiet a:hover{color:var(--tx-2);}
+
+  @media (max-width:520px){
+    .code{font-size:80px;}
+    h1{font-size:22px;}
+    .logo-l,.logo-d{margin-bottom:40px;}
+  }
+</style>
+</head>
+<body>
+
+<button onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme" class="theme-btn"><i id="themeIco" class="ti ti-moon" style="font-size:18px;"></i></button>
+
+<a href="/" aria-label="CGT Online home">
+  <img class="logo-l" src="cgt-logo.svg" alt="CGT Online" /><img class="logo-d" src="cgt-logo-light.svg" alt="CGT Online" />
+</a>
+
+<div class="code">4<b>0</b>4</div>
+<h1>This page took a wrong turn</h1>
+<p>We couldn&rsquo;t find what you were looking for, but everything else is right where you left it.</p>
+
+<a class="btn" href="/"><i class="ti ti-arrow-left"></i> Back to home</a>
+
+<div class="quiet"><a href="/portal">Or go to your portal</a></div>
+
+</body>
+</html>

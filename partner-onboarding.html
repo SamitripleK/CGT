@@ -25,7 +25,7 @@
 })();
 </script>
 <title>Become a Partner · FileCGTOnline</title>
-<meta name="description" content="Join the FileCGTOnline partner programme. Refer clients, track their progress, and earn, no tax knowledge required. Fast, secure, privacy-safe onboarding." />
+<meta name="description" content="Join the FileCGTOnline partner programme. Refer clients who have sold property, shares or other assets. Our ICAEW-regulated team handles all the Capital Gains Tax work and files with HMRC inside the 60-day deadline. Privacy-safe, and no cost to you." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -286,6 +286,13 @@ a{color:inherit;text-decoration:none;}
 .toast i{color:var(--lime);font-size:18px;}
 .hide{display:none !important;}
 
+/* ---------- landing sections ---------- */
+.lsection{max-width:960px;margin:48px auto 0;}
+.lsection h2{font-size:26px;font-weight:600;letter-spacing:-0.01em;text-align:center;margin-bottom:6px;}
+.lsection .lsub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:26px;}
+.hiw-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.hiw-3 .hiw-step{flex-direction:column;gap:12px;}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -304,7 +311,7 @@ a{color:inherit;text-decoration:none;}
   .wrap{padding:0 16px;}
   .value-hero h1{font-size:32px;}
   .value-hero .lede{font-size:16px;}
-  .benefit-grid,.type-grid,.privacy-row{grid-template-columns:1fr;}
+  .benefit-grid,.type-grid,.privacy-row,.hiw-3{grid-template-columns:1fr;}
   .wcard{padding:22px 18px;}
   .wcard h2{font-size:21px;}
   .wizard{padding:24px 16px 72px;}
@@ -340,46 +347,64 @@ a{color:inherit;text-decoration:none;}
     <div class="value-hero">
       <div>
         <span class="eyebrow"><i class="ti ti-briefcase-2"></i> Partner programme</span>
-        <h1>Become a <span>FileCGTOnline</span> Partner</h1>
-        <p class="lede">Refer clients who’ve sold property, shares or other assets, we handle all the Capital Gains Tax work, and you earn as they file. No tax knowledge required.</p>
+        <h1>Your clients' Capital Gains Tax, <span>fully handled.</span></h1>
+        <p class="lede">Refer clients who have sold property, shares or other assets. Our ICAEW-regulated team does all the CGT work and files with HMRC inside the 60-day deadline. You stay in the loop, and never touch a calculation.</p>
         <div class="value-cta">
-          <button class="btn btn-primary btn-lg" id="startApp">Start application <i class="ti ti-arrow-right"></i></button>
+          <button class="btn btn-primary btn-lg" id="startApp">Become a partner <i class="ti ti-arrow-right"></i></button>
           <button class="btn btn-ghost btn-lg" data-goto="login">Partner login</button>
         </div>
         <div class="value-trust">
-          <span class="tchip"><i class="ti ti-shield-check"></i> Bank-grade security</span>
           <span class="tchip"><i class="ti ti-rosette"></i> ICAEW regulated</span>
           <span class="tchip"><i class="ti ti-lock"></i> Privacy-safe · GDPR</span>
+          <span class="tchip"><i class="ti ti-cash-off"></i> No cost to you</span>
         </div>
       </div>
       <div class="benefit-grid">
         <div class="benefit dark">
-          <div class="bi"><i class="ti ti-percentage"></i></div>
-          <h3>Earn on every referral</h3>
-          <p>Competitive commission each time a referred client files with us.</p>
+          <div class="bi"><i class="ti ti-clock-hour-4"></i></div>
+          <h3>Beat the 60-day deadline</h3>
+          <p>We complete and file each CGT return inside HMRC's 60-day window, so your client never risks a penalty.</p>
         </div>
         <div class="benefit">
           <div class="bi"><i class="ti ti-mood-smile"></i></div>
           <h3>No tax knowledge needed</h3>
-          <p>Our qualified team does all the CGT work. You just refer.</p>
+          <p>Our qualified team does all the CGT work. You simply refer the client.</p>
         </div>
         <div class="benefit">
           <div class="bi"><i class="ti ti-timeline-event"></i></div>
           <h3>Track progress live</h3>
-          <p>See each client move through Stage 1 → 2 → 3 in real time.</p>
+          <p>Watch each client move through Stage 1 → 2 → 3 from your dashboard.</p>
         </div>
         <div class="benefit">
-          <div class="bi"><i class="ti ti-briefcase"></i></div>
-          <h3>Fully managed service</h3>
-          <p>We handle documents, calculations and HMRC filing end-to-end.</p>
+          <div class="bi"><i class="ti ti-eye-off"></i></div>
+          <h3>Client-safe by design</h3>
+          <p>You never see tax figures, calculations or documents. Privacy-safe throughout.</p>
         </div>
       </div>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="n">150+</div><div class="l">Cases filed for partner clients</div></div>
-      <div class="stat"><div class="n"><span>4.9</span>/5</div><div class="l">Average partner rating</div></div>
-      <div class="stat"><div class="n">&lt;2<span>min</span></div><div class="l">To submit a referral</div></div>
-      <div class="stat"><div class="n">0</div><div class="l">Client financial data you ever see</div></div>
+
+    <!-- HOW IT WORKS -->
+    <div class="lsection">
+      <h2>How partnering works</h2>
+      <p class="lsub">Three simple steps. No tax work, and no chasing.</p>
+      <div class="hiw-3">
+        <div class="hiw-step">
+          <span class="num">1</span>
+          <div><h4>You refer a client</h4><p>Send us a client in under two minutes, just their name and contact details. That is all we need from you.</p></div>
+        </div>
+        <div class="hiw-step">
+          <span class="num">2</span>
+          <div><h4>We complete the CGT work</h4><p>Our qualified team handles documents, calculations, client approval and HMRC filing, start to finish.</p></div>
+        </div>
+        <div class="hiw-step">
+          <span class="num">3</span>
+          <div><h4>You track progress</h4><p>Follow each referral through Stage 1, 2 and 3 from your dashboard, with no sensitive detail on show.</p></div>
+        </div>
+      </div>
+      <div class="alert calm" style="margin:26px auto 64px;max-width:720px;">
+        <i class="ti ti-info-circle"></i>
+        <div>Partnering is always free for you, and it never changes what your client pays. A partner referral fee is part of the programme and is rolling out, we will confirm the details with you directly.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -393,39 +418,27 @@ a{color:inherit;text-decoration:none;}
     <div class="stepper" id="stepper">
       <div class="seg"><div class="fill"></div></div>
       <div class="seg"><div class="fill"></div></div>
-      <div class="seg"><div class="fill"></div></div>
-      <div class="seg"><div class="fill"></div></div>
     </div>
     <div class="step-meta">
-      <span class="phase" id="wPhase">Your role</span>
-      <span class="count" id="wCount">Step 1 of 4</span>
+      <span class="phase" id="wPhase">You &amp; your firm</span>
+      <span class="count" id="wCount">Step 1 of 2</span>
     </div>
 
-    <!-- STEP 1 · PARTNER TYPE -->
+    <!-- STEP 1 · TYPE + FIRM DETAILS -->
     <div class="step show" data-wstep="1">
       <div class="wcard">
-        <h2>What best describes you?</h2>
-        <p class="sub">Select your role to personalise your experience. It also tells us how to verify your professional status.</p>
-        <div class="type-grid" id="typeGrid">
-          <label class="type" data-type="solicitor" data-verify="sra"><span class="ti-ico"><i class="ti ti-gavel"></i></span><span class="tt">Solicitor<span>Conveyancing / private client</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
-          <label class="type" data-type="estate_agent" data-verify="reg"><span class="ti-ico"><i class="ti ti-home"></i></span><span class="tt">Estate Agent<span>Sales &amp; lettings</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
-          <label class="type" data-type="accountant" data-verify="body"><span class="ti-ico"><i class="ti ti-calculator"></i></span><span class="tt">Accountant<span>Practice / bookkeeping</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
-          <label class="type" data-type="ifa" data-verify="fca"><span class="ti-ico"><i class="ti ti-chart-line"></i></span><span class="tt">Financial Advisor<span>IFA / wealth</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
-          <label class="type" data-type="mortgage_broker" data-verify="fca"><span class="ti-ico"><i class="ti ti-building-bank"></i></span><span class="tt">Mortgage Broker<span>Residential / BTL</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
-          <label class="type" data-type="other" data-verify="reg"><span class="ti-ico"><i class="ti ti-user-star"></i></span><span class="tt">Other Professional<span>Tell us more</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
+        <h2>Tell us about your firm</h2>
+        <p class="sub">A few essentials so we can set up your partner account. We only use these to contact you about referrals.</p>
+        <div class="field">
+          <label>What kind of professional are you?</label>
+          <div class="type-grid" id="typeGrid" style="margin-top:2px;">
+            <label class="type" data-type="solicitor" data-verify="sra"><span class="ti-ico"><i class="ti ti-gavel"></i></span><span class="tt">Solicitor<span>Conveyancing / private client</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
+            <label class="type" data-type="ifa" data-verify="fca"><span class="ti-ico"><i class="ti ti-chart-line"></i></span><span class="tt">Financial Adviser<span>IFA / wealth</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
+            <label class="type" data-type="estate_agent" data-verify="reg"><span class="ti-ico"><i class="ti ti-home"></i></span><span class="tt">Estate Agent<span>Sales &amp; lettings</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
+            <label class="type" data-type="other" data-verify="reg"><span class="ti-ico"><i class="ti ti-user-star"></i></span><span class="tt">Other Professional<span>Tell us more</span></span><span class="tick"><i class="ti ti-check"></i></span></label>
+          </div>
+          <div class="ferr" id="eType"><i class="ti ti-alert-circle"></i> Please choose the option that best describes you.</div>
         </div>
-      </div>
-      <div class="wactions">
-        <span></span>
-        <button class="btn btn-primary" id="w1next" disabled>Continue <i class="ti ti-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- STEP 2 · FIRM INFO -->
-    <div class="step" data-wstep="2">
-      <div class="wcard">
-        <h2>Your firm details</h2>
-        <p class="sub">Just the essentials to set up your partner account. We’ll only use these to contact you about referrals.</p>
         <div class="field">
           <label>Firm name</label>
           <div class="input-wrap"><i class="ti ti-building prefix"></i><input class="input" id="fFirm" placeholder="e.g. King Street Solicitors LLP"><i class="ti ti-check valid"></i></div>
@@ -440,6 +453,7 @@ a{color:inherit;text-decoration:none;}
           <label>Work email</label>
           <div class="input-wrap"><i class="ti ti-mail prefix"></i><input class="input" id="fEmail" type="email" placeholder="you@firm.co.uk"><i class="ti ti-check valid"></i></div>
           <div class="ferr" id="eEmail"><i class="ti ti-alert-circle"></i> Please enter a valid email address.</div>
+          <div class="hint">This becomes your portal username. Each firm has one login.</div>
         </div>
         <div class="field">
           <label>Phone number</label>
@@ -448,77 +462,34 @@ a{color:inherit;text-decoration:none;}
         </div>
       </div>
       <div class="wactions">
-        <button class="btn btn-ghost" data-back><i class="ti ti-arrow-left"></i> Back</button>
-        <button class="btn btn-primary" id="w2next">Continue <i class="ti ti-arrow-right"></i></button>
+        <span></span>
+        <button class="btn btn-primary" id="w1next">Continue <i class="ti ti-arrow-right"></i></button>
       </div>
     </div>
 
-    <!-- STEP 3 · VERIFICATION -->
-    <div class="step" data-wstep="3">
+    <!-- STEP 2 · VERIFICATION -->
+    <div class="step" data-wstep="2">
       <div class="wcard">
         <h2>Professional verification</h2>
-        <p class="sub">This helps us verify your professional status before activation, it keeps the programme trusted for everyone.</p>
+        <p class="sub">This lets our team confirm your professional status before we activate your account. It keeps the programme trusted for everyone.</p>
 
         <div class="field" data-vf="sra">
-          <label>SRA number</label>
+          <label>SRA number <span class="optional">recommended</span></label>
           <div class="input-wrap"><i class="ti ti-shield-check prefix"></i><input class="input" placeholder="e.g. 543210"></div>
           <div class="hint">Your Solicitors Regulation Authority number. We use it to confirm your firm is currently authorised.</div>
         </div>
         <div class="field hide" data-vf="fca">
-          <label>FCA reference number</label>
+          <label>FCA reference number <span class="optional">recommended</span></label>
           <div class="input-wrap"><i class="ti ti-shield-check prefix"></i><input class="input" placeholder="e.g. 123456"></div>
           <div class="hint">Your Financial Conduct Authority firm reference. We check this against the FCA register.</div>
         </div>
-        <div class="field hide" data-vf="body">
-          <label>Professional body &amp; membership no. <span class="optional">optional</span></label>
-          <div class="input-wrap"><i class="ti ti-certificate prefix"></i><input class="input" placeholder="e.g. ICAEW · 1234567"></div>
-          <div class="hint">ICAEW, ACCA, CIOT or similar. Helps us fast-track your approval.</div>
-        </div>
         <div class="field hide" data-vf="reg">
-          <label>Registration number <span class="optional">optional</span></label>
-          <div class="input-wrap"><i class="ti ti-id prefix"></i><input class="input" placeholder="Company number or professional registration"></div>
-          <div class="hint">Anything that helps us confirm you’re a genuine professional. Not sure? You can leave this blank.</div>
+          <label>Registration or membership number <span class="optional">optional</span></label>
+          <div class="input-wrap"><i class="ti ti-id prefix"></i><input class="input" placeholder="Company number, redress scheme or professional body"></div>
+          <div class="hint">Anything that helps us confirm you are a genuine professional. Not sure? You can leave this blank.</div>
         </div>
 
-        <div class="alert calm" style="margin-top:6px;"><i class="ti ti-info-circle"></i><div><b>Why we ask this:</b> we only accept regulated professionals so clients, and your reputation, stay protected. We never share your details.</div></div>
-      </div>
-      <div class="wactions">
-        <button class="btn btn-ghost" data-back><i class="ti ti-arrow-left"></i> Back</button>
-        <button class="btn btn-primary" id="w3next">Continue <i class="ti ti-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- STEP 4 · HOW IT WORKS -->
-    <div class="step" data-wstep="4">
-      <div class="wcard">
-        <h2>How partnering works</h2>
-        <p class="sub">Simple, transparent and completely privacy-safe. Here’s the whole process.</p>
-        <div class="hiw">
-          <div class="hiw-step">
-            <span class="num">1</span>
-            <div><h4>You refer a client</h4><p>Send us a client in under two minutes, just their name and contact details. That’s all we need from you.</p></div>
-          </div>
-          <div class="hiw-step">
-            <span class="num">2</span>
-            <div><h4>We complete the CGT work</h4><p>Our qualified team handles documents, calculations, client approval and HMRC filing, fully managed, start to finish.</p></div>
-          </div>
-          <div class="hiw-step">
-            <span class="num">3</span>
-            <div><h4>You track progress</h4><p>Watch each referral move through the journey from your dashboard.</p>
-              <div class="stage-track">
-                <span class="stage-pill">Stage 1</span><i class="ti ti-arrow-right stage-arrow"></i>
-                <span class="stage-pill">Stage 2</span><i class="ti ti-arrow-right stage-arrow"></i>
-                <span class="stage-pill">Stage 3</span><i class="ti ti-arrow-right stage-arrow"></i>
-                <span class="stage-pill">Completed</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="privacy-row">
-          <div class="privacy"><i class="ti ti-eye-off"></i><b>No financial data</b><span>You never see tax figures or calculations.</span></div>
-          <div class="privacy"><i class="ti ti-file-shield"></i><b>No documents</b><span>Client documents are never visible to partners.</span></div>
-          <div class="privacy"><i class="ti ti-shield-lock"></i><b>Secure &amp; compliant</b><span>Privacy-safe, GDPR-compliant by design.</span></div>
-        </div>
+        <div class="alert calm" style="margin-top:6px;"><i class="ti ti-shield-check"></i><div><b>Reviewed by our team, not an automated check.</b> We approve each application by hand, usually within one business day. Partners are not put through client identity checks, and we never share your details.</div></div>
       </div>
       <div class="wactions">
         <button class="btn btn-ghost" data-back><i class="ti ti-arrow-left"></i> Back</button>
@@ -571,19 +542,13 @@ a{color:inherit;text-decoration:none;}
           <div class="r"><i class="ti ti-circle-check-filled"></i><span>Privacy-safe, you never see client financials</span></div>
         </div>
       </div>
-      <p class="quote">“I log in, see exactly where each client is, and get on with my day. No chasing.”, Partner, Leeds</p>
+      <p class="quote">One secure login for your firm. See where every referral is, without chasing anyone or handling a single figure.</p>
     </div>
     <div class="formpane">
       <div class="inner">
         <a class="tlink" data-goto="value" style="display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;padding-left:0;"><i class="ti ti-arrow-left"></i> Back</a>
         <h1 style="font-size:27px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Partner log in</h1>
         <p style="font-size:15px;color:var(--muted);margin-bottom:24px;">Access your referrals and progress updates.</p>
-
-        <button class="btn btn-ghost btn-block" id="googleLogin" style="justify-content:center;margin-bottom:18px;">
-          <svg width="17" height="17" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
-          Log in with Google
-        </button>
-        <div style="display:flex;align-items:center;gap:14px;margin:0 0 18px;"><span style="flex:1;height:1px;background:var(--border);"></span><span style="font-size:13px;color:var(--muted-2);">or</span><span style="flex:1;height:1px;background:var(--border);"></span></div>
 
         <div class="field">
           <label>Work email</label>
@@ -625,7 +590,7 @@ a{color:inherit;text-decoration:none;}
           <div class="r"><i class="ti ti-circle-check-filled"></i><span>Privacy-safe, no client financials, ever</span></div>
         </div>
       </div>
-      <p class="quote">“Set-up took two minutes and I can see exactly where my clients are without chasing anyone.”, Partner, Bristol</p>
+      <p class="quote">Set your password once and your partner portal is ready. Referring a client then takes under two minutes.</p>
     </div>
     <div class="formpane">
       <div class="inner">
@@ -702,20 +667,18 @@ a{color:inherit;text-decoration:none;}
 
   /* ---------- wizard ---------- */
   const WSTEPS=[
-    {n:1,label:'Your role'},
-    {n:2,label:'Firm details'},
-    {n:3,label:'Verification'},
-    {n:4,label:'How it works'},
+    {n:1,label:'You & your firm'},
+    {n:2,label:'Verification'},
   ];
   function renderWizard(){
     $$('.step').forEach(el=>el.classList.toggle('show', +el.dataset.wstep===state.wstep));
     const segs=$$('#stepper .seg');
     segs.forEach((s,i)=>{ s.classList.toggle('done', i+1<state.wstep); s.classList.toggle('active', i+1===state.wstep); });
     $('#wPhase').textContent=WSTEPS[state.wstep-1].label;
-    $('#wCount').textContent='Step '+state.wstep+' of 4';
+    $('#wCount').textContent='Step '+state.wstep+' of 2';
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  function goStep(n){ state.wstep=Math.max(1,Math.min(4,n)); renderWizard(); }
+  function goStep(n){ state.wstep=Math.max(1,Math.min(2,n)); renderWizard(); }
 
   $('#startApp').addEventListener('click',()=>{ setView('wizard'); goStep(1); });
   $$('[data-back]').forEach(b=>b.addEventListener('click',()=>goStep(state.wstep-1)));
@@ -737,33 +700,25 @@ a{color:inherit;text-decoration:none;}
     setTimeout(()=>{ window.location.href='FileCGTOnline Portal.dc.html#partner'; }, 500);
   }
   $('#loginBtn').addEventListener('click',doLogin);
-  $('#googleLogin').addEventListener('click',()=>{ toast('Signing you in…'); setTimeout(()=>{ window.location.href='FileCGTOnline Portal.dc.html#partner'; },500); });
   lPw.addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
 
   /* ---------- deep-link support (#login from other pages) ---------- */
   (()=>{ const h=(location.hash||'').replace('#','').toLowerCase(); if(h==='login') setView('login'); else if(h==='apply'){ setView('wizard'); goStep(1); } })();
 
-  /* STEP 1 · type */
+  /* STEP 1 · type + firm form */
+  const setErr=(inp,err,bad)=>{ inp.classList.toggle('err',bad); err.classList.toggle('show',bad); inp.parentElement.classList.toggle('good',!bad&&inp.value.trim()); };
+  const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   $$('#typeGrid .type').forEach(t=>t.addEventListener('click',()=>{
     $$('#typeGrid .type').forEach(x=>x.classList.remove('sel'));
     t.classList.add('sel'); state.type=t.dataset.type; state.verify=t.dataset.verify;
-    $('#w1next').disabled=false;
+    $('#eType').classList.remove('show');
   }));
-  $('#w1next').addEventListener('click',()=>{
-    if(!state.type){toast('Please choose your role');return;}
-    // reveal the right verification field
-    $$('#v-wizard [data-vf]').forEach(f=>f.classList.toggle('hide', f.dataset.vf!==state.verify));
-    goStep(2);
-  });
-
-  /* STEP 2 · firm form */
-  const setErr=(inp,err,bad)=>{ inp.classList.toggle('err',bad); err.classList.toggle('show',bad); inp.parentElement.classList.toggle('good',!bad&&inp.value.trim()); };
-  const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   ['fFirm','fName','fEmail','fPhone'].forEach(id=>{
     const el=$('#'+id); el.addEventListener('input',()=>{ const w=el.parentElement; w.classList.toggle('good', id==='fEmail'?emailOk(el.value):el.value.trim().length>1); });
   });
-  $('#w2next').addEventListener('click',()=>{
+  $('#w1next').addEventListener('click',()=>{
     let ok=true;
+    if(!state.type){ $('#eType').classList.add('show'); ok=false; } else { $('#eType').classList.remove('show'); }
     const F=$('#fFirm'),N=$('#fName'),E=$('#fEmail'),P=$('#fPhone');
     if(!F.value.trim()){setErr(F,$('#eFirm'),true);ok=false;}else setErr(F,$('#eFirm'),false);
     if(!N.value.trim()){setErr(N,$('#eName'),true);ok=false;}else setErr(N,$('#eName'),false);
@@ -771,11 +726,10 @@ a{color:inherit;text-decoration:none;}
     if(!P.value.trim()){setErr(P,$('#ePhone'),true);ok=false;}else setErr(P,$('#ePhone'),false);
     if(!ok){toast('Please check the highlighted fields');return;}
     state.firm=F.value.trim();state.name=N.value.trim();state.email=E.value.trim();state.phone=P.value.trim();
-    goStep(3);
+    // reveal the right verification field for the chosen professional type
+    $$('#v-wizard [data-vf]').forEach(f=>f.classList.toggle('hide', f.dataset.vf!==state.verify));
+    goStep(2);
   });
-
-  /* STEP 3 → 4 */
-  $('#w3next').addEventListener('click',()=>goStep(4));
 
   /* STEP 4 · submit */
   $('#submitApp').addEventListener('click',()=>{

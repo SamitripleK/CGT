@@ -394,7 +394,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 .cbar.done{background:var(--su-dot);}
 @media (max-width:900px){ .cstep .clabel{display:none;} .cstepper-top{max-width:none;} .cstepper-top .inner{gap:8px;} .cbar{width:16px;} }
 
-/* ---- AI chat (step 2) — contained scroll, pinned reply dock ---- */
+/* ---- AI chat (step 2): contained scroll, pinned reply dock ---- */
 .chat{display:flex;flex-direction:column;height:calc(100vh - 300px);height:calc(100dvh - 300px);min-height:320px;max-height:660px;}
 .chat-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:6px;}
 .msg{display:flex;gap:10px;max-width:90%;animation:rise .28s ease;}
@@ -466,7 +466,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 .receipt-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:14px;margin-top:4px;border-top:1px solid var(--line);}
 .receipt-actions .btn{flex:1;justify-content:center;font-size:13px;padding:10px 12px;}
 
-/* ---- letter of engagement (step 3) — rendered inline, native to this step ---- */
+/* ---- letter of engagement (step 3): rendered inline, native to this step ---- */
 .loe-doc{border:1px solid var(--border-in);border-radius:14px;background:var(--cream);max-height:460px;overflow-y:auto;padding:24px 24px 26px;scroll-behavior:smooth;}
 .loe-doc:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
 .loe-doc .loe-title{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green-link);margin-bottom:10px;}
@@ -545,7 +545,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
         <div class="step-head">
           <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 4 · Case information</span>
           <h1>Let's set up your CGT case</h1>
-          <p>A couple of quick details to get started — then our assistant takes it from here in a short chat.</p>
+          <p>A couple of quick details to get started, then our assistant takes it from here in a short chat.</p>
         </div>
         <div class="card card-lg">
           <div class="field">
@@ -756,7 +756,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
         <div class="step-head">
           <span class="eyebrow"><i class="ti ti-circle-check"></i> Step 4 of 4 · Confirm &amp; pay</span>
           <h1>You're one step from being sorted</h1>
-          <p>Everything below is what our assistant captured. Check it's right, then confirm — and we'll take the 60-day HMRC deadline off your plate.</p>
+          <p>Everything below is what our assistant captured. Check it's right, then confirm, and we'll take the 60-day HMRC deadline off your plate.</p>
         </div>
 
         <!-- case summary (proof of work you own) -->
@@ -768,7 +768,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
         <!-- fixed-price value block -->
         <div class="card card-lg">
           <div class="fee-hero">
-            <div class="fl">Your fixed price — that's everything</div>
+            <div class="fl">Your fixed price, that's everything</div>
             <div class="fv" id="feeVal">£149</div>
             <div class="fsub">One fixed fee. No hidden charges, ever.</div>
           </div>
@@ -838,7 +838,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
           <div class="success-top">
             <div class="burst"><i class="ti ti-circle-check"></i></div>
             <h1>You're sorted. We're now acting for you.</h1>
-            <p class="sub" id="scSub">Your case is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.</p>
+            <p class="sub" id="scSub">Your case is created and paid, and your 60-day HMRC deadline is now our responsibility, not yours to track.</p>
           </div>
 
           <!-- two-column body -->
@@ -1084,15 +1084,15 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
   // Ordered question queue; each answer may inject follow-ups.
   function baseQuestions(){
     return [
-      {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First — how was it owned?"],
+      {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First, how was it owned?"],
         input:{type:'chips', options:[{label:'I owned it on my own',value:'sole',icon:'ti ti-user'},{label:'Jointly with someone',value:'joint',icon:'ti ti-users'}]},
         set:v=>{state.ownership=v;}, label:v=> v==='joint'?'Jointly owned':'Owned on my own',
         followups:v=> v==='joint' ? [{id:'share', ai:["Got it. What was your ownership share?"],
             input:{type:'chips', noOther:true, options:[{label:'50%',value:'50'},{label:'25%',value:'25'},{label:'75%',value:'75'},{label:'Another %',value:'other'}]},
             set:v=>{ if(v!=='other') state.sharePct=v; }, label:v=> v==='other'?'A different share':(v+'%'),
-            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem — what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
+            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem, what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
 
-      {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved — your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
+      {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved. Your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
 
       {id:'buyKnown', ai:["Do you have the original purchase details for this "+assetWord()+"?"],
         input:{type:'chips', options:[{label:'Yes, I have them',value:'yes',icon:'ti ti-check'},{label:"I'm not sure of the figures",value:'no',icon:'ti ti-help'}]},
@@ -1101,7 +1101,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
           {id:'buyDate', ai:["When did you acquire it?"], input:{type:'date'}, set:v=>{state.buyDate=v;}, label:v=> fmtDate(v)},
           {id:'buy', ai:["And how much did you pay for it?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.buy=v;}, label:v=> money(v)},
         ] : [
-          {id:'reconNote', ai:[{note:"That's fine — we can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
+          {id:'reconNote', ai:[{note:"That's fine. We can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
         ] },
 
       {id:'sale', ai:["How much did you sell it for?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.sale=v;}, label:v=> money(v)},
@@ -1266,7 +1266,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     typingOn();
     setTimeout(()=>{
       typingOff();
-      pushMsg('ai', "Perfect — that's everything I need.");
+      pushMsg('ai', "Perfect, that's everything I need.");
       pushMsg('ai', "Next, please review your Letter of Engagement. After that you'll see your case summary and fixed fee.");
       const dock=$('#chatDock'); dock.innerHTML='';
       const row=document.createElement('div'); row.className='chip-row';
@@ -1362,7 +1362,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       render(){ return numRow('ef_sale','How much did you sell it for?',state.sale); },
       save(r){ const e=r.querySelector('#ef_sale'); if(e) state.sale=e.value; } },
     purchase:{ title:'Purchase',
-      render(){ return `<label class="chk-row" style="margin-bottom:16px;"><input type="checkbox" id="ef_recon"${state.reconstruct?' checked':''}><span>I'm not sure of the purchase figures — reconstruct the acquisition value for me</span></label><div id="ef_buyWrap"${state.reconstruct?' style="display:none;"':''}><div class="field"><label>Purchase / acquisition date</label><input class="input" type="date" id="ef_buyDate" value="${esc(state.buyDate||'')}"></div>${numRow('ef_buy','Purchase price',state.buy)}</div>`; },
+      render(){ return `<label class="chk-row" style="margin-bottom:16px;"><input type="checkbox" id="ef_recon"${state.reconstruct?' checked':''}><span>I'm not sure of the purchase figures, reconstruct the acquisition value for me</span></label><div id="ef_buyWrap"${state.reconstruct?' style="display:none;"':''}><div class="field"><label>Purchase / acquisition date</label><input class="input" type="date" id="ef_buyDate" value="${esc(state.buyDate||'')}"></div>${numRow('ef_buy','Purchase price',state.buy)}</div>`; },
       wire(r){ const c=r.querySelector('#ef_recon'); c.addEventListener('change',()=>{ r.querySelector('#ef_buyWrap').style.display=c.checked?'none':''; }); },
       save(r){ state.reconstruct=r.querySelector('#ef_recon').checked; if(!state.reconstruct){ const d=r.querySelector('#ef_buyDate'), b=r.querySelector('#ef_buy'); if(d) state.buyDate=d.value; if(b) state.buy=b.value; } } },
     improvements:{ title:'Improvements',
@@ -1483,17 +1483,17 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     const caseName = state.service==='other' ? (state.asset||state.serviceName) : (state.address||state.serviceName);
     $('#scName').textContent = caseName;
     $('#scRef').textContent = state.ref || genRef();
-    const scSub=$('#scSub'); if(scSub) scSub.innerHTML = 'Your case for <b>'+esc(caseName)+'</b> is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.';
+    const scSub=$('#scSub'); if(scSub) scSub.innerHTML = 'Your case for <b>'+esc(caseName)+'</b> is created and paid, and your 60-day HMRC deadline is now our responsibility, not yours to track.';
     const info=calcDeadline();
     if(info && info.days>=0) $('#scDeadline').textContent = info.days+' day'+(info.days===1?'':'s')+' left';
-    // "Add deadline to calendar" — Google Calendar all-day event on the HMRC deadline
+    // "Add deadline to calendar": Google Calendar all-day event on the HMRC deadline
     const cal=$('#scCal');
     if(cal && info && info.dl){
       const d=info.dl, pad=n=>String(n).padStart(2,'0');
       const ymd=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
       const end=new Date(d.getTime()+86400000), ymdE=end.getFullYear()+pad(end.getMonth()+1)+pad(end.getDate());
       const url='https://calendar.google.com/calendar/render?action=TEMPLATE'
-        +'&text='+encodeURIComponent('HMRC CGT deadline — '+caseName)
+        +'&text='+encodeURIComponent('HMRC CGT deadline: '+caseName)
         +'&dates='+ymd+'/'+ymdE
         +'&details='+encodeURIComponent('60-day Capital Gains Tax return & payment due to HMRC. Case ref '+($('#scRef').textContent)+' · File CGT Online is handling this for you.');
       cal.setAttribute('href',url);
