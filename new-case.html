@@ -25,7 +25,7 @@
 })();
 </script>
 <title>Start a New Case · FileCGTOnline</title>
-<meta name="description" content="Guided Capital Gains Tax case setup in 4 simple steps: your case information, an AI-assisted chat, review and pricing, then your Letter of Engagement and secure payment." />
+<meta name="description" content="Guided Capital Gains Tax case setup in 5 simple steps: your case information, a scoping chat, your Letter of Engagement, review and pricing, then secure payment." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -38,14 +38,14 @@
    ============================================================ */
 :root{
   --navy:#1b2d4f; --navy-2:#253f6e; --navy-dark:#182843; --ink:#0a1120;
-  --lime:#adee68; --lime-hover:#9ce04f; --green:#83C341; --green-hover:#6fae32; --green-link:#5f7a2e;
-  --cream:#f6f2ea; --cream-2:#efe9dc; --surface:#fff; --surface-blur:rgba(255,255,255,0.9);
-  --border:#ebe4d6; --border-in:#ddd5c5; --line:#f0ebe0;
+  --lime:#83C341; --lime-hover:#6fae32; --green:#83C341; --green-hover:#6fae32; --green-link:#5f7a2e;
+  --cream:#f7f4ee; --cream-2:#efeae1; --surface:#fff; --surface-blur:rgba(255,255,255,0.9);
+  --border:#eee9e1; --border-in:#e5dfd4; --line:#f3efe8;
   --text:#1b2d4f; --muted:#64748b; --muted-2:#94a3b8; --muted-3:#475569;
-  --su-bg:#e8f5e9; --su-tx:#388e3c; --su-dot:#43a047; --su-soft:#f1f8e8;
-  --wa-bg:#fff4d6; --wa-tx:#b7791f; --wa-dot:#ffc107;
-  --er-bg:#fdeaee; --er-tx:#d32f2f; --er-dot:#e53935;
-  --in-bg:#e3f2fd; --in-tx:#1976d2;
+  --su-bg:#d3f0dd; --su-tx:#0b6f48; --su-dot:#43a047; --su-soft:#f1f8e8;
+  --wa-bg:#f9ecc0; --wa-tx:#875e00; --wa-dot:#e0a800;
+  --er-bg:#fbdcdf; --er-tx:#bd1f2d; --er-dot:#e53935;
+  --in-bg:#dbe9fe; --in-tx:#1e50c8;
   --gr-bg:#f1f5f9; --gr-tx:#475569; --gr-dot:#94a3b8;
   --r-card:16px; --r-lg:20px; --r-in:12px; --r-chip:14px; --r-pill:9999px;
   --sh-card:0 1px 2px rgba(27,45,79,0.04);
@@ -60,10 +60,10 @@ html[data-theme="dark"]{
   --text:#eaf0fb; --muted:#9fadc4; --muted-2:#7d8ba4; --muted-3:#c2cde0;
   --navy:#2c3a5f; --navy-2:#3a4c7d; --navy-dark:#223154;
   --green-link:#a9d97a;
-  --su-bg:rgba(67,160,71,0.18); --su-tx:#79cf82; --su-soft:rgba(67,160,71,0.12);
-  --wa-bg:rgba(255,193,7,0.16); --wa-tx:#f0b955;
-  --er-bg:rgba(229,57,53,0.16); --er-tx:#f2726e;
-  --in-bg:rgba(66,133,244,0.18); --in-tx:#74b0f4;
+  --su-bg:rgba(35,180,120,0.18); --su-tx:#5fd0a0; --su-soft:rgba(67,160,71,0.12);
+  --wa-bg:rgba(212,163,20,0.22); --wa-tx:#ecc35c;
+  --er-bg:rgba(230,80,90,0.20); --er-tx:#f58b8b;
+  --in-bg:rgba(59,124,246,0.20); --in-tx:#7fb2f6;
   --gr-bg:#232d47; --gr-tx:#c2cde0;
 }
 body{transition:background-color .22s ease,color .22s ease;}
@@ -394,7 +394,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 .cbar.done{background:var(--su-dot);}
 @media (max-width:900px){ .cstep .clabel{display:none;} .cstepper-top{max-width:none;} .cstepper-top .inner{gap:8px;} .cbar{width:16px;} }
 
-/* ---- AI chat (step 2) — contained scroll, pinned reply dock ---- */
+/* ---- Scoping chat (step 2): contained scroll, pinned reply dock ---- */
 .chat{display:flex;flex-direction:column;height:calc(100vh - 300px);height:calc(100dvh - 300px);min-height:320px;max-height:660px;}
 .chat-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:6px;}
 .msg{display:flex;gap:10px;max-width:90%;animation:rise .28s ease;}
@@ -466,7 +466,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 .receipt-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:14px;margin-top:4px;border-top:1px solid var(--line);}
 .receipt-actions .btn{flex:1;justify-content:center;font-size:13px;padding:10px 12px;}
 
-/* ---- letter of engagement (step 3) — rendered inline, native to this step ---- */
+/* ---- letter of engagement (step 3): rendered inline, native to this step ---- */
 .loe-doc{border:1px solid var(--border-in);border-radius:14px;background:var(--cream);max-height:460px;overflow-y:auto;padding:24px 24px 26px;scroll-behavior:smooth;}
 .loe-doc:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
 .loe-doc .loe-title{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green-link);margin-bottom:10px;}
@@ -543,9 +543,9 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       <!-- ===== STEP 1 · CASE INFORMATION ===== -->
       <section class="step" data-step="1">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 4 · Case information</span>
+          <span class="eyebrow"><i class="ti ti-map-pin"></i> Step 1 of 5 · Case information</span>
           <h1>Let's set up your CGT case</h1>
-          <p>A couple of quick details to get started — then our assistant takes it from here in a short chat.</p>
+          <p>A couple of quick details to get started, then our assistant takes it from here in a short chat.</p>
         </div>
         <div class="card card-lg">
           <div class="field">
@@ -584,10 +584,10 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
         </div>
       </section>
 
-      <!-- ===== STEP 2 · AI CHAT ONBOARDING ===== -->
+      <!-- ===== STEP 2 · SCOPING ONBOARDING ===== -->
       <section class="step" data-step="2">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-sparkles"></i> Step 2 of 4 · Guided by AI</span>
+          <span class="eyebrow"><i class="ti ti-sparkles"></i> Step 2 of 5 · Scoping</span>
           <h1>A quick chat about your disposal</h1>
           <p>Answer in your own words. Our assistant asks only what's relevant and notes everything for your case.</p>
         </div>
@@ -600,7 +600,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       <!-- ===== STEP 3 · AGREEMENT (LETTER OF ENGAGEMENT) ===== -->
       <section class="step" data-step="3">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-file-certificate"></i> Step 3 of 4 · Agreement</span>
+          <span class="eyebrow"><i class="ti ti-file-certificate"></i> Step 3 of 5 · Agreement</span>
           <h1>Your Letter of Engagement</h1>
           <p>Please read the letter setting out how we'll act for you and confirm you agree. Next you'll review your case, pricing and pay.</p>
         </div>
@@ -754,9 +754,9 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       <!-- ===== STEP 4 · CONFIRM & PAY ===== -->
       <section class="step" data-step="4">
         <div class="step-head">
-          <span class="eyebrow"><i class="ti ti-circle-check"></i> Step 4 of 4 · Confirm &amp; pay</span>
-          <h1>You're one step from being sorted</h1>
-          <p>Everything below is what our assistant captured. Check it's right, then confirm — and we'll take the 60-day HMRC deadline off your plate.</p>
+          <span class="eyebrow"><i class="ti ti-list-check"></i> Step 4 of 5 · Review</span>
+          <h1>Review your case before you pay</h1>
+          <p>Everything below is what our assistant captured, plus your fixed price. Check it's right, then continue to secure payment.</p>
         </div>
 
         <!-- case summary (proof of work you own) -->
@@ -768,7 +768,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
         <!-- fixed-price value block -->
         <div class="card card-lg">
           <div class="fee-hero">
-            <div class="fl">Your fixed price — that's everything</div>
+            <div class="fl">Your fixed price, that's everything</div>
             <div class="fv" id="feeVal">£149</div>
             <div class="fsub">One fixed fee. No hidden charges, ever.</div>
           </div>
@@ -789,6 +789,16 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
             <div class="field-err" id="errCode"><i class="ti ti-alert-circle"></i> That code isn't valid. Try <b>CGT10</b>.</div>
             <div class="hint hide" id="okCode" style="color:var(--su-tx);"><i class="ti ti-check"></i> Code applied.</div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ===== STEP 5 · PAYMENT ===== -->
+      <section class="step" data-step="5">
+        <div class="step-head">
+          <span class="eyebrow"><i class="ti ti-lock"></i> Step 5 of 5 · Payment</span>
+          <h1>Secure payment</h1>
+          <p>Pay your fixed fee to start your case. Nothing is filed with HMRC until you review and approve the draft.</p>
         </div>
 
         <!-- payment -->
@@ -838,7 +848,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
           <div class="success-top">
             <div class="burst"><i class="ti ti-circle-check"></i></div>
             <h1>You're sorted. We're now acting for you.</h1>
-            <p class="sub" id="scSub">Your case is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.</p>
+            <p class="sub" id="scSub">Your case is created and paid, and your 60-day HMRC deadline is now our responsibility, not yours to track.</p>
           </div>
 
           <!-- two-column body -->
@@ -942,9 +952,10 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
   /* ---------- 4-step client model ---------- */
   const CLIENT_STEPS = [
     {n:1, key:'Case info'},
-    {n:2, key:'AI chat'},
+    {n:2, key:'Scoping'},
     {n:3, key:'Engagement'},
     {n:4, key:'Review'},
+    {n:5, key:'Payment'},
   ];
 
   const state = {
@@ -983,13 +994,15 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     const next = $('#btnNext');
     next.disabled = false;
     if(step===2){ next.style.display='none'; }
-    else if(step===4){ next.style.display='inline-flex'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
+    else if(step===5){ next.style.display='inline-flex'; next.classList.remove('btn-primary'); next.classList.add('btn-lime'); }
+    else if(step===4){ next.style.display='inline-flex'; next.innerHTML='Continue to payment <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
     else { next.style.display='inline-flex'; next.innerHTML='Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
     buildStepper();
     if(step===2 && !state.chatStarted) startChat();
     if(step===3){ refreshPayCta(); }
-    if(step===4){
-      renderReview(); renderFee(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show');
+    if(step===4){ renderReview(); renderFee(); }
+    if(step===5){
+      renderFee(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show');
       // deadline chip at the decision point
       const dl=calcDeadline(), chip=$('#payDeadline');
       if(chip){ if(dl && dl.days>=0){ chip.style.display=''; chip.innerHTML='<i class="ti ti-clock"></i> '+dl.days+' day'+(dl.days===1?'':'s')+' left'; } else chip.style.display='none'; }
@@ -1077,22 +1090,22 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     return Math.round(taxable*rate);
   }
 
-  /* ================= STEP 2 · AI CHAT ENGINE ================= */
+  /* ================= STEP 2 · SCOPING CHAT ENGINE ================= */
   const assetWord = ()=> state.service==='other' ? 'asset' : 'property';
   const money = v => '£'+Number(v||0).toLocaleString('en-GB');
 
   // Ordered question queue; each answer may inject follow-ups.
   function baseQuestions(){
     return [
-      {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First — how was it owned?"],
+      {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First, how was it owned?"],
         input:{type:'chips', options:[{label:'I owned it on my own',value:'sole',icon:'ti ti-user'},{label:'Jointly with someone',value:'joint',icon:'ti ti-users'}]},
         set:v=>{state.ownership=v;}, label:v=> v==='joint'?'Jointly owned':'Owned on my own',
         followups:v=> v==='joint' ? [{id:'share', ai:["Got it. What was your ownership share?"],
             input:{type:'chips', noOther:true, options:[{label:'50%',value:'50'},{label:'25%',value:'25'},{label:'75%',value:'75'},{label:'Another %',value:'other'}]},
             set:v=>{ if(v!=='other') state.sharePct=v; }, label:v=> v==='other'?'A different share':(v+'%'),
-            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem — what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
+            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem, what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
 
-      {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved — your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
+      {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved. Your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
 
       {id:'buyKnown', ai:["Do you have the original purchase details for this "+assetWord()+"?"],
         input:{type:'chips', options:[{label:'Yes, I have them',value:'yes',icon:'ti ti-check'},{label:"I'm not sure of the figures",value:'no',icon:'ti ti-help'}]},
@@ -1101,7 +1114,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
           {id:'buyDate', ai:["When did you acquire it?"], input:{type:'date'}, set:v=>{state.buyDate=v;}, label:v=> fmtDate(v)},
           {id:'buy', ai:["And how much did you pay for it?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.buy=v;}, label:v=> money(v)},
         ] : [
-          {id:'reconNote', ai:[{note:"That's fine — we can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
+          {id:'reconNote', ai:[{note:"That's fine. We can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
         ] },
 
       {id:'sale', ai:["How much did you sell it for?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.sale=v;}, label:v=> money(v)},
@@ -1266,7 +1279,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     typingOn();
     setTimeout(()=>{
       typingOff();
-      pushMsg('ai', "Perfect — that's everything I need.");
+      pushMsg('ai', "Perfect, that's everything I need.");
       pushMsg('ai', "Next, please review your Letter of Engagement. After that you'll see your case summary and fixed fee.");
       const dock=$('#chatDock'); dock.innerHTML='';
       const row=document.createElement('div'); row.className='chip-row';
@@ -1291,7 +1304,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
   function renderFee(){
     $('#feeVal').textContent = fmtGBP(total());
     const pt=$('#payTotal'); if(pt) pt.textContent = fmtGBP(total());
-    if(state.step===4){ const b=$('#btnNext'); if(b) b.innerHTML='Pay '+fmtGBP(total())+' &amp; start my case <i class="ti ti-lock"></i>'; }
+    if(state.step===5){ const b=$('#btnNext'); if(b) b.innerHTML='Pay '+fmtGBP(total())+' &amp; start my case <i class="ti ti-lock"></i>'; }
     const items=priceItems();
     let rows = items.map(i=>`<div class="price-row"><span class="lab">${i.label}</span><span class="val">${fmtGBP(i.amt)}</span></div>`).join('');
     if(state.codeDiscount) rows += `<div class="price-row disc"><span class="lab"><i class="ti ti-ticket" style="color:var(--su-tx);font-size:15px;"></i> Promo ${state.codeApplied||''}</span><span class="val">–${fmtGBP(state.codeDiscount)}</span></div>`;
@@ -1362,7 +1375,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       render(){ return numRow('ef_sale','How much did you sell it for?',state.sale); },
       save(r){ const e=r.querySelector('#ef_sale'); if(e) state.sale=e.value; } },
     purchase:{ title:'Purchase',
-      render(){ return `<label class="chk-row" style="margin-bottom:16px;"><input type="checkbox" id="ef_recon"${state.reconstruct?' checked':''}><span>I'm not sure of the purchase figures — reconstruct the acquisition value for me</span></label><div id="ef_buyWrap"${state.reconstruct?' style="display:none;"':''}><div class="field"><label>Purchase / acquisition date</label><input class="input" type="date" id="ef_buyDate" value="${esc(state.buyDate||'')}"></div>${numRow('ef_buy','Purchase price',state.buy)}</div>`; },
+      render(){ return `<label class="chk-row" style="margin-bottom:16px;"><input type="checkbox" id="ef_recon"${state.reconstruct?' checked':''}><span>I'm not sure of the purchase figures, reconstruct the acquisition value for me</span></label><div id="ef_buyWrap"${state.reconstruct?' style="display:none;"':''}><div class="field"><label>Purchase / acquisition date</label><input class="input" type="date" id="ef_buyDate" value="${esc(state.buyDate||'')}"></div>${numRow('ef_buy','Purchase price',state.buy)}</div>`; },
       wire(r){ const c=r.querySelector('#ef_recon'); c.addEventListener('change',()=>{ r.querySelector('#ef_buyWrap').style.display=c.checked?'none':''; }); },
       save(r){ state.reconstruct=r.querySelector('#ef_recon').checked; if(!state.reconstruct){ const d=r.querySelector('#ef_buyDate'), b=r.querySelector('#ef_buy'); if(d) state.buyDate=d.value; if(b) state.buy=b.value; } } },
     improvements:{ title:'Improvements',
@@ -1415,7 +1428,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     toast('Updated');
   }
 
-  /* ================= STEP 3 · PAYMENT ================= */
+  /* ================= STEP 5 · PAYMENT ================= */
   $$('#payForm .pay-wallet').forEach(m=>m.addEventListener('click',()=>{
     $$('#payForm .pay-wallet').forEach(x=>x.classList.remove('sel')); m.classList.add('sel');
     $('#cardFields').classList.add('hide'); $('#cardToggle').classList.remove('sel');
@@ -1444,7 +1457,8 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       goTo(2); return;
     }
     if(state.step===3){ goTo(4); return; }
-    if(state.step===4){ startPayment(); return; }
+    if(state.step===4){ goTo(5); return; }
+    if(state.step===5){ startPayment(); return; }
   }
   $('#btnNext').addEventListener('click',next);
   $('#btnBack').addEventListener('click',()=>{ if(state.step>1) goTo(state.step-1); });
@@ -1483,17 +1497,17 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     const caseName = state.service==='other' ? (state.asset||state.serviceName) : (state.address||state.serviceName);
     $('#scName').textContent = caseName;
     $('#scRef').textContent = state.ref || genRef();
-    const scSub=$('#scSub'); if(scSub) scSub.innerHTML = 'Your case for <b>'+esc(caseName)+'</b> is created and paid — and your 60-day HMRC deadline is now our responsibility, not yours to track.';
+    const scSub=$('#scSub'); if(scSub) scSub.innerHTML = 'Your case for <b>'+esc(caseName)+'</b> is created and paid, and your 60-day HMRC deadline is now our responsibility, not yours to track.';
     const info=calcDeadline();
     if(info && info.days>=0) $('#scDeadline').textContent = info.days+' day'+(info.days===1?'':'s')+' left';
-    // "Add deadline to calendar" — Google Calendar all-day event on the HMRC deadline
+    // "Add deadline to calendar": Google Calendar all-day event on the HMRC deadline
     const cal=$('#scCal');
     if(cal && info && info.dl){
       const d=info.dl, pad=n=>String(n).padStart(2,'0');
       const ymd=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
       const end=new Date(d.getTime()+86400000), ymdE=end.getFullYear()+pad(end.getMonth()+1)+pad(end.getDate());
       const url='https://calendar.google.com/calendar/render?action=TEMPLATE'
-        +'&text='+encodeURIComponent('HMRC CGT deadline — '+caseName)
+        +'&text='+encodeURIComponent('HMRC CGT deadline: '+caseName)
         +'&dates='+ymd+'/'+ymdE
         +'&details='+encodeURIComponent('60-day Capital Gains Tax return & payment due to HMRC. Case ref '+($('#scRef').textContent)+' · File CGT Online is handling this for you.');
       cal.setAttribute('href',url);
@@ -1506,7 +1520,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
   buildStepper();
   (function(){
     var m=(location.hash||'').match(/step-?(\d+)/i);
-    var start = m ? Math.min(4,Math.max(1,parseInt(m[1],10))) : 1;
+    var start = m ? Math.min(5,Math.max(1,parseInt(m[1],10))) : 1;
     state.maxReached=start; goTo(start);
   })();
 })();
