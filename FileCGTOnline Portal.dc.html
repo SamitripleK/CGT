@@ -122,9 +122,11 @@
   .onb-input::placeholder{color:var(--tx-3);}
   .onb-input:focus,.onb-select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,45,79,0.12);}
   html[data-theme="dark"] .onb-input:focus,html[data-theme="dark"] .onb-select:focus{border-color:var(--link);box-shadow:0 0 0 3px rgba(173,238,104,0.14);}
-  .onb-select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:34px;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 11px center;}
+  .onb-select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:36px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 12px center;background-size:16px 16px;}
+  html[data-theme="dark"] .onb-select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%239fadc4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");}
   .onb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .onb-sug-item:hover{background:var(--surface-2);}
   @media (max-width:560px){
@@ -1282,8 +1284,7 @@
       <!-- Header + step tracker -->
       <div class="onb-head-pad" style="position:relative;padding:22px 24px 16px;border-bottom:1px solid var(--border-3);flex-shrink:0;">
         <button onClick="{{ onbHeaderClose }}" aria-label="{{ onbCloseAria }}" style="position:absolute;top:16px;right:16px;display:flex;width:34px;height:34px;align-items:center;justify-content:center;background:var(--surface-2);border:1px solid var(--border);border-radius:9999px;cursor:pointer;color:var(--tx-2);line-height:1;" style-hover="background:var(--muted);"><i class="ti ti-x" style="font-size:18px;"></i></button>
-        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 11px;border-radius:9999px;background:var(--su-bg);color:var(--link);border:1px solid #e4f5c7;"><i class="ti ti-sparkles" style="font-size:14px;"></i> {{ onbKicker }}</span>
-        <h2 id="onb-title" style="font-size:21px;font-weight:600;color:var(--tx);margin-top:12px;">{{ onbTitle }}</h2>
+        <h2 id="onb-title" style="font-size:21px;font-weight:600;color:var(--tx);">{{ onbTitle }}</h2>
         <p style="font-size:14px;line-height:1.6;color:var(--tx-2);margin-top:6px;max-width:48ch;">{{ onbDesc }}</p>
         <sc-if value="{{ onbShowStepper }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;align-items:center;gap:12px;margin-top:16px;">
@@ -1311,6 +1312,11 @@
               <input id="onb-mobile" class="onb-input" value="{{ onbMobile }}" onInput="{{ onbSetMobile }}" inputmode="tel" placeholder="7700 900123" style="flex:1;min-width:0;" />
             </div>
             <p style="{{ onbMobileErrStyle }}">Enter a valid mobile number.</p>
+          </div>
+          <div style="margin-top:16px;">
+            <label class="onb-label" for="onb-nino">National Insurance number</label>
+            <input id="onb-nino" class="onb-input" value="{{ onbNino }}" onInput="{{ onbSetNino }}" autocapitalize="characters" spellcheck="false" placeholder="QQ 12 34 56 C" />
+            <p style="{{ onbNinoErrStyle }}">Enter a valid National Insurance number (e.g. QQ 12 34 56 C).</p>
           </div>
         </sc-if>
 
@@ -1447,7 +1453,6 @@
         <!-- Step 1 -->
         <sc-if value="{{ onbStep1 }}" hint-placeholder-val="{{ true }}">
           <button onClick="{{ onbContinue }}" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px 20px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);">Continue <i class="ti ti-arrow-right" style="font-size:17px;"></i></button>
-          <button onClick="{{ onbSkip }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;font-weight:500;padding:12px 0 2px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="color:var(--tx);">Skip for now</button>
         </sc-if>
 
         <!-- Step 2 -->
@@ -1456,7 +1461,6 @@
             <button onClick="{{ onbBack }}" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:1px solid var(--border-2);color:var(--tx);font-size:15px;font-weight:500;padding:13px 18px;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--surface-2);"><i class="ti ti-arrow-left" style="font-size:16px;"></i> Back</button>
             <button onClick="{{ onbSave }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px 20px;border:none;border-radius:12px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="background:var(--navy-hover);"><i class="ti ti-check" style="font-size:17px;"></i> Save &amp; finish</button>
           </div>
-          <button onClick="{{ onbSkip }}" style="width:100%;background:none;border:none;color:var(--tx-2);font-size:14px;font-weight:500;padding:12px 0 2px;cursor:pointer;font-family:'Jost',sans-serif;" style-hover="color:var(--tx);">Skip for now</button>
         </sc-if>
 
         <!-- Step 3 -->
@@ -2228,7 +2232,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { portal: 'client', empty: false, flowOpen: false, role: 'Super Admin', roleOpen: false, route: 'dashboard', docQuery: '', docTab: 'all', msgDraft: '', msgTab: 'messages', msgCase: 'case-1', msgCaseOpen: false, threads: {}, copied: false, aiOpen: false, aiDraft: '', aiTurns: [{ role: 'ai', text: "Hi, I'm your FileCGTOnline assistant. Ask me anything about your case, documents or the process." }], thread: null, theme: 'light', selectedCase: null, approveOpen: false, complianceAdded: false, draftApproved: false, withdrawDone: false, authEmailResent: false, profileReminder: false, profileMenuOpen: false, notifOpen: false, profileModalOpen: false, pendingNewCase: false, identityVerified: false, firstTimeClient: false,
-    onbModalOpen: false, pSubmitOpen: false, caseTab: 'overview', onb: { step: 1, mobileCode: '+44', mobile: '', tried: false, addresses: [ { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' } ] } };
+    onbModalOpen: false, pSubmitOpen: false, caseTab: 'overview', onb: { step: 1, mobileCode: '+44', mobile: '', nino: '', tried: false, addresses: [ { mode: 'search', query: '', picked: false, line1: '', line2: '', city: '', region: '', postal: '', country: 'United Kingdom', years: '', months: '' } ] } };
 
   componentDidMount() {
     try {
@@ -3120,8 +3124,10 @@ class Component extends DCLogic {
     const addrHasLoc = (a) => a.picked || (!!a.line1.trim() && !!a.city.trim() && !!a.postal.trim() && !!a.country.trim());
     const addrHasDur = (a) => monthsOf(a) > 0;
     const mobileValid = onb.mobile.replace(/\D/g, '').length >= 7;
+    const ninoRaw = (onb.nino || '').replace(/\s/g, '').toUpperCase();
+    const ninoValid = /^[A-Z]{2}[0-9]{6}[A-Z]$/.test(ninoRaw);
     const allAddrOk = onb.addresses.every(a => addrHasLoc(a) && addrHasDur(a));
-    const formValid = mobileValid && allAddrOk && enough;
+    const formValid = mobileValid && ninoValid && allAddrOk && enough;
     const yearsOpts = Array.from({ length: 16 }, (_, n) => ({ value: String(n), label: n === 15 ? '15+' : String(n) }));
     const monthsOpts = Array.from({ length: 12 }, (_, n) => ({ value: String(n), label: String(n) }));
     const countryOpts = COUNTRIES.map(c => ({ value: c, label: c }));
@@ -3177,7 +3183,7 @@ class Component extends DCLogic {
     }
     // Step 1 → 2: only the mobile number gates the move (Progressive Disclosure).
     const onbContinue = () => {
-      if (!mobileValid) { this._setOnb({ tried: true }); return; }
+      if (!mobileValid || !ninoValid) { this._setOnb({ tried: true }); return; }
       this._setOnb({ step: 2, tried: false });
     };
     const onbBack = () => this._setOnb({ step: 1, tried: false });
@@ -3187,6 +3193,7 @@ class Component extends DCLogic {
         const su = JSON.parse(localStorage.getItem('cgt-signup') || '{}');
         su.profileComplete = true; su.profileSkipped = false;
         su.mobile = onb.mobileCode + ' ' + onb.mobile.trim();
+        su.nino = ninoRaw.replace(/^(.{2})(.{2})(.{2})(.{2})(.)$/, '$1 $2 $3 $4 $5');
         su.addresses = onb.addresses.map(a => ({ line1: a.line1, line2: a.line2, city: a.city, region: a.region, postal: a.postal, country: a.country, years: parseInt(a.years, 10) || 0, months: parseInt(a.months, 10) || 0 }));
         localStorage.setItem('cgt-signup', JSON.stringify(su));
       } catch (e) {}
@@ -3331,6 +3338,8 @@ class Component extends DCLogic {
       onbMobile: onb.mobile, onbSetMobile: (e) => this._setOnb({ mobile: e.target.value.replace(/[^0-9 +]/g, '') }),
       onbDialCodes: DIAL_CODES.map(d => ({ value: d.code, label: d.label })),
       onbMobileErrStyle: 'display:' + ((onbTried && !mobileValid) ? 'block' : 'none') + ';font-size:12px;color:var(--er-tx);margin-top:6px;',
+      onbNino: onb.nino, onbSetNino: (e) => this._setOnb({ nino: e.target.value.replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase().slice(0, 13) }),
+      onbNinoErrStyle: 'display:' + ((onbTried && !ninoValid) ? 'block' : 'none') + ';font-size:12px;color:var(--er-tx);margin-top:6px;',
       onbAddresses,
       onbTotalLabel: fmtDur(totalMonths), onbReqLabel: '3 years',
       onbProgressFillStyle: 'height:100%;border-radius:9999px;transition:width .3s ease;width:' + onbPct + '%;background:' + (enough ? '#43a047' : 'var(--navy)') + ';',
