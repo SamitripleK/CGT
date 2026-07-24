@@ -91,7 +91,10 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 
           <div style="display:flex;gap:12px;margin-bottom:16px;">
             <div style="flex:1;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">First name</label><input value="{{ firstName }}" onInput="{{ onFirstName }}" placeholder="James" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
-            <div style="flex:1;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Last name</label><input value="{{ lastName }}" onInput="{{ onLastName }}" placeholder="Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+            <div style="flex:1;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;white-space:nowrap;">Middle name <span style="color:var(--tx-2);font-weight:400;">(optional)</span></label><input value="{{ middleName }}" onInput="{{ onMiddleName }}" placeholder="Alexander" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Last name</label><input value="{{ lastName }}" onInput="{{ onLastName }}" placeholder="Whitfield" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" />
           </div>
           <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Email address</label><input type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@email.com" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
           <div style="margin-bottom:16px;"><label style="display:block;font-size:14px;font-weight:500;margin-bottom:6px;">Password</label><input type="password" placeholder="At least 8 characters" style="width:100%;border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--tx);outline:none;background:var(--surface);" /></div>
@@ -173,7 +176,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { mode: 'login', firstName: '', lastName: '', email: '', code: '', resent: false, theme: 'light' };
+  state = { mode: 'login', firstName: '', middleName: '', lastName: '', email: '', code: '', resent: false, theme: 'light' };
 
   componentDidMount() {
     try {
@@ -195,7 +198,7 @@ class Component extends DCLogic {
     const go = () => { window.location.href = 'FileCGTOnline Portal.dc.html'; };
     const createAccount = () => {
       try {
-        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, emailVerified: false, profileSkipped: true, profileComplete: false, caseStarted: false }));
+        localStorage.setItem('cgt-signup', JSON.stringify({ firstName: this.state.firstName, middleName: this.state.middleName, lastName: this.state.lastName, email: this.state.email, emailVerified: false, profileSkipped: true, profileComplete: false, caseStarted: false }));
       } catch (e) {}
       this.setState({ mode: 'verify', code: '', resent: false });
     };
@@ -230,6 +233,7 @@ class Component extends DCLogic {
 
       // signup fields
       firstName: s.firstName, onFirstName: e => this.setState({ firstName: e.target.value }),
+      middleName: s.middleName, onMiddleName: e => this.setState({ middleName: e.target.value }),
       lastName: s.lastName, onLastName: e => this.setState({ lastName: e.target.value }),
       email: s.email, onEmail: e => this.setState({ email: e.target.value }),
       createAccount,

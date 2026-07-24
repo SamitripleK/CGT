@@ -409,6 +409,13 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 .msg.note{max-width:100%;}
 .msg.note .bubble{background:var(--su-soft);border:1px dashed var(--su-dot);color:var(--muted-3);font-size:13.5px;border-radius:12px;display:flex;gap:9px;align-items:flex-start;}
 .msg.note .bubble i{color:var(--su-tx);font-size:16px;flex-shrink:0;margin-top:1px;}
+/* info icon + hover tooltip on each scoping question */
+.q-info{position:relative;display:inline-flex;align-items:center;justify-content:center;vertical-align:-3px;margin-left:5px;width:18px;height:18px;border-radius:50%;border:none;background:transparent;color:var(--muted-2);cursor:help;padding:0;transition:color .15s;}
+.q-info:hover,.q-info:focus-visible{color:var(--green);outline:none;}
+.q-info i{font-size:16px;line-height:1;}
+.q-tip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(4px);width:max-content;max-width:236px;background:var(--navy-dark);color:#fff;font-size:12.5px;font-weight:400;line-height:1.45;text-align:left;padding:9px 12px;border-radius:10px;box-shadow:0 10px 26px rgba(10,17,32,.24);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s,transform .16s;z-index:40;white-space:normal;}
+.q-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--navy-dark);}
+.q-info:hover .q-tip,.q-info:focus-visible .q-tip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
 .typing{display:inline-flex;gap:5px;padding:15px 16px;align-items:center;}
 .typing span{width:7px;height:7px;border-radius:50%;background:var(--muted-2);animation:blink 1.2s infinite;}
 .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
@@ -746,6 +753,16 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 
             <div class="loe-sign">Signed for and on behalf of<br><b>File CGT Online</b></div>
           </div>
+
+          <!-- verify legal name before accepting -->
+          <div class="loe-verify" style="margin-top:18px;padding:16px 18px;border:1px solid var(--border-in);border-radius:var(--r-card);background:var(--cream);">
+            <div class="section-label" style="margin-bottom:6px;">Verify your legal name</div>
+            <p style="font-size:13.5px;color:var(--muted-3);line-height:1.55;margin-bottom:14px;">This is the name we'll enter on your CGT Return and file with HMRC. Please check it matches your passport or other official ID exactly, and correct it if anything is wrong.</p>
+            <label for="legalName" style="display:block;font-size:13px;font-weight:600;color:var(--muted-3);margin-bottom:6px;">Full legal name</label>
+            <div class="input-wrap"><i class="ti ti-id prefix"></i><input class="input" type="text" id="legalName" placeholder="Your full legal name" autocomplete="name" style="padding-left:34px;"></div>
+            <label class="chk-row" style="margin-top:14px;"><input type="checkbox" id="legalNameChk"><span>I confirm this is my full legal name, exactly as it appears on my official identification.</span></label>
+          </div>
+
           <label class="chk-row" style="margin-top:16px;"><input type="checkbox" id="agreeChk"><span>I confirm I have read and agree to the Letter of Engagement and Terms of Service above, authorising FileCGTOnline to act on my behalf.</span></label>
         </div>
 
@@ -964,7 +981,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     address:'', asset:'', dispDate:'', sale:'', buy:'', buyDate:'', costs:'', ref:'',
     ownership:'sole', sharePct:'', taxBand:'higher',
     improvements:'', improveAmt:'', livedThere:'', livedYears:'', lettings:'', reconstruct:false, notes:'',
-    codeApplied:null, codeDiscount:0,
+    codeApplied:null, codeDiscount:0, legalName:'',
     paid:false, submitted:false, chatStarted:false, chatDone:false,
   };
 
@@ -999,7 +1016,7 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     else { next.style.display='inline-flex'; next.innerHTML='Continue <i class="ti ti-arrow-right"></i>'; next.classList.add('btn-primary'); next.classList.remove('btn-lime'); }
     buildStepper();
     if(step===2 && !state.chatStarted) startChat();
-    if(step===3){ refreshPayCta(); }
+    if(step===3){ prefillLegalName(); refreshPayCta(); }
     if(step===4){ renderReview(); renderFee(); }
     if(step===5){
       renderFee(); $('#payForm').style.display='block'; $('#payProcessing').classList.remove('show');
@@ -1098,36 +1115,41 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
   function baseQuestions(){
     return [
       {id:'own', ai:["Let's capture the key facts about your "+assetWord()+".","First, how was it owned?"],
+        hint:"How you owned the property affects your Capital Gains Tax. If you owned it jointly, only your share of the gain is taxed on you.",
         input:{type:'chips', options:[{label:'I owned it on my own',value:'sole',icon:'ti ti-user'},{label:'Jointly with someone',value:'joint',icon:'ti ti-users'}]},
         set:v=>{state.ownership=v;}, label:v=> v==='joint'?'Jointly owned':'Owned on my own',
         followups:v=> v==='joint' ? [{id:'share', ai:["Got it. What was your ownership share?"],
+            hint:"Your ownership share is the percentage of the property you legally owned. We tax only your share of the total gain.",
             input:{type:'chips', noOther:true, options:[{label:'50%',value:'50'},{label:'25%',value:'25'},{label:'75%',value:'75'},{label:'Another %',value:'other'}]},
             set:v=>{ if(v!=='other') state.sharePct=v; }, label:v=> v==='other'?'A different share':(v+'%'),
-            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem, what percentage did you own?"], input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
+            followups:v=> v==='other' ? [{id:'shareN', ai:["No problem, what percentage did you own?"], hint:"Enter the exact percentage you owned — for example 60 if you held a 60% share.", input:{type:'number', suffix:'%', placeholder:'e.g. 60'}, set:v=>{state.sharePct=v;}, label:v=>v+'%'}] : [] }] : [] },
 
       {id:'note1', ai:[{note:"As we go, I'll factor in any reliefs and the work involved. Your final price may adjust, and I'll show it at the end."}], input:{type:'auto'}},
 
       {id:'buyKnown', ai:["Do you have the original purchase details for this "+assetWord()+"?"],
+        hint:"The original purchase details let us work out your gain. If you don't have them, we can reconstruct the acquisition value from records.",
         input:{type:'chips', options:[{label:'Yes, I have them',value:'yes',icon:'ti ti-check'},{label:"I'm not sure of the figures",value:'no',icon:'ti ti-help'}]},
         set:v=>{ state.reconstruct = (v==='no'); }, label:v=> v==='yes'?'I have the details':"Not sure of the figures",
         followups:v=> v==='yes' ? [
-          {id:'buyDate', ai:["When did you acquire it?"], input:{type:'date'}, set:v=>{state.buyDate=v;}, label:v=> fmtDate(v)},
-          {id:'buy', ai:["And how much did you pay for it?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.buy=v;}, label:v=> money(v)},
+          {id:'buyDate', ai:["When did you acquire it?"], hint:"The date you legally acquired the property — usually the completion date on your purchase, not the date you agreed the offer.", input:{type:'date'}, set:v=>{state.buyDate=v;}, label:v=> fmtDate(v)},
+          {id:'buy', ai:["And how much did you pay for it?"], hint:"The price you originally paid to buy the property, before any improvement or selling costs.", input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.buy=v;}, label:v=> money(v)},
         ] : [
           {id:'reconNote', ai:[{note:"That's fine. We can reconstruct the acquisition value from records. It's a little extra work, which I'll reflect in the price."}], input:{type:'auto'}}
         ] },
 
-      {id:'sale', ai:["How much did you sell it for?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.sale=v;}, label:v=> money(v)},
+      {id:'sale', ai:["How much did you sell it for?"], hint:"The total amount the property sold for — the gross sale price before deducting any fees or costs.", input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.sale=v;}, label:v=> money(v)},
 
       {id:'costs', ai:["Any selling or buying costs? (solicitor, estate-agent fees, stamp duty)"],
+        hint:"Costs of buying and selling — such as solicitor and estate-agent fees or Stamp Duty — are deducted from your gain, so they reduce the tax due.",
         input:{type:'chips', noOther:true, options:[{label:'Enter a figure',value:'enter'},{label:'None / not sure',value:'none'}]},
         set:v=>{ if(v==='none') state.costs=''; }, label:v=> v==='none'?'None / not sure':'I have costs',
-        followups:v=> v==='enter' ? [{id:'costsN', ai:["Roughly how much in total?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.costs=v;}, label:v=> money(v)}] : [] },
+        followups:v=> v==='enter' ? [{id:'costsN', ai:["Roughly how much in total?"], hint:"Add up your buying and selling costs and enter the total. We'll deduct it from your gain.", input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.costs=v;}, label:v=> money(v)}] : [] },
 
       {id:'improve', ai:["Did you make any capital improvements (e.g. an extension or major renovation)?"],
+        hint:"Capital improvements add lasting value — an extension or a new kitchen, not routine repairs or decorating. They're deducted from your gain.",
         input:{type:'chips', options:[{label:'Yes',value:'yes'},{label:'No',value:'no'}]},
         set:v=>{state.improvements=v;}, label:v=> v==='yes'?'Yes, there were improvements':'No improvements',
-        followups:v=> v==='yes' ? [{id:'improveAmt', ai:["Roughly how much did the improvements cost?"], input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.improveAmt=v;}, label:v=> money(v)}] : [] },
+        followups:v=> v==='yes' ? [{id:'improveAmt', ai:["Roughly how much did the improvements cost?"], hint:"The total you spent on capital improvements. Keep invoices, as HMRC may ask for evidence.", input:{type:'number', prefix:'£', placeholder:'0'}, set:v=>{state.improveAmt=v;}, label:v=> money(v)}] : [] },
     ];
   }
   // residential-only relief questions, appended when applicable
@@ -1135,20 +1157,23 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     if(state.service!=='residential') return [];
     return [
       {id:'lived', ai:["Did you ever live in this property as your main home?"],
+        hint:"If the property was ever your main home, you may qualify for Private Residence Relief, which can significantly reduce your Capital Gains Tax.",
         input:{type:'chips', options:[{label:'Yes',value:'yes'},{label:'No',value:'no'}]},
         set:v=>{state.livedThere=v;}, label:v=> v==='yes'?'Yes, it was my main home':'No, never my main home',
         followups:v=> v==='yes' ? [
-          {id:'livedYears', ai:["Roughly how long did you live there?"], input:{type:'chips', options:[{label:'Under 2 years',value:'<2'},{label:'2–5 years',value:'2-5'},{label:'5+ years',value:'5+'}]}, set:v=>{state.livedYears=v;}, label:v=>v},
-          {id:'let', ai:["And was it ever let out to tenants?"], input:{type:'chips', options:[{label:'Yes, it was let',value:'yes'},{label:'No',value:'no'}]}, set:v=>{state.lettings=v;}, label:v=> v==='yes'?'Yes, it was let':'No letting'},
+          {id:'livedYears', ai:["Roughly how long did you live there?"], hint:"Roughly how long you lived there as your main home — this helps us work out the proportion of relief you're due.", input:{type:'chips', options:[{label:'Under 2 years',value:'<2'},{label:'2–5 years',value:'2-5'},{label:'5+ years',value:'5+'}]}, set:v=>{state.livedYears=v;}, label:v=>v},
+          {id:'let', ai:["And was it ever let out to tenants?"], hint:"If the property was let while it was also your home, you may qualify for additional Lettings Relief.", input:{type:'chips', options:[{label:'Yes, it was let',value:'yes'},{label:'No',value:'no'}]}, set:v=>{state.lettings=v;}, label:v=> v==='yes'?'Yes, it was let':'No letting'},
         ] : [] },
     ];
   }
   function tailQuestions(){
     return [
       {id:'band', ai:["Almost there. What's your Income Tax band this year?"],
+        hint:"Your Income Tax band sets your CGT rate on residential property — 18% at the basic rate and 24% on any gain above it.",
         input:{type:'chips', options:[{label:'Basic rate',value:'basic'},{label:'Higher rate',value:'higher'},{label:'Additional rate',value:'higher'},{label:"I'm not sure",value:'higher'}]},
         set:v=>{state.taxBand=v;}, label:v=> v==='basic'?'Basic rate':'Higher / additional'},
       {id:'notes', ai:["Anything else you'd like our team to know about this disposal?"],
+        hint:"Anything unusual we should know — an inherited property, a transfer between spouses, or reliefs claimed before. Optional.",
         input:{type:'text', placeholder:'Type a note, or skip', optional:true}, set:v=>{state.notes=v;}, label:v=> v?('“'+v+'”'):'Nothing to add'},
     ];
   }
@@ -1157,10 +1182,11 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
 
   let queue=[], qi=0;
   const scroll = ()=>{ const s=$('#chatScroll'); if(s) s.scrollTo({top:s.scrollHeight,behavior:'smooth'}); };
-  function pushMsg(role, html, extraCls){
+  function pushMsg(role, html, extraCls, hint){
     const wrap=document.createElement('div');
     wrap.className='msg '+role+(extraCls?(' '+extraCls):'');
-    if(role==='ai' && extraCls!=='note') wrap.innerHTML='<span class="av"><i class="ti ti-sparkles"></i></span><div class="bubble">'+html+'</div>';
+    const info = hint ? ' <button class="q-info" type="button" aria-label="What this means" tabindex="0"><i class="ti ti-info-circle"></i><span class="q-tip" role="tooltip">'+esc(hint)+'</span></button>' : '';
+    if(role==='ai' && extraCls!=='note') wrap.innerHTML='<span class="av"><i class="ti ti-sparkles"></i></span><div class="bubble">'+html+info+'</div>';
     else if(extraCls==='note') wrap.innerHTML='<div class="bubble"><i class="ti ti-info-circle"></i><span>'+html+'</span></div>';
     else wrap.innerHTML='<div class="bubble">'+html+'</div>';
     $('#chatScroll').appendChild(wrap); scroll(); return wrap;
@@ -1191,9 +1217,11 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     typingOn();
     setTimeout(()=>{
       typingOff();
-      (q.ai||[]).forEach(line=>{
+      const lines=q.ai||[];
+      let lastText=-1; lines.forEach((line,i)=>{ if(!(typeof line==='object' && line.note)) lastText=i; });
+      lines.forEach((line,i)=>{
         if(typeof line==='object' && line.note) pushMsg('ai', line.note, 'note');
-        else pushMsg('ai', line);
+        else pushMsg('ai', line, '', (i===lastText && q.hint)?q.hint:null);
       });
       if(q.input.type==='auto'){ qi++; setTimeout(ask, 520); return; }
       renderDock(q);
@@ -1439,7 +1467,25 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
     if(reveal) $$('#payForm .pay-wallet').forEach(x=>x.classList.remove('sel'));
   });
   $('#agreeChk').addEventListener('change',refreshPayCta);
-  function refreshPayCta(){ if(state.step===3) $('#btnNext').disabled = !$('#agreeChk').checked; }
+  (function(){
+    const ln=$('#legalName'); if(ln) ln.addEventListener('input',()=>{ state.legalName=ln.value.trim(); refreshPayCta(); });
+    const lnc=$('#legalNameChk'); if(lnc) lnc.addEventListener('change',refreshPayCta);
+  })();
+  function prefillLegalName(){
+    const el=$('#legalName'); if(!el || el.value.trim()) return;
+    try{
+      const su=JSON.parse(localStorage.getItem('cgt-signup')||'{}');
+      const parts=[su.firstName,su.middleName,su.lastName].map(s=>String(s||'').trim()).filter(Boolean);
+      if(parts.length){ el.value=parts.join(' '); state.legalName=el.value; }
+    }catch(e){}
+  }
+  function refreshPayCta(){
+    if(state.step!==3) return;
+    const nameOk = !!($('#legalName') && $('#legalName').value.trim());
+    const verified = !!($('#legalNameChk') && $('#legalNameChk').checked);
+    const agreed = !!($('#agreeChk') && $('#agreeChk').checked);
+    $('#btnNext').disabled = !(nameOk && verified && agreed);
+  }
   function startPayment(){
     if(!$('#agreeChk').checked){ toast('Please accept the engagement letter to continue'); return; }
     $('#payForm').style.display='none';
@@ -1456,7 +1502,11 @@ html[data-theme="dark"] .eyebrow{color:var(--green-link);background:var(--su-bg)
       enableAutosave(); toast('Case created · '+state.ref);
       goTo(2); return;
     }
-    if(state.step===3){ goTo(4); return; }
+    if(state.step===3){
+      const ln=$('#legalName'); if(ln) state.legalName=ln.value.trim();
+      try{ const su=JSON.parse(localStorage.getItem('cgt-signup')||'{}'); su.legalName=state.legalName; localStorage.setItem('cgt-signup',JSON.stringify(su)); }catch(e){}
+      goTo(4); return;
+    }
     if(state.step===4){ goTo(5); return; }
     if(state.step===5){ startPayment(); return; }
   }
